@@ -1,0 +1,204 @@
+.recipes-container {
+    padding: 10px;
+    justify-content: center;
+    display: inline;
+    overflow: hidden;
+
+    ::ng-deep .p-card {
+
+        height: 300px;
+        border-radius: 10px 10px 20px 20px;
+
+        .p-card-body {
+            padding-top: 1px;
+            padding-left: 10px;
+        }
+    }
+}
+
+.thumbmail-container {
+    width: 100%;
+    height: 300px;
+
+    .thumbmail-image {
+        object-fit: cover;
+        z-index: 0;
+    }
+}
+
+.image-card-header {
+    height: 220px;
+    object-fit: cover;
+    z-index: 0;
+    border-radius: 10px 10px 0 0;
+}
+
+.save-button {
+    z-index: 1;
+    position: relative;
+    bottom: 200px;
+    right: 20px;
+    float: right;
+}
+
+.time-container {
+    display: flex;
+    flex-direction: row;
+    float: left;
+    margin-left: 25px;
+
+    .image-clock {
+        height: 30px;
+        width: 30px;
+    }
+
+    .time-text {
+        margin-left: 10px;
+        margin-top: 7.5px;
+    }
+}
+
+.rating-container {
+    display: flex;
+    flex-direction: row;
+    float: right;
+    margin-top: 3px;
+    margin-left: 8px;
+
+    .dif-text {
+        margin-right: 7px;
+        margin-top: 5.5px;
+    }
+
+    .rating-image {
+        width: 25px;
+        height: 25px;
+    }
+}
+
+.ingredient-container {
+    height: 310px;
+    display: flex;
+    flex-direction: row;
+    padding-left: 20px;
+    padding-right: 20px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+}
+
+.search-card {
+    width: 300px;
+    margin-left: 20px;
+
+    ::ng-deep .p-card {
+
+        height: 270px;
+        border-radius: 5px;
+
+        .p-card-body {
+            padding-top: 1px;
+            padding-left: 10px;
+        }
+    }
+}
+
+.ingredient-card {
+    width: 250px;
+    margin-left: 15px;
+
+    ::ng-deep .p-card {
+
+        height: 270px;
+        border-radius: 5px;
+
+        .p-card-body {
+            margin: auto;
+            padding-top: 1px;
+            padding-left: 0px;
+        }
+    }
+}
+
+.select-ingredient-container {
+    padding: 0 0 5px 5px;
+    display: flex;
+    flex-wrap: wrap;
+
+    .select-ingredient {
+        font-size: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: 10px;
+        margin-top: 7px;
+
+        .p-button {
+            padding: 8px;
+        }
+
+        button {
+            font-size: 15px;
+        }
+
+        .selected {
+            background-color: #ba3636;
+            border-color: #ba3636;
+        }
+
+        .unselected {
+            background-color: #14B8A6;
+            border-color: #14B8A6;
+        }
+    }
+
+    .p-scrollpanel-bar {
+        background-color: var(--layer-2);
+        border-radius: 0;
+        opacity: 1;
+        transition: background-color .2s;
+    }
+}
+
+.selected-ingredients {
+    width: 100%;
+    height: 70px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    font-style: italic;
+}
+
+.selected-ingredients-button {
+
+    ::ng-deep .p-button {
+        display: flex;
+        margin-top: 20px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+/* width */
+::-webkit-scrollbar {
+    height: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color);
+    opacity: 1;
+    transition: background-color .2s;
+    overflow-x: hidden;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    //background-color: #007ad9;
+    overflow-x: visible;
+}

@@ -1,0 +1,27 @@
+<div class="container">
+  <div>
+    <button pButton type="button" label="Recipes" class="menu-button"></button>
+    <button pButton type="button" label="Restaurant" class="menu-button"></button>
+      <button pButton type="button" label="Create recipe" class="menu-button" (click)="showCreateRecipeDialog()"></button>
+  </div>
+  <div class="profile-container">
+    <button pButton type="button" class="p-button-raised" label="{{ user.username.at(0) | uppercase }}"
+            (click)="op.toggle($event)"></button>
+  </div>
+</div>
+
+<p-overlayPanel #op [showCloseIcon]="false" [style]="{ width: 'auto' }">
+    <ng-template pTemplate>
+        <p-button label="Logout" (onClick)="logout()"></p-button>
+    </ng-template>
+</p-overlayPanel>
+
+
+<div class="createRecipeDialog">
+    <p-dialog [(visible)]="createRecipeDialog"
+              [style]="{width: '800px'}" [showHeader]="false"
+              [baseZIndex]="10000" [draggable]="false" [resizable]="false" [dismissableMask]="true" [modal]="true" [closable]="true">
+        <app-create-recipe [username]="user.username"></app-create-recipe>
+    </p-dialog>
+</div>
+

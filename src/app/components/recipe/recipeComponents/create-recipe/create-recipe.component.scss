@@ -1,0 +1,105 @@
+.createRecipeDialog {
+    input {
+        display: flex;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 20px;
+        font-size: 20px;
+        border: none;
+        transition: box-shadow 0.3s;
+        box-shadow: -1px 10px 0px -7px #ebebeb;
+    }
+
+    input:focus {
+        outline: none;
+        box-shadow: -1px 10px 0px -7px #14B8A6;
+    }
+}
+
+.container {
+    height: 800px;
+    ::ng-deep .p-card {
+        .p-card-body {
+            padding: 0 15px;
+        }
+    }
+}
+
+.card-container {
+    margin-top: 15px;
+    margin-left: 20px;
+}
+
+.add-button {
+    left: 50%;
+    -ms-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+.items {
+    display: flex;
+    padding-top: 10px;
+    padding-bottom: 5px;
+
+    ::ng-deep .p-inputnumber .p-inputtext {
+        width: 60px;
+        text-align: center;
+    }
+
+    ::ng-deep .p-component {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+.items-container {
+    margin: 0 auto;
+}
+
+.p-card .p-card-content::-webkit-scrollbar {
+    display: none; /* for Chrome, Safari, and Opera */
+}
+
+.insert-distance {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.rating-container {
+    display: flex;
+    flex-direction: row;
+    float: right;
+    margin-top: 3px;
+    margin-left: 8px;
+
+    .dif-text {
+        margin-right: 9px;
+        margin-top: 7px;
+        font-size: 20px;
+    }
+
+    .rating-image {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+.recipe-name-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+
+    textarea {
+        font-weight: bold;
+        width: 500px;
+        resize: none;
+        text-align: center;
+        font-size: 27px;
+        border: none;
+    }
+
+    textarea:focus {
+        outline: none;
+    }
+}

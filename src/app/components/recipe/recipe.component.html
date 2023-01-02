@@ -1,0 +1,152 @@
+<!--<div *ngIf="isLoaded" class="thumbmail-container">-->
+<!--    <p-galleria [value]="images" [numVisible]="1" style="{'height': '20px'}" [circular]="true"-->
+<!--                [autoPlay]="true" [transitionInterval]="4000"-->
+<!--                [showThumbnails]="false" [showIndicators]="true" [changeItemOnIndicatorHover]="false" [showIndicatorsOnItem]="true">-->
+<!--        <ng-template pTemplate="item" let-item>-->
+<!--            <img [src]="item" style="width: 100%; display: block; height: 300px; object-fit: cover; "/>-->
+<!--        </ng-template>-->
+<!--        <ng-template pTemplate="thumbnail" let-item>-->
+<!--            <div class="grid grid-nogutter justify-content-center">-->
+<!--                <img [src]="item" style="display: block;" />-->
+<!--            </div>-->
+<!--        </ng-template>-->
+<!--    </p-galleria>-->
+<!--</div>-->
+
+<div>
+    <button pButton pRipple type="button" label="showIngredients" (click)="toggleShowIngredients()"
+            class="p-button-rounded"></button>
+</div>
+<div *ngIf="showIngredientList" class="ingredient-container message">
+    <div class="search-card">
+        <p-card class="card-container search-card">
+            <ng-template pTemplate="header">
+                <h2 style="text-align: center; padding-top: 20px;">Search</h2>
+            </ng-template>
+            <div class="col-12 md:col-4">
+                <div class="p-inputgroup" style="margin-left: 5px;">
+                    <button type="button" pButton pRipple label="Search"></button>
+                    <input type="text" pInputText [(ngModel)]="searchCategory" (ngModelChange)="refreshIngredients()"
+                           placeholder="category" style="text-align: center">
+                </div>
+                <div class="p-inputgroup" style="margin-top: 20px; margin-left: 5px;">
+                    <button type="button" pButton pRipple label="Search"></button>
+                    <input type="text" pInputText [(ngModel)]="searchIngredient" (ngModelChange)="refreshIngredients()"
+                           placeholder="ingredient" style="text-align: center">
+                </div>
+                <div style="margin-left: 5px;">
+                    <p-button label="Selected ingredients" icon="pi pi-apple" class="selected-ingredients-button"
+                              badge="{{ selectedIngredients.length }}" (click)="showSelectedIngredientsDialog()">
+                    </p-button>
+                </div>
+            </div>
+        </p-card>
+    </div>
+    <div *ngFor="let ingredient of filteredIngredients.categoryIngredients">
+        <div class="ingredient-card">
+            <p-card class="card-container ingredient-card">
+                <ng-template pTemplate="header">
+                    <h2 style="text-align: center; padding-top: 15px;">{{ ingredient.categoryName | titlecase }}</h2>
+                </ng-template>
+                <div class="select-ingredient-container">
+                    <div *ngFor="let ing of ingredient.ingredients; let i = index" class="select-ingredient">
+                        <div *ngIf="i < 6; else show_list_button">
+                            <button pButton pRipple type="button" label="{{ ing.name }}"
+                                    [ngClass]="{'selected': ing.selected == true, 'unselected': ing.selected == false}"
+                                    class="p-button-rounded" (click)="toggleIngredientSelection(ing)"></button>
+                        </div>
+                        <ng-template #show_list_button>
+                            <div *ngIf="i === 6">
+                                <button pButton pRipple type="button"
+                                        label="Show other {{ ingredient.ingredients.length - 6 }}"
+                                        (click)="showSelectedIngredientCategoryDialog(ingredient.categoryName)"
+                                        class="p-button-rounded"></button>
+                            </div>
+                        </ng-template>
+                    </div>
+                </div>
+            </p-card>
+        </div>
+    </div>
+</div>
+<!--<div class="filterContainer">-->
+<!--    <div class="p-inputgroup">-->
+<!--        <button type="button" pButton pRipple label="Search recipe"></button>-->
+<!--        <input type="text" pInputText placeholder="Keyword">-->
+<!--    </div>-->
+
+<!--    <div class="p-inputgroup">-->
+<!--        <button type="button" pButton pRipple label="Missing ingredients"></button>-->
+<!--        <input type="number" pInputText placeholder="Keyword">-->
+<!--    </div>-->
+<!--</div>-->
+<!--<div class="selected-ingredients" *ngIf="selectedIngredients.length > 0">-->
+<!--    <h4>Selected ingredients:&nbsp;</h4>-->
+<!--    <div class="text-container" *ngFor="let ingredient of selectedIngredients">-->
+<!--        <h4>{{ ingredient.name }},&nbsp;</h4>-->
+<!--    </div>-->
+<!--</div>-->
+<div class="recipes-container" fxLayout="row wrap" fxLayoutGap="40px grid">
+    <div fxFlex="30%" fxFlex.xs="100%" fxFlex.sm="50%" *ngFor="let recipe of recipes">
+        <p-card class="card-container">
+            <ng-template pTemplate="header">
+                <img alt="Card" src="{{ recipe.imageAddress }}" class="image-card-header">
+                <button pButton type="button" class="p-button-raised p-button-rounded save-button"
+                        icon="pi pi-bookmark"></button>
+            </ng-template>
+            <div>
+                <div class="time-container">
+                    <img src="assets/clock-circular-outline%20(1).png" alt="" class="image-clock">
+                    <h5 class="time-text">Time to prepare: {{ recipe.time }} min</h5>
+                </div>
+                <div class="rating-container">
+                    <h5 class="dif-text">Difficulty:</h5>
+                    <p-rating [(ngModel)]="recipe.difficulty" [stars]="5" [cancel]="false" [readonly]="true">
+                        <ng-template pTemplate="officon">
+                            <img src="assets/restaurant.png" alt="" class="rating-image">
+                        </ng-template>
+                        <ng-template pTemplate="onicon">
+                            <img src="assets/cutlery.png" alt="" class="rating-image">
+                        </ng-template>
+                    </p-rating>
+                </div>
+            </div>
+        </p-card>
+    </div>
+</div>
+
+<p-dialog header="Selected ingredients:" [(visible)]="selectedIngredientsDialog" [style]="{width: '50vw'}"
+          [baseZIndex]="10000" [draggable]="false" [resizable]="false" [dismissableMask]="true" [modal]="true">
+    <ng-template pTemplate="footer">
+
+    </ng-template>
+</p-dialog>
+
+<p-dialog header="{{selectedCategory | titlecase }}" [(visible)]="selectedIngredientCategoryDialog"
+          [style]="{width: '50vw'}"
+          [baseZIndex]="10000" [draggable]="false" [resizable]="false" [dismissableMask]="true" [modal]="true">
+    <ng-template pTemplate="footer">
+        <div class="select-ingredient-container">
+            <div *ngFor="let ing of chooseIngredients;" class="select-ingredient">
+                <button pButton pRipple type="button" label="{{ ing.name }}"
+                        [ngClass]="{'selected': ing.selected == true, 'unselected': ing.selected == false}"
+                        class="p-button-rounded" (click)="toggleIngredientSelection(ing)"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+
+<p-dialog header="Selected ingredients" [(visible)]="selectedIngredientsDialog"
+          [style]="{width: '50vw'}"
+          [baseZIndex]="10000" [draggable]="false" [resizable]="false" [dismissableMask]="true" [modal]="true">
+    <ng-template pTemplate="footer">
+        <div class="select-ingredient-container">
+            <div *ngFor="let ing of selectedIngredients;" class="select-ingredient">
+                <button pButton pRipple type="button" label="{{ ing.name }}"
+                        [ngClass]="{'selected': ing.selected == true, 'unselected': ing.selected == false}"
+                        class="p-button-rounded" (click)="toggleIngredientSelection(ing)"></button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>
+

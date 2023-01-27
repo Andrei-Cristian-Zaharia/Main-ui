@@ -23,8 +23,6 @@ export class LoginComponent {
         if (this.password === this.confirmPassword) {
             this.personService.createNewUser(this.username, this.emailAddress, this.password);
         }
-
-        console.log("Invalid password !!!");
     }
 
     login() {

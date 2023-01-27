@@ -1,3 +1,57 @@
+.banner {
+    display: flex;
+    border-radius: 0.3vw;
+
+    .ingredients-button {
+        height: 3vw;
+        width: 13.4vw;
+        position: absolute;
+        margin-top: 14vw;
+        margin-left: 43vw;
+        font-size: 1.2vw;
+    }
+}
+
+.filterContainer {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+
+    input {
+        text-align: center;
+        font-size: 18px;
+    }
+
+    .filter-rating-container {
+        display: flex;
+        flex-direction: row;
+        margin-top: 3px;
+        margin-left: 8px;
+
+        .rating-filter-image {
+            width: 40px;
+            height: 40px;
+        }
+    }
+
+    .container-filter-component {
+        height: 75px;
+        width: 250px;
+
+        .indicator-text {
+            margin-bottom: 5px;
+            text-align: center;
+            font-style: oblique;
+            font-size: 15px;
+        }
+
+        ::ng-deep .p-slider {
+            height: 10px;
+
+        }
+    }
+}
+
 .recipes-container {
     padding: 10px;
     justify-content: center;
@@ -16,16 +70,6 @@
     }
 }
 
-.thumbmail-container {
-    width: 100%;
-    height: 300px;
-
-    .thumbmail-image {
-        object-fit: cover;
-        z-index: 0;
-    }
-}
-
 .image-card-header {
     height: 220px;
     object-fit: cover;
@@ -34,11 +78,17 @@
 }
 
 .save-button {
+    display: block;
     z-index: 1;
     position: relative;
     bottom: 200px;
     right: 20px;
     float: right;
+
+    //::ng-deep .p-button {
+    //    background: #ffbc68;
+    //    border-color: #ffbc68;
+    //}
 }
 
 .time-container {
@@ -48,31 +98,26 @@
     margin-left: 25px;
 
     .image-clock {
-        height: 30px;
-        width: 30px;
+        height: 35px;
+        width: 35px;
     }
 
     .time-text {
+        font-size: 17px;
         margin-left: 10px;
-        margin-top: 7.5px;
+        margin-top: 6.5px;
     }
 }
 
-.rating-container {
+.difficulty-container {
     display: flex;
     flex-direction: row;
     float: right;
-    margin-top: 3px;
-    margin-left: 8px;
+    margin-bottom: 2px;
 
-    .dif-text {
-        margin-right: 7px;
-        margin-top: 5.5px;
-    }
-
-    .rating-image {
-        width: 25px;
-        height: 25px;
+    .difficulty-image {
+        width: 35px;
+        height: 35px;
     }
 }
 

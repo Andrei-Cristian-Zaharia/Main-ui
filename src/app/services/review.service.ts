@@ -3,31 +3,41 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {RecipeModel} from "../models/recipe.model";
 import {AuthService} from "./auth.service";
 import {ApiConfig} from "../configs/api-config.service";
+import {ReviewModel} from "../models/review.model";
 
 @Injectable({
     providedIn: 'root'
 })
-export class RecipeService {
+export class ReviewService {
     constructor(
         @Inject(ApiConfig) private apiConfig: ApiConfig,
         private http: HttpClient,
         private authService: AuthService
     ) { }
 
-    getRecipes() {
-        return this.http.get<RecipeModel[]>(this.apiConfig.RECIPE_API + "/all");
+    getReviewsForRecipe(id: number) {
+
+        let body = {
+            "category": "RECIPE",
+            "id": id
+        }
+
+        return this.http.post<ReviewModel[]>(this.apiConfig.REVIEW_API + "/all/entity", body, this.getOptions());
     }
 
-    getRecipesFilteredByIngredients(body) {
-        console.log(body);
-        return this.http.post<RecipeModel[]>(this.apiConfig.RECIPE_API + "/all/filtered", body);
-    }
-
-    createNewRecipe(recipe) {
-        return this.http.post(this.apiConfig.RECIPE_API, recipe, this.getOptions());
+    createNewReview(review) {
+        return this.http.post(this.apiConfig.REVIEW_API, review, this.getOptionsAuth());
     }
 
     getOptions() {
+        return {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        };
+    }
+
+    getOptionsAuth() {
         return {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json',

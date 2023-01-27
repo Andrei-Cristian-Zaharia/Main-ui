@@ -1,22 +1,9 @@
-<!--<div *ngIf="isLoaded" class="thumbmail-container">-->
-<!--    <p-galleria [value]="images" [numVisible]="1" style="{'height': '20px'}" [circular]="true"-->
-<!--                [autoPlay]="true" [transitionInterval]="4000"-->
-<!--                [showThumbnails]="false" [showIndicators]="true" [changeItemOnIndicatorHover]="false" [showIndicatorsOnItem]="true">-->
-<!--        <ng-template pTemplate="item" let-item>-->
-<!--            <img [src]="item" style="width: 100%; display: block; height: 300px; object-fit: cover; "/>-->
-<!--        </ng-template>-->
-<!--        <ng-template pTemplate="thumbnail" let-item>-->
-<!--            <div class="grid grid-nogutter justify-content-center">-->
-<!--                <img [src]="item" style="display: block;" />-->
-<!--            </div>-->
-<!--        </ng-template>-->
-<!--    </p-galleria>-->
-<!--</div>-->
-
-<div>
-    <button pButton pRipple type="button" label="showIngredients" (click)="toggleShowIngredients()"
-            class="p-button-rounded"></button>
+<div class="banner">
+    <img style="width: 100%;" alt="" src="assets/food-banner.jpg">
+    <button pButton type="button" label="Select ingredients" (click)="toggleShowIngredients()"
+            class="ingredients-button"></button>
 </div>
+
 <div *ngIf="showIngredientList" class="ingredient-container message">
     <div class="search-card">
         <p-card class="card-container search-card">
@@ -69,44 +56,95 @@
         </div>
     </div>
 </div>
-<!--<div class="filterContainer">-->
-<!--    <div class="p-inputgroup">-->
-<!--        <button type="button" pButton pRipple label="Search recipe"></button>-->
-<!--        <input type="text" pInputText placeholder="Keyword">-->
-<!--    </div>-->
-
-<!--    <div class="p-inputgroup">-->
-<!--        <button type="button" pButton pRipple label="Missing ingredients"></button>-->
-<!--        <input type="number" pInputText placeholder="Keyword">-->
-<!--    </div>-->
-<!--</div>-->
-<!--<div class="selected-ingredients" *ngIf="selectedIngredients.length > 0">-->
-<!--    <h4>Selected ingredients:&nbsp;</h4>-->
-<!--    <div class="text-container" *ngFor="let ingredient of selectedIngredients">-->
-<!--        <h4>{{ ingredient.name }},&nbsp;</h4>-->
-<!--    </div>-->
-<!--</div>-->
+<div class="filterContainer">
+    <div>
+        <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input type="text" pInputText [(ngModel)]="filterRecipeName" placeholder="Search recipe name" (change)="refreshRecipes()">
+        </span>
+    </div>
+    <div>
+        <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input type="text" pInputText [(ngModel)]="filterAuthorName" placeholder="Search author name" (submit)="refreshRecipes()">
+        </span>
+    </div>
+    <div class="container-filter-component">
+        <p class="indicator-text">Prepare time: {{ sliderText }}</p>
+        <p-slider [(ngModel)]="rangeValues" [min]="1" [max]="600" [range]="true" (onChange)="changeSliderValue()"></p-slider>
+    </div>
+    <div class="filter-rating-container">
+        <p-rating [(ngModel)]="filterRating" [stars]="5" [cancel]="false" (contextmenu)="resetRatingFilter($event)"
+                  (click)="refreshRecipes()" pTooltip="Rating" tooltipPosition="top">
+            <ng-template pTemplate="cancel">
+                <img src="assets/cross.png" alt="" style="width: 28px; height: 28px;">
+            </ng-template>
+            <ng-template pTemplate="officon">
+                <img src="assets/star-unfilled.png" alt="" class="rating-filter-image">
+            </ng-template>
+            <ng-template pTemplate="onicon">
+                <img src="assets/star.png" alt="" class="rating-filter-image">
+            </ng-template>
+        </p-rating>
+    </div>
+    <div class="filter-rating-container">
+        <p-rating [(ngModel)]="filterDifficulty" [stars]="5" [cancel]="false" (contextmenu)="resetDifficultyFilter($event)"
+                  (click)="refreshRecipes()" pTooltip="Difficulty" tooltipPosition="top">
+            <ng-template pTemplate="cancel">
+                <img src="assets/cross.png" alt="" style="width: 28px; height: 28px;">
+            </ng-template>
+            <ng-template pTemplate="officon">
+                <img src="assets/effort-unfilled.png" alt="" class="rating-filter-image">
+            </ng-template>
+            <ng-template pTemplate="onicon">
+                <img src="assets/effort.png" alt="" class="rating-filter-image">
+            </ng-template>
+        </p-rating>
+    </div>
+    <div class="filter-rating-container">
+        <p-rating [(ngModel)]="filterSpiciness" [stars]="5" [cancel]="false" (contextmenu)="resetSicinessFilter($event)"
+                  (click)="refreshRecipes()" pTooltip="Spiciness" tooltipPosition="top">
+            <ng-template pTemplate="cancel">
+                <img src="assets/cross.png" alt="" style="width: 28px; height: 28px;">
+            </ng-template>
+            <ng-template pTemplate="officon">
+                <img src="assets/chili-unfilled.png" alt="" class="rating-filter-image">
+            </ng-template>
+            <ng-template pTemplate="onicon">
+                <img src="assets/chili.png" alt="" class="rating-filter-image">
+            </ng-template>
+        </p-rating>
+    </div>
+</div>
+<div class="selected-ingredients" *ngIf="selectedIngredients.length > 0">
+    <h4>Selected ingredients:&nbsp;</h4>
+    <div class="text-container" *ngFor="let ingredient of selectedIngredients">
+        <h4>{{ ingredient.name }},&nbsp;</h4>
+    </div>
+</div>
 <div class="recipes-container" fxLayout="row wrap" fxLayoutGap="40px grid">
     <div fxFlex="30%" fxFlex.xs="100%" fxFlex.sm="50%" *ngFor="let recipe of recipes">
         <p-card class="card-container">
             <ng-template pTemplate="header">
-                <img alt="Card" src="{{ recipe.imageAddress }}" class="image-card-header">
-                <button pButton type="button" class="p-button-raised p-button-rounded save-button"
-                        icon="pi pi-bookmark"></button>
+                <img alt="Card" src="{{ recipe.imageAddress }}" class="image-card-header"
+                     (click)="showViewRecipeDialog(recipe)">
+                <div class="save-button">
+                    <button pButton type="button" class="p-button-raised p-button-rounded" icon="pi pi-bookmark"></button>
+                </div>
             </ng-template>
             <div>
                 <div class="time-container">
-                    <img src="assets/clock-circular-outline%20(1).png" alt="" class="image-clock">
-                    <h5 class="time-text">Time to prepare: {{ recipe.time }} min</h5>
+                    <img src="assets/clock.png" alt="" class="image-clock">
+                    <h5 class="time-text">{{ recipe.time | time }}</h5>
                 </div>
-                <div class="rating-container">
-                    <h5 class="dif-text">Difficulty:</h5>
-                    <p-rating [(ngModel)]="recipe.difficulty" [stars]="5" [cancel]="false" [readonly]="true">
+                <div class="difficulty-container">
+                    <p-rating [(ngModel)]="recipe.difficulty" [stars]="5" [cancel]="false" [readonly]="true"
+                              pTooltip="Difficulty" tooltipPosition="top">
                         <ng-template pTemplate="officon">
-                            <img src="assets/restaurant.png" alt="" class="rating-image">
+                            <img src="assets/effort-unfilled.png" alt="" class="difficulty-image">
                         </ng-template>
                         <ng-template pTemplate="onicon">
-                            <img src="assets/cutlery.png" alt="" class="rating-image">
+                            <img src="assets/effort.png" alt="" class="difficulty-image">
                         </ng-template>
                     </p-rating>
                 </div>
@@ -150,3 +188,11 @@
     </ng-template>
 </p-dialog>
 
+<div class="createRecipeDialog">
+    <p-dialog [(visible)]="viewRecipeDialog"
+              [style]="{width: '65vw', height: '50vw'}" [showHeader]="false"
+              [baseZIndex]="10000" [draggable]="false" [resizable]="false" [dismissableMask]="true" [modal]="true"
+              [closable]="true">
+        <app-recipe-view [recipe]="selectedRecipe" [value]></app-recipe-view>
+    </p-dialog>
+</div>

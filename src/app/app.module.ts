@@ -19,10 +19,15 @@ import {CreateRecipeComponent} from './components/recipe/recipeComponents/create
 import {DropdownModule} from 'primeng/dropdown';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {InputTextareaModule} from 'primeng/inputtextarea';
+import {InputTextModule} from 'primeng/inputtext';
 import {LoginComponent} from './components/login/login.component';
 import {NotFoundComponent} from './components/not-found/not-found.component';
 import {ApiConfig} from "./configs/api-config.service";
 import {OverlayPanelModule} from 'primeng/overlaypanel';
+import {SliderModule} from 'primeng/slider';
+import {RecipeViewComponent} from './components/recipe/recipeComponents/recipe-view/recipe-view.component';
+import {TimeTransform} from "./pipes/time.pipe";
+import {TooltipModule} from 'primeng/tooltip';
 
 @NgModule({
     declarations: [
@@ -32,7 +37,9 @@ import {OverlayPanelModule} from 'primeng/overlaypanel';
         OverviewComponent,
         CreateRecipeComponent,
         LoginComponent,
-        NotFoundComponent
+        NotFoundComponent,
+        RecipeViewComponent,
+        TimeTransform
     ],
     imports: [
         BrowserModule,
@@ -49,7 +56,10 @@ import {OverlayPanelModule} from 'primeng/overlaypanel';
         DropdownModule,
         InputNumberModule,
         InputTextareaModule,
-        OverlayPanelModule
+        OverlayPanelModule,
+        InputTextModule,
+        SliderModule,
+        TooltipModule
     ],
     providers: [
         LoginGuard,

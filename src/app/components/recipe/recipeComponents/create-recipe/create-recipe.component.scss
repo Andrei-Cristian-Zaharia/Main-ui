@@ -18,7 +18,10 @@
 }
 
 .container {
-    height: 800px;
+    height: auto;
+    display: inline-flex;
+    justify-content: space-around;
+
     ::ng-deep .p-card {
         .p-card-body {
             padding: 0 15px;
@@ -47,7 +50,7 @@
         text-align: center;
     }
 
-    ::ng-deep .p-component {
+    .space {
         padding-left: 10px;
         padding-right: 10px;
     }
@@ -62,14 +65,15 @@
 }
 
 .insert-distance {
+    white-space: pre-wrap;
     margin-top: 20px;
     margin-bottom: 20px;
+    width: 40vw
 }
 
-.rating-container {
+.difficulty-container {
     display: flex;
     flex-direction: row;
-    float: right;
     margin-top: 3px;
     margin-left: 8px;
 
@@ -79,7 +83,7 @@
         font-size: 20px;
     }
 
-    .rating-image {
+    .difficulty-image {
         width: 40px;
         height: 40px;
     }
@@ -101,5 +105,16 @@
 
     textarea:focus {
         outline: none;
+    }
+}
+
+.editor-container {
+    margin-left: 30px;
+    ::ng-deep .p-card {
+
+        height: 500px;
+        width: 15vw;
+        position: sticky;
+        top: 0;
     }
 }

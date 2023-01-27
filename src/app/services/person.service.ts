@@ -15,8 +15,7 @@ export class PersonService {
         private authService: AuthService,
         private http: HttpClient,
         private cookieService: CookieService
-    ) {
-    }
+    ) { }
 
     createNewUser(username: string, emailAddress: string, password: string) {
 

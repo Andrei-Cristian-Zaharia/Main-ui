@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, HostListener, Input, OnInit} from '@angular/core';
 import {AddIngredientModel} from "../../../../models/addIngredientModel.model";
 import {IngredientsByCategoryModel} from "../../../../models/ingredientsByCategory.model";
 import {IngredientService} from "../../../../services/ingredient.service";
@@ -28,9 +28,13 @@ export class CreateRecipeComponent implements OnInit {
     recipeName: string;
     imageLink: string;
     time: number = 1;
-    difficulty: number;
+    difficulty: number = 2;
     description: string;
     howToPrepare: string;
+
+    keysPressed = {};
+
+    imageComponent: string = "<img src=\"insert-image-source\">";
 
     constructor(ingredientService: IngredientService,
                 utilsService: UtilsService,
@@ -49,15 +53,81 @@ export class CreateRecipeComponent implements OnInit {
                     }
                 );
             }
-            console.log(data);
         })
 
         this.utilsService.getMeasurements().subscribe(data => {
             this.measurements = data;
-            console.log(data);
         })
 
         this.addIngredient();
+    }
+
+    // @HostListener('document:keypress', ['$event'])
+    // handleKeyboardEvent(event: KeyboardEvent) {
+    //     console.log(event.type)
+    //     console.log(event.key);
+    // }
+
+    clearPressedKeys() {
+        this.keysPressed = new Map();
+        console.log(this.keysPressed)
+    }
+
+    formatText(event) {
+        let target = event.target || event.srcElement;
+        const textArea = document.getElementById(target.id) as HTMLTextAreaElement;
+        let startPos = textArea.selectionStart;
+        let endPos = textArea.selectionEnd;
+
+        this.keysPressed[event.key] = true;
+        console.log(textArea.value);
+
+        if (event.key === "i" && this.keysPressed['Control']) {
+            textArea.value = textArea.value.substring(0, startPos) + this.imageComponent;
+            console.log(textArea.value);
+        }
+
+        if (event.key === "b" && this.keysPressed['Control']) {
+            textArea.value = textArea.value.substring(0, startPos) + "<b>"
+                + textArea.value.substring(startPos, endPos) + "</b>"
+                + textArea.value.substring(endPos, textArea.textLength);
+            console.log(textArea.value);
+        }
+
+        if (event.key === "1" && this.keysPressed['Control']) {
+            textArea.value = textArea.value.substring(0, startPos) + "<h1>"
+                + textArea.value.substring(startPos, endPos) + "</h1>"
+                + textArea.value.substring(endPos, textArea.textLength);
+            console.log(textArea.value);
+        }
+
+        if (event.key === "2" && this.keysPressed['Control']) {
+            textArea.value = textArea.value.substring(0, startPos) + "<h2>"
+                + textArea.value.substring(startPos, endPos) + "</h2>"
+                + textArea.value.substring(endPos, textArea.textLength);
+            console.log(textArea.value);
+        }
+
+        if (event.key === "3" && this.keysPressed['Control']) {
+            textArea.value = textArea.value.substring(0, startPos) + "<h3>"
+                + textArea.value.substring(startPos, endPos) + "</h3>"
+                + textArea.value.substring(endPos, textArea.textLength);
+            console.log(textArea.value);
+        }
+
+        if (event.key === "4" && this.keysPressed['Control']) {
+            textArea.value = textArea.value.substring(0, startPos) + "<h4>"
+                + textArea.value.substring(startPos, endPos) + "</h4>"
+                + textArea.value.substring(endPos, textArea.textLength);
+            console.log(textArea.value);
+        }
+
+        if (event.key === "5" && this.keysPressed['Control']) {
+            textArea.value = textArea.value.substring(0, startPos) + "<h5>"
+                + textArea.value.substring(startPos, endPos) + "</h5>"
+                + textArea.value.substring(endPos, textArea.textLength);
+            console.log(textArea.value);
+        }
     }
 
     createRecipe() {
@@ -78,8 +148,22 @@ export class CreateRecipeComponent implements OnInit {
             ingredientMeasurements: ingredientMeasurement
         }
 
+        this.resetInputs();
+
+        console.log(this.description);
+
         this.recipeService.createNewRecipe(recipe).subscribe(result => console.log(result),
             () => console.log("An error has occurred while trying to create a new recipe."));
+    }
+
+    private resetInputs() {
+        this.description = '';
+        this.howToPrepare = '';
+        this.time = 1;
+        this.difficulty = 0;
+        this.imageLink = '';
+        this.recipeName = '';
+        this.addedIngredients = new Array<AddIngredientModel>;
     }
 
     addIngredient() {
@@ -87,8 +171,6 @@ export class CreateRecipeComponent implements OnInit {
         ingredient.quantity = 0;
 
         this.addedIngredients.push(ingredient);
-
-        console.log(this.addedIngredients)
     }
 
     deleteIngredient(index: number) {

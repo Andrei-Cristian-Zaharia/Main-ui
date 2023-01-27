@@ -2,5 +2,5 @@ import {CategoryIngredientModel} from "./categoryIngredient.model";
 
 export class IngredientsByCategoryModel {
 
-    categoryIngredients: CategoryIngredientModel[];
+    categoryIngredients: CategoryIngredientModel[] = new Array<CategoryIngredientModel>;
 }

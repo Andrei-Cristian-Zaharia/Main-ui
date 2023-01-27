@@ -9,7 +9,7 @@
             (click)="op.toggle($event)"></button>
   </div>
 </div>
-
+<hr/>
 <p-overlayPanel #op [showCloseIcon]="false" [style]="{ width: 'auto' }">
     <ng-template pTemplate>
         <p-button label="Logout" (onClick)="logout()"></p-button>
@@ -19,9 +19,8 @@
 
 <div class="createRecipeDialog">
     <p-dialog [(visible)]="createRecipeDialog"
-              [style]="{width: '800px'}" [showHeader]="false"
+              [style]="{width: '60vw'}" [showHeader]="false"
               [baseZIndex]="10000" [draggable]="false" [resizable]="false" [dismissableMask]="true" [modal]="true" [closable]="true">
         <app-create-recipe [username]="user.username"></app-create-recipe>
     </p-dialog>
 </div>
-

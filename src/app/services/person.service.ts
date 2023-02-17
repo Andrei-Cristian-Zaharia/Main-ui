@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {CookieService} from "ngx-cookie-service";
 import {AuthService} from "./auth.service";
 import {PersonDetailsModel} from "../models/personDetails.model";
+import {PersonBasicInfoModel} from "../models/personBasicInfo.model";
 
 @Injectable({
     providedIn: 'root'
@@ -32,8 +33,15 @@ export class PersonService {
     }
 
     getPersonDetails() {
-        return this.http.get<PersonDetailsModel>(
+        return this.http.get<PersonBasicInfoModel>(
             this.apiConfig.PERSON_API + "/email?emailAddress=" + this.cookieService.get('emailAddress'),
+            this.getOptionsAuth()
+        );
+    }
+
+    getPersonDetailsByUsername(username) {
+        return this.http.get<PersonDetailsModel>(
+            this.apiConfig.PERSON_API + "/details/name?name=" +  username,
             this.getOptionsAuth()
         );
     }

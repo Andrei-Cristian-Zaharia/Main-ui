@@ -25,8 +25,12 @@ export class ReviewService {
         return this.http.post<ReviewModel[]>(this.apiConfig.REVIEW_API + "/all/entity", body, this.getOptions());
     }
 
+    checkReviewFromUserOnRecipe(email: string, recipeId: number) {
+        return this.http.get<boolean>(this.apiConfig.REVIEW_API + "/check/recipe/existence?email=" + email + "&recipeId=" + recipeId);
+    }
+
     createNewReview(review) {
-        return this.http.post(this.apiConfig.REVIEW_API, review, this.getOptionsAuth());
+        return this.http.post(this.apiConfig.REVIEW_API + "/create", review, this.getOptionsAuth());
     }
 
     getOptions() {

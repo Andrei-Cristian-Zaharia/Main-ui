@@ -60,18 +60,21 @@
     <div>
         <span class="p-input-icon-left">
             <i class="pi pi-search"></i>
-            <input type="text" pInputText [(ngModel)]="filterRecipeName" placeholder="Search recipe name" (change)="refreshRecipes()">
+            <input type="text" pInputText [(ngModel)]="filterRecipeName" placeholder="Search recipe name"
+                   (change)="refreshRecipes()">
         </span>
     </div>
     <div>
         <span class="p-input-icon-left">
             <i class="pi pi-search"></i>
-            <input type="text" pInputText [(ngModel)]="filterAuthorName" placeholder="Search author name" (submit)="refreshRecipes()">
+            <input type="text" pInputText [(ngModel)]="filterAuthorName" placeholder="Search author name"
+                   (submit)="refreshRecipes()">
         </span>
     </div>
     <div class="container-filter-component">
         <p class="indicator-text">Prepare time: {{ sliderText }}</p>
-        <p-slider [(ngModel)]="rangeValues" [min]="1" [max]="600" [range]="true" (onChange)="changeSliderValue()"></p-slider>
+        <p-slider [(ngModel)]="rangeValues" [min]="1" [max]="600" [range]="true"
+                  (onChange)="changeSliderValue()"></p-slider>
     </div>
     <div class="filter-rating-container">
         <p-rating [(ngModel)]="filterRating" [stars]="5" [cancel]="false" (contextmenu)="resetRatingFilter($event)"
@@ -88,7 +91,8 @@
         </p-rating>
     </div>
     <div class="filter-rating-container">
-        <p-rating [(ngModel)]="filterDifficulty" [stars]="5" [cancel]="false" (contextmenu)="resetDifficultyFilter($event)"
+        <p-rating [(ngModel)]="filterDifficulty" [stars]="5" [cancel]="false"
+                  (contextmenu)="resetDifficultyFilter($event)"
                   (click)="refreshRecipes()" pTooltip="Difficulty" tooltipPosition="top">
             <ng-template pTemplate="cancel">
                 <img src="assets/cross.png" alt="" style="width: 28px; height: 28px;">
@@ -129,7 +133,8 @@
                 <img alt="Card" src="{{ recipe.imageAddress }}" class="image-card-header"
                      (click)="showViewRecipeDialog(recipe)">
                 <div class="save-button">
-                    <button pButton type="button" class="p-button-raised p-button-rounded" icon="pi pi-bookmark"></button>
+                    <button pButton type="button" class="p-button-raised p-button-rounded"
+                            icon="pi pi-bookmark"></button>
                 </div>
             </ng-template>
             <div>
@@ -188,11 +193,9 @@
     </ng-template>
 </p-dialog>
 
-<div class="createRecipeDialog">
-    <p-dialog [(visible)]="viewRecipeDialog"
-              [style]="{width: '65vw', height: '50vw'}" [showHeader]="false"
-              [baseZIndex]="10000" [draggable]="false" [resizable]="false" [dismissableMask]="true" [modal]="true"
-              [closable]="true">
-        <app-recipe-view [recipe]="selectedRecipe" [value]></app-recipe-view>
-    </p-dialog>
-</div>
+<p-dialog [(visible)]="viewRecipeDialog"
+          [style]="{width: '65vw', height: '50vw'}" [showHeader]="false"
+          [baseZIndex]="10000" [draggable]="false" [resizable]="false" [dismissableMask]="true" [modal]="true"
+          [closable]="true">
+    <app-recipe-view [recipe]="selectedRecipe"></app-recipe-view>
+</p-dialog>

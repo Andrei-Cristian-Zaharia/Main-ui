@@ -28,6 +28,8 @@ import {SliderModule} from 'primeng/slider';
 import {RecipeViewComponent} from './components/recipe/recipeComponents/recipe-view/recipe-view.component';
 import {TimeTransform} from "./pipes/time.pipe";
 import {TooltipModule} from 'primeng/tooltip';
+import { ProfileComponent } from './components/profile/profile.component';
+import { RecipePageComponent } from './components/recipe/recipeComponents/recipe-page/recipe-page.component';
 
 @NgModule({
     declarations: [
@@ -39,7 +41,9 @@ import {TooltipModule} from 'primeng/tooltip';
         LoginComponent,
         NotFoundComponent,
         RecipeViewComponent,
-        TimeTransform
+        TimeTransform,
+        ProfileComponent,
+        RecipePageComponent
     ],
     imports: [
         BrowserModule,

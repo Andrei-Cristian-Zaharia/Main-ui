@@ -14,6 +14,8 @@ import {NotFoundComponent} from "./components/not-found/not-found.component";
 import {Observable} from "rxjs";
 import {AuthService} from "./services/auth.service";
 import {OverviewComponent} from "./components/overview/overview.component";
+import {ProfileComponent} from "./components/profile/profile.component";
+import {RecipePageComponent} from "./components/recipe/recipeComponents/recipe-page/recipe-page.component";
 
 @Injectable()
 export class LoginGuard implements CanActivate {
@@ -41,6 +43,10 @@ const routes: Routes = [
         path: '', component: OverviewComponent, children: [
             // {path: 'recipes', component: RecipeComponent, canActivate: [LoginGuard] },
             {path: 'recipes', component: RecipeComponent },
+            {path: 'recipe', component: RecipePageComponent },
+            {path: 'recipe/:name', component: RecipePageComponent },
+            {path: 'profile', component: ProfileComponent },
+            {path: 'profile/:username', component: ProfileComponent },
         ]
     },
     {path: 'login', component: LoginComponent},

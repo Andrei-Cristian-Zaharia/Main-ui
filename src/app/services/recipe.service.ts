@@ -23,6 +23,10 @@ export class RecipeService {
         return this.http.post<RecipeModel[]>(this.apiConfig.RECIPE_API + "/all/filtered", body);
     }
 
+    getRecipeByName(recipeName: string) {
+        return this.http.get<RecipeModel>(this.apiConfig.RECIPE_API + "/findByName?name=" + recipeName);
+    }
+
     createNewRecipe(recipe) {
         return this.http.post(this.apiConfig.RECIPE_API, recipe, this.getOptions());
     }

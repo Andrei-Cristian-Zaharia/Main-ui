@@ -26,13 +26,25 @@
         object-fit: fill;
         border-radius: 5px;
         display: block;
-        margin-left: 30px;
+        margin-left: 70px;
     }
 }
 
 .recipe-name {
-    text-align: center;
-    margin-top: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+
+    .web-img {
+        align-items: center;
+        justify-content: center;
+        margin-left: 10px;
+        height: 40px;
+        width: 40px;
+        cursor: pointer;
+    }
 }
 
 .recipe-description {
@@ -53,14 +65,30 @@
     }
 }
 
-.recipe-howToPrepare {
-    margin-top: 25px;
-    margin-bottom: 25px;
+.recipe-ingredients {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 300px;
+    position: sticky;
+    top: 1rem;
+    align-self: flex-start;
+}
 
-    padding-bottom: 25px;
+.review-content-page {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    height: auto;
 
-    .howToPrepare-text {
-        margin-top: 15px;
+    .recipe-howToPrepare {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        height: auto;
+        width: 900px;
+
+        .howToPrepare-text {
+            margin-top: 15px;
+        }
     }
 }
 
@@ -69,36 +97,39 @@
     margin-top: 15px;
     height: auto;
     width: auto;
-    border: dotted;
 
     .ingredient-line {
-        padding: 10px 20px;
+        padding: 10px 5px;
     }
 }
 
 .details-container {
     width: 20vw;
-    padding: 5px 10px;
+    padding: 5px 50px;
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
     display: block;
 
     .author {
-        margin-top: 5px;
+        margin-top: 10px;
         display: inline-flex;
         flex-direction: row;
 
         .image-person {
-            height: 30px;
-            width: 30px;
+            height: 40px;
+            width: 40px;
         }
 
         .author-text {
+            cursor: pointer;
             margin-left: 7.5px;
             margin-top: 4px;
         }
     }
 
     .time-container {
-        margin-top: 5px;
+        margin-top: 10px;
         display: inline-flex;
         flex-direction: row;
 
@@ -116,7 +147,7 @@
     .rating-container {
         display: flex;
         flex-direction: row;
-        margin-top: 5px;
+        margin-top: 10px;
         margin-left: 20px;
 
         .rating-image {
@@ -127,6 +158,12 @@
 }
 
 .review-container {
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    .p-card .p-card-content {
+        padding: 0;
+    }
 
     .review-insert-title {
         outline: none;
@@ -139,7 +176,13 @@
         width: 100%;
     }
 
+    .review-submit {
+        padding-top: 20px;
+        margin-left: 28vw;
+    }
+
     .review-section-title {
+        padding-bottom: 15px;
         display: inline-flex;
         font-size: 20px;
         text-align: center;
@@ -160,9 +203,14 @@
             padding-bottom: 40px;
 
             .review-author-text {
+                cursor: pointer;
                 margin-top: 5px;
                 margin-left: 7px;
             }
+        }
+
+        .review-display-content {
+            word-wrap: break-word;
         }
     }
 

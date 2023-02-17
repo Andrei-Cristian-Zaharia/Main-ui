@@ -1,6 +1,11 @@
 <div class="dialog-header" *ngIf="recipe != null">
     <div class="recipe-name">
-        <h1>{{ recipe.name }}</h1>
+        <div>
+            <h1>{{ recipe.name }}</h1>
+        </div>
+        <div>
+            <img class="web-img" src="assets/website.png" alt="" (click)="goToRecipePage(recipe.name)">
+        </div>
     </div>
     <div class="recipe-description">
         <h2>Description</h2>
@@ -16,18 +21,19 @@
                 <div>
                     <div class="author">
                         <img src="assets/person-icon.png" alt="" class="image-person">
-                        <h3 class="author-text">Publisher: {{ recipe.person.username }} </h3>
+                        <h3 class="author-text"
+                            (click)="goToProfile(recipe.person.username)">Publisher: {{ recipe.person.username }} </h3>
                     </div>
                 </div>
                 <div>
                     <div class="time-container">
                         <img src="assets/clock.png" alt="" class="image-clock">
-                        <h3 class="time-text">Time to prepare: {{ recipe.time }} min</h3>
+                        <h3 class="time-text">Prepare time: {{ recipe.time | time }}</h3>
                     </div>
                 </div>
                 <div class="rating-container">
                     <p-rating [(ngModel)]="recipe.difficulty" [stars]="5" [cancel]="false"
-                              [readonly]="true">
+                              [readonly]="true" pTooltip="Difficulty" tooltipPosition="top">
                         <ng-template pTemplate="officon">
                             <img src="assets/effort-unfilled.png" alt="" class="rating-image">
                         </ng-template>
@@ -38,7 +44,7 @@
                 </div>
                 <div class="rating-container">
                     <p-rating [(ngModel)]="recipe.rating" [stars]="5" [cancel]="false"
-                              [readonly]="true">
+                              [readonly]="true" pTooltip="Rating" tooltipPosition="top">
                         <ng-template pTemplate="officon">
                             <img src="assets/star-unfilled.png" alt="" class="rating-image">
                         </ng-template>
@@ -49,7 +55,7 @@
                 </div>
                 <div class="rating-container">
                     <p-rating [(ngModel)]="recipe.spiciness" [stars]="5" [cancel]="false"
-                              [readonly]="true">
+                              [readonly]="true" pTooltip="Spiciness" tooltipPosition="top">
                         <ng-template pTemplate="officon">
                             <img src="assets/chili-unfilled.png" alt="" class="rating-image">
                         </ng-template>
@@ -61,24 +67,26 @@
             </div>
         </div>
     </div>
-    <div>
-        <h2>Ingredients</h2>
-        <div class="ingredients-container">
-            <div class="ingredient-line" *ngFor="let ing of recipe.ingredientList">
-                <li>{{ ing.quantity }} {{ ing.measurementUnit }} de {{ ing.name }} </li>
+    <div class="review-content-page">
+        <div class="recipe-ingredients">
+            <h2>Ingredients</h2>
+            <div class="ingredients-container">
+                <div class="ingredient-line" *ngFor="let ing of recipe.ingredientList">
+                    <li>{{ ing.quantity }} {{ ing.measurementUnit }} de {{ ing.name }} </li>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="recipe-howToPrepare">
-        <h2>How to prepare</h2>
-        <p [innerHTML]="recipe.howToPrepare" class="howToPrepare-text"></p>
+        <div class="recipe-howToPrepare">
+            <h2>How to prepare</h2>
+            <p [innerHTML]="recipe.howToPrepare" class="howToPrepare-text"></p>
+        </div>
     </div>
     <div class="review-container">
         <div class="review-section-title">
             <h2>Reviews</h2>
-            <div *ngIf="userLogged == true">
+            <div *ngIf="userLogged == true && userAlreadyPosted == false">
                 <button pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded review-add"
-                        (click)="toogleCreateReviewWindow()"></button>
+                        (click)="toggleCreateReviewWindow()"></button>
             </div>
         </div>
         <p-card *ngIf="insertNewReviewWindow === true">
@@ -105,7 +113,9 @@
 
             <textarea class="review-insert-content" rows="2" pInputTextarea [autoResize]="true"
                       [(ngModel)]="content"></textarea>
-
+            <div class="review-submit">
+                <p-button label="Submit" (onClick)="createReview()"></p-button>
+            </div>
         </p-card>
         <div *ngFor="let review of reviews">
             <div class="review">
@@ -131,12 +141,15 @@
                         </div>
                     </ng-template>
 
-                    {{ review.text }}
+                    <div class="review-display-content">
+                        {{ review.text }}
+                    </div>
 
                     <ng-template pTemplate="footer">
                         <div class="review-user">
                             <img src="assets/person-icon.png" alt="" class="review-image-person">
-                            <h3 class="review-author-text"> {{ review.person.username }} </h3>
+                            <h3 class="review-author-text"
+                                (click)="goToProfile(review.person.username)"> {{ review.person.username }} </h3>
                         </div>
                     </ng-template>
                 </p-card>

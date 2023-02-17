@@ -163,8 +163,6 @@ export class RecipeComponent implements OnInit {
             imageWithClass
         ).replaceAll("\\/", '');
 
-        console.log(recipe.description);
-
         this.viewRecipeDialog = true;
     }
 

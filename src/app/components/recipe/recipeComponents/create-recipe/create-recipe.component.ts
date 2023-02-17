@@ -142,17 +142,21 @@ export class CreateRecipeComponent implements OnInit {
             howToPrepare: this.howToPrepare,
             time: this.time,
             difficulty: this.difficulty,
+            spiciness: 0,
+            isVegan: false,
             imageAddress: this.imageLink,
             ingredientNames: ingredientNames,
             ingredientQuantities: ingredientQuantity,
             ingredientMeasurements: ingredientMeasurement
         }
 
-        this.resetInputs();
 
         console.log(this.description);
 
-        this.recipeService.createNewRecipe(recipe).subscribe(result => console.log(result),
+        this.recipeService.createNewRecipe(recipe).subscribe(result => {
+                console.log(result);
+                this.resetInputs();
+            },
             () => console.log("An error has occurred while trying to create a new recipe."));
     }
 

@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {PersonService} from "../../services/person.service";
 import {PersonDetailsModel} from "../../models/personDetails.model";
 import {AuthService} from "../../services/auth.service";
+import {PersonBasicInfoModel} from "../../models/personBasicInfo.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-navbar',
@@ -11,14 +13,19 @@ import {AuthService} from "../../services/auth.service";
 export class NavbarComponent implements OnInit {
 
     constructor(private personService: PersonService,
-                private authService: AuthService) { }
+                private authService: AuthService,
+                private router: Router) { }
 
-    user: PersonDetailsModel;
+    user: PersonBasicInfoModel;
 
     createRecipeDialog: boolean = false;
 
     ngOnInit(): void {
         this.personService.getPersonDetails().subscribe(data => this.user = data);
+    }
+
+    goToRecipes(){
+        this.router.navigateByUrl('');
     }
 
     logout(){

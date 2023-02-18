@@ -1,0 +1,36 @@
+.profile-container {
+    padding: 60px 40px;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    background: #14B8A6;
+
+    .details-container {
+
+        display: flex;
+
+        .user-name {
+            margin-left: 20px;
+            padding-top: 40px;
+            padding-bottom: 40px;
+        }
+
+        img {
+            width: 120px;
+            height: 120px;
+        }
+    }
+
+    .restaurant-container{
+        background: #b81414;
+        padding: 60px;
+    }
+
+    .owned-recipes {
+
+    }
+
+    .owned-reviews {
+
+    }
+}

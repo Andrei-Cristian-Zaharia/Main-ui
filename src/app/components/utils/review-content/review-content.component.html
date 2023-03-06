@@ -1,0 +1,95 @@
+<div class="review-container">
+    <div class="review-section-title">
+        <h2>Reviews</h2>
+        <div *ngIf="userLogged == true && userAlreadyPosted == false">
+            <div *ngIf="newReviewPanelOpen == false">
+                <button pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded review-add"
+                        (click)="toggleCreateReviewWindow()"></button>
+            </div>
+            <div *ngIf="newReviewPanelOpen == true">
+                <button pButton pRipple type="button" icon="pi pi-minus" class="p-button-rounded review-add"
+                        (click)="toggleCreateReviewWindow()"></button>
+            </div>
+        </div>
+    </div>
+    <p-card *ngIf="insertNewReviewWindow === true">
+        <ng-template pTemplate="header">
+            <div class="review-header" id="newReview">
+                <div>
+                    <div class="review-title">
+                            <textarea class="review-insert-title" rows="1" pInputTextarea [autoResize]="true"
+                                      [(ngModel)]="title" placeholder="Title..."></textarea>
+                    </div>
+                </div>
+                <div class="rating-container">
+                    <p-rating [(ngModel)]="givenStars" [stars]="5" [cancel]="false">
+                        <ng-template pTemplate="officon">
+                            <img src="../../../../assets/star-unfilled.png" alt="" class="rating-image">
+                        </ng-template>
+                        <ng-template pTemplate="onicon">
+                            <img src="../../../../assets/star.png" alt="" class="rating-image">
+                        </ng-template>
+                    </p-rating>
+                </div>
+            </div>
+        </ng-template>
+
+        <textarea class="review-insert-content" rows="2" pInputTextarea [autoResize]="true"
+                  [(ngModel)]="content"></textarea>
+        <div class="review-submit">
+            <p-button label="Submit" (onClick)="createReview()"></p-button>
+        </div>
+    </p-card>
+    <div *ngFor="let review of reviews">
+        <div class="review">
+            <p-card class="review-card">
+                <ng-template pTemplate="header">
+                    <div class="review-header">
+                        <div>
+                            <div class="review-title">
+                                <h2>{{ review.title }}</h2>
+                                <p class="review-date"> {{ review.creationDate }} </p>
+                            </div>
+                        </div>
+                        <div class="rating-container">
+                            <p-rating [(ngModel)]="review.rating" [stars]="5" [cancel]="false"
+                                      [readonly]="true">
+                                <ng-template pTemplate="officon">
+                                    <img src="../../../../assets/star-unfilled.png" alt="" class="rating-image">
+                                </ng-template>
+                                <ng-template pTemplate="onicon">
+                                    <img src="../../../../assets/star.png" alt="" class="rating-image">
+                                </ng-template>
+                            </p-rating>
+                        </div>
+                    </div>
+                </ng-template>
+
+                <div class="review-display-content">
+                    {{ review.text }}
+                </div>
+
+                <ng-template pTemplate="footer">
+                    <div class="review-user">
+                        <div style="display: flex;" *ngIf="review.person.username == user.username">
+                            <img src="../../../../assets/delete.png" alt="" class="review-edit-delete" (click)="showDeleteDialog()">
+                            <img src="../../../../assets/edit.png" alt="" class="review-edit-delete">
+                        </div>
+                        <img src="../../../../assets/person-icon.png" alt="">
+                        <h3 class="review-author-text"
+                            (click)="goToProfile(review.person.username)"> {{ review.person.username }} </h3>
+                    </div>
+                </ng-template>
+            </p-card>
+        </div>
+    </div>
+</div>
+
+<p-dialog header="Confirm delete" [(visible)]="confirmDeleteDialog" [position]="'bottom'" [modal]="true" [style]="{width: '20vw'}"
+          [draggable]="false" [resizable]="false">
+    <p>Are you sure you want to delete this review ?</p>
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" (click)="hideDeleteDialog()" label="Sure" styleClass="p-button-text"></p-button>
+        <p-button icon="pi pi-check" (click)="hideDeleteDialog()" label="Cancel" styleClass="p-button-text"></p-button>
+    </ng-template>
+</p-dialog>

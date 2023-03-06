@@ -1,0 +1,11 @@
+<div>
+    <p-rating [(ngModel)]="value" [stars]="5" [cancel]="false" [readonly]="readonly"
+              pTooltip="{{ tooltipDescription }}" tooltipPosition="top" (click)="emitValue()">
+        <ng-template pTemplate="officon">
+            <img [ngStyle]="{'height': imageSizePx, 'width': imageSizePx}" src="{{ imageSourceUnfilled }}" alt="">
+        </ng-template>
+        <ng-template pTemplate="onicon">
+            <img [ngStyle]="{'height': imageSizePx, 'width': imageSizePx}" src="{{ imageSourceFilled }}" alt="">
+        </ng-template>
+    </p-rating>
+</div>

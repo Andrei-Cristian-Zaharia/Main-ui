@@ -7,6 +7,5 @@ export class PersonDetailsModel {
     emailAddress: string;
     hasRestaurant: boolean;
     accountType: string;
-    ownedRestaurant: RestaurantModel;
     ownedRecipes: RecipeModel[] = new Array<RecipeModel>;
 }

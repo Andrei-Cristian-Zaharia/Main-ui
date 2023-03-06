@@ -15,18 +15,26 @@ export class ReviewService {
         private authService: AuthService
     ) { }
 
-    getReviewsForRecipe(id: number) {
+    getReviewsForEntity(id: number, category: string) {
 
         let body = {
-            "category": "RECIPE",
+            "category": category,
             "id": id
         }
 
         return this.http.post<ReviewModel[]>(this.apiConfig.REVIEW_API + "/all/entity", body, this.getOptions());
     }
 
-    checkReviewFromUserOnRecipe(email: string, recipeId: number) {
-        return this.http.get<boolean>(this.apiConfig.REVIEW_API + "/check/recipe/existence?email=" + email + "&recipeId=" + recipeId);
+    checkReviewFromUserOnEntity(email: string, entityId: number, category: string) {
+        return this.http.get<boolean>(this.apiConfig.REVIEW_API +
+            "/check/entity/existence?email=" + email +
+            "&entityId=" + entityId + "" +
+            "&category=" + category
+        );
+    }
+
+    getReviewsForUser(email: string) {
+        return this.http.get<ReviewModel[]>(this.apiConfig.REVIEW_API + "/all/user?email=" + email);
     }
 
     createNewReview(review) {

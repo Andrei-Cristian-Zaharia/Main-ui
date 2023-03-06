@@ -27,6 +27,10 @@ export class RecipeService {
         return this.http.get<RecipeModel>(this.apiConfig.RECIPE_API + "/findByName?name=" + recipeName);
     }
 
+    getRecipesForUser(name: string) {
+        return this.http.get<RecipeModel[]>(this.apiConfig.RECIPE_API + "/all/owner/username?name=" + name);
+    }
+
     createNewRecipe(recipe) {
         return this.http.post(this.apiConfig.RECIPE_API, recipe, this.getOptions());
     }

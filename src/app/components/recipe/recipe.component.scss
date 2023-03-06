@@ -22,18 +22,6 @@
         font-size: 18px;
     }
 
-    .filter-rating-container {
-        display: flex;
-        flex-direction: row;
-        margin-top: 3px;
-        margin-left: 8px;
-
-        .rating-filter-image {
-            width: 40px;
-            height: 40px;
-        }
-    }
-
     .container-filter-component {
         height: 75px;
         width: 250px;
@@ -91,13 +79,14 @@
     //}
 }
 
-.time-container {
+.time-component {
     display: flex;
     flex-direction: row;
     float: left;
+    margin-top: 0;
     margin-left: 25px;
 
-    .image-clock {
+    .time-image {
         height: 35px;
         width: 35px;
     }
@@ -114,11 +103,6 @@
     flex-direction: row;
     float: right;
     margin-bottom: 2px;
-
-    .difficulty-image {
-        width: 35px;
-        height: 35px;
-    }
 }
 
 .ingredient-container {

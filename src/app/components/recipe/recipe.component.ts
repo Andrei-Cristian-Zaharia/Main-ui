@@ -4,6 +4,8 @@ import {RecipeModel} from "../../models/recipe.model";
 import {IngredientService} from "../../services/ingredient.service";
 import {BasicIngredientModel} from "../../models/basicIngredient.model";
 import {IngredientsByCategoryModel} from "../../models/ingredientsByCategory.model";
+import {EntityTypeEnum} from "../../enums/entityType.enum";
+import {RateTypeEnum} from "../../enums/rateType.enum";
 
 @Component({
     selector: 'app-recipe',
@@ -42,6 +44,8 @@ export class RecipeComponent implements OnInit {
     rangeValues: number[] = [1, 600];
     sliderText: string = null;
 
+    rateType = RateTypeEnum;
+
     constructor(recipeService: RecipeService, ingredientService: IngredientService) {
         this.ingredientService = ingredientService;
         this.recipeService = recipeService;
@@ -51,6 +55,24 @@ export class RecipeComponent implements OnInit {
         this.refreshRecipes();
         this.refreshIngredients();
         this.changeSliderValue();
+    }
+
+    updateRatingFilter(rate: number) {
+        this.filterRating = rate;
+
+        this.refreshRecipes();
+    }
+
+    updateDifficultyFilter(rate: number) {
+        this.filterDifficulty = rate;
+
+        this.refreshRecipes();
+    }
+
+    updateSpicinessFilter(rate: number) {
+        this.filterSpiciness = rate;
+
+        this.refreshRecipes();
     }
 
     resetRatingFilter(event: MouseEvent) {
@@ -67,7 +89,7 @@ export class RecipeComponent implements OnInit {
         this.refreshRecipes();
     }
 
-    resetSicinessFilter(event: MouseEvent) {
+    resetSpicinessFilter(event: MouseEvent) {
         event.preventDefault();
         this.filterSpiciness = 0;
 
@@ -92,6 +114,7 @@ export class RecipeComponent implements OnInit {
         this.recipeService.getRecipesFilteredByIngredients(filterForm).subscribe(result => {
 
             this.recipes = result;
+            console.log(result)
 
             this.isLoaded = true;
         })

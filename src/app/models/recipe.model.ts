@@ -1,8 +1,8 @@
 import {PersonModel} from "./person.model";
 import {IngredientModel} from "./ingredient.model";
+import {BaseEntityModel} from "./baseEntity.model";
 
-export class RecipeModel {
-    id: number;
+export class RecipeModel extends BaseEntityModel {
     name: string;
     description: string;
     howToPrepare: string;
@@ -15,4 +15,8 @@ export class RecipeModel {
     missingIngredients: number;
     person: PersonModel;
     ingredientList: IngredientModel[];
+
+    constructor() {
+        super("RECIPE");
+    }
 }

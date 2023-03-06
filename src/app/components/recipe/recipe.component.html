@@ -76,49 +76,12 @@
         <p-slider [(ngModel)]="rangeValues" [min]="1" [max]="600" [range]="true"
                   (onChange)="changeSliderValue()"></p-slider>
     </div>
-    <div class="filter-rating-container">
-        <p-rating [(ngModel)]="filterRating" [stars]="5" [cancel]="false" (contextmenu)="resetRatingFilter($event)"
-                  (click)="refreshRecipes()" pTooltip="Rating" tooltipPosition="top">
-            <ng-template pTemplate="cancel">
-                <img src="assets/cross.png" alt="" style="width: 28px; height: 28px;">
-            </ng-template>
-            <ng-template pTemplate="officon">
-                <img src="assets/star-unfilled.png" alt="" class="rating-filter-image">
-            </ng-template>
-            <ng-template pTemplate="onicon">
-                <img src="assets/star.png" alt="" class="rating-filter-image">
-            </ng-template>
-        </p-rating>
-    </div>
-    <div class="filter-rating-container">
-        <p-rating [(ngModel)]="filterDifficulty" [stars]="5" [cancel]="false"
-                  (contextmenu)="resetDifficultyFilter($event)"
-                  (click)="refreshRecipes()" pTooltip="Difficulty" tooltipPosition="top">
-            <ng-template pTemplate="cancel">
-                <img src="assets/cross.png" alt="" style="width: 28px; height: 28px;">
-            </ng-template>
-            <ng-template pTemplate="officon">
-                <img src="assets/effort-unfilled.png" alt="" class="rating-filter-image">
-            </ng-template>
-            <ng-template pTemplate="onicon">
-                <img src="assets/effort.png" alt="" class="rating-filter-image">
-            </ng-template>
-        </p-rating>
-    </div>
-    <div class="filter-rating-container">
-        <p-rating [(ngModel)]="filterSpiciness" [stars]="5" [cancel]="false" (contextmenu)="resetSicinessFilter($event)"
-                  (click)="refreshRecipes()" pTooltip="Spiciness" tooltipPosition="top">
-            <ng-template pTemplate="cancel">
-                <img src="assets/cross.png" alt="" style="width: 28px; height: 28px;">
-            </ng-template>
-            <ng-template pTemplate="officon">
-                <img src="assets/chili-unfilled.png" alt="" class="rating-filter-image">
-            </ng-template>
-            <ng-template pTemplate="onicon">
-                <img src="assets/chili.png" alt="" class="rating-filter-image">
-            </ng-template>
-        </p-rating>
-    </div>
+    <rate [value]="filterRating" [type]="rateType.rating" [readonly]="false" [imageSize]="40"
+          (selectedValue)="updateRatingFilter($event)" (contextmenu)="resetRatingFilter($event)"></rate>
+    <rate [value]="filterDifficulty" [type]="rateType.difficulty" [readonly]="false" [imageSize]="40"
+          (selectedValue)="updateDifficultyFilter($event)" (contextmenu)="resetDifficultyFilter($event)"></rate>
+    <rate [value]="filterSpiciness" [type]="rateType.spiciness" [readonly]="false" [imageSize]="40"
+          (selectedValue)="updateSpicinessFilter($event)" (contextmenu)="resetSpicinessFilter($event)"></rate>
 </div>
 <div class="selected-ingredients" *ngIf="selectedIngredients.length > 0">
     <h4>Selected ingredients:&nbsp;</h4>
@@ -138,20 +101,12 @@
                 </div>
             </ng-template>
             <div>
-                <div class="time-container">
-                    <img src="assets/clock.png" alt="" class="image-clock">
+                <div class="time-component">
+                    <img src="assets/clock.png" alt="" class="time-image">
                     <h5 class="time-text">{{ recipe.time | time }}</h5>
                 </div>
                 <div class="difficulty-container">
-                    <p-rating [(ngModel)]="recipe.difficulty" [stars]="5" [cancel]="false" [readonly]="true"
-                              pTooltip="Difficulty" tooltipPosition="top">
-                        <ng-template pTemplate="officon">
-                            <img src="assets/effort-unfilled.png" alt="" class="difficulty-image">
-                        </ng-template>
-                        <ng-template pTemplate="onicon">
-                            <img src="assets/effort.png" alt="" class="difficulty-image">
-                        </ng-template>
-                    </p-rating>
+                    <rate [value]="recipe.difficulty" [type]="rateType.difficulty" [imageSize]="35"></rate>
                 </div>
             </div>
         </p-card>

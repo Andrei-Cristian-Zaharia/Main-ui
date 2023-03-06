@@ -8,5 +8,6 @@ export class ReviewModel {
     rating: number;
     creationDate: Date;
     category: string;
+    entityName: string;
     person: PersonModel;
 }

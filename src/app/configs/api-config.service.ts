@@ -10,6 +10,7 @@ export class ApiConfig {
     private _UTILS_API: string = 'http://localhost:3005/v1/food-api/utils/';
     private _PERSON_API: string = 'http://localhost:3005/v1/core-api/person';
     private _REVIEW_API: string = 'http://localhost:3005/v1/core-api/review';
+    private _RESTAURANT_API: string = 'http://localhost:3005/v1/restaurant-api/restaurant';
 
 
     get PERSON_API(): string {
@@ -34,5 +35,9 @@ export class ApiConfig {
 
     get REVIEW_API(): string {
         return this._REVIEW_API;
+    }
+
+    get RESTAURANT_API(): string {
+        return this._RESTAURANT_API;
     }
 }

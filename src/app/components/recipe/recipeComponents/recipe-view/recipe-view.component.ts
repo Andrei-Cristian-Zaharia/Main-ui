@@ -13,6 +13,8 @@ import {ReviewService} from "../../../../services/review.service";
 import {ReviewModel} from "../../../../models/review.model";
 import {CookieService} from "ngx-cookie-service";
 import {Router} from "@angular/router";
+import {RateTypeEnum} from "../../../../enums/rateType.enum";
+import {EntityTypeEnum} from "../../../../enums/entityType.enum";
 
 @Component({
     selector: 'app-recipe-view',
@@ -21,7 +23,7 @@ import {Router} from "@angular/router";
     encapsulation: ViewEncapsulation.None,
 })
 
-export class RecipeViewComponent implements OnChanges {
+export class RecipeViewComponent {
 
     @Input()
     recipe: RecipeModel;
@@ -30,85 +32,16 @@ export class RecipeViewComponent implements OnChanges {
 
     userLogged: boolean = false;
 
-    insertNewReviewWindow: boolean = false;
-
-    userAlreadyPosted: boolean = false;
-
-    givenStars: number = 0;
-    title: string;
-    content: string;
+    rateType = RateTypeEnum;
+    entityType = EntityTypeEnum;
 
     constructor(private reviewService: ReviewService,
                 private cookieService: CookieService,
                 private router: Router) { }
 
-    ngOnChanges(changes: SimpleChanges): void {
-        this.refreshReviews();
-        this.resetReview();
-        this.checkLogin();
-        this.checkPostReview();
-    }
-
-    resetReview() {
-        this.insertNewReviewWindow = false;
-        this.title = "";
-        this.content = "";
-        this.givenStars = 0;
-    }
-
-    refreshReviews() {
-        this.reviewService.getReviewsForRecipe(this.recipe.id).subscribe(data => {
-            this.reviews = data;
-            console.log(data);
-
-            this.updateRecipeRating();
-        })
-    }
-
-    checkLogin() {
-        if (this.cookieService.get('token') != "") {
-            this.userLogged = true;
-        }
-    }
-
-    checkPostReview() {
-        this.reviewService.checkReviewFromUserOnRecipe(this.cookieService.get('emailAddress'), this.recipe.id)
-            .subscribe(data => {
-                this.userAlreadyPosted = data;
-            })
-    }
-
-    updateRecipeRating() {
-
-        let sum = 0;
-
-        for (let review of this.reviews) {
-            sum += review.rating;
-        }
-
-        this.recipe.rating = sum / this.reviews.length;
-    }
-
-    toggleCreateReviewWindow() {
-        this.insertNewReviewWindow = true;
-    }
-
-    createReview() {
-
-        let review = {
-            "title": this.title,
-            "text": this.content,
-            "rating": this.givenStars,
-            "category": "RECIPE",
-            "ownerEmail": this.cookieService.get('emailAddress'),
-            "recipeId": this.recipe.id
-        }
-
-        this.reviewService.createNewReview(review).subscribe(result => {
-            this.updateRecipeRating();
-            this.refreshReviews();
-            this.resetReview();
-        });
+    updateRecipeRating(rating: number) {
+        console.log(rating)
+        this.recipe.rating = rating;
     }
 
     goToProfile(username) {

@@ -16,6 +16,7 @@ import {AuthService} from "./services/auth.service";
 import {OverviewComponent} from "./components/overview/overview.component";
 import {ProfileComponent} from "./components/profile/profile.component";
 import {RecipePageComponent} from "./components/recipe/recipeComponents/recipe-page/recipe-page.component";
+import {RestaurantComponent} from "./components/restaurant/restaurant.component";
 
 @Injectable()
 export class LoginGuard implements CanActivate {
@@ -47,6 +48,8 @@ const routes: Routes = [
             {path: 'recipe/:name', component: RecipePageComponent },
             {path: 'profile', component: ProfileComponent },
             {path: 'profile/:username', component: ProfileComponent },
+            {path: 'restaurant', component: RestaurantComponent },
+            {path: 'restaurant/:name', component: RestaurantComponent }
         ]
     },
     {path: 'login', component: LoginComponent},

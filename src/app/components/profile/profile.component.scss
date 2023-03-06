@@ -1,36 +1,220 @@
-.profile-container {
-    padding: 60px 40px;
-    width: 70%;
-    margin-left: auto;
-    margin-right: auto;
-    background: #14B8A6;
+.profile-details-container {
+    margin-left: 50px;
+    display: flex;
 
-    .details-container {
+    .user-name {
+        margin-left: 20px;
+        padding-top: 40px;
+        padding-bottom: 40px;
+    }
 
+    img {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+.profile-section-title {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    font-size: 20px;
+
+    .subtitle-not-found {
+        padding: 10px;
+    }
+}
+
+.profile-restaurant-container {
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    .left-panel-image {
+        height: 600px;
+        width: 1000px;
+        border-bottom-left-radius: 5px;
+        border-top-left-radius: 5px;
+    }
+
+    .right-panel-image {
+        padding: 40px 15px 20px;
+        text-align: center;
+        width: 100%;
+        height: 100%;
+        margin: auto;
+
+        .profile-restaurant-address {
+            padding: 20px 0 20px;
+            width: 60%;
+            margin: auto;
+        }
+
+        .profile-restaurant-details {
+            height: 210px;
+            width: 100%;
+        }
+
+        .profile-restaurant-rating {
+            padding-top: 10px;
+            padding-bottom: 5px;
+        }
+
+        .profile-restaurant-visit-button {
+            width: 100%;
+            margin-top: 2vw;
+        }
+    }
+}
+
+.profile-restaurant-title {
+    font-weight: bold;
+    padding-bottom: 5px;
+}
+
+.profile-recipes-container{
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    .profile-recipe-box {
+        height: 200px;
+        width: 100%;
         display: flex;
 
-        .user-name {
-            margin-left: 20px;
-            padding-top: 40px;
+        .profile-recipe-details {
+
+            .profile-recipe-name {
+                margin-top: 10px;
+                width: 60vw;
+                text-align: center;
+            }
+
+            .recipe-rates {
+                margin-top: 20px;
+                display: flex;
+                justify-content: space-around;
+            }
+
+            .recipe-details {
+                margin-top: 20px;
+                display: flex;
+                justify-content: space-around;
+
+                .recipe-open-page {
+                    cursor: pointer;
+                    margin-top: 17px;
+                }
+            }
+        }
+
+        .profile-recipe-img {
+            margin-top: 10px;
+            height: 180px;
+            width: 280px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+    }
+}
+
+.review-container {
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    .p-card .p-card-content {
+        padding: 0;
+    }
+
+    .review-insert-title {
+        outline: none;
+        border: none;
+        border-bottom: inset;
+        width: 20vw;
+    }
+
+    .review-insert-content {
+        width: 100%;
+    }
+
+    .review-submit {
+        padding-top: 20px;
+        margin-left: 28vw;
+    }
+
+    .review-section-title {
+        padding-bottom: 15px;
+        display: inline-flex;
+        font-size: 20px;
+        text-align: center;
+
+        .review-add {
+            margin-top: 4px;
+            margin-left: 15px;
+            width: 30px;
+            height: 30px;
+        }
+    }
+
+    .review {
+        margin-top: 10px;
+        padding-bottom: 10px;
+
+        .review-card .p-card-body {
             padding-bottom: 40px;
+
+            .review-author-text {
+                cursor: pointer;
+                margin-top: 5px;
+                margin-left: 7px;
+            }
         }
 
-        img {
-            width: 120px;
-            height: 120px;
+        .review-display-content {
+            word-wrap: break-word;
         }
     }
 
-    .restaurant-container{
-        background: #b81414;
-        padding: 60px;
+    .review-header {
+        display: flex;
+        justify-content: space-between;
+
+        .review-title {
+            display: inline-flex;
+            padding-top: 10px;
+            padding-left: 15px;
+            font-size: 15px;
+
+            .review-date {
+                font-style: italic;
+                margin-top: 5px;
+                margin-left: 10px;
+            }
+        }
+
+        .review-owner {
+            padding-left: 20px;
+            font-size: 20px;
+        }
+
+        .rating-container {
+            margin-top: 10px;
+            margin-right: 10px;
+
+            .rating-image {
+                width: 30px;
+                height: 30px;
+            }
+        }
     }
 
-    .owned-recipes {
+    .review-entity {
+        margin-left: 25px;
+        height: 15px;
+        display: flex;
+        float: left;
 
-    }
-
-    .owned-reviews {
-
+        //img {
+        //    height: 30px;
+        //    width: 30px;
+        //    margin-bottom: 150px;
+        //}
     }
 }

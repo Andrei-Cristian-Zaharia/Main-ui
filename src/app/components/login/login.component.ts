@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../services/auth.service";
 import {PersonService} from "../../services/person.service";
 
@@ -7,7 +7,7 @@ import {PersonService} from "../../services/person.service";
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
 
     emailAddress: string;
     username: string;
@@ -16,6 +16,10 @@ export class LoginComponent {
 
     constructor(private authService: AuthService,
                 private personService: PersonService) {
+    }
+
+    ngOnInit(): void {
+        this.logout();
     }
 
     createAccount() {

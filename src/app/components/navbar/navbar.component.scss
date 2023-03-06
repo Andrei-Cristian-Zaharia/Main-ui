@@ -3,7 +3,7 @@
   width: 100%;
   color: white;
   position: relative;
-  display: inline-block;
+  display: block;
 
   .menu-button {
     float: left;
@@ -12,7 +12,7 @@
     margin-top: 1.1%;
   }
 
-  .profile-container {
+  .right-container {
     display: inline-block;
     text-align: center;
     float: right;

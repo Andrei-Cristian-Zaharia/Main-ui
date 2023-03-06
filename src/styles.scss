@@ -1,3 +1,40 @@
+// RECIPE
+.recipe-name {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+
+    .web-img {
+        align-items: center;
+        justify-content: center;
+        margin-left: 10px;
+        height: 40px;
+        width: 40px;
+        cursor: pointer;
+    }
+}
+
+// Time image + text = time-component
+.time-component {
+    margin-top: 10px;
+    display: inline-flex;
+    flex-direction: row;
+
+    .time-image {
+        height: 40px;
+        width: 40px;
+    }
+
+    .time-text {
+        margin-left: 7.5px;
+        margin-top: 4px;
+    }
+}
+
+// OTHERS
+
 * {
     margin: 0;
     padding: 0;
@@ -11,4 +48,8 @@ body {
 
 body::-webkit-scrollbar {
     display: none; /* for Chrome, Safari, and Opera */
+}
+
+.page-container {
+    padding: 20px 220px 40px;
 }

@@ -1,13 +1,19 @@
 <div class="container">
-  <div>
-    <button pButton type="button" label="Recipes" class="menu-button" (click)="goToRecipes()"></button>
-    <button pButton type="button" label="Restaurant" class="menu-button"></button>
-      <button pButton type="button" label="Create recipe" class="menu-button" (click)="showCreateRecipeDialog()"></button>
-  </div>
-  <div class="profile-container">
-    <button pButton type="button" class="p-button-raised" label="{{ user.username.at(0) | uppercase }}"
-            (click)="op.toggle($event)"></button>
-  </div>
+    <div>
+        <button pButton type="button" label="Recipes" class="menu-button" (click)="goToRecipes()"></button>
+        <div class="menu-button" *ngIf="userLogged == true && user.hasRestaurant == true">
+            <button pButton type="button" label="Restaurant"></button>
+        </div>
+        <div class="menu-button" *ngIf="userLogged == true">
+            <button pButton type="button" label="Create recipe" (click)="showCreateRecipeDialog()"></button>
+        </div>
+    </div>
+    <div class="right-container">
+        <div *ngIf="userLogged == true">
+            <button pButton type="button" class="p-button-raised" label="{{ user.username.at(0) | uppercase }}"
+                    (click)="op.toggle($event)"></button>
+        </div>
+    </div>
 </div>
 <hr/>
 <p-overlayPanel #op [showCloseIcon]="false" [style]="{ width: 'auto' }">
@@ -17,10 +23,11 @@
 </p-overlayPanel>
 
 
-<div class="createRecipeDialog">
+<div class="createRecipeDialog" *ngIf="userLogged == true">
     <p-dialog [(visible)]="createRecipeDialog"
               [style]="{width: '60vw'}" [showHeader]="false"
-              [baseZIndex]="10000" [draggable]="false" [resizable]="false" [dismissableMask]="true" [modal]="true" [closable]="true">
+              [baseZIndex]="10000" [draggable]="false" [resizable]="false" [dismissableMask]="true" [modal]="true"
+              [closable]="true">
         <app-create-recipe [username]="user.username"></app-create-recipe>
     </p-dialog>
 </div>

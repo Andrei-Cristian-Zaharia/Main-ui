@@ -32,11 +32,9 @@ export class PersonService {
             });
     }
 
-    getPersonDetails() {
+    getPersonDetails(email: string) {
         return this.http.get<PersonBasicInfoModel>(
-            this.apiConfig.PERSON_API + "/email?emailAddress=" + this.cookieService.get('emailAddress'),
-            this.getOptionsAuth()
-        );
+            this.apiConfig.PERSON_API + "/email?emailAddress=" + email, this.getOptionsAuth());
     }
 
     getPersonDetailsByUsername(username) {

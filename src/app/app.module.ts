@@ -30,6 +30,14 @@ import {TimeTransform} from "./pipes/time.pipe";
 import {TooltipModule} from 'primeng/tooltip';
 import { ProfileComponent } from './components/profile/profile.component';
 import { RecipePageComponent } from './components/recipe/recipeComponents/recipe-page/recipe-page.component';
+import {DataViewModule} from "primeng/dataview";
+import { RateComponent } from './components/utils/rate/rate.component';
+import {SplitterModule} from "primeng/splitter";
+import { RestaurantComponent } from './components/restaurant/restaurant.component';
+import { RecipeDescriptionComponent } from './components/recipe/recipeComponents/recipeContainers/recipe-description/recipe-description.component';
+import { RecipeSummaryComponent } from './components/recipe/recipeComponents/recipeContainers/recipe-summary/recipe-summary.component';
+import { RecipeContentComponent } from './components/recipe/recipeComponents/recipeContainers/recipe-content/recipe-content.component';
+import { ReviewContentComponent } from './components/utils/review-content/review-content.component';
 
 @NgModule({
     declarations: [
@@ -43,7 +51,13 @@ import { RecipePageComponent } from './components/recipe/recipeComponents/recipe
         RecipeViewComponent,
         TimeTransform,
         ProfileComponent,
-        RecipePageComponent
+        RecipePageComponent,
+        RateComponent,
+        RestaurantComponent,
+        RecipeDescriptionComponent,
+        RecipeSummaryComponent,
+        RecipeContentComponent,
+        ReviewContentComponent
     ],
     imports: [
         BrowserModule,
@@ -63,7 +77,9 @@ import { RecipePageComponent } from './components/recipe/recipeComponents/recipe
         OverlayPanelModule,
         InputTextModule,
         SliderModule,
-        TooltipModule
+        TooltipModule,
+        DataViewModule,
+        SplitterModule
     ],
     providers: [
         LoginGuard,

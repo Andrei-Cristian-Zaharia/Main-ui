@@ -35,7 +35,7 @@
             </div>
         </div>
         <div class="review-content-page">
-            <div class="recipe-ingredients">
+            <div class="recipe-ingredients" *ngIf="!isMobile">
                 <h2>Ingredients</h2>
                 <div class="ingredients-container">
                     <div class="ingredient-line" *ngFor="let ing of recipe.ingredientList">

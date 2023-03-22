@@ -80,11 +80,6 @@
         .rating-container {
             margin-top: 10px;
             margin-right: 10px;
-
-            .rating-image {
-                width: 30px;
-                height: 30px;
-            }
         }
     }
 
@@ -104,6 +99,37 @@
             margin-bottom: 150px;
             margin-left: 5px;
             margin-right: 5px;
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+
+    .review-container {
+        .review-header {
+            justify-content: initial;
+
+            .review-title {
+                padding-left: 10px;
+                display: inline-block;
+
+                .review-date {
+                    font-style: italic;
+                    margin-top: 5px;
+                    margin-left: 20px;
+                }
+            }
+
+            .rating-container {
+                margin-top: 10px;
+                margin-right: 10px;
+
+                .rating-image {
+                    width: 30px;
+                    height: 30px;
+                }
+            }
         }
     }
 }

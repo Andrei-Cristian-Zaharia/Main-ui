@@ -1,5 +1,4 @@
 import {Component, OnInit, SimpleChanges, ViewEncapsulation} from '@angular/core';
-import {ReviewModel} from "../../../../models/review.model";
 import {ReviewService} from "../../../../services/review.service";
 import {CookieService} from "ngx-cookie-service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -7,6 +6,7 @@ import {RecipeModel} from "../../../../models/recipe.model";
 import {RecipeService} from "../../../../services/recipe.service";
 import {RateTypeEnum} from "../../../../enums/rateType.enum";
 import {EntityTypeEnum} from "../../../../enums/entityType.enum";
+import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 
 @Component({
     selector: 'app-recipe-page',
@@ -21,7 +21,10 @@ export class RecipePageComponent implements OnInit {
     rateType = RateTypeEnum;
     entityType = EntityTypeEnum;
 
-    constructor(private reviewService: ReviewService,
+    isMobile: boolean;
+
+    constructor(private responsive: BreakpointObserver,
+                private reviewService: ReviewService,
                 private cookieService: CookieService,
                 private recipeService: RecipeService,
                 private activatedRoute: ActivatedRoute,

@@ -67,6 +67,10 @@ export class AuthService {
         this.router.navigate(['login']);
     }
 
+    authLoginPage() {
+        this.router.navigate(['login']);
+    }
+
     getToken(): string {
         return this.cookieService.get('token');
     }

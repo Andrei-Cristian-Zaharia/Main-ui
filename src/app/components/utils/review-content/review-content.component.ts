@@ -1,4 +1,13 @@
-import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewEncapsulation} from '@angular/core';
+import {
+    Component,
+    EventEmitter,
+    Input,
+    OnChanges,
+    OnInit,
+    Output,
+    SimpleChanges,
+    ViewEncapsulation
+} from '@angular/core';
 import {ReviewModel} from "../../../models/review.model";
 import {ReviewService} from "../../../services/review.service";
 import {CookieService} from "ngx-cookie-service";
@@ -8,6 +17,8 @@ import {EntityTypeEnum} from "../../../enums/entityType.enum";
 import {AuthService} from "../../../services/auth.service";
 import {PersonService} from "../../../services/person.service";
 import {PersonBasicInfoModel} from "../../../models/personBasicInfo.model";
+import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
+import {RateTypeEnum} from "../../../enums/rateType.enum";
 
 @Component({
     selector: 'review-content',
@@ -15,7 +26,7 @@ import {PersonBasicInfoModel} from "../../../models/personBasicInfo.model";
     styleUrls: ['./review-content.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class ReviewContentComponent implements OnChanges {
+export class ReviewContentComponent implements OnInit, OnChanges {
 
     @Input()
     entity: BaseEntityModel;
@@ -39,12 +50,24 @@ export class ReviewContentComponent implements OnChanges {
     title: string;
     content: string;
 
+    rateType = RateTypeEnum;
+
     confirmDeleteDialog: boolean = false;
 
-    constructor(private reviewService: ReviewService,
+    isMobile: boolean;
+
+    constructor(private responsive: BreakpointObserver,
+                private reviewService: ReviewService,
                 private cookieService: CookieService,
                 private personService: PersonService,
                 private router: Router) {
+    }
+
+    ngOnInit(): void {
+        this.responsive.observe(Breakpoints.HandsetPortrait)
+            .subscribe(result => {
+                this.isMobile = result.matches;
+            });
     }
 
     ngOnChanges(changes: SimpleChanges): void {
@@ -126,8 +149,7 @@ export class ReviewContentComponent implements OnChanges {
             setTimeout(() => {
                 document.getElementById("newReview").scrollIntoView({behavior: 'smooth'});
             }, 150);
-        }
-        else {
+        } else {
             this.insertNewReviewWindow = false;
             this.newReviewPanelOpen = false;
             this.resetReview();

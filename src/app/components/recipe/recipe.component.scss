@@ -47,13 +47,19 @@
     overflow: hidden;
 
     ::ng-deep .p-card {
-
+        margin-left: 40px;
         height: 300px;
         border-radius: 10px 10px 20px 20px;
+        margin-bottom: 20px;
 
         .p-card-body {
-            padding-top: 1px;
-            padding-left: 10px;
+            padding-top: 20px;
+            padding-left: 1px;
+            padding-right: 1px;
+        }
+
+        .p-card-content {
+            padding: 1px;
         }
     }
 }
@@ -102,6 +108,7 @@
     display: flex;
     flex-direction: row;
     float: right;
+    margin-top: 0;
     margin-bottom: 2px;
 }
 
@@ -230,4 +237,54 @@
 ::-webkit-scrollbar-thumb:hover {
     //background-color: #007ad9;
     overflow-x: visible;
+}
+
+.mobile-recipe-search {
+    span {
+        padding: 10px 5px 5px;
+        width: 100%;
+
+        input {
+            width: 100%;
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+
+    .banner {
+        padding-bottom: 18px;
+
+        .ingredients-button {
+            position: absolute;
+            left: 50%;
+            margin-left: -50px;
+            margin-top: 50px;
+            height: 40px;
+            width: 110px;
+            font-size: 13px;
+        }
+    }
+
+    .time-component {
+        margin-left: 15px;
+
+        .time-text {
+            font-size: 14px;
+            margin-left: 10px;
+            margin-top: 6.5px;
+        }
+    }
+
+    .save-button {
+        bottom: 210px;
+        right: 8px;
+    }
+
+    .recipes-container {
+        ::ng-deep .p-card {
+            margin-left: 0;
+        }
+    }
 }

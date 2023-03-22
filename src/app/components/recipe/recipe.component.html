@@ -56,7 +56,7 @@
         </div>
     </div>
 </div>
-<div class="filterContainer">
+<div class="filterContainer" *ngIf="!isMobile">
     <div>
         <span class="p-input-icon-left">
             <i class="pi pi-search"></i>
@@ -83,13 +83,24 @@
     <rate [value]="filterSpiciness" [type]="rateType.spiciness" [readonly]="false" [imageSize]="40"
           (selectedValue)="updateSpicinessFilter($event)" (contextmenu)="resetSpicinessFilter($event)"></rate>
 </div>
+
+<!-- MOBILE -->
+<div class="mobile-recipe-search" *ngIf="isMobile">
+    <span class="p-input-icon-left">
+        <i class="pi pi-search"></i>
+        <input type="text" pInputText [(ngModel)]="filterRecipeName" placeholder="Search recipe name"
+               (change)="refreshRecipes()">
+    </span>
+</div>
+<!-- END MOBILE -->
+
 <div class="selected-ingredients" *ngIf="selectedIngredients.length > 0">
     <h4>Selected ingredients:&nbsp;</h4>
     <div class="text-container" *ngFor="let ingredient of selectedIngredients">
         <h4>{{ ingredient.name }},&nbsp;</h4>
     </div>
 </div>
-<div class="recipes-container" fxLayout="row wrap" fxLayoutGap="40px grid">
+<div class="recipes-container" style="padding-bottom: 20px" fx fxLayout="row wrap" fxLayoutGap="0px grid">
     <div fxFlex="30%" fxFlex.xs="100%" fxFlex.sm="50%" *ngFor="let recipe of recipes">
         <p-card class="card-container">
             <ng-template pTemplate="header">
@@ -106,7 +117,7 @@
                     <h5 class="time-text">{{ recipe.time | time }}</h5>
                 </div>
                 <div class="difficulty-container">
-                    <rate [value]="recipe.difficulty" [type]="rateType.difficulty" [imageSize]="35"></rate>
+                    <rate [value]="recipe.difficulty" [type]="rateType.difficulty" [imageSize]="30"></rate>
                 </div>
             </div>
         </p-card>

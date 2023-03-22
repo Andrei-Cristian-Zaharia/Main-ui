@@ -1,27 +1,41 @@
-<div class="container">
-    <div>
-        <button pButton type="button" label="Recipes" class="menu-button" (click)="goToRecipes()"></button>
-        <div class="menu-button" *ngIf="userLogged == true && user.hasRestaurant == true">
-            <button pButton type="button" label="Restaurant"></button>
-        </div>
-        <div class="menu-button" *ngIf="userLogged == true">
-            <button pButton type="button" label="Create recipe" (click)="showCreateRecipeDialog()"></button>
-        </div>
-    </div>
-    <div class="right-container">
-        <div *ngIf="userLogged == true">
-            <button pButton type="button" class="p-button-raised" label="{{ user.username.at(0) | uppercase }}"
-                    (click)="op.toggle($event)"></button>
-        </div>
-    </div>
-</div>
-<hr/>
-<p-overlayPanel #op [showCloseIcon]="false" [style]="{ width: 'auto' }">
-    <ng-template pTemplate>
-        <p-button label="Logout" (onClick)="logout()"></p-button>
-    </ng-template>
-</p-overlayPanel>
+<!--<div class="container" *ngIf="!isMobile">-->
+<!--    <div>-->
+<!--        <button pButton type="button" label="Recipes" class="menu-button" (click)="goToRecipes()"></button>-->
+<!--        <div class="menu-button" *ngIf="userLogged == true && user.hasRestaurant == true">-->
+<!--            <button pButton type="button" label="Restaurant"></button>-->
+<!--        </div>-->
+<!--        <div class="menu-button" *ngIf="userLogged == true">-->
+<!--            <button pButton type="button" label="Create recipe" (click)="showCreateRecipeDialog()"></button>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div class="right-container">-->
+<!--        <div *ngIf="userLogged == true">-->
+<!--            <button pButton type="button" class="p-button-raised" label="{{ user.username.at(0) | uppercase }}"-->
+<!--                    (click)="op.toggle($event)"></button>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<section class="top-nav">
+    <div class="qr-container" *ngIf="!isMobile">
+        <ngx-qrcode-styling #qrcode [config]="config" [data]="currentURL"></ngx-qrcode-styling>
+    </div>
+    <input id="menu-toggle" type="checkbox" />
+    <label class='menu-button-container' for="menu-toggle">
+        <div class='menu-button'></div>
+    </label>
+    <ul class="menu">
+        <li class="menu-element" (click)="goToRecipes()">Recipes</li>
+        <li class="menu-element" *ngIf="userLogged == true && user.hasRestaurant == true">Restaurant</li>
+        <li class="menu-element" *ngIf="isMobile">Saved</li>
+        <li class="menu-element" *ngIf="userLogged == true" (click)="showCreateRecipeDialog()">Create recipe</li>
+        <li class="menu-element" *ngIf="userLogged == true" (click)="logout()">Logout</li>
+        <li class="menu-element" *ngIf="userLogged == false" (click)="login()">Login</li>
+    </ul>
+</section>
+
+<hr/>
 
 <div class="createRecipeDialog" *ngIf="userLogged == true">
     <p-dialog [(visible)]="createRecipeDialog"

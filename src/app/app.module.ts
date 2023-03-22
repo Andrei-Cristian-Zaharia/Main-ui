@@ -38,6 +38,8 @@ import { RecipeDescriptionComponent } from './components/recipe/recipeComponents
 import { RecipeSummaryComponent } from './components/recipe/recipeComponents/recipeContainers/recipe-summary/recipe-summary.component';
 import { RecipeContentComponent } from './components/recipe/recipeComponents/recipeContainers/recipe-content/recipe-content.component';
 import { ReviewContentComponent } from './components/utils/review-content/review-content.component';
+import {NgxQRCodeModule} from "@techiediaries/ngx-qrcode";
+import {NgxQrcodeStylingModule} from "ngx-qrcode-styling";
 
 @NgModule({
     declarations: [
@@ -79,7 +81,9 @@ import { ReviewContentComponent } from './components/utils/review-content/review
         SliderModule,
         TooltipModule,
         DataViewModule,
-        SplitterModule
+        SplitterModule,
+        NgxQRCodeModule,
+        NgxQrcodeStylingModule
     ],
     providers: [
         LoginGuard,

@@ -1,18 +1,6 @@
 .dialog-header {
     height: 30px;
     width: 100%;
-
-    img {
-        height: auto;
-        width: auto;
-        max-height: 25vw;
-        max-width: 35vw;
-        object-fit: fill;
-        object-position: center;
-        border-radius: 5px;
-        display: block;
-        margin: 0 auto;
-    }
 }
 
 .page-container {
@@ -23,14 +11,17 @@
     display: flex;
 
     .summary-image {
-        height: auto;
-        width: auto;
-        max-height: 25vw;
-        max-width: 35vw;
-        object-fit: fill;
-        border-radius: 5px;
-        display: block;
-        margin-left: 70px;
+        img {
+            height: auto;
+            width: auto;
+            max-height: 25vw;
+            max-width: 35vw;
+            object-fit: fill;
+            object-position: center;
+            border-radius: 5px;
+            display: block;
+            margin: 0 auto 0 100px;
+        }
     }
 }
 
@@ -75,6 +66,18 @@
 
         .howToPrepare-text {
             margin-top: 15px;
+
+            img {
+                height: auto;
+                width: auto;
+                max-height: 25vw;
+                max-width: 35vw;
+                object-fit: fill;
+                object-position: center;
+                border-radius: 5px;
+                display: block;
+                margin: 0 auto;
+            }
         }
     }
 }
@@ -150,4 +153,88 @@
 ::-webkit-scrollbar-thumb:hover {
     //background-color: #007ad9;
     overflow-y: visible;
+}
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+
+    .page-container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .summary-container {
+        display: inline-block;
+        width: 100%;
+
+        .summary-image {
+            img {
+                height: auto;
+                width: 100%;
+                max-height: none;
+                max-width: none;
+                margin-left: 0;
+            }
+        }
+    }
+
+    .details-container {
+        width: 100%;
+        padding: 5px 10px;
+        margin-top: 30px;
+
+        .author {
+            margin-left: 70px;
+
+            .image-person {
+                height: 35px;
+                width: 35px;
+            }
+        }
+
+        .rating-container {
+            margin-left: 45px;
+
+        }
+    }
+
+    .time-component {
+        margin-left: 45px;
+    }
+
+    .review-content-page {
+        display: inline-block;
+        .recipe-howToPrepare {
+            width: 100%;
+            .howToPrepare-text {
+                img {
+                    height: auto;
+                    width: 100%;
+                    max-height: none;
+                    max-width: none;
+                    margin-left: 0;
+                }
+            }
+        }
+    }
+
+    .recipe-ingredients {
+        padding-top: 20px;
+        padding-bottom: 20px;
+        width: 100%;
+        position: relative;
+        top: 0;
+        align-self: initial;
+    }
+
+    .ingredients-container {
+        margin-left: 10px;
+        margin-top: 10px;
+        height: auto;
+        width: 100%;
+
+        .ingredient-line {
+            padding: 2px;
+        }
+    }
 }

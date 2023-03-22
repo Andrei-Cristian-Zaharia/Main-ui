@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {RecipeService} from "../../services/recipe.service";
 import {RecipeModel} from "../../models/recipe.model";
 import {IngredientService} from "../../services/ingredient.service";
@@ -6,11 +6,14 @@ import {BasicIngredientModel} from "../../models/basicIngredient.model";
 import {IngredientsByCategoryModel} from "../../models/ingredientsByCategory.model";
 import {EntityTypeEnum} from "../../enums/entityType.enum";
 import {RateTypeEnum} from "../../enums/rateType.enum";
+import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-recipe',
     templateUrl: './recipe.component.html',
-    styleUrls: ['./recipe.component.scss']
+    styleUrls: ['./recipe.component.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class RecipeComponent implements OnInit {
     isLoaded = false;
@@ -46,12 +49,21 @@ export class RecipeComponent implements OnInit {
 
     rateType = RateTypeEnum;
 
-    constructor(recipeService: RecipeService, ingredientService: IngredientService) {
+    isMobile: boolean;
+
+    constructor(recipeService: RecipeService, ingredientService: IngredientService,
+                private responsive: BreakpointObserver, private router: Router) {
         this.ingredientService = ingredientService;
         this.recipeService = recipeService;
     }
 
     ngOnInit(): void {
+        this.responsive.observe(Breakpoints.HandsetPortrait)
+            .subscribe(result => {
+                this.isMobile = result.matches;
+                console.log(this.isMobile);
+            });
+
         this.refreshRecipes();
         this.refreshIngredients();
         this.changeSliderValue();
@@ -174,6 +186,11 @@ export class RecipeComponent implements OnInit {
     }
 
     showViewRecipeDialog(recipe) {
+        if (this.isMobile) {
+            this.router.navigateByUrl('recipe?name=' + recipe.name);
+            return;
+        }
+
         this.selectedRecipe = recipe;
 
         recipe.description = recipe.description.replaceAll('\n', '<br>');

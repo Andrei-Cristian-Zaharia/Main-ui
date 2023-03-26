@@ -70,9 +70,7 @@ export class ProfileComponent implements OnInit{
 
     goToRestaurant(name: string) {
         this.router.navigateByUrl('restaurant?name=' + name);
-    }
-
-    goToRecipePage(name: string) {
+    }    goToRecipePage(name: string) {
         this.router.navigateByUrl('recipe?name=' + name);
     }
 }

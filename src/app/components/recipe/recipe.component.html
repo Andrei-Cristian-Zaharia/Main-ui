@@ -1,3 +1,5 @@
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
 <div class="banner">
     <img style="width: 100%;" alt="" src="assets/food-banner.jpg">
     <button pButton type="button" label="Select ingredients" (click)="toggleShowIngredients()"
@@ -101,24 +103,25 @@
     </div>
 </div>
 <div class="recipes-container" style="padding-bottom: 20px" fx fxLayout="row wrap" fxLayoutGap="0px grid">
-    <div fxFlex="30%" fxFlex.xs="100%" fxFlex.sm="50%" *ngFor="let recipe of recipes">
+    <div class="recipe-card" fxFlex="30%" fxFlex.xs="100%" fxFlex.sm="50%" *ngFor="let recipe of recipes">
         <p-card class="card-container">
             <ng-template pTemplate="header">
-                <img alt="Card" src="{{ recipe.imageAddress }}" class="image-card-header"
-                     (click)="showViewRecipeDialog(recipe)">
-                <div class="save-button">
-                    <button pButton type="button" class="p-button-raised p-button-rounded"
-                            icon="pi pi-bookmark"></button>
+                <div>
+                    <img alt="Card" src="{{ recipe.imageAddress }}" class="image-card-header"
+                         (click)="showViewRecipeDialog(recipe)">
+<!--                    <div class="save-button">-->
+<!--                        <button pButton type="button" class="p-button-raised p-button-rounded"-->
+<!--                                icon="pi pi-bookmark"></button>-->
+<!--                    </div>-->
                 </div>
             </ng-template>
-            <div>
+            <div class="recipe-details-container">
                 <div class="time-component">
                     <img src="assets/clock.png" alt="" class="time-image">
                     <h5 class="time-text">{{ recipe.time | time }}</h5>
                 </div>
-                <div class="difficulty-container">
-                    <rate [value]="recipe.difficulty" [type]="rateType.difficulty" [imageSize]="30"></rate>
-                </div>
+                <rate class="rate-difficulty" [value]="recipe.difficulty" [type]="rateType.difficulty"
+                      [imageSize]="30"></rate>
             </div>
         </p-card>
     </div>

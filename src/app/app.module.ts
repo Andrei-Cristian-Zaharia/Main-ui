@@ -40,6 +40,8 @@ import { RecipeContentComponent } from './components/recipe/recipeComponents/rec
 import { ReviewContentComponent } from './components/utils/review-content/review-content.component';
 import {NgxQRCodeModule} from "@techiediaries/ngx-qrcode";
 import {NgxQrcodeStylingModule} from "ngx-qrcode-styling";
+import { MyProfileComponent } from './components/my-profile/my-profile.component';
+import { RecipesListComponent } from './components/utils/recipes-list/recipes-list.component';
 
 @NgModule({
     declarations: [
@@ -59,7 +61,9 @@ import {NgxQrcodeStylingModule} from "ngx-qrcode-styling";
         RecipeDescriptionComponent,
         RecipeSummaryComponent,
         RecipeContentComponent,
-        ReviewContentComponent
+        ReviewContentComponent,
+        MyProfileComponent,
+        RecipesListComponent
     ],
     imports: [
         BrowserModule,

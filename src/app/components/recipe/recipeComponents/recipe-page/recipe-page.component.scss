@@ -163,6 +163,10 @@
         padding-right: 10px;
     }
 
+    .details {
+        margin-left: 7vw;
+    }
+
     .summary-container {
         display: inline-block;
         width: 100%;
@@ -208,6 +212,7 @@
             width: 100%;
             .howToPrepare-text {
                 img {
+                    margin-top: 10px;
                     height: auto;
                     width: 100%;
                     max-height: none;

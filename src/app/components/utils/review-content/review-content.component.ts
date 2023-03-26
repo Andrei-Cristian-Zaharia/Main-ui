@@ -53,6 +53,7 @@ export class ReviewContentComponent implements OnInit, OnChanges {
     rateType = RateTypeEnum;
 
     confirmDeleteDialog: boolean = false;
+    currentDeleteId: number;
 
     isMobile: boolean;
 
@@ -117,6 +118,15 @@ export class ReviewContentComponent implements OnInit, OnChanges {
             });
     }
 
+    updateReviewRating(rate: number) {
+        this.givenStars = rate;
+    }
+
+    resetReviewRating(event: MouseEvent) {
+        event.preventDefault();
+        this.givenStars = 0;
+    }
+
     updateRating() {
         let sum = 0;
 
@@ -160,11 +170,18 @@ export class ReviewContentComponent implements OnInit, OnChanges {
         this.router.navigateByUrl('profile?name=' + username);
     }
 
-    showDeleteDialog() {
+    showDeleteDialog(id: number) {
         this.confirmDeleteDialog = true;
+        this.currentDeleteId = id;
     }
 
     hideDeleteDialog() {
         this.confirmDeleteDialog = false;
+    }
+
+    deleteReviewOfUser() {
+        this.reviewService.deleteReview(this.currentDeleteId).subscribe();
+        this.hideDeleteDialog();
+        location.reload();
     }
 }

@@ -41,6 +41,10 @@ export class ReviewService {
         return this.http.post(this.apiConfig.REVIEW_API + "/create", review, this.getOptionsAuth());
     }
 
+    deleteReview(id: number) {
+        return this.http.delete(this.apiConfig.REVIEW_API + "/delete?id=" + id, this.getOptionsAuth());
+    }
+
     getOptions() {
         return {
             headers: new HttpHeaders({

@@ -72,41 +72,25 @@
 }
 
 .save-button {
-    display: block;
     z-index: 1;
     position: relative;
     bottom: 200px;
     right: 20px;
     float: right;
-
-    //::ng-deep .p-button {
-    //    background: #ffbc68;
-    //    border-color: #ffbc68;
-    //}
 }
 
-.time-component {
+.recipe-details-container {
+    position: relative;
     display: flex;
-    flex-direction: row;
-    float: left;
-    margin-top: 0;
-    margin-left: 25px;
+    justify-content: space-around;
+    padding: 10px;
+}
 
-    .time-image {
-        height: 35px;
-        width: 35px;
-    }
-
-    .time-text {
-        font-size: 17px;
-        margin-left: 10px;
-        margin-top: 6.5px;
-    }
+.rate-difficulty {
+    margin-left: 40px;
 }
 
 .difficulty-container {
-    display: flex;
-    flex-direction: row;
     float: right;
     margin-top: 0;
     margin-bottom: 2px;
@@ -136,6 +120,19 @@
             padding-top: 1px;
             padding-left: 10px;
         }
+    }
+}
+
+.recipe-card {
+    margin-top: 40px;
+    margin-left: 40px;
+
+    .p-card .p-card-content {
+        padding: 0;
+    }
+
+    .p-card .p-card-body {
+        padding: 1px;
     }
 }
 
@@ -253,6 +250,10 @@
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */
 
+    .recipe-card {
+        margin-left: 0;
+    }
+
     .banner {
         padding-bottom: 18px;
 
@@ -273,7 +274,7 @@
         .time-text {
             font-size: 14px;
             margin-left: 10px;
-            margin-top: 6.5px;
+            margin-top: 11px;
         }
     }
 

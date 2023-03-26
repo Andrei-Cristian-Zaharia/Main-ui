@@ -33,6 +33,13 @@ export class RecipePageComponent implements OnInit {
 
     ngOnInit(): void {
         this.getRecipe();
+
+        if (!localStorage.getItem('refresh')) {
+            localStorage.setItem('refresh', 'no reload')
+            location.reload()
+        } else {
+            localStorage.removeItem('refresh')
+        }
     }
 
     getRecipe() {

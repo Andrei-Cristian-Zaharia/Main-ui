@@ -18,7 +18,6 @@
 
 // Time image + text = time-component
 .time-component {
-    margin-top: 10px;
     display: inline-flex;
     flex-direction: row;
 
@@ -29,7 +28,7 @@
 
     .time-text {
         margin-left: 7.5px;
-        margin-top: 4px;
+        margin-top: 10px;
     }
 }
 

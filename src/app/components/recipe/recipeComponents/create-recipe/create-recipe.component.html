@@ -1,95 +1,61 @@
 <div class="recipe-name-container">
-        <textarea name="text" rows="2" cols="20" wrap="hard" placeholder="Name..."
+        <textarea name="text" rows="2" cols="20" wrap="hard" placeholder="Enter name"
                   maxlength="60" [(ngModel)]="recipeName"></textarea>
 </div>
 <div class="container">
-    <div>
-        <h2>Details</h2>
-        <div class="insert-distance">
-            <p-inputNumber [(ngModel)]="time" [min]="1" [max]="800" [maxlength]="30"
-                           prefix="Time to prepare: " suffix=" minutes"></p-inputNumber>
-            <div class="difficulty-container">
-                <h5 class="dif-text">Difficulty:</h5>
-                <p-rating [(ngModel)]="difficulty" [stars]="5" [cancel]="false">
-                    <ng-template pTemplate="officon">
-                        <img src="assets/effort-unfilled.png" alt="" class="difficulty-image">
-                    </ng-template>
-                    <ng-template pTemplate="onicon">
-                        <img src="assets/effort.png" alt="" class="difficulty-image">
-                    </ng-template>
-                </p-rating>
-            </div>
+    <h2>Details</h2>
+    <div class="generalDetails">
+        <div class="veganContainer">
+            <h2 class="veganText">Vegan: </h2>
+            <p-inputSwitch class="veganSwitch" [(ngModel)]="isVegan"></p-inputSwitch>
         </div>
+        <p-inputNumber [(ngModel)]="prepareTime"
+                       placeholder="Time to prepare" suffix="mins" mode="decimal" [useGrouping]="false"> </p-inputNumber>
 
-        <h2>Ingredients</h2>
+        <rate [value]="difficulty" [type]="rateType.difficulty" [readonly]="false" [imageSize]="40"
+              (selectedValue)="updateDifficultyFilter($event)" (contextmenu)="resetDifficultyFilter($event)"></rate>
+        <rate [value]="spiciness" [type]="rateType.spiciness" [readonly]="false" [imageSize]="40"
+              (selectedValue)="updateSpicinessFilter($event)" (contextmenu)="resetSpicinessFilter($event)"></rate>
+    </div>
 
-        <p-card [style]="{'margin-top': '20px', 'margin-bottom': '20px', 'width': '40vw'}">
-            <div class="card-container">
-                <button class="add-button" pButton type="button" label="Add ingredient"
-                        (click)="addIngredient()"></button>
-                <ul *ngFor="let ing of addedIngredients; let i = index">
-                    <div class="items">
-                        <div class="items-container">
-                            <p-inputNumber mode="decimal" [useGrouping]="true" [min]="0" [maxlength]="4"
-                                           [(ngModel)]="ing.quantity"></p-inputNumber>
-                            <p-dropdown [options]="measurements" [editable]="true" placeholder="Measurement"
-                                        [showClear]="true" [(ngModel)]="ing.measurementUnit" [autoDisplayFirst]="false"
-                                        class="space"></p-dropdown>
-                            <p-dropdown [options]="ingredients" placeholder="Select an ingredient" optionLabel="name"
-                                        [filter]="true" filterBy="name"
-                                        [showClear]="true" [(ngModel)]="ing.ingredientName"></p-dropdown>
-                            <button *ngIf="addedIngredients.length > 1"
-                                    style="margin-left: 10px" pButton type="button" label="Delete"
-                                    (click)="deleteIngredient(i)">
-                            </button>
-                        </div>
+    <h2>Ingredients</h2>
+
+    <p-card [style]="{'margin-top': '20px', 'margin-bottom': '20px'}">
+        <div class="card-container">
+            <button class="add-button" pButton type="button" label="Add ingredient" (click)="addIngredient()"></button>
+            <ul *ngFor="let ing of addedIngredients; let i = index">
+                <div class="items">
+                    <div class="items-container">
+                        <p-dropdown [options]="measurements" [editable]="true" placeholder="Measurement"
+                                    [showClear]="true" [(ngModel)]="ing.measurementUnit" [autoDisplayFirst]="false"
+                                    class="space"></p-dropdown>
+                        <p-dropdown class="item" [options]="ingredients" placeholder="Select ingredient"
+                                    optionLabel="name" [filter]="true" filterBy="name"
+                                    [showClear]="true" [(ngModel)]="ing.ingredientName">
+                        </p-dropdown>
+                        <button *ngIf="addedIngredients.length > 1"
+                                style="margin-left: 10px" pButton type="button" label="Delete"
+                                (click)="deleteIngredient(i)">
+                        </button>
                     </div>
-                </ul>
-            </div>
-        </p-card>
+                </div>
+            </ul>
+        </div>
+    </p-card>
 
-        <h2>Description</h2>
-        <textarea class="insert-distance" rows="1" pInputTextarea [autoResize]="true"
-                  [(ngModel)]="description" id="descriptionText" (keydown)="formatText($event)"
-                  (keyup)="clearPressedKeys()"></textarea>
+    <h2>Description</h2>
+    <textarea class="insert-distance" rows="1" pInputTextarea [autoResize]="true"
+              [(ngModel)]="description" id="descriptionText" (keydown)="formatText($event)"
+              (keyup)="clearPressedKeys()"></textarea>
 
-        <h2>How to prepare</h2>
-        <textarea class="insert-distance" rows="1" pInputTextarea [autoResize]="true"
-                  [(ngModel)]="howToPrepare" id="howToPrepareText" (keydown)="formatText($event)"
-                  (keyup)="clearPressedKeys()"></textarea>
+    <h2>How to prepare</h2>
+    <textarea class="insert-distance" rows="1" pInputTextarea [autoResize]="true"
+              [(ngModel)]="howToPrepare" id="howToPrepareText" (keydown)="formatText($event)"
+              (keyup)="clearPressedKeys()"></textarea>
 
-        <h2>Link to image</h2>
-        <textarea class=" insert-distance" rows="1" pInputTextarea [autoResize]="true"
-                  [(ngModel)]="imageLink"></textarea>
-    </div>
-    <div class="editor-container">
-        <p-card>
-            Toolbox
-            <br>
-            <br>
-            <br>
-            <br>
-            CTRL + i = insert image
-            <br>
-            <br>
-            CTRL + b = bold selected
-            <br>
-            <br>
-            CTRL + 1 = h1 selected
-            <br>
-            <br>
-            CTRL + 2 = h1 selected
-            <br>
-            <br>
-            CTRL + 3 = h1 selected
-            <br>
-            <br>
-            CTRL + 4 = h1 selected
-            <br>
-            <br>
-            CTRL + 5 = h1 selected
-        </p-card>
-    </div>
+    <h2>Link to image</h2>
+    <textarea class=" insert-distance" rows="1" pInputTextarea [autoResize]="true"
+              [(ngModel)]="imageLink"></textarea>
 </div>
 <div>
     <button class="add-button" pButton type="button" label="Create" (click)="createRecipe()"></button>

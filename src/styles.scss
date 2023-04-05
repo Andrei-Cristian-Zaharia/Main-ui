@@ -32,6 +32,59 @@
     }
 }
 
+// LOGIN - REGISTER
+
+.login-content{
+    background-image: url('../src/assets/Background_M.jpg');
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-form {
+    border-radius: 5px;
+    background-color: #f0a04b;
+    width: 300px;
+    height: 50vh;
+    position: relative;
+
+    .login-text {
+        padding: 15px;
+        text-align: center;
+        box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        background: #f0a04b;
+        color: #FFF6E7;
+    }
+
+    .login-buttons-container {
+        margin-top: 50px;
+        width: 100%;
+
+        .login-button {
+            padding: 10px 0;
+            display: table;
+            margin: 0 auto;
+        }
+    }
+
+    .reset-button {
+        color: #FFF6E7;
+        width: 100%;
+        position: absolute;
+        text-align: center;
+        bottom: 20px;
+
+        .create-button {
+            color: #9cb0a4;
+            cursor: pointer;
+        }
+    }
+}
+
 // OTHERS
 
 * {

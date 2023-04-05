@@ -63,6 +63,7 @@
         padding-bottom: 20px;
         height: auto;
         width: 900px;
+        align-self: flex-start;
 
         .howToPrepare-text {
             margin-top: 15px;
@@ -105,6 +106,7 @@
         margin-top: 10px;
         display: inline-flex;
         flex-direction: row;
+        margin-left: 40px;
 
         .image-person {
             height: 40px;
@@ -164,7 +166,7 @@
     }
 
     .details {
-        margin-left: 7vw;
+        margin-left: 2vw;
     }
 
     .summary-container {
@@ -208,6 +210,8 @@
 
     .review-content-page {
         display: inline-block;
+        align-self: normal;
+
         .recipe-howToPrepare {
             width: 100%;
             .howToPrepare-text {

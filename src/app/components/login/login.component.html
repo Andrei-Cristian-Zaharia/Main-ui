@@ -1,12 +1,22 @@
-<div style="margin-bottom: 25px; margin-top: 25px;">
-    <input [(ngModel)]="emailAddress" placeholder="EmailAddress">
-    <input [(ngModel)]="password" placeholder="Password">
-    <p-button (onClick)="login()" label="Login"></p-button>
-</div>
-<div style="margin-bottom: 25px; margin-top: 25px;">
-    <input [(ngModel)]="username" placeholder="Username">
-    <input [(ngModel)]="emailAddress" placeholder="EmailAddress">
-    <input [(ngModel)]="password" placeholder="Password">
-    <input [(ngModel)]="confirmPassword" placeholder="Password">
-    <p-button (onClick)="createAccount()" label="Create"></p-button>
+<div class="login-content">
+    <div class="login-form">
+        <div class="login-text">
+            <h1>Login</h1>
+        </div>
+        <div class="login-buttons-container">
+            <div class="login-button">
+                <input pInputText placeholder="Email address" [(ngModel)]="emailAddress"/>
+            </div>
+            <div class="login-button">
+                <p-password placeholder="Password" [feedback]="false" [(ngModel)]="password"></p-password>
+            </div>
+            <div class="login-button">
+                <p-button label="Submit" (click)="login()"></p-button>
+            </div>
+        </div>
+        <div class="reset-button">
+            <h5>Don't have an account yet ?</h5>
+            <h5 class="create-button" (click)="registerAccount()">Create an account</h5>
+        </div>
+    </div>
 </div>

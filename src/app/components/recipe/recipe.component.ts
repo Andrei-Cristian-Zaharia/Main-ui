@@ -8,6 +8,10 @@ import {EntityTypeEnum} from "../../enums/entityType.enum";
 import {RateTypeEnum} from "../../enums/rateType.enum";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {Router} from "@angular/router";
+import {PersonService} from "../../services/person.service";
+import {Observable} from "rxjs";
+import {PersonBasicInfoModel} from "../../models/personBasicInfo.model";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
     selector: 'app-recipe',
@@ -43,16 +47,22 @@ export class RecipeComponent implements OnInit {
     filterDifficulty: number = 0;
     filterSpiciness: number = 0;
     filterRecipeName: string = null;
-    filterAuthorName: string = null;
+    filterAuthorName: string = "";
     rangeValues: number[] = [1, 600];
     sliderText: string = null;
 
     rateType = RateTypeEnum;
 
     isMobile: boolean;
+    ratingImageSize: number;
+
+    user: PersonBasicInfoModel;
 
     constructor(recipeService: RecipeService, ingredientService: IngredientService,
-                private responsive: BreakpointObserver, private router: Router) {
+                private responsive: BreakpointObserver,
+                private router: Router,
+                private personService: PersonService,
+                private authService: AuthService) {
         this.ingredientService = ingredientService;
         this.recipeService = recipeService;
     }
@@ -63,9 +73,17 @@ export class RecipeComponent implements OnInit {
                 this.isMobile = result.matches;
             });
 
+        this.personService.getPersonDetails(this.authService.getCurrentUserEmail()).subscribe(data => this.user = data);
+
         this.refreshRecipes();
         this.refreshIngredients();
         this.changeSliderValue();
+
+        if (this.isMobile) {
+            this.ratingImageSize = 24;
+        } else {
+            this.ratingImageSize = 30;
+        }
     }
 
     updateRatingFilter(rate: number) {
@@ -114,6 +132,7 @@ export class RecipeComponent implements OnInit {
 
         let filterForm = {
             "recipeName": this.filterRecipeName,
+            "authorName": this.filterAuthorName,
             "prepareTimeMin": this.rangeValues[0],
             "prepareTimeMax": this.rangeValues[1],
             "rating": this.filterRating,
@@ -125,7 +144,6 @@ export class RecipeComponent implements OnInit {
         this.recipeService.getRecipesFilteredByIngredients(filterForm).subscribe(result => {
 
             this.recipes = result;
-            console.log(result)
 
             this.isLoaded = true;
         })
@@ -231,6 +249,10 @@ export class RecipeComponent implements OnInit {
         }
 
         this.refreshRecipes();
+    }
+
+    addFavorite(recipeId: number) {
+        this.recipeService.addFavorite(recipeId, this.user.id).subscribe(data => console.log(data));
     }
 }
 

@@ -40,8 +40,12 @@ import { RecipeContentComponent } from './components/recipe/recipeComponents/rec
 import { ReviewContentComponent } from './components/utils/review-content/review-content.component';
 import {NgxQRCodeModule} from "@techiediaries/ngx-qrcode";
 import {NgxQrcodeStylingModule} from "ngx-qrcode-styling";
+import {PasswordModule} from "primeng/password";
 import { MyProfileComponent } from './components/my-profile/my-profile.component';
 import { RecipesListComponent } from './components/utils/recipes-list/recipes-list.component';
+import { RegisterComponent } from './components/register/register.component';
+import { ToastModule } from 'primeng/toast';
+import {InputSwitchModule} from "primeng/inputswitch";
 
 @NgModule({
     declarations: [
@@ -63,7 +67,8 @@ import { RecipesListComponent } from './components/utils/recipes-list/recipes-li
         RecipeContentComponent,
         ReviewContentComponent,
         MyProfileComponent,
-        RecipesListComponent
+        RecipesListComponent,
+        RegisterComponent
     ],
     imports: [
         BrowserModule,
@@ -87,7 +92,10 @@ import { RecipesListComponent } from './components/utils/recipes-list/recipes-li
         DataViewModule,
         SplitterModule,
         NgxQRCodeModule,
-        NgxQrcodeStylingModule
+        NgxQrcodeStylingModule,
+        PasswordModule,
+        ToastModule,
+        InputSwitchModule
     ],
     providers: [
         LoginGuard,

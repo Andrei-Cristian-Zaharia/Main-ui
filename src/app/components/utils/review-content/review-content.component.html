@@ -1,12 +1,12 @@
 <div class="review-container">
     <div class="review-section-title">
         <h2>Reviews</h2>
-        <div *ngIf="userLogged == true && userAlreadyPosted == false">
-            <div *ngIf="newReviewPanelOpen == false">
+        <div *ngIf="userLogged === true">
+            <div *ngIf="newReviewPanelOpen === false && userAlreadyPosted == false">
                 <button pButton pRipple type="button" icon="pi pi-plus" class="p-button-rounded review-add"
                         (click)="toggleCreateReviewWindow()"></button>
             </div>
-            <div *ngIf="newReviewPanelOpen == true">
+            <div *ngIf="newReviewPanelOpen === true">
                 <button pButton pRipple type="button" icon="pi pi-minus" class="p-button-rounded review-add"
                         (click)="toggleCreateReviewWindow()"></button>
             </div>
@@ -26,11 +26,13 @@
                       (contextmenu)="resetReviewRating($event)"></rate>
             </div>
         </ng-template>
-
         <textarea class="review-insert-content" rows="2" pInputTextarea [autoResize]="true"
                   [(ngModel)]="content"></textarea>
-        <div class="review-submit">
+        <div class="review-submit" *ngIf="userAlreadyPosted === false">
             <p-button label="Submit" (onClick)="createReview()"></p-button>
+        </div>
+        <div class="review-submit" *ngIf="userAlreadyPosted === true">
+            <p-button label="Edit" (onClick)="editReview()"></p-button>
         </div>
     </p-card>
     <div *ngFor="let review of reviews">
@@ -61,8 +63,9 @@
                     <div class="review-user">
                         <div style="display: flex;" *ngIf="review.person.username == user.username">
                             <img src="../../../../assets/delete.png" alt="" class="review-edit-delete"
-                                 (click)="showDeleteDialog(review.id)">
-                            <img src="../../../../assets/edit.png" alt="" class="review-edit-delete">
+                                 (click)="showDeleteDialog(review)">
+                            <img src="../../../../assets/edit.png" alt="" class="review-edit-delete"
+                                (click)="editReviewOfUser(review)">
                         </div>
                         <img src="../../../../assets/person-icon.png" alt="">
                         <h3 class="review-author-text"

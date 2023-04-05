@@ -5,6 +5,8 @@ import {IngredientService} from "../../../../services/ingredient.service";
 import {UtilsService} from "../../../../services/utils.service";
 import {RecipeService} from "../../../../services/recipe.service";
 import {IngredintsDisplayModel} from "../../../../models/ingredintsDisplay.model";
+import {RateTypeEnum} from "../../../../enums/rateType.enum";
+import * as events from "events";
 
 @Component({
     selector: 'app-create-recipe',
@@ -27,14 +29,18 @@ export class CreateRecipeComponent implements OnInit {
 
     recipeName: string;
     imageLink: string;
-    time: number = 1;
-    difficulty: number = 2;
+    prepareTime: string;
+    difficulty: number = 0;
+    spiciness: number = 0;
     description: string;
     howToPrepare: string;
+    isVegan: boolean;
 
     keysPressed = {};
 
     imageComponent: string = "<img src=\"insert-image-source\">";
+
+    rateType = RateTypeEnum;
 
     constructor(ingredientService: IngredientService,
                 utilsService: UtilsService,
@@ -60,6 +66,30 @@ export class CreateRecipeComponent implements OnInit {
         })
 
         this.addIngredient();
+    }
+
+    assingTime(value: string) {
+        console.log("Value", value);
+        this.prepareTime = value;
+        console.log("prep", this.prepareTime);
+    }
+
+    updateDifficultyFilter(rate: number) {
+        this.difficulty = rate;
+    }
+
+    updateSpicinessFilter(rate: number) {
+        this.spiciness = rate;
+    }
+
+    resetDifficultyFilter(event: MouseEvent) {
+        event.preventDefault();
+        this.difficulty = 0;
+    }
+
+    resetSpicinessFilter(event: MouseEvent) {
+        event.preventDefault();
+        this.spiciness = 0;
     }
 
     // @HostListener('document:keypress', ['$event'])
@@ -132,7 +162,6 @@ export class CreateRecipeComponent implements OnInit {
 
     createRecipe() {
         let ingredientNames = this.addedIngredients.map(element => element.ingredientName.name);
-        let ingredientQuantity = this.addedIngredients.map(element => element.quantity);
         let ingredientMeasurement = this.addedIngredients.map(element => element.measurementUnit);
 
         let recipe = {
@@ -140,13 +169,13 @@ export class CreateRecipeComponent implements OnInit {
             name: this.recipeName,
             description: this.description,
             howToPrepare: this.howToPrepare,
-            time: this.time,
+            time: this.prepareTime,
             difficulty: this.difficulty,
-            spiciness: 0,
-            isVegan: false,
+            spiciness: this.spiciness,
+            isVegan: this.isVegan,
+            publicRecipe: true,
             imageAddress: this.imageLink,
             ingredientNames: ingredientNames,
-            ingredientQuantities: ingredientQuantity,
             ingredientMeasurements: ingredientMeasurement
         }
 
@@ -163,7 +192,7 @@ export class CreateRecipeComponent implements OnInit {
     private resetInputs() {
         this.description = '';
         this.howToPrepare = '';
-        this.time = 1;
+        this.prepareTime = '';
         this.difficulty = 0;
         this.imageLink = '';
         this.recipeName = '';
@@ -172,7 +201,6 @@ export class CreateRecipeComponent implements OnInit {
 
     addIngredient() {
         let ingredient = new AddIngredientModel();
-        ingredient.quantity = 0;
 
         this.addedIngredients.push(ingredient);
     }

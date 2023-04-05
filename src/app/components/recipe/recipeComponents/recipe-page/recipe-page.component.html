@@ -25,7 +25,7 @@
                     <div>
                         <div class="time-component">
                             <img src="assets/clock.png" alt="" class="time-image">
-                            <h3 class="time-text">Prepare time: {{ recipe.time | time }}</h3>
+                            <h3 class="time-text">Prepare time: {{ recipe.time.toString() | time }}</h3>
                         </div>
                     </div>
                     <rate class="rating-container" [value]="recipe.difficulty" [type]="rateType.difficulty" [imageSize]="40"></rate>
@@ -39,7 +39,7 @@
                 <h2>Ingredients</h2>
                 <div class="ingredients-container">
                     <div class="ingredient-line" *ngFor="let ing of recipe.ingredientList">
-                        <li>{{ ing.quantity }} {{ ing.measurementUnit }} de {{ ing.name }} </li>
+                        <li>{{ ing.measurementUnit }} {{ ing.name }} </li>
                     </div>
                 </div>
             </div>

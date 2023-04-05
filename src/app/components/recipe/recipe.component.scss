@@ -13,9 +13,11 @@
 }
 
 .filterContainer {
+    box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+    background: #ffffff;
     display: flex;
     justify-content: space-around;
-    padding: 10px;
+    padding: 15px 10px 5px 10px;
 
     input {
         text-align: center;
@@ -73,16 +75,16 @@
 
 .save-button {
     z-index: 1;
-    position: relative;
-    bottom: 200px;
+    position: absolute;
+    top: 25px;
     right: 20px;
-    float: right;
 }
 
 .recipe-details-container {
     position: relative;
     display: flex;
     justify-content: space-around;
+    align-items: center;
     padding: 10px;
 }
 
@@ -125,7 +127,12 @@
 
 .recipe-card {
     margin-top: 40px;
-    margin-left: 40px;
+    margin-left: 20px;
+    margin-right: 20px;
+
+    .p-card {
+        position: relative;
+    }
 
     .p-card .p-card-content {
         padding: 0;
@@ -252,6 +259,7 @@
 
     .recipe-card {
         margin-left: 0;
+        margin-right: 0;
     }
 
     .banner {

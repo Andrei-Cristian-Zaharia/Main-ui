@@ -12,7 +12,6 @@ export class RecipeModel extends BaseEntityModel {
     rating: number;
     isVegan: boolean;
     imageAddress: string;
-    missingIngredients: number;
     person: PersonModel;
     ingredientList: IngredientModel[];
 

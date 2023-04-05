@@ -19,7 +19,6 @@ export class RecipeService {
     }
 
     getRecipesFilteredByIngredients(body) {
-        console.log(body);
         return this.http.post<RecipeModel[]>(this.apiConfig.RECIPE_API + "/all/filtered", body);
     }
 
@@ -33,6 +32,15 @@ export class RecipeService {
 
     createNewRecipe(recipe) {
         return this.http.post(this.apiConfig.RECIPE_API, recipe, this.getOptions());
+    }
+
+    addFavorite(recipeId: number, userId: number) {
+        let body = {
+            "recipeId": recipeId,
+            "userId": userId
+        }
+        console.log(body);
+        return this.http.post<String>(this.apiConfig.RECIPE_API + "/addFavorite", body, this.getOptions());
     }
 
     getOptions() {

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../../services/auth.service";
 import {PersonService} from "../../services/person.service";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-login',
@@ -10,23 +11,14 @@ import {PersonService} from "../../services/person.service";
 export class LoginComponent implements OnInit{
 
     emailAddress: string;
-    username: string;
     password: string;
-    confirmPassword: string;
 
     constructor(private authService: AuthService,
-                private personService: PersonService) {
+                private router: Router) {
     }
 
     ngOnInit(): void {
         this.logout();
-    }
-
-    createAccount() {
-
-        if (this.password === this.confirmPassword) {
-            this.personService.createNewUser(this.username, this.emailAddress, this.password);
-        }
     }
 
     login() {
@@ -35,5 +27,9 @@ export class LoginComponent implements OnInit{
 
     logout() {
         this.authService.authLogout();
+    }
+
+    registerAccount() {
+        this.router.navigate(['/register']);
     }
 }

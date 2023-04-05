@@ -37,6 +37,10 @@ export class ReviewService {
         return this.http.get<ReviewModel[]>(this.apiConfig.REVIEW_API + "/all/user?email=" + email);
     }
 
+    editReview(review) {
+        return this.http.post(this.apiConfig.REVIEW_API + "/edit", review, this.getOptionsAuth());
+    }
+
     createNewReview(review) {
         return this.http.post(this.apiConfig.REVIEW_API + "/create", review, this.getOptionsAuth());
     }

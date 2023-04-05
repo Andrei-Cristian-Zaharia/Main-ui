@@ -14,7 +14,6 @@ import {CookieService} from "ngx-cookie-service";
 import {Router} from "@angular/router";
 import {BaseEntityModel} from "../../../models/baseEntity.model";
 import {EntityTypeEnum} from "../../../enums/entityType.enum";
-import {AuthService} from "../../../services/auth.service";
 import {PersonService} from "../../../services/person.service";
 import {PersonBasicInfoModel} from "../../../models/personBasicInfo.model";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
@@ -52,8 +51,10 @@ export class ReviewContentComponent implements OnInit, OnChanges {
 
     rateType = RateTypeEnum;
 
+    oldReview: ReviewModel;
+
     confirmDeleteDialog: boolean = false;
-    currentDeleteId: number;
+    currentDeleteReview: ReviewModel;
 
     isMobile: boolean;
 
@@ -111,6 +112,23 @@ export class ReviewContentComponent implements OnInit, OnChanges {
         });
     }
 
+    editReview() {
+        let review = {
+            "id": this.oldReview.id,
+            "title": this.title,
+            "text": this.content,
+            "rating": this.givenStars,
+        }
+
+        this.reviewService.editReview(review).subscribe(result => {
+            this.refreshReviews();
+            this.resetReview();
+            this.updateRating();
+            this.checkPostReview();
+            this.newReviewPanelOpen = false;
+        });
+    }
+
     checkPostReview() {
         this.reviewService.checkReviewFromUserOnEntity(this.cookieService.get('emailAddress'), this.entity.id, this.category)
             .subscribe(data => {
@@ -162,6 +180,7 @@ export class ReviewContentComponent implements OnInit, OnChanges {
         } else {
             this.insertNewReviewWindow = false;
             this.newReviewPanelOpen = false;
+            this.refreshReviews();
             this.resetReview();
         }
     }
@@ -170,9 +189,9 @@ export class ReviewContentComponent implements OnInit, OnChanges {
         this.router.navigateByUrl('profile?name=' + username);
     }
 
-    showDeleteDialog(id: number) {
+    showDeleteDialog(review: ReviewModel) {
         this.confirmDeleteDialog = true;
-        this.currentDeleteId = id;
+        this.currentDeleteReview = review;
     }
 
     hideDeleteDialog() {
@@ -180,8 +199,29 @@ export class ReviewContentComponent implements OnInit, OnChanges {
     }
 
     deleteReviewOfUser() {
-        this.reviewService.deleteReview(this.currentDeleteId).subscribe();
+        this.reviewService.deleteReview(this.currentDeleteReview.id).subscribe();
+        const index = this.reviews.indexOf(this.currentDeleteReview);
+        if (index !== -1) {
+            this.reviews.splice(index, 1);
+        }
+
+        this.newReviewPanelOpen = false;
         this.hideDeleteDialog();
-        location.reload();
+    }
+
+    editReviewOfUser(review: ReviewModel) {
+        this.title = review.title;
+        this.givenStars = review.rating;
+        this.content = review.text;
+
+        const index = this.reviews.indexOf(review);
+        if (index !== -1) {
+            this.reviews.splice(index, 1);
+        }
+
+        this.oldReview = review;
+
+        this.newReviewPanelOpen = true;
+        this.insertNewReviewWindow = true;
     }
 }

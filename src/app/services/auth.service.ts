@@ -8,7 +8,6 @@ import {Router} from "@angular/router";
     providedIn: 'root'
 })
 export class AuthService {
-
     result: boolean;
 
     constructor(
@@ -73,5 +72,9 @@ export class AuthService {
 
     getToken(): string {
         return this.cookieService.get('token');
+    }
+
+    getCurrentUserEmail(): string {
+        return this.cookieService.get('emailAddress');
     }
 }

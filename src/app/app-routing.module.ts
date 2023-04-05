@@ -17,6 +17,7 @@ import {OverviewComponent} from "./components/overview/overview.component";
 import {ProfileComponent} from "./components/profile/profile.component";
 import {RecipePageComponent} from "./components/recipe/recipeComponents/recipe-page/recipe-page.component";
 import {RestaurantComponent} from "./components/restaurant/restaurant.component";
+import {RegisterComponent} from "./components/register/register.component";
 
 @Injectable()
 export class LoginGuard implements CanActivate {
@@ -53,6 +54,7 @@ const routes: Routes = [
         ]
     },
     {path: 'login', component: LoginComponent},
+    {path: 'register', component: RegisterComponent},
     {path: '**', component: NotFoundComponent},  // Wildcard route for a 404 page
 ];
 

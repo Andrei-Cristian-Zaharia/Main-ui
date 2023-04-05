@@ -19,8 +19,6 @@
 
 .container {
     height: auto;
-    display: inline-flex;
-    justify-content: space-around;
 
     ::ng-deep .p-card {
         .p-card-body {
@@ -29,9 +27,34 @@
     }
 }
 
+.generalDetails {
+    display: flex;
+    justify-content: space-evenly;
+    justify-items: center;
+
+    .veganContainer {
+        display: flex;
+        margin-top: 5px;
+        justify-items: center;
+
+        .veganText {
+            margin-right: 10px;
+            margin-top: 2px;
+        }
+
+        .veganSwitch {
+            margin-top: 4px;
+        }
+    }
+
+    padding: 20px;
+}
+
 .card-container {
     margin-top: 15px;
     margin-left: 20px;
+
+    position: relative;
 }
 
 .add-button {
@@ -58,6 +81,15 @@
 
 .items-container {
     margin: 0 auto;
+
+    .item {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    ::ng-deep .p-dropdown {
+        width: 275px;
+    }
 }
 
 .p-card .p-card-content::-webkit-scrollbar {
@@ -68,7 +100,7 @@
     white-space: pre-wrap;
     margin-top: 20px;
     margin-bottom: 20px;
-    width: 40vw
+    width: 100%;
 }
 
 .difficulty-container {

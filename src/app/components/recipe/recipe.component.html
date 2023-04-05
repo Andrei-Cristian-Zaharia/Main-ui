@@ -58,40 +58,13 @@
         </div>
     </div>
 </div>
-<div class="filterContainer" *ngIf="!isMobile">
-    <div>
-        <span class="p-input-icon-left">
-            <i class="pi pi-search"></i>
-            <input type="text" pInputText [(ngModel)]="filterRecipeName" placeholder="Search recipe name"
-                   (change)="refreshRecipes()">
-        </span>
-    </div>
-    <div>
-        <span class="p-input-icon-left">
-            <i class="pi pi-search"></i>
-            <input type="text" pInputText [(ngModel)]="filterAuthorName" placeholder="Search author name"
-                   (submit)="refreshRecipes()">
-        </span>
-    </div>
-    <div class="container-filter-component">
-        <p class="indicator-text">Prepare time: {{ sliderText }}</p>
-        <p-slider [(ngModel)]="rangeValues" [min]="1" [max]="600" [range]="true"
-                  (onChange)="changeSliderValue()"></p-slider>
-    </div>
-    <rate [value]="filterRating" [type]="rateType.rating" [readonly]="false" [imageSize]="40"
-          (selectedValue)="updateRatingFilter($event)" (contextmenu)="resetRatingFilter($event)"></rate>
-    <rate [value]="filterDifficulty" [type]="rateType.difficulty" [readonly]="false" [imageSize]="40"
-          (selectedValue)="updateDifficultyFilter($event)" (contextmenu)="resetDifficultyFilter($event)"></rate>
-    <rate [value]="filterSpiciness" [type]="rateType.spiciness" [readonly]="false" [imageSize]="40"
-          (selectedValue)="updateSpicinessFilter($event)" (contextmenu)="resetSpicinessFilter($event)"></rate>
-</div>
 
 <!-- MOBILE -->
 <div class="mobile-recipe-search" *ngIf="isMobile">
     <span class="p-input-icon-left">
         <i class="pi pi-search"></i>
         <input type="text" pInputText [(ngModel)]="filterRecipeName" placeholder="Search recipe name"
-               (change)="refreshRecipes()">
+               (ngModelChange)="refreshRecipes()">
     </span>
 </div>
 <!-- END MOBILE -->
@@ -102,30 +75,58 @@
         <h4>{{ ingredient.name }},&nbsp;</h4>
     </div>
 </div>
-<div class="recipes-container" style="padding-bottom: 20px" fx fxLayout="row wrap" fxLayoutGap="0px grid">
-    <div class="recipe-card" fxFlex="30%" fxFlex.xs="100%" fxFlex.sm="50%" *ngFor="let recipe of recipes">
-        <p-card class="card-container">
-            <ng-template pTemplate="header">
-                <div>
-                    <img alt="Card" src="{{ recipe.imageAddress }}" class="image-card-header"
-                         (click)="showViewRecipeDialog(recipe)">
-<!--                    <div class="save-button">-->
-<!--                        <button pButton type="button" class="p-button-raised p-button-rounded"-->
-<!--                                icon="pi pi-bookmark"></button>-->
-<!--                    </div>-->
-                </div>
-            </ng-template>
-            <div class="recipe-details-container">
-                <div class="time-component">
-                    <img src="assets/clock.png" alt="" class="time-image">
-                    <h5 class="time-text">{{ recipe.time | time }}</h5>
-                </div>
-                <rate class="rate-difficulty" [value]="recipe.difficulty" [type]="rateType.difficulty"
-                      [imageSize]="30"></rate>
-            </div>
-        </p-card>
+
+<div class="filterContainer" *ngIf="!isMobile">
+        <div>
+        <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input type="text" pInputText [(ngModel)]="filterRecipeName" placeholder="Search recipe name"
+                   (ngModelChange)="refreshRecipes()">
+        </span>
+        </div>
+        <div>
+        <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input type="text" pInputText [(ngModel)]="filterAuthorName" placeholder="Search author name"
+                   (ngModelChange)="refreshRecipes()">
+        </span>
+        </div>
+        <div class="container-filter-component">
+            <p class="indicator-text">Prepare time: {{ sliderText }}</p>
+            <p-slider [(ngModel)]="rangeValues" [min]="1" [max]="600" [range]="true"
+                      (onChange)="changeSliderValue()"></p-slider>
+        </div>
+        <rate [value]="filterRating" [type]="rateType.rating" [readonly]="false" [imageSize]="40"
+              (selectedValue)="updateRatingFilter($event)" (contextmenu)="resetRatingFilter($event)"></rate>
+        <rate [value]="filterDifficulty" [type]="rateType.difficulty" [readonly]="false" [imageSize]="40"
+              (selectedValue)="updateDifficultyFilter($event)" (contextmenu)="resetDifficultyFilter($event)"></rate>
+        <rate [value]="filterSpiciness" [type]="rateType.spiciness" [readonly]="false" [imageSize]="40"
+              (selectedValue)="updateSpicinessFilter($event)" (contextmenu)="resetSpicinessFilter($event)"></rate>
     </div>
-</div>
+<div class="recipes-container" style="padding-bottom: 20px" fx fxLayout="row wrap" fxLayoutGap="0px grid">
+        <div class="recipe-card" fxFlex="30%" fxFlex.xs="100%" fxFlex.sm="50%" *ngFor="let recipe of recipes">
+            <p-card class="card-container">
+                <ng-template pTemplate="header">
+                    <div>
+                        <img alt="Card" src="{{ recipe.imageAddress }}" class="image-card-header"
+                             (click)="showViewRecipeDialog(recipe)">
+                                            <div class="save-button">
+                                                <button pButton type="button" class="p-button-raised p-button-rounded"
+                                                        icon="pi pi-bookmark" (click)="addFavorite(recipe.id)"></button>
+                                            </div>
+                    </div>
+                </ng-template>
+                <div class="recipe-details-container">
+                    <div class="time-component">
+                        <img src="assets/clock.png" alt="" class="time-image">
+                        <h5 class="time-text">{{ recipe.time.toString() | time }}</h5>
+                    </div>
+                    <rate class="rate-difficulty" [value]="recipe.difficulty" [type]="rateType.difficulty"
+                          [imageSize]="ratingImageSize"></rate>
+                </div>
+            </p-card>
+        </div>
+    </div>
 
 <p-dialog header="Selected ingredients:" [(visible)]="selectedIngredientsDialog" [style]="{width: '50vw'}"
           [baseZIndex]="10000" [draggable]="false" [resizable]="false" [dismissableMask]="true" [modal]="true">

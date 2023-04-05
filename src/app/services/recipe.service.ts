@@ -39,7 +39,6 @@ export class RecipeService {
             "recipeId": recipeId,
             "userId": userId
         }
-        console.log(body);
         return this.http.post<String>(this.apiConfig.RECIPE_API + "/addFavorite", body, this.getOptions());
     }
 

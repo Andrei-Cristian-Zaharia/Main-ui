@@ -73,12 +73,36 @@
     border-radius: 10px 10px 0 0;
 }
 
-.save-button {
-    z-index: 1;
-    position: absolute;
-    top: 25px;
-    right: 20px;
+.addToFavorite {
+    background-image: url('../../../assets/Unliked.png');
+    transition: background-image .3s ease-out .3s;
+    background-size: contain;
+    height: 45px;
+    width: 45px;
 }
+
+.addToFavorite:hover {
+    background-image: url('../../../assets/Liked.png');
+    transition: background-image .3s ease-out .3s;
+    height: 45px;
+    width: 45px;
+}
+
+.removeFromFavorite {
+    background-image: url('../../../assets/Liked.png');
+    transition: background-image .3s ease-out .3s;
+    background-size: contain;
+    height: 45px;
+    width: 45px;
+}
+
+.removeFromFavorite:hover {
+    background-image: url('../../../assets/Unliked.png');
+    transition: background-image .3s ease-out .3s;
+    height: 45px;
+    width: 45px;
+}
+
 
 .recipe-details-container {
     position: relative;

@@ -39,7 +39,7 @@ export class RecipeService {
             "recipeId": recipeId,
             "userId": userId
         }
-        return this.http.post<String>(this.apiConfig.RECIPE_API + "/addFavorite", body, this.getOptions());
+        return this.http.post<string>(this.apiConfig.RECIPE_API + "/addFavorite", body, this.getOptions());
     }
 
     removeFavorite(recipeId: number, userId: number) {
@@ -48,8 +48,8 @@ export class RecipeService {
         );
     }
 
-    getFavoriteList(email: string) {
-        return this.http.get<RecipeModel[]>(this.apiConfig.RECIPE_API + "/favoriteList?email=" + email);
+    getFavoriteListFiltered(email: string, body) {
+        return this.http.post<RecipeModel[]>(this.apiConfig.RECIPE_API + "/favoriteListFiltered?email=" + email, body);
     }
 
     getFavoriteListNames(email: string) {

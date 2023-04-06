@@ -12,6 +12,7 @@ import {PersonService} from "../../services/person.service";
 import {Observable} from "rxjs";
 import {PersonBasicInfoModel} from "../../models/personBasicInfo.model";
 import {AuthService} from "../../services/auth.service";
+import {CookieService} from "ngx-cookie-service";
 
 @Component({
     selector: 'app-recipe',
@@ -64,7 +65,7 @@ export class RecipeComponent implements OnInit {
                 private router: Router,
                 private personService: PersonService,
                 private activatedRoute: ActivatedRoute,
-                private authService: AuthService) {
+                private cookieService: CookieService) {
         this.ingredientService = ingredientService;
         this.recipeService = recipeService;
     }
@@ -87,12 +88,11 @@ export class RecipeComponent implements OnInit {
     }
 
     getCurrentUser() {
-        if (this.authService.getCurrentUserEmail() != ''){
-            this.personService.getPersonDetails(this.authService.getCurrentUserEmail()).subscribe(data => {
+        if (this.cookieService.get('emailAddress') != null) {
+            this.personService.getPersonDetails(this.cookieService.get('emailAddress')).subscribe(data => {
                 this.user = data
 
                 this.refreshFavoriteNames();
-                this.refreshRecipes();
             });
         } else {
             this.refreshRecipes();
@@ -141,16 +141,20 @@ export class RecipeComponent implements OnInit {
     refreshFavoriteNames() {
         this.recipeService.getFavoriteListNames(this.user.emailAddress).subscribe(data => {
             this.favoriteNames = data
+            this.refreshRecipes();
         });
     }
 
     refreshRecipes(): void {
         this.activatedRoute.queryParamMap.subscribe(params => {
 
-            if (params.get('favourites') &&
-                this.authService.getCurrentUserEmail() &&
-                params.get('favourites') === 'show') {
-                this.recipeService.getFavoriteList(this.authService.getCurrentUserEmail()).subscribe(data => {
+            if (this.user != null &&
+                this.activatedRoute.snapshot.queryParams['favorites'] &&
+                params.get('favorites') === 'show') {
+                this.recipeService.getFavoriteListFiltered(
+                    this.user.emailAddress,
+                    this.formFilters()
+                ).subscribe(data => {
                     this.recipes = data;
                     this.verifyFavorites();
                 })
@@ -161,6 +165,19 @@ export class RecipeComponent implements OnInit {
     }
 
     getRecipes() {
+        this.recipeService.getRecipesFilteredByIngredients(this.formFilters()).subscribe(result => {
+            this.recipes = result;
+
+            if (this.user != null){
+                this.verifyFavorites();
+            }
+            else {
+                this.isLoaded = true;
+            }
+        })
+    }
+
+    formFilters() {
         let ingredients = this.selectedIngredients.map(i => i.name);
 
         let filterForm = {
@@ -174,22 +191,14 @@ export class RecipeComponent implements OnInit {
             "ingredientsNames": ingredients
         }
 
-        this.recipeService.getRecipesFilteredByIngredients(filterForm).subscribe(result => {
-
-            this.recipes = result;
-
-            if (this.user != null){
-                this.verifyFavorites();
-            }
-
-            this.isLoaded = true;
-        })
+        return filterForm
     }
 
     verifyFavorites() {
         if (this.favoriteNames != undefined){
             this.recipes.forEach(recipe => {
                 recipe.saved = this.favoriteNames.includes(recipe.name);
+                this.isLoaded = true;
             })
         }
     }
@@ -297,13 +306,11 @@ export class RecipeComponent implements OnInit {
     }
 
     addFavorite(recipe: RecipeModel) {
-        this.recipeService.addFavorite(recipe.id, this.user.id).subscribe(data => this.refreshRecipes());
-        recipe.saved = true;
+        this.recipeService.addFavorite(recipe.id, this.user.id).subscribe(data => this.refreshFavoriteNames());
     }
 
     removeFavorite(recipe: RecipeModel) {
-        this.recipeService.removeFavorite(recipe.id, this.user.id).subscribe(data => this.refreshRecipes());
-        recipe.saved = false;
+        this.recipeService.removeFavorite(recipe.id, this.user.id).subscribe(data => this.refreshFavoriteNames());
     }
 }
 

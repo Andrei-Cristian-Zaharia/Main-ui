@@ -92,7 +92,7 @@ export class NavbarComponent implements OnInit {
     }
 
     goToFavouriteRecipes() {
-        this.router.navigate(['/recipes'], { queryParams: {favourites:'show'}});
+        this.router.navigate(['/recipes'], { queryParams: {favorites:'show'}});
     }
 
     logout() {

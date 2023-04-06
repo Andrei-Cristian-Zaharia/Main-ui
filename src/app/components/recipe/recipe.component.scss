@@ -74,31 +74,31 @@
 }
 
 .addToFavorite {
-    background-image: url('../../../assets/Unliked.png');
-    transition: background-image .3s ease-out .3s;
+    background-image: url('../../../assets/unfavorite.png');
+    transition: background-image .2s ease-out .2s;
     background-size: contain;
     height: 45px;
     width: 45px;
 }
 
 .addToFavorite:hover {
-    background-image: url('../../../assets/Liked.png');
-    transition: background-image .3s ease-out .3s;
+    background-image: url('../../../assets/favorite.png');
+    transition: background-image .2s ease-out .2s;
     height: 45px;
     width: 45px;
 }
 
 .removeFromFavorite {
-    background-image: url('../../../assets/Liked.png');
-    transition: background-image .3s ease-out .3s;
+    background-image: url('../../../assets/favorite.png');
+    transition: background-image .2s ease-out .2s;
     background-size: contain;
     height: 45px;
     width: 45px;
 }
 
 .removeFromFavorite:hover {
-    background-image: url('../../../assets/Unliked.png');
-    transition: background-image .3s ease-out .3s;
+    background-image: url('../../../assets/unfavorite.png');
+    transition: background-image .2s ease-out .2s;
     height: 45px;
     width: 45px;
 }

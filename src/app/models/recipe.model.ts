@@ -13,10 +13,11 @@ export class RecipeModel extends BaseEntityModel {
     isVegan: boolean;
     imageAddress: string;
     person: PersonModel;
-    saved: boolean = false;
+    saved: boolean;
     ingredientList: IngredientModel[];
 
     constructor() {
         super("RECIPE");
+        this.saved = false;
     }
 }

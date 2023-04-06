@@ -45,6 +45,7 @@ const routes: Routes = [
         path: '', component: OverviewComponent, children: [
             // {path: 'recipes', component: RecipeComponent, canActivate: [LoginGuard] },
             {path: 'recipes', component: RecipeComponent },
+            {path: 'recipes/:favourites', component: RecipeComponent },
             {path: 'recipe', component: RecipePageComponent },
             {path: 'recipe/:name', component: RecipePageComponent },
             {path: 'profile', component: ProfileComponent },

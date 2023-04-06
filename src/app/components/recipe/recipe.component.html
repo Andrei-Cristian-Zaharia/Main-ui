@@ -113,8 +113,8 @@
                 </div>
             </ng-template>
             <div class="recipe-details-container">
-                <div class="addToFavorite" (click)="addFavorite(recipe.id)"></div>
-                <div class="removeFromFavorite" (click)="addFavorite(recipe.id)"></div>
+                <div *ngIf="recipe.saved === false" class="addToFavorite" (click)="addFavorite(recipe)"></div>
+                <div *ngIf="recipe.saved === true" class="removeFromFavorite" (click)="removeFavorite(recipe)"></div>
                 <div class="time-component">
                     <img src="assets/clock.png" alt="" class="time-image">
                     <h5 class="time-text">{{ recipe.time.toString() | time }}</h5>

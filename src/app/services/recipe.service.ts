@@ -42,6 +42,20 @@ export class RecipeService {
         return this.http.post<String>(this.apiConfig.RECIPE_API + "/addFavorite", body, this.getOptions());
     }
 
+    removeFavorite(recipeId: number, userId: number) {
+        return this.http.delete(this.apiConfig.SAVED_RECIPES_API + "/delete?recipeId=" + recipeId + "&userId=" + userId,
+            this.getOptions()
+        );
+    }
+
+    getFavoriteList(email: string) {
+        return this.http.get<RecipeModel[]>(this.apiConfig.RECIPE_API + "/favoriteList?email=" + email);
+    }
+
+    getFavoriteListNames(email: string) {
+        return this.http.get<string[]>(this.apiConfig.RECIPE_API + "/favoriteNames?email=" + email);
+    }
+
     getOptions() {
         return {
             headers: new HttpHeaders({

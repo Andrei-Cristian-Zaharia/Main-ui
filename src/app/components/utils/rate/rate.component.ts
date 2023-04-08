@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {RateTypeEnum} from "../../../enums/rateType.enum";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 
@@ -7,7 +7,7 @@ import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
   templateUrl: './rate.component.html',
   styleUrls: ['./rate.component.scss']
 })
-export class RateComponent implements OnInit{
+export class RateComponent implements OnChanges{
 
     @Input()
     value: number;
@@ -30,7 +30,7 @@ export class RateComponent implements OnInit{
 
     tooltipDescription: string;
 
-    ngOnInit(): void {
+    ngOnChanges(): void {
         this.imageSizePx = this.imageSize + 'px';
 
         switch (this.type) {

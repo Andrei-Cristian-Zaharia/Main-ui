@@ -107,31 +107,33 @@
     <rate [value]="filterSpiciness" [type]="rateType.spiciness" [readonly]="false" [imageSize]="40"
           (selectedValue)="updateSpicinessFilter($event)" (contextmenu)="resetSpicinessFilter($event)"></rate>
 </div>
-<div *ngIf="isLoaded == true" class="recipes-container" style="padding-bottom: 20px" fx fxLayout="row wrap" fxLayoutGap="0px grid">
-    <div class="recipe-card" fxFlex="30%" fxFlex.xs="100%" fxFlex.sm="50%" *ngFor="let recipe of recipes">
-        <p-card>
-            <ng-template pTemplate="header">
-                <div>
-                    <img alt="Card" src="{{ recipe.imageAddress }}" class="image-card-header"
-                         (click)="showViewRecipeDialog(recipe)">
-                    <div *ngIf="recipe.vegan" class="veganMark"></div>
-                </div>
-            </ng-template>
-            <div class="recipe-details-container">
-                <div *ngIf="recipe.saved === false" class="addToFavorite" tooltipPosition="top"
-                     (click)="addFavorite(recipe)" pTooltip="Save to favorites"></div>
-                <div *ngIf="recipe.saved === true" class="removeFromFavorite" tooltipPosition="top"
-                     (click)="removeFavorite(recipe)" pTooltip="Remove from favorites"></div>
-                <div class="time-component">
-                    <img src="assets/clock.png" alt="" class="time-image">
-                    <h5 class="time-text">{{ recipe.time.toString() | time }}</h5>
-                </div>
-                <rate class="rate-difficulty" [value]="recipe.difficulty" [type]="rateType.difficulty"
-                      [imageSize]="ratingImageSize"></rate>
-            </div>
-        </p-card>
-    </div>
-</div>
+<!--<div *ngIf="isLoaded == true" class="recipes-container" style="padding-bottom: 20px" fx fxLayout="row wrap" fxLayoutGap="0px grid">-->
+<!--    <div class="recipe-card" fxFlex="30%" fxFlex.xs="100%" fxFlex.sm="50%" *ngFor="let recipe of recipes">-->
+<!--        <p-card>-->
+<!--            <ng-template pTemplate="header">-->
+<!--                <div>-->
+<!--                    <img alt="Card" src="{{ recipe.imageAddress }}" class="image-card-header"-->
+<!--                         (click)="showViewRecipeDialog(recipe)">-->
+<!--                    <div *ngIf="recipe.vegan" class="veganMark"></div>-->
+<!--                </div>-->
+<!--            </ng-template>-->
+<!--            <div class="recipe-details-container">-->
+<!--                <div *ngIf="recipe.saved === false" class="addToFavorite" tooltipPosition="top"-->
+<!--                     (click)="addFavorite(recipe)" pTooltip="Save to favorites"></div>-->
+<!--                <div *ngIf="recipe.saved === true" class="removeFromFavorite" tooltipPosition="top"-->
+<!--                     (click)="removeFavorite(recipe)" pTooltip="Remove from favorites"></div>-->
+<!--                <div class="time-component">-->
+<!--                    <img src="assets/clock.png" alt="" class="time-image">-->
+<!--                    <h5 class="time-text">{{ recipe.time.toString() | time }}</h5>-->
+<!--                </div>-->
+<!--                <rate class="rate-difficulty" [value]="recipe.difficulty" [type]="rateType.difficulty"-->
+<!--                      [imageSize]="ratingImageSize"></rate>-->
+<!--            </div>-->
+<!--        </p-card>-->
+<!--    </div>-->
+<!--</div>-->
+
+<profile-recipes *ngIf="isLoaded === true" [recipes]="recipes" [width]="27" [height]="15" [headerSize]="11.5"/>
 
 <p-dialog header="Selected ingredients:" [(visible)]="selectedIngredientsDialog" [style]="{width: '50vw'}"
           [baseZIndex]="10000" [draggable]="false" [resizable]="false" [dismissableMask]="true" [modal]="true">

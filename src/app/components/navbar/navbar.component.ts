@@ -82,7 +82,6 @@ export class NavbarComponent implements OnInit {
         this.responsive.observe(Breakpoints.HandsetPortrait)
             .subscribe(result => {
                 this.isMobile = result.matches;
-                console.log(this.isMobile);
             });
     }
 

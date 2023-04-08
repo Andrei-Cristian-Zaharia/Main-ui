@@ -1,15 +1,17 @@
 <div class="recipes-container">
     <div class="recipe-card" *ngFor="let recipe of recipes">
-        <p-card>
+        <p-card [style]="{width: width + 'rem', height: height + 'rem'}">
             <ng-template pTemplate="header">
                 <div class="recipe-card-image-container">
-                    <img alt="Card" src="{{ recipe.imageAddress }}" class="image-card-header">
-                    <div class="recipe-card-hover-name-box">
+                    <img alt="Card" src="{{ recipe.imageAddress }}" class="image-card-header"
+                         [style]="{height: headerSize + 'rem'}">
+                    <div class="recipe-card-hover-name-box" [style]="{height: headerSize + 'rem'}">
                         <p class="recipe-card-hover-name">{{ recipe.name }}</p>
                     </div>
                 </div>
             </ng-template>
             <div class="recipe-edit-button">Edit</div>
+            <h4 class="recipe-mobile-name">{{ recipe.name }}</h4>
         </p-card>
     </div>
 </div>

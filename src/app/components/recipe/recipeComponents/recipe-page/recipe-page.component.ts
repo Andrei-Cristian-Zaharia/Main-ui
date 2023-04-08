@@ -23,8 +23,6 @@ export class RecipePageComponent implements OnInit {
     entityType = EntityTypeEnum;
     reviewType = ReviewTypeEnum;
 
-    isMobile: boolean;
-
     constructor(private responsive: BreakpointObserver,
                 private reviewService: ReviewService,
                 private cookieService: CookieService,

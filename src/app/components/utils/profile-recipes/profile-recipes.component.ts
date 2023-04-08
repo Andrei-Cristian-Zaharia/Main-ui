@@ -1,4 +1,4 @@
-import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {PersonBasicInfoModel} from "../../../models/personBasicInfo.model";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {ReviewService} from "../../../services/review.service";
@@ -18,7 +18,17 @@ export class ProfileRecipesComponent implements OnInit {
 
     isMobile: boolean;
 
+    @Input()
     recipes: RecipeModel[];
+
+    @Input()
+    width: number = 30;
+
+    @Input()
+    height: number = 30;
+
+    @Input()
+    headerSize: number = 11;
 
     constructor(private responsive: BreakpointObserver,
                 private reviewService: ReviewService,
@@ -33,7 +43,9 @@ export class ProfileRecipesComponent implements OnInit {
                 this.isMobile = result.matches;
             });
 
-        this.getCurrentUser();
+        if (this.recipes == null){
+            this.getCurrentUser();
+        }
     }
 
     getCurrentUser() {

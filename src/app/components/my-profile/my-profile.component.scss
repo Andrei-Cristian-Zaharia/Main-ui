@@ -7,7 +7,7 @@
 
 .profile-details-container {
     height: 220px;
-    width: 100%;
+    width: 60%;
     margin: 0 auto;
     background: rgb(255, 247, 233);
     border-radius: 10px;
@@ -109,21 +109,19 @@
 //
 //}
 
-@media only screen and (max-width: 768px) {
-
+@media only screen and (max-width: 1400px) {
     .profile-details-container {
         display: block;
         height: auto;
-        width: 95%;
+        width: 75%;
 
         img {
-            left: 10px;
+            left: 25px;
             top: 10px;
             width: 20%;
         }
 
         .profile-details-header {
-            display: flex;
 
             .profile-details-header-username {
                 width: 100%;
@@ -161,6 +159,18 @@
                     }
                 }
             }
+        }
+    }
+}
+@media only screen and (max-width: 768px) {
+
+    .profile-details-container {
+        width: 95%;
+
+        img {
+            left: 10px;
+            top: 10px;
+            width: 25%;
         }
     }
 }

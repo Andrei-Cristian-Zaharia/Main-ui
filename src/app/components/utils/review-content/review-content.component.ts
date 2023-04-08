@@ -61,6 +61,7 @@ export class ReviewContentComponent implements OnInit, OnChanges {
     currentDeleteReview: ReviewModel;
 
     isMobile: boolean;
+    rateImageSize
 
     constructor(private responsive: BreakpointObserver,
                 private reviewService: ReviewService,
@@ -73,6 +74,11 @@ export class ReviewContentComponent implements OnInit, OnChanges {
         this.responsive.observe(Breakpoints.HandsetPortrait)
             .subscribe(result => {
                 this.isMobile = result.matches;
+                if (this.isMobile) {
+                    this.rateImageSize = 20;
+                } else {
+                    this.rateImageSize = 25;
+                }
             });
     }
 
@@ -90,7 +96,6 @@ export class ReviewContentComponent implements OnInit, OnChanges {
     getCurrentUser() {
         this.personService.getPersonDetails(this.cookieService.get("emailAddress")).subscribe(data => {
             this.user = data;
-            console.log(this.reviewType)
             if (this.reviewType === ReviewTypeEnum.VIEW) {
                 this.getReviews();
             }
@@ -241,7 +246,6 @@ export class ReviewContentComponent implements OnInit, OnChanges {
     getReviews() {
         this.reviewService.getReviewsForUser(this.user.emailAddress).subscribe(result => {
             this.reviews = result;
-            console.log(result);
         })
     }
 

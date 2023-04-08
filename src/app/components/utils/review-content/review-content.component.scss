@@ -2,8 +2,12 @@
     padding-top: 20px;
     padding-bottom: 20px;
 
-    .p-card .p-card-content {
-        padding: 0;
+    .p-card {
+        position: relative;
+
+        .p-card-content {
+            padding: 0;
+        }
     }
 
     .review-insert-title {
@@ -104,11 +108,18 @@
 }
 
 .review-rate {
-    padding: 10px;
+    padding: 10px 10px 0 0;
 }
 
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */
+
+    .review-rate {
+        position: absolute;
+        right: 10px;
+        padding: 20px 0 0 0;
+    }
+
 
     .review-container {
         .review-header {
@@ -117,6 +128,9 @@
             .review-title {
                 padding-left: 10px;
                 display: inline-block;
+                font-size: 12px;
+                inline-size: 50%;
+                overflow-wrap: break-word;
 
                 .review-date {
                     font-style: italic;

@@ -7,8 +7,6 @@
         <div class="profile-info-container">
             <h1 class="profile-info-container-username">{{ user.username }}</h1>
             <div class="profile-general-info">
-                <div class="go-to-favorites-button" tooltipPosition="top"
-                     pTooltip="Go to favorite recipes"></div>
                 <hr>
                 <div class="profile-general-info-box">
                     <img src="assets/recipe-book.png" alt="">
@@ -39,7 +37,7 @@
     </div>
     <div class="profile-recipes-container">
         <h2 class="profile-recipes-container-title">Recipes</h2>
-        <profile-recipes/>
+        <profile-recipes [width]="19" [height]="12.5" [headerSize]="9"/>
     </div>
     <div class="profile-reviews-container">
         <review-content [reviewType]="reviewType.VIEW"></review-content>

@@ -40,18 +40,12 @@
             <p-card class="review-card">
                 <ng-template pTemplate="header">
                     <div class="review-header">
-                        <div>
-                            <div class="review-title">
-                                <h2>{{ review.title }}</h2>
-                                <p class="review-date"> {{ review.creationDate }} </p>
-                                <div class="rating-container" *ngIf="isMobile">
-                                    <rate [value]="review.rating" [type]="rateType.rating" [imageSize]="20"></rate>
-                                </div>
-                            </div>
+                        <div class="review-title">
+                            <h2>{{ review.title }}</h2>
+                            <p class="review-date"> {{ review.creationDate }} </p>
                         </div>
-                        <div class="rating-container" *ngIf="!isMobile">
-                            <rate [value]="review.rating" [type]="rateType.rating" [imageSize]="35"></rate>
-                        </div>
+                        <rate class="review-rate" [imageSize]="rateImageSize" [readonly]="true" [value]="review.rating"
+                              [type]="rateType.rating"/>
                     </div>
                 </ng-template>
 
@@ -92,7 +86,8 @@
                                 <h2>{{ review.title }}</h2>
                                 <p class="review-date"> {{ review.creationDate }} </p>
                             </div>
-                            <rate style="padding: 20px" [readonly]="true" [value]="review.rating" [type]="rateType.rating"/>
+                            <rate class="review-rate" [imageSize]="rateImageSize" [readonly]="true" [value]="review.rating"
+                                  [type]="rateType.rating"/>
                         </div>
                     </ng-template>
 

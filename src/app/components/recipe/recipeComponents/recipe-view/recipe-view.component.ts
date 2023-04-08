@@ -15,6 +15,8 @@ import {CookieService} from "ngx-cookie-service";
 import {Router} from "@angular/router";
 import {RateTypeEnum} from "../../../../enums/rateType.enum";
 import {EntityTypeEnum} from "../../../../enums/entityType.enum";
+import {ReviewTypeEnum} from "../../../../enums/reviewType.enum";
+import {RecipeService} from "../../../../services/recipe.service";
 
 @Component({
     selector: 'app-recipe-view',
@@ -28,20 +30,33 @@ export class RecipeViewComponent {
     @Input()
     recipe: RecipeModel;
 
+    @Input()
+    username: string;
+
+    recipes: RecipeModel[];
+
     reviews: ReviewModel[] = new Array<ReviewModel>;
 
     userLogged: boolean = false;
 
     rateType = RateTypeEnum;
     entityType = EntityTypeEnum;
+    reviewType = ReviewTypeEnum;
 
     constructor(private reviewService: ReviewService,
                 private cookieService: CookieService,
+                private recipeService: RecipeService,
                 private router: Router) { }
 
     updateRecipeRating(rating: number) {
-        console.log(rating)
         this.recipe.rating = rating;
+    }
+
+    getRecipes() {
+        this.recipeService.getRecipesForUser(this.username).subscribe(result => {
+            this.recipes = result;
+            console.log(result);
+        })
     }
 
     goToProfile(username) {

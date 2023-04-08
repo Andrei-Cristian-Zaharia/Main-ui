@@ -10,7 +10,7 @@ export class RecipeModel extends BaseEntityModel {
     difficulty: number;
     spiciness: number;
     rating: number;
-    isVegan: boolean;
+    vegan: boolean;
     imageAddress: string;
     person: PersonModel;
     saved: boolean;

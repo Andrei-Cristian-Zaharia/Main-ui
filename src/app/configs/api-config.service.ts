@@ -4,7 +4,7 @@ export const API_CONFIG = new InjectionToken<ApiConfig>('api-config');
 
 export class ApiConfig {
 
-    private _LOCALHOST: string ='http://localhost' // 192.168.100.14
+    private _LOCALHOST: string ='http://192.168.100.14' // 192.168.100.14
     private _HOST_URL: string = this._LOCALHOST + ':4200'
     private _AUTH_API: string = this._LOCALHOST + ':3005/v1/core-api/auth';
     private _RECIPE_API: string =  this._LOCALHOST +':3005/v1/food-api/recipe';

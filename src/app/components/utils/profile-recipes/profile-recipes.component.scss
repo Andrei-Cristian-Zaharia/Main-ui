@@ -1,0 +1,99 @@
+.recipes-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    overflow: hidden;
+
+    ::ng-deep .p-card {
+        width: 19rem;
+        height: 200px;
+        border-radius: 10px 10px 20px 20px;
+        margin-bottom: 20px;
+
+        .p-card-body {
+            padding-top: 20px;
+            padding-left: 1px;
+            padding-right: 1px;
+        }
+
+        .p-card-content {
+            padding: 1px;
+        }
+    }
+}
+
+.recipe-card {
+    margin-top: 40px;
+    margin-right: 5px;
+
+    .p-card {
+        position: relative;
+    }
+
+    .p-card .p-card-content {
+        padding: 0;
+    }
+
+    ::ng-deep .p-card .p-card-body {
+        padding: 4px;
+    }
+
+    .recipe-card-image-container {
+        position: relative;
+
+        .recipe-card-hover-name-box {
+            opacity: 0;
+            transition: opacity .25s ease-in-out .25s;
+            background: rgba(34, 34, 34, 0.5);
+            width: 100%;
+            height: 140px;
+            top: 0;
+            position: absolute;
+            border-radius: 10px 10px 0 0;
+            color: white;
+
+            .recipe-card-hover-name {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 20px;
+                inline-size: 100%;
+                overflow-wrap: break-word;
+                text-align: center;
+                height: 100%;
+            }
+        }
+    }
+
+    .recipe-card-image-container:hover {
+        .recipe-card-hover-name-box {
+            transition: opacity .25s ease-in-out .25s;
+            opacity: 1;
+        }
+    }
+
+    .recipe-edit-button {
+        width: 100px;
+        height: 40px;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        border-radius: 5px;
+        font-size: 20px;
+        background: #9e754e;
+        color: white;
+    }
+
+    .recipe-edit-button:hover {
+        background: #9e754e;
+    }
+}
+
+.image-card-header {
+    height: 140px;
+    object-fit: cover;
+    z-index: 0;
+    border-radius: 10px 10px 0 0;
+}

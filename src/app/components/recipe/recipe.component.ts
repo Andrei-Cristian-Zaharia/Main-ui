@@ -59,6 +59,7 @@ export class RecipeComponent implements OnInit {
 
     user: PersonBasicInfoModel;
     favoriteNames: string[];
+    showFavorites: boolean;
 
     constructor(recipeService: RecipeService, ingredientService: IngredientService,
                 private responsive: BreakpointObserver,
@@ -151,6 +152,7 @@ export class RecipeComponent implements OnInit {
             if (this.user != null &&
                 this.activatedRoute.snapshot.queryParams['favorites'] &&
                 params.get('favorites') === 'show') {
+                this.showFavorites = false;
                 this.recipeService.getFavoriteListFiltered(
                     this.user.emailAddress,
                     this.formFilters()
@@ -159,6 +161,7 @@ export class RecipeComponent implements OnInit {
                     this.verifyFavorites();
                 })
             } else {
+                this.showFavorites = true;
                 this.getRecipes();
             }
         })
@@ -311,6 +314,14 @@ export class RecipeComponent implements OnInit {
 
     removeFavorite(recipe: RecipeModel) {
         this.recipeService.removeFavorite(recipe.id, this.user.id).subscribe(data => this.refreshFavoriteNames());
+    }
+
+    goToRecipes() {
+        this.router.navigate(['/recipes']);
+    }
+
+    goToFavouriteRecipes() {
+        this.router.navigate(['/recipes'], { queryParams: {favorites:'show'}});
     }
 }
 

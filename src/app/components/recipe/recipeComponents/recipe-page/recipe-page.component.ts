@@ -7,6 +7,7 @@ import {RecipeService} from "../../../../services/recipe.service";
 import {RateTypeEnum} from "../../../../enums/rateType.enum";
 import {EntityTypeEnum} from "../../../../enums/entityType.enum";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
+import {ReviewTypeEnum} from "../../../../enums/reviewType.enum";
 
 @Component({
     selector: 'app-recipe-page',
@@ -20,6 +21,7 @@ export class RecipePageComponent implements OnInit {
 
     rateType = RateTypeEnum;
     entityType = EntityTypeEnum;
+    reviewType = ReviewTypeEnum;
 
     isMobile: boolean;
 

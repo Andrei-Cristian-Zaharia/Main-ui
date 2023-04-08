@@ -37,6 +37,18 @@ export class ReviewService {
         return this.http.get<ReviewModel[]>(this.apiConfig.REVIEW_API + "/all/user?email=" + email);
     }
 
+    countUserReviews(email: string) {
+        return this.http.get<number>(this.apiConfig.REVIEW_API + "/countUserReviews?email=" + email);
+    }
+
+    averageRecipeRate(id: number) {
+        return this.http.get<number>(this.apiConfig.REVIEW_API + "/averageRecipeRate?recipeId=" + id);
+    }
+
+    averageRateUser(email: string) {
+        return this.http.get<number>(this.apiConfig.REVIEW_API + "/averageRateUser?email=" + email);
+    }
+
     editReview(review) {
         return this.http.post(this.apiConfig.REVIEW_API + "/edit", review, this.getOptionsAuth());
     }

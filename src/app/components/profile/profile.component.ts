@@ -20,14 +20,12 @@ export class ProfileComponent implements OnInit{
 
     user: PersonDetailsModel;
     restaurant: RestaurantModel;
-    recipes: RecipeModel[];
     reviews: ReviewModel[];
     rateType = RateTypeEnum;
 
     constructor(private activatedRoute: ActivatedRoute,
                 private reviewService: ReviewService,
                 private personService: PersonService,
-                private recipeService: RecipeService,
                 private restaurantService: RestaurantService,
                 private router: Router) {}
 
@@ -39,8 +37,6 @@ export class ProfileComponent implements OnInit{
                 console.log(data);
 
                 this.getRestaurant();
-                this.getRecipes();
-                this.getReviews();
             }, () => console.log("There was an error and user with username " + params.get('name') + " couldn't be fetched..."));
         })
     }
@@ -54,23 +50,7 @@ export class ProfileComponent implements OnInit{
         }
     }
 
-    getReviews() {
-        this.reviewService.getReviewsForUser(this.user.emailAddress).subscribe(result => {
-            this.reviews = result;
-            console.log(result);
-        })
-    }
-
-    getRecipes() {
-        this.recipeService.getRecipesForUser(this.user.username).subscribe(result => {
-            this.recipes = result;
-            console.log(result);
-        })
-    }
-
     goToRestaurant(name: string) {
         this.router.navigateByUrl('restaurant?name=' + name);
-    }    goToRecipePage(name: string) {
-        this.router.navigateByUrl('recipe?name=' + name);
     }
 }

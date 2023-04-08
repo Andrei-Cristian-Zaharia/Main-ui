@@ -73,6 +73,20 @@
     border-radius: 10px 10px 0 0;
 }
 
+.showFavoritesButton {
+    background-image: url('../../../assets/favorite.png');
+    background-size: contain;
+    height: 45px;
+    width: 45px;
+}
+
+.hideFavoritesButton {
+    background-image: url('../../../assets/unfavorite.png');
+    background-size: contain;
+    height: 45px;
+    width: 45px;
+}
+
 .addToFavorite {
     background-image: url('../../../assets/unfavorite.png');
     transition: background-image .2s ease-out .2s;
@@ -165,6 +179,16 @@
     .p-card .p-card-body {
         padding: 1px;
     }
+}
+
+.veganMark {
+    background: url("../../../assets/vegan.png");
+    background-size: contain;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 55px;
+    height: 55px;
 }
 
 .ingredient-card {
@@ -303,10 +327,15 @@
     .time-component {
         margin-left: 15px;
 
+        .time-image {
+            height: 30px;
+            width: 30px;
+        }
+
         .time-text {
-            font-size: 14px;
+            font-size: 12px;
             margin-left: 10px;
-            margin-top: 11px;
+            margin-top: 7px;
         }
     }
 

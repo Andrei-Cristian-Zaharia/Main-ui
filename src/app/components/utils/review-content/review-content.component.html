@@ -1,4 +1,4 @@
-<div class="review-container">
+<div *ngIf="reviewType === 0" class="review-container">
     <div class="review-section-title">
         <h2>Reviews</h2>
         <div *ngIf="userLogged === true">
@@ -65,7 +65,7 @@
                             <img src="../../../../assets/delete.png" alt="" class="review-edit-delete"
                                  (click)="showDeleteDialog(review)">
                             <img src="../../../../assets/edit.png" alt="" class="review-edit-delete"
-                                (click)="editReviewOfUser(review)">
+                                 (click)="editReviewOfUser(review)">
                         </div>
                         <img src="../../../../assets/person-icon.png" alt="">
                         <h3 class="review-author-text"
@@ -76,6 +76,53 @@
             </p-card>
         </div>
     </div>
+</div>
+
+<div *ngIf="reviewType === 1">
+    <div class="review-container" *ngIf="reviews.length > 0; else noReviews">
+        <div class="profile-section-title">
+            <h2>Reviews</h2>
+        </div>
+        <div *ngFor="let review of reviews">
+            <div class="review">
+                <p-card class="review-card">
+                    <ng-template pTemplate="header">
+                        <div class="review-header">
+                            <div class="review-title">
+                                <h2>{{ review.title }}</h2>
+                                <p class="review-date"> {{ review.creationDate }} </p>
+                            </div>
+                            <rate style="padding: 20px" [readonly]="true" [value]="review.rating" [type]="rateType.rating"/>
+                        </div>
+                    </ng-template>
+
+                    <div class="review-display-content">
+                        {{ review.text }}
+                    </div>
+
+                    <ng-template pTemplate="footer">
+                        <div class="review-entity">
+                            <div *ngIf="review.category == 'RECIPE'; else restaurantName">
+                                <h3 class="review-author-text"
+                                    (click)="goToRecipePage(review.entityName)">Recipe: {{ review.entityName }} </h3>
+                            </div>
+                            <ng-template #restaurantName>
+                                <h3 class="review-author-text"
+                                    (click)="goToRecipePage(review.entityName)">
+                                    Restaurant: {{ review.entityName }} </h3>
+                            </ng-template>
+                        </div>
+                    </ng-template>
+                </p-card>
+            </div>
+        </div>
+    </div>
+    <ng-template #noReviews>
+        <div class="profile-section-title">
+            <h2>Reviews</h2>
+            <h4 class="subtitle-not-found">There are no reviews to display.</h4>
+        </div>
+    </ng-template>
 </div>
 
 <p-dialog header="Confirm delete" [(visible)]="confirmDeleteDialog" [position]="'bottom'" [modal]="true"

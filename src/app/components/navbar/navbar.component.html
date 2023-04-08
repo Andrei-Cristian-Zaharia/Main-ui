@@ -30,7 +30,7 @@
         <li class="menu-element" *ngIf="userLogged == true && user.hasRestaurant == true">Restaurant</li>
         <li class="menu-element" *ngIf="isMobile" (click)="goToFavouriteRecipes()">Saved</li>
         <li class="menu-element" *ngIf="userLogged == true" (click)="showCreateRecipeDialog()">Create recipe</li>
-        <li class="menu-element" *ngIf="userLogged == true">Profile</li>
+        <li class="menu-element" *ngIf="userLogged == true" (click)="goToProfile()">Profile</li>
         <li class="menu-element" *ngIf="userLogged == true" (click)="logout()">Logout</li>
         <li class="menu-element" *ngIf="userLogged == false" (click)="login()">Login</li>
     </ul>

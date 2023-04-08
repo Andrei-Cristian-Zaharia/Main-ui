@@ -18,6 +18,7 @@ import {PersonService} from "../../../services/person.service";
 import {PersonBasicInfoModel} from "../../../models/personBasicInfo.model";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {RateTypeEnum} from "../../../enums/rateType.enum";
+import {ReviewTypeEnum} from "../../../enums/reviewType.enum";
 
 @Component({
     selector: 'review-content',
@@ -32,6 +33,9 @@ export class ReviewContentComponent implements OnInit, OnChanges {
 
     @Input()
     category: EntityTypeEnum;
+
+    @Input()
+    reviewType: ReviewTypeEnum;
 
     @Output()
     rating = new EventEmitter<number>();
@@ -73,8 +77,9 @@ export class ReviewContentComponent implements OnInit, OnChanges {
     }
 
     ngOnChanges(changes: SimpleChanges): void {
+        this.getCurrentUser();
+
         if (this.entity != null) {
-            this.getCurrentUser();
             this.refreshReviews();
             this.checkPostReview();
             this.resetReview();
@@ -85,6 +90,10 @@ export class ReviewContentComponent implements OnInit, OnChanges {
     getCurrentUser() {
         this.personService.getPersonDetails(this.cookieService.get("emailAddress")).subscribe(data => {
             this.user = data;
+            console.log(this.reviewType)
+            if (this.reviewType === ReviewTypeEnum.VIEW) {
+                this.getReviews();
+            }
         })
     }
 
@@ -189,6 +198,10 @@ export class ReviewContentComponent implements OnInit, OnChanges {
         this.router.navigateByUrl('profile?name=' + username);
     }
 
+    goToRecipePage(name: string) {
+        this.router.navigateByUrl('recipe?name=' + name);
+    }
+
     showDeleteDialog(review: ReviewModel) {
         this.confirmDeleteDialog = true;
         this.currentDeleteReview = review;
@@ -224,4 +237,12 @@ export class ReviewContentComponent implements OnInit, OnChanges {
         this.newReviewPanelOpen = true;
         this.insertNewReviewWindow = true;
     }
+
+    getReviews() {
+        this.reviewService.getReviewsForUser(this.user.emailAddress).subscribe(result => {
+            this.reviews = result;
+            console.log(result);
+        })
+    }
+
 }

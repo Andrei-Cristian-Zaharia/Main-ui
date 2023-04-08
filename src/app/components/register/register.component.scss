@@ -1,0 +1,20 @@
+.login-form {
+    height: 60%;
+}
+
+::ng-deep .p-toast {
+    .p-toast-message.p-toast-message-error {
+            background: #222222;
+            color: #ffffff;
+        }
+    }
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+
+    .login-form {
+        width: 300px;
+        height: 550px;
+    }
+}
+

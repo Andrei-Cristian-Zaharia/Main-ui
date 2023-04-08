@@ -1,0 +1,15 @@
+<div class="recipes-container">
+    <div class="recipe-card" *ngFor="let recipe of recipes">
+        <p-card>
+            <ng-template pTemplate="header">
+                <div class="recipe-card-image-container">
+                    <img alt="Card" src="{{ recipe.imageAddress }}" class="image-card-header">
+                    <div class="recipe-card-hover-name-box">
+                        <p class="recipe-card-hover-name">{{ recipe.name }}</p>
+                    </div>
+                </div>
+            </ng-template>
+            <div class="recipe-edit-button">Edit</div>
+        </p-card>
+    </div>
+</div>

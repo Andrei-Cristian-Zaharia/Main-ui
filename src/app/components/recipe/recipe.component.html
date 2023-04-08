@@ -77,6 +77,10 @@
 </div>
 
 <div class="filterContainer" *ngIf="!isMobile">
+    <div *ngIf="user != null && showFavorites === true"  class="showFavoritesButton" tooltipPosition="top"
+         pTooltip="Show favorite recipes" (click)="goToFavouriteRecipes()"></div>
+    <div *ngIf="user != null && showFavorites === false" class="hideFavoritesButton" tooltipPosition="top"
+         pTooltip="Show all recipes" (click)="goToRecipes()"></div>
     <div>
         <span class="p-input-icon-left">
             <i class="pi pi-search"></i>
@@ -105,11 +109,12 @@
 </div>
 <div *ngIf="isLoaded == true" class="recipes-container" style="padding-bottom: 20px" fx fxLayout="row wrap" fxLayoutGap="0px grid">
     <div class="recipe-card" fxFlex="30%" fxFlex.xs="100%" fxFlex.sm="50%" *ngFor="let recipe of recipes">
-        <p-card class="card-container">
+        <p-card>
             <ng-template pTemplate="header">
                 <div>
                     <img alt="Card" src="{{ recipe.imageAddress }}" class="image-card-header"
                          (click)="showViewRecipeDialog(recipe)">
+                    <div *ngIf="recipe.vegan" class="veganMark"></div>
                 </div>
             </ng-template>
             <div class="recipe-details-container">

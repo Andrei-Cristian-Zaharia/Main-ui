@@ -5,7 +5,6 @@ import {PersonBasicInfoModel} from "../../models/personBasicInfo.model";
 import {Router} from "@angular/router";
 import {CookieService} from "ngx-cookie-service";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
-import {NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels} from "@techiediaries/ngx-qrcode";
 import {NgxQrcodeStylingComponent, Options} from "ngx-qrcode-styling";
 import {ApiConfig} from "../../configs/api-config.service";
 
@@ -93,6 +92,10 @@ export class NavbarComponent implements OnInit {
 
     goToFavouriteRecipes() {
         this.router.navigate(['/recipes'], { queryParams: {favorites:'show'}});
+    }
+
+    goToProfile() {
+        this.router.navigate(['/my-profile']);
     }
 
     logout() {

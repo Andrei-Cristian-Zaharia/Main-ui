@@ -1,0 +1,52 @@
+<!--<div style="margin-bottom: 25px; margin-top: 25px;">-->
+<!--    <input [(ngModel)]="emailAddress" placeholder="EmailAddress">-->
+<!--    <input [(ngModel)]="password" placeholder="Password">-->
+<!--    <p-button (onClick)="login()" label="Login"></p-button>-->
+<!--</div>-->
+<!--<div style="margin-bottom: 25px; margin-top: 25px;">-->
+<!--    <input [(ngModel)]="username" placeholder="Username">-->
+<!--    <input [(ngModel)]="emailAddress" placeholder="EmailAddress">-->
+<!--    <input [(ngModel)]="password" placeholder="Password">-->
+<!--    <input [(ngModel)]="confirmPassword" placeholder="Password">-->
+<!--    <p-button (onClick)="createAccount()" label="Create"></p-button>-->
+<!--</div>-->
+
+<p-toast position="top-left" [baseZIndex]="5000">
+    <ng-template let-message pTemplate="message">
+        <div class="flex flex-column" style="flex: 1">
+            <div class="text-center">
+                <h4>{{message.summary}}</h4>
+                <p>{{message.detail}}</p>
+            </div>
+        </div>
+    </ng-template>
+</p-toast>
+
+<div class="login-content">
+    <div class="login-form">
+        <div class="login-text">
+            <h1>Register</h1>
+        </div>
+        <div class="login-buttons-container">
+            <div class="login-button">
+                <input pInputText placeholder="Username" [(ngModel)]="username"/>
+            </div>
+            <div class="login-button">
+                <input pInputText placeholder="Email address" [(ngModel)]="emailAddress"/>
+            </div>
+            <div class="login-button">
+                <p-password placeholder="Password" [feedback]="true" [(ngModel)]="password"></p-password>
+            </div>
+            <div id="confirmButton" class="login-button">
+                <p-password placeholder="Confirm password" [feedback]="false" [(ngModel)]="confirmPassword"></p-password>
+            </div>
+            <div class="login-button">
+                <p-button label="Create" (click)="createAccount()"></p-button>
+            </div>
+        </div>
+        <div class="reset-button">
+            <h5>Already a member ?</h5>
+            <h5 class="create-button" (click)="goToLogin()">Go to login page</h5>
+        </div>
+    </div>
+</div>

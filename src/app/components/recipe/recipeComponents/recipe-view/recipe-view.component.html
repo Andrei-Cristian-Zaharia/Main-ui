@@ -52,5 +52,6 @@
             <p [innerHTML]="recipe.howToPrepare" class="howToPrepare-text"></p>
         </div>
     </div>
-    <review-content [entity]="recipe" [category]="entityType.RECIPE" (rating)="updateRecipeRating($event)"></review-content>
+    <review-content [entity]="recipe" [category]="entityType.RECIPE" [reviewType]="reviewType.INSERT"
+                    (rating)="updateRecipeRating($event)"></review-content>
 </div>

@@ -30,6 +30,10 @@ export class RecipeService {
         return this.http.get<RecipeModel[]>(this.apiConfig.RECIPE_API + "/all/owner/username?name=" + name);
     }
 
+    countUserRecipes(email: string) {
+        return this.http.get<number>(this.apiConfig.RECIPE_API + "/countUserRecipes?email=" + email);
+    }
+
     createNewRecipe(recipe) {
         return this.http.post(this.apiConfig.RECIPE_API, recipe, this.getOptions());
     }

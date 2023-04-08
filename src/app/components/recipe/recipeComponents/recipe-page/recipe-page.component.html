@@ -48,6 +48,7 @@
                 <p [innerHTML]="recipe.howToPrepare" class="howToPrepare-text"></p>
             </div>
         </div>
-        <review-content [entity]="recipe" [category]="entityType.RECIPE" (rating)="recipe.rating"></review-content>
+        <review-content [entity]="recipe" [category]="entityType.RECIPE" [reviewType]="reviewType.INSERT"
+                        (rating)="recipe.rating"></review-content>
     </div>
 </div>

@@ -1,32 +1,23 @@
 .recipe-view-dialog-header {
     height: 30px;
     width: 100%;
-
-    img {
-        height: auto;
-        width: auto;
-        max-height: 25vw;
-        max-width: 35vw;
-        object-fit: fill;
-        object-position: center;
-        border-radius: 5px;
-        display: block;
-        margin: 0 auto;
-    }
 }
 
 .summary-container {
     display: flex;
 
     .summary-image {
-        height: auto;
-        width: auto;
-        max-height: 25vw;
-        max-width: 35vw;
-        object-fit: fill;
-        border-radius: 5px;
-        display: block;
-        margin-left: 70px;
+        img {
+            height: auto;
+            width: auto;
+            max-height: 25vw;
+            max-width: 35vw;
+            object-fit: fill;
+            object-position: center;
+            border-radius: 5px;
+            display: block;
+            margin: 0 auto 0 100px;
+        }
     }
 }
 
@@ -74,6 +65,18 @@
 
         .howToPrepare-text {
             margin-top: 15px;
+
+            img {
+                height: auto;
+                width: auto;
+                max-height: 25vw;
+                max-width: 35vw;
+                object-fit: fill;
+                object-position: center;
+                border-radius: 5px;
+                display: block;
+                margin: 0 auto;
+            }
         }
     }
 }

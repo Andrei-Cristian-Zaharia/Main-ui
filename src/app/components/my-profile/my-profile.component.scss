@@ -1,0 +1,166 @@
+.my-profile-container {
+    //background-image: url('../../../assets/Background_M.jpg');
+    height: 100vh;
+    width: 100%;
+    padding: 15px 5% 20px 5%;
+}
+
+.profile-details-container {
+    height: 220px;
+    width: 100%;
+    margin: 0 auto;
+    background: rgb(255, 247, 233);
+    border-radius: 10px;
+    display: flex;
+
+    img {
+        position: relative;
+        left: 20px;
+        top: 10%;
+        width: auto;
+        height: 80%;
+    }
+
+    .profile-details-header {
+        display: flex;
+
+        .profile-details-header-username {
+            display: none;
+        }
+    }
+
+    .profile-info-container {
+        position: relative;
+        width: 100%;
+        padding: 20px;
+        left: 30px;
+
+        .profile-info-container-username {
+            text-align: center;
+            display: block;
+        }
+
+        .profile-info {
+            display: flex;
+            justify-items: center;
+            justify-content: space-evenly;
+
+            ::ng-deep .p-inputtext {
+                text-align: center;
+            }
+        }
+
+        .profile-general-info {
+            padding: 15px 0 15px 0;
+            display: flex;
+            justify-items: center;
+
+            hr {
+                border:         none;
+                border-left:    1px solid hsla(200, 10%, 50%,100);
+                height:         auto;
+                width:          1px;
+            }
+
+            .go-to-favorites-button {
+                background-image: url('../../../assets/favorite.png');
+                background-size: contain;
+                background-repeat: no-repeat;
+                display: block;
+                height: 45px;
+                width: 45px;
+                margin: auto;
+            }
+
+            .profile-general-info-box {
+                display: grid;
+                text-align: center;
+                width: 90px;
+
+                img {
+                    padding-bottom: 8px;
+                    height: 60px;
+                    width: 60px;
+                }
+            }
+        }
+    }
+}
+
+.profile-recipes-container {
+    background: rgb(255, 247, 233);
+
+    border-radius: 10px;
+    margin-top: 20px;
+
+    .profile-recipes-container-title {
+        padding-top: 20px;
+    }
+}
+
+.profile-reviews-container {
+    background: rgb(255, 247, 233);
+    padding: 0 20px 0 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+//@media only screen and () {
+//
+//}
+
+@media only screen and (max-width: 768px) {
+
+    .profile-details-container {
+        display: block;
+        height: auto;
+        width: 95%;
+
+        img {
+            left: 10px;
+            top: 10px;
+            width: 20%;
+        }
+
+        .profile-details-header {
+            display: flex;
+
+            .profile-details-header-username {
+                width: 100%;
+                display: flex;
+                padding-top: 20px;
+                padding-left: 30px;
+                align-items: center;
+                justify-content: center;
+                font-size: 25px;
+                inline-size: 60%;
+                overflow-wrap: break-word;
+            }
+        }
+
+        .profile-info-container {
+            left: 0;
+
+            .profile-info-container-username {
+                display: none;
+            }
+
+            .profile-general-info {
+                .go-to-favorites-button {
+                    display: none;
+                }
+
+                .profile-general-info-box {
+                    font-size: 13px;
+
+                    img {
+                        padding-bottom: 10px;
+                        margin-left: 6px;
+                        height: 55px;
+                        width: 50px;
+                    }
+                }
+            }
+        }
+    }
+}

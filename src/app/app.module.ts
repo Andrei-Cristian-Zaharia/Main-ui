@@ -43,9 +43,10 @@ import {NgxQrcodeStylingModule} from "ngx-qrcode-styling";
 import {PasswordModule} from "primeng/password";
 import { MyProfileComponent } from './components/my-profile/my-profile.component';
 import { RecipesListComponent } from './components/utils/recipes-list/recipes-list.component';
-// import { RegisterComponent } from './components/register/register.component';
+import { RegisterComponent } from './components/register/register.component';
 import { ToastModule } from 'primeng/toast';
 import {InputSwitchModule} from "primeng/inputswitch";
+import { ProfileRecipesComponent } from './components/utils/profile-recipes/profile-recipes.component';
 
 @NgModule({
     declarations: [
@@ -68,7 +69,8 @@ import {InputSwitchModule} from "primeng/inputswitch";
         ReviewContentComponent,
         MyProfileComponent,
         RecipesListComponent,
-        // RegisterComponent
+        RegisterComponent,
+        ProfileRecipesComponent
     ],
     imports: [
         BrowserModule,

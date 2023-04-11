@@ -1,17 +1,45 @@
 <div class="recipes-container">
     <div class="recipe-card" *ngFor="let recipe of recipes">
-        <p-card [style]="{width: width + 'rem', height: height + 'rem'}">
+        <p-card [ngStyle]="{ display: 'block', width: width + 'rem', height: height + 'rem' }">
             <ng-template pTemplate="header">
                 <div class="recipe-card-image-container">
-                    <img alt="Card" src="{{ recipe.imageAddress }}" class="image-card-header"
-                         [style]="{height: headerSize + 'rem'}">
-                    <div class="recipe-card-hover-name-box" [style]="{height: headerSize + 'rem'}">
+                    <img alt="Card" src="{{ recipe.imageAddress }}" class="image-card-header" (click)="showViewRecipeDialog(recipe)"
+                         [style]="{ height: headerSize + 'rem' }">
+                    <div class="recipe-card-hover-name-box" (click)="showViewRecipeDialog(recipe)"
+                         [style]="{ height: headerSize + 'rem' }">
                         <p class="recipe-card-hover-name">{{ recipe.name }}</p>
                     </div>
                 </div>
             </ng-template>
-            <div class="recipe-edit-button">Edit</div>
-            <h4 class="recipe-mobile-name">{{ recipe.name }}</h4>
+            <div *ngIf="type === 'EDIT'">
+                <div class="recipe-edit-button" (click)="showCreateRecipeDialog(recipe)">Edit</div>
+                <h4 class="recipe-mobile-name">{{ recipe.name }}</h4>
+            </div>
+            <div class="recipe-view-container" *ngIf="type === 'VIEW'">
+                <save-button [recipe]="recipe" (outRecipe)="updateUserSaveList($event)"/>
+                <time-display [value]="recipe.time"/>
+                <rate style="margin-top: 4px" [type]="rateType.difficulty" [value]="recipe.difficulty"/>
+            </div>
         </p-card>
     </div>
+</div>
+
+<p-dialog [(visible)]="viewRecipeDialog"
+          [style]="{width: '65vw', height: '50vw'}" [showHeader]="false"
+          [baseZIndex]="10000" [draggable]="false" [resizable]="false" [dismissableMask]="true" [modal]="true"
+          [closable]="true">
+    <app-recipe-view [recipe]="selectedRecipe"></app-recipe-view>
+</p-dialog>
+
+<div>
+    <p-dialog [(visible)]="createRecipeDialog"
+              [style]="{width: '60vw'}" [showHeader]="false"
+              [baseZIndex]="10000" [draggable]="false" [resizable]="false" [dismissableMask]="true" [modal]="true"
+              [closable]="true">
+        <app-create-recipe *ngIf="createRecipeDialog"
+                           [username]="user.username"
+                           [recipe]="selectedRecipe"
+                           [type]="'EDIT'">
+        </app-create-recipe>
+    </p-dialog>
 </div>

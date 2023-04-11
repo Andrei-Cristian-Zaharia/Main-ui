@@ -4,14 +4,11 @@ import {RecipeModel} from "../../models/recipe.model";
 import {IngredientService} from "../../services/ingredient.service";
 import {BasicIngredientModel} from "../../models/basicIngredient.model";
 import {IngredientsByCategoryModel} from "../../models/ingredientsByCategory.model";
-import {EntityTypeEnum} from "../../enums/entityType.enum";
 import {RateTypeEnum} from "../../enums/rateType.enum";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {ActivatedRoute, Router} from "@angular/router";
 import {PersonService} from "../../services/person.service";
-import {Observable} from "rxjs";
 import {PersonBasicInfoModel} from "../../models/personBasicInfo.model";
-import {AuthService} from "../../services/auth.service";
 import {CookieService} from "ngx-cookie-service";
 
 @Component({
@@ -28,7 +25,6 @@ export class RecipeComponent implements OnInit {
     recipes: RecipeModel[];
     ingredients: IngredientsByCategoryModel;
     filteredIngredients: IngredientsByCategoryModel;
-    images: string[] = [];
 
     searchIngredient: string = "";
     searchCategory: string = "";
@@ -39,9 +35,6 @@ export class RecipeComponent implements OnInit {
     chooseIngredients: BasicIngredientModel[] = new Array<BasicIngredientModel>;
     selectedIngredients: BasicIngredientModel[] = new Array<BasicIngredientModel>;
     selectedIngredientsNames: string[] = new Array<string>;
-
-    viewRecipeDialog: boolean;
-    selectedRecipe: RecipeModel;
 
     // search fields
     filterRating: number = 0;
@@ -164,6 +157,10 @@ export class RecipeComponent implements OnInit {
                 this.showFavorites = true;
                 this.getRecipes();
             }
+
+            console.log(this.user != null);
+            console.log(this.activatedRoute.snapshot.queryParams['favorites'])
+            console.log(params.get('favorites') === 'show')
         })
     }
 
@@ -204,6 +201,8 @@ export class RecipeComponent implements OnInit {
                 this.isLoaded = true;
             })
         }
+
+        console.log(this.recipes)
     }
 
     refreshIngredients(): void {
@@ -259,27 +258,6 @@ export class RecipeComponent implements OnInit {
         this.showIngredientList = !this.showIngredientList;
     }
 
-    showViewRecipeDialog(recipe) {
-        if (this.isMobile) {
-            this.router.navigateByUrl('recipe?name=' + recipe.name);
-            return;
-        }
-
-        this.selectedRecipe = recipe;
-
-        recipe.description = recipe.description.replaceAll('\n', '<br>');
-        recipe.howToPrepare = recipe.howToPrepare.replaceAll('\n', '<br>');
-
-        let imageWithClass = '<img class="view-photo"';
-
-        recipe.description = recipe.description.replaceAll(
-            '<img',
-            imageWithClass
-        ).replaceAll("\\/", '');
-
-        this.viewRecipeDialog = true;
-    }
-
     changeSliderValue() {
         this.sliderText = "";
 
@@ -306,14 +284,6 @@ export class RecipeComponent implements OnInit {
         }
 
         this.refreshRecipes();
-    }
-
-    addFavorite(recipe: RecipeModel) {
-        this.recipeService.addFavorite(recipe.id, this.user.id).subscribe(data => this.refreshFavoriteNames());
-    }
-
-    removeFavorite(recipe: RecipeModel) {
-        this.recipeService.removeFavorite(recipe.id, this.user.id).subscribe(data => this.refreshFavoriteNames());
     }
 
     goToRecipes() {

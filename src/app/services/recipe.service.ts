@@ -14,10 +14,6 @@ export class RecipeService {
         private authService: AuthService
     ) { }
 
-    getRecipes() {
-        return this.http.get<RecipeModel[]>(this.apiConfig.RECIPE_API + "/all");
-    }
-
     getRecipesFilteredByIngredients(body) {
         return this.http.post<RecipeModel[]>(this.apiConfig.RECIPE_API + "/all/filtered", body);
     }

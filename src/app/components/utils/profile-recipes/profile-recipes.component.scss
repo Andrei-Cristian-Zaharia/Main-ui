@@ -36,6 +36,11 @@
         padding: 4px;
     }
 
+    .recipe-view-container {
+        display: flex;
+        justify-content: space-evenly;
+    }
+
     .recipe-card-image-container {
         position: relative;
 
@@ -47,6 +52,7 @@
             height: 140px;
             top: 0;
             position: absolute;
+            cursor: pointer;
             border-radius: 10px 10px 0 0;
             color: white;
 

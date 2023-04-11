@@ -1,4 +1,4 @@
-import {Component, HostListener, Input, OnInit} from '@angular/core';
+import {Component, HostListener, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {AddIngredientModel} from "../../../../models/addIngredientModel.model";
 import {IngredientsByCategoryModel} from "../../../../models/ingredientsByCategory.model";
 import {IngredientService} from "../../../../services/ingredient.service";
@@ -7,6 +7,8 @@ import {RecipeService} from "../../../../services/recipe.service";
 import {IngredintsDisplayModel} from "../../../../models/ingredintsDisplay.model";
 import {RateTypeEnum} from "../../../../enums/rateType.enum";
 import * as events from "events";
+import {RecipeModel} from "../../../../models/recipe.model";
+import {IngredientModel} from "../../../../models/ingredient.model";
 
 @Component({
     selector: 'app-create-recipe',
@@ -17,6 +19,12 @@ export class CreateRecipeComponent implements OnInit {
 
     @Input()
     username: string;
+
+    @Input()
+    type: string;
+
+    @Input()
+    recipe: RecipeModel;
 
     ingredients: IngredintsDisplayModel[] = new Array<IngredintsDisplayModel>;
     measurements: string[];
@@ -65,13 +73,25 @@ export class CreateRecipeComponent implements OnInit {
             this.measurements = data;
         })
 
+        this.initDialog();
+
         this.addIngredient();
     }
 
-    assingTime(value: string) {
-        console.log("Value", value);
-        this.prepareTime = value;
-        console.log("prep", this.prepareTime);
+    mapIngredientToAddIngredient(ingredients: IngredientModel[]): AddIngredientModel[] {
+        let result = new Array<AddIngredientModel>;
+
+        ingredients.forEach(ing => {
+            let item = new AddIngredientModel();
+            let name = new IngredintsDisplayModel();
+            name.name = ing.name;
+            item.ingredientName = name;
+            item.measurementUnit = ing.measurementUnit;
+
+            result.push(item);
+        })
+
+        return result;
     }
 
     updateDifficultyFilter(rate: number) {
@@ -207,5 +227,26 @@ export class CreateRecipeComponent implements OnInit {
 
     deleteIngredient(index: number) {
         this.addedIngredients.splice(index, 1);
+    }
+
+    initDialog(): void {
+        if (this.type == 'EDIT') {
+            console.log(this.recipe)
+            this.recipeName = this.recipe.name;
+            this.description = this.recipe.description;
+            this.difficulty = this.recipe.difficulty;
+            this.spiciness = this.recipe.spiciness;
+            this.prepareTime = this.recipe.time.toString();
+            this.isVegan = this.recipe.vegan;
+            this.howToPrepare = this.recipe.howToPrepare;
+            this.imageLink = this.recipe.imageAddress;
+            this.addedIngredients = this.mapIngredientToAddIngredient(this.recipe.ingredientList);
+
+            console.log("EDITING")
+
+            return;
+        }
+
+        console.log("Something else")
     }
 }

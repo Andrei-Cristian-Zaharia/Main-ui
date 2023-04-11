@@ -42,36 +42,36 @@
     }
 }
 
-.recipes-container {
-    padding: 10px;
-    justify-content: center;
-    display: inline;
-    overflow: hidden;
+//.recipes-container {
+//    padding: 10px;
+//    justify-content: center;
+//    display: inline;
+//    overflow: hidden;
+//
+//    ::ng-deep .p-card {
+//        margin-left: 40px;
+//        height: 300px;
+//        border-radius: 10px 10px 20px 20px;
+//        margin-bottom: 20px;
+//
+//        .p-card-body {
+//            padding-top: 20px;
+//            padding-left: 1px;
+//            padding-right: 1px;
+//        }
+//
+//        .p-card-content {
+//            padding: 1px;
+//        }
+//    }
+//}
 
-    ::ng-deep .p-card {
-        margin-left: 40px;
-        height: 300px;
-        border-radius: 10px 10px 20px 20px;
-        margin-bottom: 20px;
-
-        .p-card-body {
-            padding-top: 20px;
-            padding-left: 1px;
-            padding-right: 1px;
-        }
-
-        .p-card-content {
-            padding: 1px;
-        }
-    }
-}
-
-.image-card-header {
-    height: 220px;
-    object-fit: cover;
-    z-index: 0;
-    border-radius: 10px 10px 0 0;
-}
+//.image-card-header {
+//    height: 220px;
+//    object-fit: cover;
+//    z-index: 0;
+//    border-radius: 10px 10px 0 0;
+//}
 
 .showFavoritesButton {
     background-image: url('../../../assets/favorite.png');
@@ -87,54 +87,23 @@
     width: 45px;
 }
 
-.addToFavorite {
-    background-image: url('../../../assets/unfavorite.png');
-    transition: background-image .2s ease-out .2s;
-    background-size: contain;
-    height: 45px;
-    width: 45px;
-}
+//.recipe-details-container {
+//    position: relative;
+//    display: flex;
+//    justify-content: space-around;
+//    align-items: center;
+//    padding: 10px;
+//}
 
-.addToFavorite:hover {
-    background-image: url('../../../assets/favorite.png');
-    transition: background-image .2s ease-out .2s;
-    height: 45px;
-    width: 45px;
-}
+//.rate-difficulty {
+//    margin-left: 40px;
+//}
 
-.removeFromFavorite {
-    background-image: url('../../../assets/favorite.png');
-    transition: background-image .2s ease-out .2s;
-    background-size: contain;
-    height: 45px;
-    width: 45px;
-}
-
-.removeFromFavorite:hover {
-    background-image: url('../../../assets/unfavorite.png');
-    transition: background-image .2s ease-out .2s;
-    height: 45px;
-    width: 45px;
-}
-
-
-.recipe-details-container {
-    position: relative;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 10px;
-}
-
-.rate-difficulty {
-    margin-left: 40px;
-}
-
-.difficulty-container {
-    float: right;
-    margin-top: 0;
-    margin-bottom: 2px;
-}
+//.difficulty-container {
+//    float: right;
+//    margin-top: 0;
+//    margin-bottom: 2px;
+//}
 
 .ingredient-container {
     height: 310px;
@@ -163,33 +132,33 @@
     }
 }
 
-.recipe-card {
-    margin-top: 40px;
-    margin-left: 20px;
-    margin-right: 20px;
+//.recipe-card {
+//    margin-top: 40px;
+//    margin-left: 20px;
+//    margin-right: 20px;
+//
+//    .p-card {
+//        position: relative;
+//    }
+//
+//    .p-card .p-card-content {
+//        padding: 0;
+//    }
+//
+//    .p-card .p-card-body {
+//        padding: 1px;
+//    }
+//}
 
-    .p-card {
-        position: relative;
-    }
-
-    .p-card .p-card-content {
-        padding: 0;
-    }
-
-    .p-card .p-card-body {
-        padding: 1px;
-    }
-}
-
-.veganMark {
-    background: url("../../../assets/vegan.png");
-    background-size: contain;
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    width: 55px;
-    height: 55px;
-}
+//.veganMark {
+//    background: url("../../../assets/vegan.png");
+//    background-size: contain;
+//    position: absolute;
+//    top: 20px;
+//    left: 20px;
+//    width: 55px;
+//    height: 55px;
+//}
 
 .ingredient-card {
     width: 250px;
@@ -305,10 +274,10 @@
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */
 
-    .recipe-card {
-        margin-left: 0;
-        margin-right: 0;
-    }
+    //.recipe-card {
+    //    margin-left: 0;
+    //    margin-right: 0;
+    //}
 
     .banner {
         padding-bottom: 18px;
@@ -324,29 +293,29 @@
         }
     }
 
-    .time-component {
-        margin-left: 15px;
-
-        .time-image {
-            height: 30px;
-            width: 30px;
-        }
-
-        .time-text {
-            font-size: 12px;
-            margin-left: 10px;
-            margin-top: 7px;
-        }
-    }
+    //.time-component {
+    //    margin-left: 15px;
+    //
+    //    .time-image {
+    //        height: 30px;
+    //        width: 30px;
+    //    }
+    //
+    //    .time-text {
+    //        font-size: 12px;
+    //        margin-left: 10px;
+    //        margin-top: 7px;
+    //    }
+    //}
 
     .save-button {
         bottom: 210px;
         right: 8px;
     }
 
-    .recipes-container {
-        ::ng-deep .p-card {
-            margin-left: 0;
-        }
-    }
+    //.recipes-container {
+    //    ::ng-deep .p-card {
+    //        margin-left: 0;
+    //    }
+    //}
 }

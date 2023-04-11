@@ -1,0 +1,6 @@
+<div *ngIf="recipe.saved === false" class="addToFavorite" tooltipPosition="top"
+     (click)="emitAddRecipe(recipe.id)" pTooltip="Save to favorites">
+</div>
+<div *ngIf="recipe.saved === true" class="removeFromFavorite" tooltipPosition="top"
+     (click)="emitRemoveRecipe(recipe.id)" pTooltip="Remove from favorites">
+</div>

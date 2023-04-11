@@ -45,12 +45,12 @@
 
     <h2>Description</h2>
     <textarea class="insert-distance" rows="1" pInputTextarea [autoResize]="true"
-              [(ngModel)]="description" id="descriptionText" (keydown)="formatText($event)"
+              [(ngModel)]="(type === 'EDIT' && recipe != null) ? recipe.description : description" id="descriptionText" (keydown)="formatText($event)"
               (keyup)="clearPressedKeys()"></textarea>
 
     <h2>How to prepare</h2>
     <textarea class="insert-distance" rows="1" pInputTextarea [autoResize]="true"
-              [(ngModel)]="howToPrepare" id="howToPrepareText" (keydown)="formatText($event)"
+              [(ngModel)]="(type === 'EDIT' && recipe != null) ? recipe.howToPrepare : howToPrepare" id="howToPrepareText" (keydown)="formatText($event)"
               (keyup)="clearPressedKeys()"></textarea>
 
     <h2>Link to image</h2>

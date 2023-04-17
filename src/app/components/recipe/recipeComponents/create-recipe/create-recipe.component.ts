@@ -1,4 +1,4 @@
-import {Component, HostListener, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {AddIngredientModel} from "../../../../models/addIngredientModel.model";
 import {IngredientsByCategoryModel} from "../../../../models/ingredientsByCategory.model";
 import {IngredientService} from "../../../../services/ingredient.service";
@@ -9,6 +9,7 @@ import {RateTypeEnum} from "../../../../enums/rateType.enum";
 import * as events from "events";
 import {RecipeModel} from "../../../../models/recipe.model";
 import {IngredientModel} from "../../../../models/ingredient.model";
+import {DynamicDialogRef} from "primeng/dynamicdialog";
 
 @Component({
     selector: 'app-create-recipe',
@@ -25,6 +26,9 @@ export class CreateRecipeComponent implements OnInit {
 
     @Input()
     recipe: RecipeModel;
+
+    @Output()
+    closeDialog = new EventEmitter<boolean>();
 
     ingredients: IngredintsDisplayModel[] = new Array<IngredintsDisplayModel>;
     measurements: string[];
@@ -75,7 +79,9 @@ export class CreateRecipeComponent implements OnInit {
 
         this.initDialog();
 
-        this.addIngredient();
+        if (this.type != 'EDIT') {
+            this.addIngredient();
+        }
     }
 
     mapIngredientToAddIngredient(ingredients: IngredientModel[]): AddIngredientModel[] {
@@ -120,17 +126,15 @@ export class CreateRecipeComponent implements OnInit {
 
     clearPressedKeys() {
         this.keysPressed = new Map();
-        console.log(this.keysPressed)
     }
 
-    formatText(event) {
+    formatText(event)  {
         let target = event.target || event.srcElement;
         const textArea = document.getElementById(target.id) as HTMLTextAreaElement;
         let startPos = textArea.selectionStart;
         let endPos = textArea.selectionEnd;
 
         this.keysPressed[event.key] = true;
-        console.log(textArea.value);
 
         if (event.key === "i" && this.keysPressed['Control']) {
             textArea.value = textArea.value.substring(0, startPos) + this.imageComponent;
@@ -185,6 +189,7 @@ export class CreateRecipeComponent implements OnInit {
         let ingredientMeasurement = this.addedIngredients.map(element => element.measurementUnit);
 
         let recipe = {
+            id: null,
             ownerName: this.username,
             name: this.recipeName,
             description: this.description,
@@ -199,11 +204,13 @@ export class CreateRecipeComponent implements OnInit {
             ingredientMeasurements: ingredientMeasurement
         }
 
-
-        console.log(this.description);
+        if (this.recipe != null) {
+            recipe.id = this.recipe.id;
+        }
 
         this.recipeService.createNewRecipe(recipe).subscribe(result => {
                 console.log(result);
+                this.closeModal();
                 this.resetInputs();
             },
             () => console.log("An error has occurred while trying to create a new recipe."));
@@ -230,23 +237,20 @@ export class CreateRecipeComponent implements OnInit {
     }
 
     initDialog(): void {
-        if (this.type == 'EDIT') {
-            console.log(this.recipe)
+        if (this.type === 'EDIT') {
             this.recipeName = this.recipe.name;
-            this.description = this.recipe.description;
+            this.description = this.recipe.description.replaceAll('<br>', '\n');
             this.difficulty = this.recipe.difficulty;
             this.spiciness = this.recipe.spiciness;
             this.prepareTime = this.recipe.time.toString();
             this.isVegan = this.recipe.vegan;
-            this.howToPrepare = this.recipe.howToPrepare;
+            this.howToPrepare = this.recipe.howToPrepare.replaceAll('<br>', '\n');
             this.imageLink = this.recipe.imageAddress;
             this.addedIngredients = this.mapIngredientToAddIngredient(this.recipe.ingredientList);
-
-            console.log("EDITING")
-
-            return;
         }
+    }
 
-        console.log("Something else")
+    closeModal() {
+        this.closeDialog.emit(true);
     }
 }

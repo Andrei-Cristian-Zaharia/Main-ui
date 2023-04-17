@@ -76,18 +76,51 @@
         }
     }
 
-    .recipe-edit-button {
-        width: 100px;
-        height: 40px;
-        margin: auto;
+    .recipe-buttons-container {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        border-radius: 5px;
-        font-size: 20px;
-        background: #9e754e;
-        color: white;
+
+        .recipe-edit-button {
+            width: 100px;
+            height: 40px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 20px;
+            background: #9e754e;
+            color: white;
+        }
+
+        .recipe-edit-button:hover {
+            background: #b98c62;
+            transition: background-color .15s ease-in-out .15s;
+        }
+
+        .recipe-delete-button {
+            width: 60px;
+            height: 40px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 20px;
+            background: #c24653;
+            color: white;
+
+            img {
+                width: 30px;
+                height: 30px;
+            }
+        }
+
+        .recipe-delete-button:hover {
+            background: #d75e6b;
+            transition: background-color .15s ease-in-out .15s;
+        }
     }
 
     .recipe-edit-button:hover {
@@ -106,14 +139,20 @@
 }
 
 @media only screen and (max-width: 768px) {
-    .recipe-card .recipe-edit-button {
+    .recipe-card .recipe-buttons-container .recipe-edit-button {
         display: none;
     }
 
-    .recipe-card .recipe-mobile-name {
-        inline-size: 100%;
-        overflow-wrap: break-word;
-        text-align: center;
-        display: block;
+    .recipe-card .recipe-buttons-container .recipe-delete-button {
+        display: none;
+    }
+
+    .recipe-card {
+        .recipe-mobile-name {
+            inline-size: 100%;
+            overflow-wrap: break-word;
+            text-align: center;
+            display: block;
+        }
     }
 }

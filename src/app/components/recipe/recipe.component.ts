@@ -14,8 +14,7 @@ import {CookieService} from "ngx-cookie-service";
 @Component({
     selector: 'app-recipe',
     templateUrl: './recipe.component.html',
-    styleUrls: ['./recipe.component.scss'],
-    encapsulation: ViewEncapsulation.None,
+    styleUrls: ['./recipe.component.scss']
 })
 export class RecipeComponent implements OnInit {
     isLoaded = false;

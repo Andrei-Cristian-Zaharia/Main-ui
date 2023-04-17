@@ -29,7 +29,8 @@
                         <p-dropdown [options]="measurements" [editable]="true" placeholder="Measurement"
                                     [showClear]="true" [(ngModel)]="ing.measurementUnit" [autoDisplayFirst]="false"
                                     class="space"></p-dropdown>
-                        <p-dropdown class="item" [options]="ingredients" placeholder="Select ingredient"
+                        <p-dropdown class="item" [options]="ingredients"
+                                    placeholder="{{ ing.ingredientName != null ? ing.ingredientName.name : 'Select ingredient' }}"
                                     optionLabel="name" [filter]="true" filterBy="name"
                                     [showClear]="true" [(ngModel)]="ing.ingredientName">
                         </p-dropdown>
@@ -45,18 +46,21 @@
 
     <h2>Description</h2>
     <textarea class="insert-distance" rows="1" pInputTextarea [autoResize]="true"
-              [(ngModel)]="(type === 'EDIT' && recipe != null) ? recipe.description : description" id="descriptionText" (keydown)="formatText($event)"
+              [(ngModel)]="description" id="descriptionText" (keydown)="formatText($event)"
               (keyup)="clearPressedKeys()"></textarea>
 
     <h2>How to prepare</h2>
     <textarea class="insert-distance" rows="1" pInputTextarea [autoResize]="true"
-              [(ngModel)]="(type === 'EDIT' && recipe != null) ? recipe.howToPrepare : howToPrepare" id="howToPrepareText" (keydown)="formatText($event)"
+              [(ngModel)]="howToPrepare" id="howToPrepareText" (keydown)="formatText($event)"
               (keyup)="clearPressedKeys()"></textarea>
 
     <h2>Link to image</h2>
     <textarea class=" insert-distance" rows="1" pInputTextarea [autoResize]="true"
               [(ngModel)]="imageLink"></textarea>
 </div>
-<div>
+<div *ngIf="type != 'EDIT'">
     <button class="add-button" pButton type="button" label="Create" (click)="createRecipe()"></button>
+</div>
+<div *ngIf="type === 'EDIT'">
+    <button class="add-button" pButton type="button" label="Save" (click)="createRecipe()"></button>
 </div>

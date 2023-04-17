@@ -6,9 +6,9 @@
             class="ingredients-button"></button>
 </div>
 
-<div *ngIf="showIngredientList" class="ingredient-container message">
+<div *ngIf="showIngredientList" class="ingredient-container">
     <div class="search-card">
-        <p-card class="card-container search-card">
+        <p-card class="search-card">
             <ng-template pTemplate="header">
                 <h2 style="text-align: center; padding-top: 20px;">Search</h2>
             </ng-template>
@@ -31,31 +31,28 @@
             </div>
         </p-card>
     </div>
-    <div *ngFor="let ingredient of filteredIngredients.categoryIngredients">
-        <div class="ingredient-card">
-            <p-card class="card-container ingredient-card">
-                <ng-template pTemplate="header">
-                    <h2 style="text-align: center; padding-top: 15px;">{{ ingredient.categoryName | titlecase }}</h2>
-                </ng-template>
-                <div class="select-ingredient-container">
-                    <div *ngFor="let ing of ingredient.ingredients; let i = index" class="select-ingredient">
-                        <div *ngIf="i < 6; else show_list_button">
-                            <button pButton pRipple type="button" label="{{ ing.name }}"
-                                    [ngClass]="{'selected': ing.selected == true, 'unselected': ing.selected == false}"
-                                    class="p-button-rounded" (click)="toggleIngredientSelection(ing)"></button>
+    <div class="ingredient-card" *ngFor="let ingredient of filteredIngredients.categoryIngredients">
+        <p-card>
+            <ng-template pTemplate="header">
+                <h2 class="ingredient-card-title">{{ ingredient.categoryName | titlecase }}</h2>
+            </ng-template>
+            <div class="select-ingredient-container">
+                <div *ngFor="let ing of ingredient.ingredients; let i = index" class="select-ingredient">
+                    <div *ngIf="i < 14; else show_list_button">
+                        <div [ngClass]="{'selected': ing.selected == true, 'unselected': ing.selected == false}"
+                             class="select-ingredient-container-element" (click)="toggleIngredientSelection(ing)">
+                            {{ ing.name }}
                         </div>
-                        <ng-template #show_list_button>
-                            <div *ngIf="i === 6">
-                                <button pButton pRipple type="button"
-                                        label="Show other {{ ingredient.ingredients.length - 6 }}"
-                                        (click)="showSelectedIngredientCategoryDialog(ingredient.categoryName)"
-                                        class="p-button-rounded"></button>
-                            </div>
-                        </ng-template>
                     </div>
+                    <ng-template #show_list_button>
+                        <div *ngIf="i === 14" class="select-ingredient-container-element"
+                             (click)="showSelectedIngredientCategoryDialog(ingredient.categoryName)">
+                            Show other {{ ingredient.ingredients.length - 14 }}
+                        </div>
+                    </ng-template>
                 </div>
-            </p-card>
-        </div>
+            </div>
+        </p-card>
     </div>
 </div>
 
@@ -77,7 +74,7 @@
 </div>
 
 <div class="filterContainer" *ngIf="!isMobile">
-    <div *ngIf="user != null && showFavorites === true"  class="showFavoritesButton" tooltipPosition="top"
+    <div *ngIf="user != null && showFavorites === true" class="showFavoritesButton" tooltipPosition="top"
          pTooltip="Show favorite recipes" (click)="goToFavouriteRecipes()"></div>
     <div *ngIf="user != null && showFavorites === false" class="hideFavoritesButton" tooltipPosition="top"
          pTooltip="Show all recipes" (click)="goToRecipes()"></div>

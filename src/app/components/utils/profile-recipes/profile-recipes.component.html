@@ -3,7 +3,8 @@
         <p-card [ngStyle]="{ display: 'block', width: width + 'rem', height: height + 'rem' }">
             <ng-template pTemplate="header">
                 <div class="recipe-card-image-container">
-                    <img alt="Card" src="{{ recipe.imageAddress }}" class="image-card-header" (click)="showViewRecipeDialog(recipe)"
+                    <img alt="Card" src="{{ recipe.imageAddress }}" class="image-card-header"
+                         (click)="showViewRecipeDialog(recipe)"
                          [style]="{ height: headerSize + 'rem' }">
                     <div class="recipe-card-hover-name-box" (click)="showViewRecipeDialog(recipe)"
                          [style]="{ height: headerSize + 'rem' }">
@@ -11,8 +12,11 @@
                     </div>
                 </div>
             </ng-template>
-            <div *ngIf="type === 'EDIT'">
+            <div class="recipe-buttons-container" *ngIf="type === 'EDIT'">
                 <div class="recipe-edit-button" (click)="showCreateRecipeDialog(recipe)">Edit</div>
+                <div class="recipe-delete-button" (click)="showCreateRecipeDialog(recipe)">
+                    <img src="assets/delete.png" alt="">
+                </div>
                 <h4 class="recipe-mobile-name">{{ recipe.name }}</h4>
             </div>
             <div class="recipe-view-container" *ngIf="type === 'VIEW'">
@@ -39,7 +43,8 @@
         <app-create-recipe *ngIf="createRecipeDialog"
                            [username]="user.username"
                            [recipe]="selectedRecipe"
-                           [type]="'EDIT'">
+                           [type]="'EDIT'"
+                           (closeDialog)="hideCreateRecipeDialog()">
         </app-create-recipe>
     </p-dialog>
 </div>

@@ -2,7 +2,7 @@
     //background-image: url('../../../assets/Background_M.jpg');
     height: 100vh;
     width: 100%;
-    padding: 15px 5% 20px 5%;
+    padding: 15px 5% 15px 5%;
 }
 
 .profile-details-container {
@@ -56,10 +56,10 @@
             justify-items: center;
 
             hr {
-                border:         none;
-                border-left:    1px solid hsla(200, 10%, 50%,100);
-                height:         auto;
-                width:          1px;
+                border: none;
+                border-left: 1px solid hsla(200, 10%, 50%, 100);
+                height: auto;
+                width: 1px;
             }
 
             .go-to-favorites-button {
@@ -83,6 +83,41 @@
                     width: 60px;
                 }
             }
+        }
+    }
+}
+
+.profile-restaurant-container {
+    background: rgb(255, 247, 233);
+
+    border-radius: 10px;
+    margin-top: 20px;
+
+    .profile-restaurant-container-title {
+        padding-top: 20px;
+    }
+
+    .profile-restaurant {
+        padding: 20px;
+
+        .profile-restaurant-button {
+            width: 420px;
+            height: 80px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            justify-content: center;
+            cursor: pointer;
+            border-radius: 10px;
+            font-size: 20px;
+            background: #65b048;
+            color: white;
+        }
+
+        .profile-restaurant-button:hover {
+            background: #81cb65;
+            transition: background-color .15s ease-in-out .15s;
         }
     }
 }
@@ -162,6 +197,7 @@
         }
     }
 }
+
 @media only screen and (max-width: 768px) {
 
     .profile-details-container {
@@ -172,5 +208,11 @@
             top: 10px;
             width: 25%;
         }
+    }
+
+    .profile-restaurant-container .profile-restaurant .profile-restaurant-button {
+        width: 280px;
+        height: 80px;
+        font-size: 15px;
     }
 }

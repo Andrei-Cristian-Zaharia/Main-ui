@@ -21,8 +21,6 @@
     }
 }
 
-
-
 .recipe-description {
     margin-top: 25px;
     margin-bottom: 25px;
@@ -30,13 +28,25 @@
     .description-text {
         margin-top: 15px;
 
+        //img {
+        //    border-radius: 30px;
+        //    max-width: 40vw;
+        //    max-height: 20vw;
+        //    width: auto;
+        //    height: auto;
+        //    padding: 10px;
+        //}
+
         img {
-            border-radius: 30px;
-            max-width: 40vw;
-            max-height: 20vw;
-            width: auto;
             height: auto;
-            padding: 10px;
+            width: auto;
+            max-height: 25vw;
+            max-width: 35vw;
+            object-fit: fill;
+            object-position: center;
+            border-radius: 5px;
+            display: block;
+            margin: 0 auto;
         }
     }
 }

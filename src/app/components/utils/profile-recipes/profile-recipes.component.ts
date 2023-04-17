@@ -95,9 +95,9 @@ export class ProfileRecipesComponent implements OnInit {
             this.getCurrentUser();
         }
 
-        if (this.type == "VIEW") {
-            this.getCurrentUser();
-        }
+        // if (this.type == "VIEW") {
+        //     this.getCurrentUser();
+        // }
     }
 
     showViewRecipeDialog(recipe) {
@@ -158,5 +158,10 @@ export class ProfileRecipesComponent implements OnInit {
     showCreateRecipeDialog(recipe: RecipeModel) {
         this.selectedRecipe = recipe;
         this.createRecipeDialog = true;
+    }
+
+    hideCreateRecipeDialog() {
+        this.createRecipeDialog = false;
+        this.getRecipes();
     }
 }

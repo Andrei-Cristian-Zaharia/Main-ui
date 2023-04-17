@@ -107,27 +107,55 @@
 
 .ingredient-container {
     height: 310px;
-    display: flex;
-    flex-direction: row;
     padding-left: 20px;
     padding-right: 20px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    white-space: nowrap;
-}
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    overflow-y: auto;
 
-.search-card {
-    width: 300px;
-    margin-left: 20px;
+    .search-card {
+        width: 345px;
+        margin-left: 20px;
 
-    ::ng-deep .p-card {
+        ::ng-deep .p-card {
+            height: 270px;
+            border-radius: 5px;
 
-        height: 270px;
-        border-radius: 5px;
+            .p-card-body {
+                padding-top: 1px;
+                padding-left: 10px;
+            }
+        }
+    }
 
-        .p-card-body {
-            padding-top: 1px;
-            padding-left: 10px;
+    .ingredient-card {
+        width: 350px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        margin-left: 15px;
+
+        .ingredient-card-title {
+            text-align: center;
+            padding-top: 15px;
+        }
+
+        ::ng-deep .p-card{
+            //.p-card-header {
+            //    background: rgb(255, 247, 233);
+            //}
+
+            .p-card-body {
+                //background: rgb(255, 247, 233);
+                //border-bottom-right-radius: 10px;
+                //border-bottom-left-radius: 10px;
+                height: 230px;
+                padding: 5px;
+            }
+
+            .p-card-content {
+                padding: 0;
+            }
         }
     }
 }
@@ -160,27 +188,25 @@
 //    height: 55px;
 //}
 
-.ingredient-card {
-    width: 250px;
-    margin-left: 15px;
-
-    ::ng-deep .p-card {
-
-        height: 270px;
-        border-radius: 5px;
-
-        .p-card-body {
-            margin: auto;
-            padding-top: 1px;
-            padding-left: 0px;
-        }
-    }
-}
-
 .select-ingredient-container {
     padding: 0 0 5px 5px;
     display: flex;
+    justify-content: start;
     flex-wrap: wrap;
+
+    .select-ingredient-container-element {
+        cursor: pointer;
+        border-radius: 10px;
+        padding: 10px;
+        width: auto;
+        height: auto;
+        max-font-size: 15px;
+        font-size: 14px;
+        font-weight: bold;
+        text-align: center;
+        background: #9e754e;
+        color: white;
+    }
 
     .select-ingredient {
         font-size: 10px;

@@ -71,4 +71,12 @@ export class MyProfileComponent implements OnInit {
             this.averageRate = data;
         })
     }
+
+    createRestaurant() {
+
+    }
+
+    goToRestaurant() {
+
+    }
 }

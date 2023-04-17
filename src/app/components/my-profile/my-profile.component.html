@@ -23,7 +23,7 @@
                 <div class="profile-general-info-box">
                     <img src="assets/star.png" alt="">
                     <h4><i>Rating</i></h4>
-                    <h4>{{ averageRate }}</h4>
+                    <h4>{{ averageRate | number : '1.2-2' }}</h4>
                 </div>
                 <hr>
                 <div class="profile-general-info-box">
@@ -32,6 +32,21 @@
                     <h4>99</h4>
                 </div>
                 <hr>
+            </div>
+        </div>
+    </div>
+    <div class="profile-restaurant-container">
+        <h2 class="profile-restaurant-container-title">Restaurant</h2>
+        <div class="profile-restaurant">
+            <div class="profile-restaurant-button">
+                <div *ngIf="user.hasRestaurant" (click)="goToRestaurant()">
+                    <p>View your restaurant page</p>
+                    There you can choose to edit it.
+                </div>
+                <div *ngIf="!user.hasRestaurant" (click)="createRestaurant()">
+                    <p>Do you have a real life restaurant ?</p>
+                    Try create one here too by pressing this.
+                </div>
             </div>
         </div>
     </div>

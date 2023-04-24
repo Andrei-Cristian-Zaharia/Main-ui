@@ -49,6 +49,7 @@ import {InputSwitchModule} from "primeng/inputswitch";
 import { ProfileRecipesComponent } from './components/utils/profile-recipes/profile-recipes.component';
 import { TimeDisplayComponent } from './components/utils/time-display/time-display.component';
 import { SaveButtonComponent } from './components/utils/save-button/save-button.component';
+import { ProfileRestaurantComponent } from './components/utils/profile-restaurant/profile-restaurant.component';
 
 @NgModule({
     declarations: [
@@ -74,7 +75,8 @@ import { SaveButtonComponent } from './components/utils/save-button/save-button.
         RegisterComponent,
         ProfileRecipesComponent,
         TimeDisplayComponent,
-        SaveButtonComponent
+        SaveButtonComponent,
+        ProfileRestaurantComponent
     ],
     imports: [
         BrowserModule,

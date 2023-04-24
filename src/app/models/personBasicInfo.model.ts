@@ -1,7 +1,8 @@
-export class PersonBasicInfoModel {
+import {PersonModel} from "./person.model";
+
+export class PersonBasicInfoModel extends PersonModel{
+
     id: number;
-    username: string;
-    emailAddress: string;
     hasRestaurant: boolean;
     accountType: string;
 }

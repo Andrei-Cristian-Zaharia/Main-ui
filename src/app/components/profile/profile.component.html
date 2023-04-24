@@ -1,41 +1,53 @@
-<div class="page-container">
-    <div class="profile-details-container">
-        <img src="assets/person-icon.png" alt="" class="profile-icon">
-        <h1 class="user-name">{{ user.username }}</h1>
-    </div>
-    <div class="profile-restaurant-container" *ngIf="user.hasRestaurant; else noRestaurant">
-        <div class="profile-section-title">
-            <h2>Restaurant</h2>
+<div class="my-profile-container">
+    <div class="profile-details-container my-profile-container-component">
+        <div class="profile-details-header">
+            <img src="assets/person-icon.png" alt="">
+            <h1 class="profile-details-header-username">{{ user.username }}</h1>
         </div>
-        <p-splitter [style]="{'height': '600px'}" [panelSizes]="[65,35]" styleClass="mb-5">
-            <ng-template pTemplate>
-                <img class="left-panel-image" src="{{ restaurant.frontImage }}" alt="">
-            </ng-template>
-            <ng-template pTemplate>
-                <div class="right-panel-image">
-                    <h2>{{ restaurant.name }}</h2>
-                    <div class="profile-restaurant-rating">
-                        <rate [value]="4" [type]="rateType.rating"></rate>
-                    </div>
-                    <div class="profile-restaurant-address">
-                        <p class="profile-restaurant-title">Location of our restaurant:</p>
-                        {{ restaurant.address }}
-                    </div>
-                    <div class="profile-restaurant-details">
-                        <p class="profile-restaurant-title">Short description of our special place:</p>
-                        {{ restaurant.description }}
-                    </div>
-                    <div class="profile-restaurant-visit-button">
-                        <p-button label="Visit restaurant page" (onClick)="goToRestaurant(restaurant.name)"></p-button>
-                    </div>
+        <div class="profile-info-container">
+            <h1 class="profile-info-container-username">{{ user.username }}</h1>
+            <div class="profile-general-info">
+                <hr>
+                <div class="profile-general-info-box">
+                    <img src="assets/recipe-book.png" alt="">
+                    <h4><i>Recipes</i></h4>
+                    <h4>{{ recipesNumber }}</h4>
                 </div>
-            </ng-template>
-        </p-splitter>
-    </div>
-    <ng-template #noRestaurant>
-        <div class="profile-section-title">
-            <h2>Restaurant</h2>
-            <h4 class="subtitle-not-found">There is no restaurant to display.</h4>
+                <hr>
+                <div class="profile-general-info-box">
+                    <img src="assets/review.png" alt="">
+                    <h4><i>Reviews</i></h4>
+                    <h4>{{ reviewsNumber }}</h4>
+                </div>
+                <hr>
+                <div class="profile-general-info-box">
+                    <img src="assets/star.png" alt="">
+                    <h4><i>Rating</i></h4>
+                    <h4>{{ averageRate | number : '1.2-2' }}</h4>
+                </div>
+                <hr>
+                <div class="profile-general-info-box">
+                    <img src="assets/popularity.png" alt="">
+                    <h4><i>Popularity</i></h4>
+                    <h4>99</h4>
+                </div>
+                <hr>
+            </div>
         </div>
-    </ng-template>
+    </div>
+    <div class="my-profile-container-component">
+        <profile-restaurant [restaurant]="restaurant" [user]="user"></profile-restaurant>
+    </div>
+    <div class="profile-recipes-container my-profile-container-component">
+        <h2 class="profile-recipes-container-title">Recipes</h2>
+        <profile-recipes [recipes]="recipes"
+                         [width]="20"
+                         [height]="12.5"
+                         [headerSize]="8"
+                         [mobileWidth]="20">
+        </profile-recipes>
+    </div>
+    <div class="profile-reviews-container my-profile-container-component">
+        <review-content [reviewType]="reviewType.VIEW" [user]="user"></review-content>
+    </div>
 </div>

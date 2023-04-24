@@ -104,15 +104,17 @@
     <rate [value]="filterSpiciness" [type]="rateType.spiciness" [readonly]="false" [imageSize]="40"
           (selectedValue)="updateSpicinessFilter($event)" (contextmenu)="resetSpicinessFilter($event)"></rate>
 </div>
-
-<!-- SHOW RECIPES -->
-<profile-recipes *ngIf="isLoaded === true" (favoriteListUpdated)="refreshFavoriteNames()"
-                 [recipes]="recipes"
-                 [width]="27"
-                 [height]="15"
-                 [headerSize]="11.5">
-</profile-recipes>
-<!-- END SHOW RECIPES-->
+<div class="background-component">
+    <!-- SHOW RECIPES -->
+    <profile-recipes *ngIf="isLoaded === true" (favoriteListUpdated)="refreshFavoriteNames()"
+                     [recipes]="recipes"
+                     [width]="27"
+                     [height]="15"
+                     [headerSize]="11.5"
+                     [user]="user">
+    </profile-recipes>
+    <!-- END SHOW RECIPES-->
+</div>
 
 <p-dialog header="Selected ingredients:" [(visible)]="selectedIngredientsDialog" [style]="{width: '50vw'}"
           [baseZIndex]="10000" [draggable]="false" [resizable]="false" [dismissableMask]="true" [modal]="true">

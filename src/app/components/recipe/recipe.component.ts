@@ -156,10 +156,6 @@ export class RecipeComponent implements OnInit {
                 this.showFavorites = true;
                 this.getRecipes();
             }
-
-            console.log(this.user != null);
-            console.log(this.activatedRoute.snapshot.queryParams['favorites'])
-            console.log(params.get('favorites') === 'show')
         })
     }
 
@@ -200,8 +196,6 @@ export class RecipeComponent implements OnInit {
                 this.isLoaded = true;
             })
         }
-
-        console.log(this.recipes)
     }
 
     refreshIngredients(): void {

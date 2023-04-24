@@ -1,60 +1,50 @@
-<div class="my-profile-container">
-    <div class="profile-details-container">
-        <div class="profile-details-header">
-            <img src="assets/person-icon.png" alt="">
-            <h1 class="profile-details-header-username">{{ user.username }}</h1>
-        </div>
-        <div class="profile-info-container">
-            <h1 class="profile-info-container-username">{{ user.username }}</h1>
-            <div class="profile-general-info">
-                <hr>
-                <div class="profile-general-info-box">
-                    <img src="assets/recipe-book.png" alt="">
-                    <h4><i>Recipes</i></h4>
-                    <h4>{{ recipesNumber }}</h4>
-                </div>
-                <hr>
-                <div class="profile-general-info-box">
-                    <img src="assets/review.png" alt="">
-                    <h4><i>Reviews</i></h4>
-                    <h4>{{ reviewsNumber }}</h4>
-                </div>
-                <hr>
-                <div class="profile-general-info-box">
-                    <img src="assets/star.png" alt="">
-                    <h4><i>Rating</i></h4>
-                    <h4>{{ averageRate | number : '1.2-2' }}</h4>
-                </div>
-                <hr>
-                <div class="profile-general-info-box">
-                    <img src="assets/popularity.png" alt="">
-                    <h4><i>Popularity</i></h4>
-                    <h4>99</h4>
-                </div>
-                <hr>
+<div *ngIf="user != null">
+    <div class="my-profile-container">
+        <div class="profile-details-container container-component">
+            <div class="profile-details-header">
+                <img src="assets/person-icon.png" alt="">
+                <h1 class="profile-details-header-username">{{ user.username }}</h1>
             </div>
-        </div>
-    </div>
-    <div class="profile-restaurant-container">
-        <h2 class="profile-restaurant-container-title">Restaurant</h2>
-        <div class="profile-restaurant">
-            <div class="profile-restaurant-button">
-                <div *ngIf="user.hasRestaurant" (click)="goToRestaurant()">
-                    <p>View your restaurant page</p>
-                    There you can choose to edit it.
-                </div>
-                <div *ngIf="!user.hasRestaurant" (click)="createRestaurant()">
-                    <p>Do you have a real life restaurant ?</p>
-                    Try create one here too by pressing this.
+            <div class="profile-info-container">
+                <h1 class="profile-info-container-username">{{ user.username }}</h1>
+                <div class="profile-general-info">
+                    <hr>
+                    <div class="profile-general-info-box">
+                        <img src="assets/recipe-book.png" alt="">
+                        <h4><i>Recipes</i></h4>
+                        <h4>{{ recipesNumber }}</h4>
+                    </div>
+                    <hr>
+                    <div class="profile-general-info-box">
+                        <img src="assets/review.png" alt="">
+                        <h4><i>Reviews</i></h4>
+                        <h4>{{ reviewsNumber }}</h4>
+                    </div>
+                    <hr>
+                    <div class="profile-general-info-box">
+                        <img src="assets/star.png" alt="">
+                        <h4><i>Rating</i></h4>
+                        <h4>{{ averageRate | number : '1.2-2' }}</h4>
+                    </div>
+                    <hr>
+                    <div class="profile-general-info-box">
+                        <img src="assets/popularity.png" alt="">
+                        <h4><i>Popularity</i></h4>
+                        <h4>99</h4>
+                    </div>
+                    <hr>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="profile-recipes-container">
-        <h2 class="profile-recipes-container-title">Recipes</h2>
-        <profile-recipes [width]="19" [height]="12.5" [headerSize]="8" [type]="'EDIT'"/>
-    </div>
-    <div class="profile-reviews-container">
-        <review-content [reviewType]="reviewType.VIEW"></review-content>
+        <div class="container-component">
+            <profile-restaurant [user]="user"></profile-restaurant>
+        </div>
+        <div class="profile-recipes-container container-component">
+            <h2 class="profile-recipes-container-title">Recipes</h2>
+            <profile-recipes [width]="20" [height]="10" [headerSize]="8" [type]="'EDIT'"/>
+        </div>
+        <div class="profile-reviews-container container-component">
+            <review-content [reviewType]="reviewType.VIEW" [user]="user"></review-content>
+        </div>
     </div>
 </div>

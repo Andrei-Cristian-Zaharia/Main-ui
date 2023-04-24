@@ -1,57 +1,73 @@
 <div class="recipe-view-dialog-header" *ngIf="recipe != null">
-    <div class="recipe-name">
-        <div>
-            <h1>{{ recipe.name }}</h1>
-        </div>
-        <div>
-            <img class="web-img" src="assets/website.png" alt="" (click)="goToRecipePage(recipe.name)">
-        </div>
-    </div>
-    <div class="recipe-description">
-        <h2>Description</h2>
-        <p [innerHTML]="recipe.description" class="description-text"></p>
-    </div>
-    <div class="summary-container">
-        <div class="summary-image">
-            <img src="{{ recipe.imageAddress }}" alt="">
-        </div>
-        <div class="details-container">
-            <h2>Details</h2>
+    <div class="container-component">
+        <div class="recipe-name">
             <div>
+                <h1>{{ recipe.name }}</h1>
+            </div>
+            <div *ngIf="type != 'PAGE'">
+                <img class="web-img" src="assets/website.png" alt="" (click)="goToRecipePage(recipe.name)">
+            </div>
+        </div>
+        <div class="recipe-description">
+            <h2>Description</h2>
+            <p [innerHTML]="recipe.description" class="description-text"></p>
+        </div>
+    </div>
+        <div class="summary-container">
+            <div class="summary-image container-component">
+                <img src="{{ recipe.imageAddress }}" alt="">
+            </div>
+            <div class="details-container container-component">
+                <h2>Details</h2>
                 <div>
-                    <div class="author">
-                        <img src="assets/person-icon.png" alt="" class="image-person">
-                        <h3 class="author-text"
-                            (click)="goToProfile(recipe.person.username)">
-                            Publisher: {{ recipe.person.username }} </h3>
+                    <div>
+                        <div class="author">
+                            <img src="assets/person-icon.png" alt="" class="image-person">
+                            <h3 class="author-text"
+                                (click)="goToProfile(recipe.person.username)">
+                                Publisher: {{ recipe.person.username }} </h3>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="time-component">
+                            <img src="assets/clock.png" alt="" class="time-image">
+                            <h3 class="time-text">Prepare time: {{ recipe.time.toString() | time }}</h3>
+                        </div>
+                    </div>
+                    <rate class="rating-container" [value]="recipe.difficulty" [type]="rateType.difficulty"
+                          [imageSize]="40"></rate>
+                    <rate class="rating-container" [value]="recipe.rating" [type]="rateType.rating"
+                          [imageSize]="40"></rate>
+                    <rate class="rating-container" [value]="recipe.spiciness" [type]="rateType.spiciness"
+                          [imageSize]="40"></rate>
+                </div>
+            </div>
+            <div class="container-component">
+                Poate inca ceva aici, calorii and stuff
+            </div>
+        </div>
+    <div class="container-component">
+        <div class="review-content-page">
+            <div class="recipe-ingredients">
+                <h2>Ingredients</h2>
+                <div class="ingredients-container">
+                    <div class="ingredient-line" *ngFor="let ing of recipe.ingredientList">
+                        <li>{{ ing.measurementUnit }} {{ ing.name }} </li>
                     </div>
                 </div>
-                <div>
-                    <div class="time-component">
-                        <img src="assets/clock.png" alt="" class="time-image">
-                        <h3 class="time-text">Prepare time: {{ recipe.time.toString() | time }}</h3>
-                    </div>
-                </div>
-                <rate class="rating-container" [value]="recipe.difficulty" [type]="rateType.difficulty" [imageSize]="40"></rate>
-                <rate class="rating-container" [value]="recipe.rating" [type]="rateType.rating" [imageSize]="40"></rate>
-                <rate class="rating-container" [value]="recipe.spiciness" [type]="rateType.spiciness" [imageSize]="40"></rate>
+            </div>
+            <div class="recipe-howToPrepare">
+                <h2>How to prepare</h2>
+                <p [innerHTML]="recipe.howToPrepare" class="howToPrepare-text"></p>
             </div>
         </div>
     </div>
-    <div class="review-content-page">
-        <div class="recipe-ingredients">
-            <h2>Ingredients</h2>
-            <div class="ingredients-container">
-                <div class="ingredient-line" *ngFor="let ing of recipe.ingredientList">
-                    <li>{{ ing.measurementUnit }} {{ ing.name }} </li>
-                </div>
-            </div>
-        </div>
-        <div class="recipe-howToPrepare">
-            <h2>How to prepare</h2>
-            <p [innerHTML]="recipe.howToPrepare" class="howToPrepare-text"></p>
-        </div>
+    <div class="container-component">
+        <review-content [entity]="recipe"
+                        [category]="entityType.RECIPE"
+                        [reviewType]="reviewType.INSERT"
+                        [user]="recipe.person"
+                        (rating)="updateRecipeRating($event)">
+        </review-content>
     </div>
-    <review-content [entity]="recipe" [category]="entityType.RECIPE" [reviewType]="reviewType.INSERT"
-                    (rating)="updateRecipeRating($event)"></review-content>
 </div>

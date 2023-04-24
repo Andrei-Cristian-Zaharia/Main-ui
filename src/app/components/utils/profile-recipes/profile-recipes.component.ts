@@ -24,6 +24,7 @@ import {Router} from "@angular/router";
 })
 export class ProfileRecipesComponent implements OnInit {
 
+    @Input()
     user: PersonBasicInfoModel;
 
     isMobile: boolean;
@@ -48,8 +49,13 @@ export class ProfileRecipesComponent implements OnInit {
     @Output()
     favoriteListUpdated = new EventEmitter<boolean>();
 
+    @Input()
     mobileWidth = 22;
+
+    @Input()
     mobileHeight = 12;
+
+    @Input()
     mobileHeaderSize = 8.75;
 
     initialWidth: number;

@@ -1,71 +1,181 @@
+.my-profile-container {
+    width: 100%;
+    height: auto;
+    padding: 15px 5% 15px 5%;
+}
+
 .profile-details-container {
-    margin-left: 50px;
+    height: 220px;
+    width: 60%;
+    margin: 0 auto;
+    background: #FFF7EF;
+    border-radius: 10px;
     display: flex;
 
-    .user-name {
-        margin-left: 20px;
-        padding-top: 40px;
-        padding-bottom: 40px;
-    }
-
     img {
-        width: 120px;
-        height: 120px;
-    }
-}
-
-.profile-section-title {
-    padding-top: 20px;
-    padding-bottom: 20px;
-    font-size: 20px;
-
-    .subtitle-not-found {
-        padding: 10px;
-    }
-}
-
-.profile-restaurant-container {
-    padding-top: 20px;
-    padding-bottom: 20px;
-
-    .left-panel-image {
-        height: 600px;
-        width: 1000px;
-        border-bottom-left-radius: 5px;
-        border-top-left-radius: 5px;
+        position: relative;
+        left: 20px;
+        top: 10%;
+        width: auto;
+        height: 80%;
     }
 
-    .right-panel-image {
-        padding: 40px 15px 20px;
-        text-align: center;
+    .profile-details-header {
+        display: flex;
+
+        .profile-details-header-username {
+            display: none;
+        }
+    }
+
+    .profile-info-container {
+        position: relative;
         width: 100%;
-        height: 100%;
-        margin: auto;
+        padding: 20px;
+        left: 30px;
 
-        .profile-restaurant-address {
-            padding: 20px 0 20px;
-            width: 60%;
-            margin: auto;
+        .profile-info-container-username {
+            text-align: center;
+            display: block;
         }
 
-        .profile-restaurant-details {
-            height: 210px;
-            width: 100%;
+        .profile-info {
+            display: flex;
+            justify-items: center;
+            justify-content: space-evenly;
+
+            ::ng-deep .p-inputtext {
+                text-align: center;
+            }
         }
 
-        .profile-restaurant-rating {
-            padding-top: 10px;
-            padding-bottom: 5px;
-        }
+        .profile-general-info {
+            padding: 15px 0 15px 0;
+            display: flex;
+            justify-items: center;
 
-        .profile-restaurant-visit-button {
-            width: 100%;
-            margin-top: 2vw;
+            hr {
+                border: none;
+                border-left: 1px solid hsla(200, 10%, 50%, 100);
+                height: auto;
+                width: 1px;
+            }
+
+            .go-to-favorites-button {
+                background-image: url('../../../assets/favorite.png');
+                background-size: contain;
+                background-repeat: no-repeat;
+                display: block;
+                height: 45px;
+                width: 45px;
+                margin: auto;
+            }
+
+            .profile-general-info-box {
+                display: grid;
+                text-align: center;
+                width: 90px;
+
+                img {
+                    padding-bottom: 8px;
+                    height: 60px;
+                    width: 60px;
+                }
+            }
         }
     }
 }
 
-.profile-restaurant-title {
-    font-weight: bold;
-    padding-bottom: 5px;
+.container-component {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 20px;
+    box-shadow: 0 16px 28px 13px rgba(0, 0, 0, 0.1);
+    background: #fdfbf8;
+    border-radius: 10px;
+}
+
+.profile-recipes-container {
+    .profile-recipes-container-title {
+        padding-top: 20px;
+    }
+}
+
+.profile-reviews-container {
+    padding: 0 20px 0 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+@media only screen and (max-width: 1400px) {
+    .profile-details-container {
+        display: block;
+        height: auto;
+        width: 75%;
+
+        img {
+            left: 25px;
+            top: 10px;
+            width: 20%;
+        }
+
+        .profile-details-header {
+
+            .profile-details-header-username {
+                width: 100%;
+                display: flex;
+                padding-top: 20px;
+                padding-left: 30px;
+                align-items: center;
+                justify-content: center;
+                font-size: 25px;
+                inline-size: 60%;
+                overflow-wrap: break-word;
+            }
+        }
+
+        .profile-info-container {
+            left: 0;
+
+            .profile-info-container-username {
+                display: none;
+            }
+
+            .profile-general-info {
+                .go-to-favorites-button {
+                    display: none;
+                }
+
+                .profile-general-info-box {
+                    font-size: 13px;
+
+                    img {
+                        padding-bottom: 10px;
+                        margin-left: 6px;
+                        height: 55px;
+                        width: 50px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+
+    .profile-details-container {
+        width: 95%;
+
+        img {
+            left: 10px;
+            top: 10px;
+            width: 25%;
+        }
+    }
+
+    .profile-restaurant-container .profile-restaurant .profile-restaurant-button {
+        width: 280px;
+        height: 80px;
+        font-size: 15px;
+    }
 }

@@ -17,7 +17,9 @@
                 <div class="recipe-delete-button" (click)="showCreateRecipeDialog(recipe)">
                     <img src="assets/delete.png" alt="">
                 </div>
-                <h4 class="recipe-mobile-name">{{ recipe.name }}</h4>
+                <div class="recipe-mobile-name">
+                    <h4>{{ recipe.name }}</h4>
+                </div>
             </div>
             <div class="recipe-view-container" *ngIf="type === 'VIEW'">
                 <save-button [recipe]="recipe" (outRecipe)="updateUserSaveList($event)"/>
@@ -32,7 +34,7 @@
           [style]="{width: '65vw', height: '50vw'}" [showHeader]="false"
           [baseZIndex]="10000" [draggable]="false" [resizable]="false" [dismissableMask]="true" [modal]="true"
           [closable]="true">
-    <app-recipe-view [recipe]="selectedRecipe"></app-recipe-view>
+    <recipe-view [recipe]="selectedRecipe"></recipe-view>
 </p-dialog>
 
 <div>

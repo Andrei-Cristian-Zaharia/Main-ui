@@ -1,0 +1,93 @@
+.profile-restaurant-container {
+    height: 500px;
+
+    .profile-restaurant-container-base {
+        padding: 20px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        justify-items: center;
+
+        .left-panel-image {
+            img {
+                height: 450px;
+                width: 900px;
+                object-fit: cover;
+                border-bottom-left-radius: 20px;
+                border-top-left-radius: 20px;
+            }
+        }
+
+        .right-panel-image {
+            padding: 10px 15px 10px;
+            text-align: center;
+            position: relative;
+            width: 100%;
+            height: 450px;
+
+            .profile-restaurant-address {
+                padding: 20px 0 20px;
+                width: 60%;
+                margin: auto;
+            }
+
+            .profile-restaurant-details {
+                height: auto;
+                width: 100%;
+                max-font-size: 15px;
+                font-size: 0.8vw;
+            }
+
+            .profile-restaurant-rating {
+                padding-top: 10px;
+                padding-bottom: 5px;
+            }
+
+            .right-panel-button-container {
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translate(-50%, 0);
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1400px) {
+    .profile-restaurant-container {
+        height: auto;
+
+        .profile-restaurant-container-base {
+            padding: 0;
+            display: block;
+
+            .left-panel-image {
+                height: auto;
+                width: 95%;
+                margin: 0 auto;
+
+                img {
+                    width: 100%;
+                    height: 300px;
+                    object-fit: cover;
+                    border-top-left-radius: 10px;
+                    border-top-right-radius: 10px;
+                    border-bottom-left-radius: 0;
+                }
+            }
+
+            .right-panel-image {
+                height: auto;
+                .profile-restaurant-details {
+                    font-size: 15px;
+                }
+
+                .right-panel-button-container {
+                    position: relative;
+                    padding-top: 20px;
+                }
+            }
+        }
+    }
+}
+

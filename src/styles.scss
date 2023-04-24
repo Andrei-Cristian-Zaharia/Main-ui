@@ -35,7 +35,9 @@
 // LOGIN - REGISTER
 
 .login-content{
-    background-image: url('../src/assets/Background_M.jpg');
+    //background-image: url('../src/assets/layered-waves-haikei (1).png');
+    //background-repeat: repeat-x;
+    //background-image: url('../src/assets/Background_M.jpg');
     height: 100vh;
     width: 100%;
     display: flex;
@@ -87,12 +89,24 @@
 
 // OTHERS
 
+.container-component {
+    padding: 20px;
+    margin-top: 20px;
+    height: auto;
+    margin-bottom: 20px;
+    box-shadow: 0 16px 28px 13px rgba(0, 0, 0, 0.1);
+    background: #fdfbf8;
+    border-radius: 10px;
+}
+
 * {
     margin: 0;
     padding: 0;
 }
 
 body {
+    background-image: url('../src/assets/second-background.png');
+    background-repeat: repeat;
     margin-bottom: 0;
     padding-bottom: 0;
     overflow-x: hidden;

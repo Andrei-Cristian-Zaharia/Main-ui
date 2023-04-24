@@ -9,6 +9,8 @@ import {RecipeModel} from "../../models/recipe.model";
 import {RateTypeEnum} from "../../enums/rateType.enum";
 import {RestaurantModel} from "../../models/restaurant.model";
 import {RestaurantService} from "../../services/restaurant.service";
+import {CookieService} from "ngx-cookie-service";
+import {ReviewTypeEnum} from "../../enums/reviewType.enum";
 
 @Component({
   selector: 'app-profile',
@@ -22,11 +24,20 @@ export class ProfileComponent implements OnInit{
     restaurant: RestaurantModel;
     reviews: ReviewModel[];
     rateType = RateTypeEnum;
+    recipes: RecipeModel[];
+
+    reviewsNumber: number = 0;
+    recipesNumber: number = 0;
+    averageRate: number = 0;
+
+    reviewType = ReviewTypeEnum;
 
     constructor(private activatedRoute: ActivatedRoute,
-                private reviewService: ReviewService,
                 private personService: PersonService,
+                private reviewService: ReviewService,
+                private recipeService: RecipeService,
                 private restaurantService: RestaurantService,
+                private cookieService: CookieService,
                 private router: Router) {}
 
     ngOnInit(): void {
@@ -34,9 +45,13 @@ export class ProfileComponent implements OnInit{
 
             this.personService.getPersonDetailsByUsername(params.get('name')).subscribe(data => {
                 this.user = data;
-                console.log(data);
+                console.log(this.user)
 
                 this.getRestaurant();
+                this.getRecipes();
+                this.getAveragesRateForUser();
+                this.countUserReviewsNumber();
+                this.countUserRecipes();
             }, () => console.log("There was an error and user with username " + params.get('name') + " couldn't be fetched..."));
         })
     }
@@ -45,9 +60,32 @@ export class ProfileComponent implements OnInit{
         if (this.user.hasRestaurant) {
             this.restaurantService.getRestaurantForUser(this.user.username).subscribe(result => {
                 this.restaurant = result;
-                console.log(result);
             })
         }
+    }
+
+    getRecipes() {
+        this.recipeService.getRecipesForUser(this.user.username).subscribe(data => {
+            this.recipes = data;
+        })
+    }
+
+    countUserReviewsNumber() {
+        this.reviewService.countUserReviews(this.user.username).subscribe(data => {
+            this.reviewsNumber = data;
+        })
+    }
+
+    countUserRecipes() {
+        this.recipeService.countUserRecipes(this.user.username).subscribe(data => {
+            this.recipesNumber = data;
+        })
+    }
+
+    getAveragesRateForUser() {
+        this.reviewService.averageRateUser(this.user.username).subscribe(data => {
+            this.averageRate = data;
+        })
     }
 
     goToRestaurant(name: string) {

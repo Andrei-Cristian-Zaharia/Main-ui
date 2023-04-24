@@ -1,4 +1,5 @@
 .recipes-container {
+    padding-bottom: 30px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -78,6 +79,7 @@
 
     .recipe-buttons-container {
         display: flex;
+        height: 40px;
 
         .recipe-edit-button {
             width: 100px;
@@ -89,12 +91,12 @@
             cursor: pointer;
             border-radius: 5px;
             font-size: 20px;
-            background: #9e754e;
+            background: #AE8A68;
             color: white;
         }
 
         .recipe-edit-button:hover {
-            background: #b98c62;
+            background: #c7a381;
             transition: background-color .15s ease-in-out .15s;
         }
 
@@ -108,7 +110,7 @@
             cursor: pointer;
             border-radius: 5px;
             font-size: 20px;
-            background: #c24653;
+            background: #C35354;
             color: white;
 
             img {
@@ -118,7 +120,7 @@
         }
 
         .recipe-delete-button:hover {
-            background: #d75e6b;
+            background: #d57173;
             transition: background-color .15s ease-in-out .15s;
         }
     }
@@ -148,11 +150,14 @@
     }
 
     .recipe-card {
+
+
         .recipe-mobile-name {
-            inline-size: 100%;
-            overflow-wrap: break-word;
-            text-align: center;
             display: block;
+            text-align: center;
+            overflow-wrap: break-word;
+            inline-size: 100%;
+            margin: auto;
         }
     }
 }

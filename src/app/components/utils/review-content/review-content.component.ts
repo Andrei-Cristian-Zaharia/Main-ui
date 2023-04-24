@@ -15,10 +15,10 @@ import {Router} from "@angular/router";
 import {BaseEntityModel} from "../../../models/baseEntity.model";
 import {EntityTypeEnum} from "../../../enums/entityType.enum";
 import {PersonService} from "../../../services/person.service";
-import {PersonBasicInfoModel} from "../../../models/personBasicInfo.model";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {RateTypeEnum} from "../../../enums/rateType.enum";
 import {ReviewTypeEnum} from "../../../enums/reviewType.enum";
+import {PersonModel} from "../../../models/person.model";
 
 @Component({
     selector: 'review-content',
@@ -37,12 +37,14 @@ export class ReviewContentComponent implements OnInit, OnChanges {
     @Input()
     reviewType: ReviewTypeEnum;
 
+    @Input()
+    user: PersonModel;
+
     @Output()
     rating = new EventEmitter<number>();
 
     reviews: ReviewModel[] = new Array<ReviewModel>;
 
-    user: PersonBasicInfoModel;
     userLogged: boolean = false;
     userAlreadyPosted: boolean = false;
 
@@ -83,7 +85,9 @@ export class ReviewContentComponent implements OnInit, OnChanges {
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-        this.getCurrentUser();
+        if (this.reviewType === ReviewTypeEnum.VIEW) {
+            this.getReviews();
+        }
 
         if (this.entity != null) {
             this.refreshReviews();
@@ -91,15 +95,6 @@ export class ReviewContentComponent implements OnInit, OnChanges {
             this.resetReview();
             this.checkLogin();
         }
-    }
-
-    getCurrentUser() {
-        this.personService.getPersonDetails(this.cookieService.get("emailAddress")).subscribe(data => {
-            this.user = data;
-            if (this.reviewType === ReviewTypeEnum.VIEW) {
-                this.getReviews();
-            }
-        })
     }
 
     checkLogin() {

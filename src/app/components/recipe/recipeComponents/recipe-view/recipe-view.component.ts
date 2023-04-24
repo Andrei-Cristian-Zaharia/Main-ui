@@ -1,11 +1,6 @@
 import {
-    AfterContentInit,
-    Component, EventEmitter,
-    Input,
-    OnChanges,
-    OnDestroy,
-    OnInit,
-    SimpleChanges,
+    Component,
+    Input, OnInit,
     ViewEncapsulation
 } from '@angular/core';
 import {RecipeModel} from "../../../../models/recipe.model";
@@ -19,7 +14,7 @@ import {ReviewTypeEnum} from "../../../../enums/reviewType.enum";
 import {RecipeService} from "../../../../services/recipe.service";
 
 @Component({
-    selector: 'app-recipe-view',
+    selector: 'recipe-view',
     templateUrl: './recipe-view.component.html',
     styleUrls: ['./recipe-view.component.scss'],
     encapsulation: ViewEncapsulation.None,
@@ -31,9 +26,7 @@ export class RecipeViewComponent {
     recipe: RecipeModel;
 
     @Input()
-    username: string;
-
-    recipes: RecipeModel[];
+    type: string;
 
     reviews: ReviewModel[] = new Array<ReviewModel>;
 
@@ -52,14 +45,12 @@ export class RecipeViewComponent {
         this.recipe.rating = rating;
     }
 
-    getRecipes() {
-        this.recipeService.getRecipesForUser(this.username).subscribe(result => {
-            this.recipes = result;
-            console.log(result);
-        })
-    }
-
     goToProfile(username) {
+        if (this.recipe.person.username != null && username === this.recipe.person.username) {
+            this.router.navigateByUrl('my-profile');
+            return;
+        }
+
         this.router.navigateByUrl('profile?name=' + username);
     }
 

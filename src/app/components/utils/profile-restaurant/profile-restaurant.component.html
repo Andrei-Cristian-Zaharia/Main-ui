@@ -1,0 +1,35 @@
+<div *ngIf="isLoaded">
+    <div class="profile-restaurant-container" *ngIf="user.hasRestaurant; else noRestaurant">
+        <div class="profile-section-title">
+        </div>
+        <div class="profile-restaurant-container-base">
+            <div class="left-panel-image">
+                <img src="{{ restaurant.frontImage }}" alt="">
+            </div>
+            <div class="right-panel-image">
+                <h2>{{ restaurant.name }}</h2>
+                <div class="profile-restaurant-rating">
+                    <rate [value]="4" [type]="rateType.rating"></rate>
+                </div>
+                <div class="profile-restaurant-address">
+                    <p class="profile-restaurant-title">Location of our restaurant:</p>
+                    {{ restaurant.address }}
+                </div>
+                <div class="profile-restaurant-details">
+                    <p class="profile-restaurant-title">Short description of our special place:</p>
+                    {{ restaurant.description }}
+                </div>
+                <div class="right-panel-button-container">
+                    <p-button label="Visit restaurant page" (onClick)="goToRestaurant(restaurant.name)"></p-button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ng-template #noRestaurant>
+        <div class="profile-section-title">
+            <h2>Restaurant</h2>
+            <h4 class="subtitle-not-found">There is no restaurant to display.</h4>
+        </div>
+    </ng-template>
+
+</div>

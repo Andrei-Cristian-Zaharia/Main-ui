@@ -6,3 +6,14 @@
         padding: 0 100px 0 100px;
     }
 }
+
+@media only screen and (max-width: 768px) {
+
+    .recipe-page-container {
+        padding: 20px 10px 20px 10px;
+
+        .recipe-description {
+            padding: 0 10px 0 10px;
+        }
+    }
+}

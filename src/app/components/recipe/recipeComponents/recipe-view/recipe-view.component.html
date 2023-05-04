@@ -13,39 +13,47 @@
             <p [innerHTML]="recipe.description" class="description-text"></p>
         </div>
     </div>
-        <div class="summary-container">
-            <div class="summary-image container-component">
-                <img src="{{ recipe.imageAddress }}" alt="">
-            </div>
-            <div class="details-container container-component">
-                <h2>Details</h2>
-                <div>
-                    <div>
-                        <div class="author">
-                            <img src="assets/person-icon.png" alt="" class="image-person">
-                            <h3 class="author-text"
-                                (click)="goToProfile(recipe.person.username)">
-                                Publisher: {{ recipe.person.username }} </h3>
-                        </div>
+    <div class="summary-container">
+        <div class="summary-image container-component">
+            <img src="{{ recipe.imageAddress }}" alt="">
+        </div>
+        <div class="details-container container-component">
+            <h2>Details</h2>
+            <div class="details-container-box">
+                <div class="center-component">
+                    <div class="author">
+                        <img src="assets/person-icon.png" alt="" class="image-person">
+                        <h3 class="author-text"
+                            (click)="goToProfile(recipe.person.username)">
+                            Publisher: {{ recipe.person.username }} </h3>
                     </div>
-                    <div>
-                        <div class="time-component">
-                            <img src="assets/clock.png" alt="" class="time-image">
-                            <h3 class="time-text">Prepare time: {{ recipe.time.toString() | time }}</h3>
-                        </div>
-                    </div>
-                    <rate class="rating-container" [value]="recipe.difficulty" [type]="rateType.difficulty"
-                          [imageSize]="40"></rate>
-                    <rate class="rating-container" [value]="recipe.rating" [type]="rateType.rating"
-                          [imageSize]="40"></rate>
-                    <rate class="rating-container" [value]="recipe.spiciness" [type]="rateType.spiciness"
-                          [imageSize]="40"></rate>
                 </div>
-            </div>
-            <div class="container-component">
-                Poate inca ceva aici, calorii and stuff
+                <div>
+                    <div class="time-component center-component">
+                        <img src="assets/clock.png" alt="" class="time-image">
+                        <h3 class="time-text">Prepare time: {{ recipe.time.toString() | time }}</h3>
+                    </div>
+                </div>
+                <rate class="rating-container center-component" [value]="recipe.difficulty"
+                      [type]="rateType.difficulty" [imageSize]="40"></rate>
+                <rate class="rating-container center-component" [value]="recipe.rating"
+                      [type]="rateType.rating" [imageSize]="40"></rate>
+                <rate class="rating-container center-component" [value]="recipe.spiciness"
+                      [type]="rateType.spiciness" [imageSize]="40"></rate>
             </div>
         </div>
+        <div class="container-component">
+            Poate inca ceva aici, calorii and stuff
+        </div>
+    </div>
+    <div class="container-component mobileIngredients">
+        <h2>Ingredients</h2>
+        <div class="ingredients-container">
+            <div class="ingredient-line" *ngFor="let ing of recipe.ingredientList">
+                <li>{{ ing.measurementUnit }} {{ ing.name }} </li>
+            </div>
+        </div>
+    </div>
     <div class="container-component">
         <div class="review-content-page">
             <div class="recipe-ingredients">

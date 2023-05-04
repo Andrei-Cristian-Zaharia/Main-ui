@@ -5,6 +5,7 @@
     align-items: center;
     justify-content: center;
     margin-top: 20px;
+    text-align: center;
 
     .web-img {
         align-items: center;
@@ -20,6 +21,7 @@
 .time-component {
     display: inline-flex;
     flex-direction: row;
+    margin: auto;
 
     .time-image {
         height: 40px;
@@ -97,6 +99,11 @@
     box-shadow: 0 16px 28px 13px rgba(0, 0, 0, 0.1);
     background: #fdfbf8;
     border-radius: 10px;
+}
+
+.center-component {
+    display: flex;
+    justify-content: center;
 }
 
 * {

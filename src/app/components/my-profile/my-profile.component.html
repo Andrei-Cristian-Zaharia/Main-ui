@@ -1,6 +1,6 @@
 <div *ngIf="user != null">
     <div class="my-profile-container">
-        <div class="profile-details-container container-component">
+        <div class="profile-details-container main-component">
             <div class="profile-details-header">
                 <img src="assets/person-icon.png" alt="">
                 <h1 class="profile-details-header-username">{{ user.username }}</h1>
@@ -36,14 +36,14 @@
                 </div>
             </div>
         </div>
-        <div class="container-component">
+        <div class="main-component">
             <profile-restaurant [user]="user"></profile-restaurant>
         </div>
-        <div class="profile-recipes-container container-component">
+        <div class="profile-recipes-container main-component">
             <h2 class="profile-recipes-container-title">Recipes</h2>
             <profile-recipes [width]="20" [height]="10" [headerSize]="8" [type]="'EDIT'"/>
         </div>
-        <div class="profile-reviews-container container-component">
+        <div class="reviews-container main-component">
             <review-content [reviewType]="reviewType.VIEW" [user]="user"></review-content>
         </div>
     </div>

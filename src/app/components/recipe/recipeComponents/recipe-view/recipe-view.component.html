@@ -1,5 +1,5 @@
 <div class="recipe-view-dialog-header" *ngIf="recipe != null">
-    <div class="container-component">
+    <div class="main-component">
         <div class="recipe-name">
             <div>
                 <h1>{{ recipe.name }}</h1>
@@ -14,20 +14,13 @@
         </div>
     </div>
     <div class="summary-container">
-        <div class="summary-image container-component">
+        <div class="summary-image main-component">
             <img src="{{ recipe.imageAddress }}" alt="">
         </div>
-        <div class="details-container container-component">
+        <div class="details-container main-component">
             <h2>Details</h2>
             <div class="details-container-box">
-                <div class="center-component">
-                    <div class="author">
-                        <img src="assets/person-icon.png" alt="" class="image-person">
-                        <h3 class="author-text"
-                            (click)="goToProfile(recipe.person.username)">
-                            Publisher: {{ recipe.person.username }} </h3>
-                    </div>
-                </div>
+                <author class="center-component" [person]="recipe.person"/>
                 <div>
                     <div class="time-component center-component">
                         <img src="assets/clock.png" alt="" class="time-image">
@@ -42,11 +35,11 @@
                       [type]="rateType.spiciness" [imageSize]="40"></rate>
             </div>
         </div>
-        <div class="container-component">
+        <div class="main-component">
             Poate inca ceva aici, calorii and stuff
         </div>
     </div>
-    <div class="container-component mobileIngredients">
+    <div *ngIf="isMobile" class="main-component mobileIngredients">
         <h2>Ingredients</h2>
         <div class="ingredients-container">
             <div class="ingredient-line" *ngFor="let ing of recipe.ingredientList">
@@ -54,8 +47,8 @@
             </div>
         </div>
     </div>
-    <div class="container-component">
-        <div class="review-content-page">
+    <div class="main-component">
+        <div class="recipe-content-page">
             <div class="recipe-ingredients">
                 <h2>Ingredients</h2>
                 <div class="ingredients-container">
@@ -70,7 +63,7 @@
             </div>
         </div>
     </div>
-    <div class="container-component">
+    <div class="main-component">
         <review-content [entity]="recipe"
                         [category]="entityType.RECIPE"
                         [reviewType]="reviewType.INSERT"

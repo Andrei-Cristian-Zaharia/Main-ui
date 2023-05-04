@@ -1,0 +1,121 @@
+.restaurant-container {
+    padding: 20px 100px 10px 100px;
+
+    .restaurant-banner {
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 400px;
+        overflow: hidden;
+        margin: auto;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+    }
+}
+
+.restaurant-page {
+    padding: 20px 10px 10px 10px;
+    display: flex;
+
+    .restaurant-page-main {
+        width: 100%;
+        height: auto;
+        align-self: flex-start;
+
+        .restaurant-page-main-component {
+            margin: 20px 0;
+            padding: 10px;
+
+            .restaurant-page-main-component-title {
+                padding: 20px;
+                font-size: 30px;
+            }
+        }
+    }
+
+    .restaurant-page-summary {
+        width: 400px;
+        height: auto;
+        min-height: 600px;
+        margin-left: 30px;
+        position: sticky;
+        top: 20px;
+        align-self: flex-start;
+
+        .restaurant-page-summary-component {
+            padding: 20px 0;
+            text-align: center;
+
+            .restaurant-page-summary-component-title {
+                font-size: 20px;
+                margin-bottom: 5px;
+            }
+        }
+
+        .restaurant-page-summary-name {
+            margin-bottom: 10px;
+            font-size: 30px;
+
+            .restaurant-page-summary-partner {
+                margin-top: 5px;
+                font-size: 15px;
+            }
+        }
+
+        .restaurant-page-summary-address {
+            text-decoration: none;
+            color: black;
+        }
+
+        .restaurant-page-summary-contact {
+            display: block;
+            padding: 20px 0 10px 0;
+            right: 0;
+            margin: auto;
+
+            position: absolute;
+            left:0;
+            bottom:0;
+        }
+
+        .restaurant-page-summary-button {
+            height: 50px;
+            background: #ae8a68;
+            border-radius: 5px;
+            width: 200px;
+            margin: 20px auto;
+            cursor: pointer;
+            padding: 15px 0 40px 0;
+
+            .restaurant-page-summary-button-text {
+                font-size: 20px;
+                text-align: center;
+                margin: auto;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .restaurant-container {
+        padding: 10px 10px 10px 10px;
+
+        .restaurant-banner {
+            height: 300px;
+        }
+    }
+
+    .restaurant-page {
+        display: block;
+
+        .restaurant-page-summary {
+            width: auto;
+            margin-left: 0;
+        }
+    }
+}
+

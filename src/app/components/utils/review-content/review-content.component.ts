@@ -113,6 +113,8 @@ export class ReviewContentComponent implements OnInit, OnChanges {
             "recipeId": this.entity.id
         }
 
+        console.log("review", review)
+
         this.reviewService.createNewReview(review).subscribe(result => {
             this.refreshReviews();
             this.resetReview();

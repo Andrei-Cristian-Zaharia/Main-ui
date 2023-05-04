@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {CookieService} from "ngx-cookie-service";
 import {ApiConfig} from "../configs/api-config.service";
 import {Router} from "@angular/router";
+import {PersonBasicInfoModel} from "../models/personBasicInfo.model";
 
 @Injectable({
     providedIn: 'root'
@@ -27,10 +28,27 @@ export class AuthService {
 
         return await this.http.post<string>(this.apiConfig.AUTH_API + "/login", body, this.getOptions())
             .toPromise().then(token => {
-                this.cookieService.set('token', token);
-                this.cookieService.set('emailAddress', emailAddress);
-                this.router.navigate(['']);
+                this.getPersonDetails(emailAddress, token).subscribe(data => {
+                    this.cookieService.set('token', token);
+                    this.cookieService.set('username', data.username)
+                    this.cookieService.set('emailAddress', data.emailAddress);
+                    this.router.navigate(['']);
+                })
             });
+    }
+
+    getOptionsAuth(token: string) {
+        return {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                Authorization: token
+            })
+        };
+    }
+
+    getPersonDetails(email: string, token: string) {
+        return this.http.get<PersonBasicInfoModel>(
+            this.apiConfig.PERSON_API + "/email?emailAddress=" + email, this.getOptionsAuth(token));
     }
 
     async checkSession(): Promise<boolean> {

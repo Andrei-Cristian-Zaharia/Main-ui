@@ -1,1 +1,75 @@
-<p>restaurant works!</p>
+<div *ngIf="restaurant != null" class="restaurant-container">
+    <div id="banner" class="restaurant-banner main-component">
+        <img src="{{ restaurant.bannerImage }}" alt="">
+    </div>
+
+    <div class="restaurant-page">
+        <div class="restaurant-page-main main-component">
+            <div class="restaurant-page-main-component">
+                <p class="restaurant-page-main-component-title">Description</p>
+                {{ restaurant.description }}
+            </div>
+            <div class="restaurant-page-main-component">
+                <p class="restaurant-page-main-component-title">Announcements</p>
+                {{ restaurant.pageText }}
+            </div>
+            <div class="restaurant-page-main-component">
+                <p class="restaurant-page-main-component-title">We are hiring !</p>
+                {{ restaurant.employAnnounce }}
+            </div>
+        </div>
+        <div class="restaurant-page-summary main-component">
+            <div class="restaurant-page-summary-name restaurant-page-summary-component">
+                {{ restaurant.name }}
+                <div class="restaurant-page-summary-partner">
+                    <i>Our partner since: {{ restaurant.partnerSince }}</i>
+                </div>
+            </div>
+            <author class="center-component" [person]="restaurant.owner"/>
+            <rate class="center-component" [value]="restaurant.rating" [type]="rateType.rating"/>
+            <div class="restaurant-page-summary-component">
+                <div class="restaurant-page-summary-component-title">
+                    Address:
+                </div>
+                <div>
+                    {{ restaurant.addressLocation }}
+                </div>
+            </div>
+            <div class="restaurant-page-summary-button center-component">
+                <div class="restaurant-page-summary-button-text">
+                    Display virtual menu
+                </div>
+            </div>
+            <div class="restaurant-page-summary-contact restaurant-page-summary-component">
+                <div class="restaurant-page-summary-component-title">
+                    Contact info:
+                </div>
+                <div>
+                    Telephone number: {{ restaurant.telephone }}
+                </div>
+                <div>
+                    Email: {{ restaurant.emailAddress }}
+                </div>
+                <div class="media-container">
+                    <div class="media-logo-button" (click)="openLink(restaurant.facebookLink)">
+                        <img src="assets/facebook-logo.png" alt="">
+                    </div>
+                    <div class="media-logo-button" (click)="openLink(restaurant.instagramLink)">
+                        <img src="assets/instagram-logo.png" alt="">
+                    </div>
+                    <div class="media-logo-button" (click)="openLink(restaurant.websiteAddress)">
+                        <img src="assets/website.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main-component">
+        <review-content [entity]="restaurant"
+                        [category]="entityType.RESTAURANT"
+                        [reviewType]="reviewType.INSERT"
+                        [user]="restaurant.owner"
+                        (rating)="updateRestaurantRating($event)">
+        </review-content>
+    </div>
+</div>

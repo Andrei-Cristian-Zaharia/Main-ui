@@ -36,7 +36,7 @@
 
 // LOGIN - REGISTER
 
-.login-content{
+.login-content {
     //background-image: url('../src/assets/layered-waves-haikei (1).png');
     //background-repeat: repeat-x;
     //background-image: url('../src/assets/Background_M.jpg');
@@ -90,8 +90,25 @@
 }
 
 // OTHERS
+.media-container {
+    display: flex;
+    margin-top: 10px;
+    justify-content: center;
 
-.container-component {
+    .media-logo-button {
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        margin: 0 10px;
+
+        img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+    }
+}
+
+.main-component {
     padding: 20px;
     margin-top: 20px;
     height: auto;
@@ -99,6 +116,12 @@
     box-shadow: 0 16px 28px 13px rgba(0, 0, 0, 0.1);
     background: #fdfbf8;
     border-radius: 10px;
+}
+
+.reviews-container {
+    padding: 0 20px 0 20px;
+    border-radius: 10px;
+    margin-top: 20px;
 }
 
 .center-component {

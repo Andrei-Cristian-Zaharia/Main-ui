@@ -50,6 +50,8 @@ import { ProfileRecipesComponent } from './components/utils/profile-recipes/prof
 import { TimeDisplayComponent } from './components/utils/time-display/time-display.component';
 import { SaveButtonComponent } from './components/utils/save-button/save-button.component';
 import { ProfileRestaurantComponent } from './components/utils/profile-restaurant/profile-restaurant.component';
+import { AuthorComponent } from './components/utils/author/author.component';
+import { CreateMenuComponent } from './components/utils/create-menu/create-menu.component';
 
 @NgModule({
     declarations: [
@@ -76,7 +78,9 @@ import { ProfileRestaurantComponent } from './components/utils/profile-restauran
         ProfileRecipesComponent,
         TimeDisplayComponent,
         SaveButtonComponent,
-        ProfileRestaurantComponent
+        ProfileRestaurantComponent,
+        AuthorComponent,
+        CreateMenuComponent
     ],
     imports: [
         BrowserModule,

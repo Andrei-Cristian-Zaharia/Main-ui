@@ -18,6 +18,10 @@ export class RestaurantService {
         return this.http.get<RestaurantModel>(this.apiConfig.RESTAURANT_API + "/owner?name=" + name)
     }
 
+    getRestaurantByName(name: string) {
+        return this.http.get<RestaurantModel>(this.apiConfig.RESTAURANT_API + "/name?name=" + name)
+    }
+
     getOptions() {
         return {
             headers: new HttpHeaders({

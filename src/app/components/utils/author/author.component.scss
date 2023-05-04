@@ -1,0 +1,16 @@
+.author {
+    margin-top: 10px;
+    display: inline-flex;
+    flex-direction: row;
+
+    .image-person {
+        height: 40px;
+        width: 40px;
+    }
+
+    .author-text {
+        cursor: pointer;
+        margin-left: 7.5px;
+        margin-top: 9px;
+    }
+}

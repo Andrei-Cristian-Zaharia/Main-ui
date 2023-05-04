@@ -7,6 +7,7 @@ import {CookieService} from "ngx-cookie-service";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {NgxQrcodeStylingComponent, Options} from "ngx-qrcode-styling";
 import {ApiConfig} from "../../configs/api-config.service";
+import {RestaurantService} from "../../services/restaurant.service";
 
 @Component({
     selector: 'app-navbar',
@@ -41,6 +42,7 @@ export class NavbarComponent implements OnInit {
                 private responsive: BreakpointObserver,
                 private personService: PersonService,
                 private cookieService: CookieService,
+                private restaurantService: RestaurantService,
                 private authService: AuthService,
                 private router: Router) {
 
@@ -95,6 +97,12 @@ export class NavbarComponent implements OnInit {
 
     goToProfile() {
         this.router.navigate(['/my-profile']);
+    }
+
+    goToRestaurant() {
+        this.restaurantService.getRestaurantForUser(this.cookieService.get('username')).subscribe(data => {
+            this.router.navigateByUrl('restaurant?name=' + data.name);
+        })
     }
 
     logout() {

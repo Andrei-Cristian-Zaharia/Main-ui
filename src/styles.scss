@@ -118,15 +118,57 @@
     border-radius: 10px;
 }
 
+.button-style {
+    cursor: pointer;
+    border-radius: 5px;
+    background: #00BAF0;
+    padding: 10px;
+    margin: auto 0;
+    width: auto;
+    text-align: center;
+}
+
+.circle-button {
+    display: block;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background: #00BAF0;
+    text-align: center;
+    color: white;
+    font-size: 23.5px;
+    cursor: pointer;
+}
+
+
+.input-style {
+    background: rgba(34, 34, 34, 0);
+    color: white;
+    box-shadow: none;
+    border: none;
+    outline: none;
+    font-size: 30px;
+    font-weight: normal;
+    width: auto;
+}
+
+.input-style:focus {
+    outline: none;
+}
+
 .reviews-container {
     padding: 0 20px 0 20px;
     border-radius: 10px;
     margin-top: 20px;
 }
 
-.center-component {
+.center-component-flex {
     display: flex;
     justify-content: center;
+}
+
+.center-component-margin {
+    margin: 0 auto;
 }
 
 * {

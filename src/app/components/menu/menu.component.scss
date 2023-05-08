@@ -1,0 +1,105 @@
+.restaurant-create-menu-info {
+    padding: 20px;
+
+    .restaurant-create-menu-info-button {
+        background: #AE8A68;
+        width: 200px;
+        padding: 10px;
+        margin: 30px auto 0 auto;
+        font-size: 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+}
+
+.menu-category-component {
+    width: 100%;
+    height: auto;
+    min-height: 100px;
+    background: rgb(34, 34, 34);
+    border-radius: 10px;
+    margin: 20px auto 10px auto;
+
+    .menu-category-header {
+        padding: 20px;
+        display: flex;
+        color: white;
+        font-size: 30px;
+
+        .menu-category-header-title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+    }
+
+    .menu-category-header-edit {
+        display: flex;
+    }
+
+    .menu-category-container {
+        padding: 5px;
+
+        .menu-category-item {
+            height: auto;
+            width: 850px;
+            margin: 10px 20px;
+            padding: 10px;
+            color: white;
+
+            .menu-category-item-header {
+                display: flex;
+                justify-content: space-between;
+
+                .menu-category-item-link-button {
+                    display: flex;
+
+                    img {
+                        margin-left: 10px;
+                        margin-bottom: 4px;
+                        width: 20px;
+                        height: 20px;
+                        cursor: pointer;
+                    }
+                }
+
+                .menu-category-item-header-name {
+                    margin-left: 20px;
+                }
+
+                .menu-category-item-header-price {
+                    margin-right: 50px;
+                }
+            }
+        }
+
+        .menu-category-item-description {
+            margin-top: 5px;
+            font-style: italic;
+            font-size: 15px;
+        }
+
+        .menu-category-container-add-item-container {
+            border: 1px white;
+            height: 120px;
+            display: flex;
+            justify-content: space-evenly;
+            padding: 5px 40px 5px 40px;
+
+            .add-item-container-left {
+                flex: 3;
+                display: grid;
+                border: white dashed 2px;
+                border-radius: 5px;
+                padding: 10px;
+            }
+
+            .add-item-container-right {
+                flex: 1;
+                margin: auto;
+                display: flex;
+                justify-content: center;
+                color: white;
+            }
+        }
+    }
+}

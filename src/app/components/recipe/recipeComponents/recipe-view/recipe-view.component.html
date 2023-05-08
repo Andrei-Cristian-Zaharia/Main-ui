@@ -20,18 +20,18 @@
         <div class="details-container main-component">
             <h2>Details</h2>
             <div class="details-container-box">
-                <author class="center-component" [person]="recipe.person"/>
+                <author class="center-component-flex" [person]="recipe.person"/>
                 <div>
-                    <div class="time-component center-component">
+                    <div class="time-component center-component-flex">
                         <img src="assets/clock.png" alt="" class="time-image">
                         <h3 class="time-text">Prepare time: {{ recipe.time.toString() | time }}</h3>
                     </div>
                 </div>
-                <rate class="rating-container center-component" [value]="recipe.difficulty"
+                <rate class="rating-container center-component-flex" [value]="recipe.difficulty"
                       [type]="rateType.difficulty" [imageSize]="40"></rate>
-                <rate class="rating-container center-component" [value]="recipe.rating"
+                <rate class="rating-container center-component-flex" [value]="recipe.rating"
                       [type]="rateType.rating" [imageSize]="40"></rate>
-                <rate class="rating-container center-component" [value]="recipe.spiciness"
+                <rate class="rating-container center-component-flex" [value]="recipe.spiciness"
                       [type]="rateType.spiciness" [imageSize]="40"></rate>
             </div>
         </div>

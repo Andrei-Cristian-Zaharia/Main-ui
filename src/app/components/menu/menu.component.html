@@ -1,0 +1,110 @@
+<div *ngIf="createMenu === true && isOwner === true">
+    <div class="restaurant-create-menu-info">
+        <p>Create a new menu for your restaurant !</p>
+        <br>
+        <p>There are a few steps to help you create a menu for your restaurant:</p>
+        <br>
+        <p>
+            Press the button below to start the creation.
+            When creating a menu, you can choose to add one item together with recipe in your menu or just some info and
+            the price for it. Adding the recipe to an item, means that you allow users to see how your chefs are
+            preparing
+            food, in order to give them a chance to prepare a real meal !
+        </p>
+        <p>Create as many categories as you want and add items according to your needs ! </p>
+        <div>
+            <div class="restaurant-create-menu-info-button center-component-flex" (click)="createNewMenu()">
+                Create menu
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="createMenu === false && isOwner === true">
+    <div *ngFor="let category of menu.categories" class="menu-category-component">
+        <div class="menu-category-header">
+            {{ category.category | titlecase }}
+
+            <div *ngIf="category.createItem == false" class="circle-button" style="margin-left: 10px"
+                 (click)="openCreateItemCategory(category.category)">+</div>
+            <div *ngIf="category.createItem == true" class="circle-button" style="margin-left: 10px"
+                 (click)="closeCreateItemCategory(category.category)">-</div>
+        </div>
+        <div class="menu-category-container">
+            <div *ngFor="let item of category.items" class="menu-category-item">
+                <div class="menu-category-item-header">
+                    <div *ngIf="item.recipe != null">
+                        {{ item.recipe.name }}
+                        <div (click)="goToRecipe(item.recipe.name)">
+                            <img src="assets/link.png" alt="">
+                        </div>
+                    </div>
+                    <div *ngIf="item.recipe === null" class="menu-category-item-link-button">
+                        {{ item.name }}
+                    </div>
+                    <div>
+                        {{ item.price | currency }}
+                    </div>
+                </div>
+                <div class="menu-category-item-description">
+                    {{ item.description }}
+                </div>
+            </div>
+            <div *ngIf="category.createItem === true" class="menu-category-container-add-item-container">
+                <div class="add-item-container-left">
+                    <input class="input-style" style="font-size: 20px" placeholder="Name" [(ngModel)]="newItemName">
+                    <input class="input-style" style="font-size: 20px" placeholder="Price" [(ngModel)]="newItemPrice">
+                    <input class="input-style" style="font-size: 20px" placeholder="Description" [(ngModel)]="newItemDescription">
+                </div>
+                <div class="add-item-container-right">
+                    <div class="button-style" style="width: 175px; font-size: 25px; height: 50px;">
+                        Link to recipe
+                    </div>
+                </div>
+                <div class="add-item-container-right">
+                    <div class="button-style" style="width: 150px; font-size: 25px; height: 50px;"
+                    (click)="createNewItem(category.category)">
+                        Create
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="menu-category-component">
+        <div class="menu-category-header menu-category-header-edit">
+            <input class="input-style " placeholder="Add new category" [(ngModel)]="newCategoryName">
+            <div class="button-style" style="width: 150px" (click)="createNewCategory()">
+                Create
+            </div>
+        </div>
+    </div>
+    <div class="button-style center-component-margin" style="width: 150px" (click)="updateMenuItems()">
+        Save
+    </div>
+</div>
+
+<div *ngIf="createMenu === false && isOwner === false">
+    <div *ngFor="let category of menu.categories" class="menu-category-component">
+        <div class="menu-category-header">
+            {{ category.category | titlecase }}
+        </div>
+        <div class="menu-category-container">
+            <div *ngFor="let item of category.items" class="menu-category-item">
+                <div class="menu-category-item-header">
+                    <div *ngIf="item.recipe != null">
+                        {{ item.recipe.name }}
+                    </div>
+                    <div *ngIf="item.recipe === null">
+                        {{ item.name }}
+                    </div>
+                    <div>
+                        {{ item.price | currency }}
+                    </div>
+                </div>
+                <div class="menu-category-item-description">
+                    {{ item.description }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

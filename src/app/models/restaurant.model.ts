@@ -1,5 +1,6 @@
 import {PersonModel} from "./person.model";
 import {BaseEntityModel} from "./baseEntity.model";
+import {MenuModel} from "./menu.model";
 
 export class RestaurantModel extends BaseEntityModel{
     name: string;
@@ -17,6 +18,7 @@ export class RestaurantModel extends BaseEntityModel{
     instagramLink: string;
     facebookLink: string;
     partnerSince: Date;
+    menu: MenuModel;
     owner: PersonModel;
     rating: number;
 

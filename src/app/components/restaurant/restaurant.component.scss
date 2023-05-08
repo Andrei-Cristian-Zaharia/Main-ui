@@ -3,7 +3,7 @@
 
     .restaurant-banner {
         background-repeat: no-repeat;
-        width: 100%;
+        flex: 1;
         height: 400px;
         overflow: hidden;
         margin: auto;
@@ -22,9 +22,34 @@
     display: flex;
 
     .restaurant-page-main {
-        width: 100%;
+        flex: 4;
         height: auto;
         align-self: flex-start;
+
+        .restaurant-page-main-header {
+            display: flex;
+            justify-content: center;
+
+            .restaurant-page-main-header-button {
+                padding: 5px 15px 5px 15px;
+                margin-left: 2px;
+                margin-right: 2px;
+                width: 100%;
+                height: 35px;
+                text-align: center;
+                cursor: pointer;
+                font-size: 20px;
+                background: #ef6666;
+            }
+
+            .restaurant-page-main-header-overview {
+                border-radius: 5px 0 0 5px;
+            }
+
+            .restaurant-page-main-header-menu {
+                border-radius: 0 5px 5px 0;
+            }
+        }
 
         .restaurant-page-main-component {
             margin: 20px 0;
@@ -38,7 +63,7 @@
     }
 
     .restaurant-page-summary {
-        width: 400px;
+        flex: 1;
         height: auto;
         min-height: 600px;
         margin-left: 30px;

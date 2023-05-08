@@ -52,6 +52,7 @@ import { SaveButtonComponent } from './components/utils/save-button/save-button.
 import { ProfileRestaurantComponent } from './components/utils/profile-restaurant/profile-restaurant.component';
 import { AuthorComponent } from './components/utils/author/author.component';
 import { CreateMenuComponent } from './components/utils/create-menu/create-menu.component';
+import { MenuComponent } from './components/menu/menu.component';
 
 @NgModule({
     declarations: [
@@ -80,7 +81,8 @@ import { CreateMenuComponent } from './components/utils/create-menu/create-menu.
         SaveButtonComponent,
         ProfileRestaurantComponent,
         AuthorComponent,
-        CreateMenuComponent
+        CreateMenuComponent,
+        MenuComponent
     ],
     imports: [
         BrowserModule,

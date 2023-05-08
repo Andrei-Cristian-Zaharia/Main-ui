@@ -5,17 +5,32 @@
 
     <div class="restaurant-page">
         <div class="restaurant-page-main main-component">
-            <div class="restaurant-page-main-component">
-                <p class="restaurant-page-main-component-title">Description</p>
-                {{ restaurant.description }}
-            </div>
-            <div class="restaurant-page-main-component">
-                <p class="restaurant-page-main-component-title">Announcements</p>
-                {{ restaurant.pageText }}
-            </div>
-            <div class="restaurant-page-main-component">
-                <p class="restaurant-page-main-component-title">We are hiring !</p>
-                {{ restaurant.employAnnounce }}
+                <div class="restaurant-page-main-header">
+                    <div class="restaurant-page-main-header-button restaurant-page-main-header-overview"
+                         (click)="showOverview()">
+                        Overview
+                    </div>
+                    <div class="restaurant-page-main-header-button restaurant-page-main-header-menu"
+                         (click)="showMenu()">
+                        Menu
+                    </div>
+                </div>
+                <div *ngIf="displayOverview">
+                    <div class="restaurant-page-main-component">
+                        <p class="restaurant-page-main-component-title">Description</p>
+                        {{ restaurant.description }}
+                    </div>
+                    <div class="restaurant-page-main-component">
+                        <p class="restaurant-page-main-component-title">Announcements</p>
+                        {{ restaurant.pageText }}
+                    </div>
+                    <div class="restaurant-page-main-component">
+                        <p class="restaurant-page-main-component-title">We are hiring !</p>
+                        {{ restaurant.employAnnounce }}
+                    </div>
+                </div>
+            <div *ngIf="displayMenu">
+                <menu *ngIf="menu != null" [menu]="menu" [isOwner]="isOwner" [restaurantId]="restaurant.id"></menu>
             </div>
         </div>
         <div class="restaurant-page-summary main-component">
@@ -25,8 +40,8 @@
                     <i>Our partner since: {{ restaurant.partnerSince }}</i>
                 </div>
             </div>
-            <author class="center-component" [person]="restaurant.owner"/>
-            <rate class="center-component" [value]="restaurant.rating" [type]="rateType.rating"/>
+            <author class="center-component-flex" [person]="restaurant.owner"/>
+            <rate class="center-component-flex" [value]="restaurant.rating" [type]="rateType.rating"/>
             <div class="restaurant-page-summary-component">
                 <div class="restaurant-page-summary-component-title">
                     Address:
@@ -35,10 +50,8 @@
                     {{ restaurant.addressLocation }}
                 </div>
             </div>
-            <div class="restaurant-page-summary-button center-component">
-                <div class="restaurant-page-summary-button-text">
-                    Display virtual menu
-                </div>
+            <div class="button-style center-component-margin" style="width: 200px">
+                Display virtual menu
             </div>
             <div class="restaurant-page-summary-contact restaurant-page-summary-component">
                 <div class="restaurant-page-summary-component-title">

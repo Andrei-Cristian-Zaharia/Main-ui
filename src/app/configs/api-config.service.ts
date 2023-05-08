@@ -14,6 +14,8 @@ export class ApiConfig {
     private _REVIEW_API: string = this._LOCALHOST +':3005/v1/core-api/review';
     private _RESTAURANT_API: string = this._LOCALHOST + ':3005/v1/restaurant-api/restaurant';
     private _SAVED_RECIPES_API: string = this._LOCALHOST + ':3005/v1/food-api/savedRecipes';
+    private _MENU_API: string = this._LOCALHOST + ':3005/v1/restaurant-api/menu';
+    private _MENU_ITEM_API: string = this._LOCALHOST + ':3005/v1/restaurant-api/menuItem';
 
 
     get PERSON_API(): string {
@@ -46,6 +48,14 @@ export class ApiConfig {
 
     get SAVED_RECIPES_API(): string {
         return this._SAVED_RECIPES_API;
+    }
+
+    get MENU(): string {
+        return this._MENU_API;
+    }
+
+    get MENU_ITEM(): string {
+        return this._MENU_ITEM_API;
     }
 
     get HOST_URL(): string {

@@ -22,7 +22,6 @@ export class IngredientService {
         return this.http.get<string[]>(this.apiConfig.INGREDIENT_API  + "all/name");
     }
 
-
     getAllIngredientsByCategory() {
         return this.http.get<IngredientsByCategoryModel>(this.apiConfig.INGREDIENT_API + "all/byCategory");
     }

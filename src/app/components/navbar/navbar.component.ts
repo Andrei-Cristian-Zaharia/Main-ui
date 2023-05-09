@@ -58,7 +58,6 @@ export class NavbarComponent implements OnInit {
         this.qrcode.update(this.qrcode.config, {
             data: this.currentURL
         }).subscribe((res) => {
-            // TO DO something!
         });
     }
 
@@ -96,6 +95,10 @@ export class NavbarComponent implements OnInit {
     }
 
     goToProfile() {
+        this.router.navigate(['/my-profile']);
+    }
+
+    goToAdmin() {
         this.router.navigate(['/my-profile']);
     }
 

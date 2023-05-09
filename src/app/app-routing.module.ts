@@ -44,7 +44,6 @@ const routes: Routes = [
     { path: '',  redirectTo: '/recipes', pathMatch: 'full' },
     {
         path: '', component: OverviewComponent, children: [
-            // {path: 'recipes', component: RecipeComponent, canActivate: [LoginGuard] },
             {path: 'recipes', component: RecipeComponent },
             {path: 'recipes/:favorites', component: RecipeComponent },
             {path: 'recipe', component: RecipePageComponent },

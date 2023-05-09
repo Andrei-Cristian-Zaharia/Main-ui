@@ -33,10 +33,16 @@
         <div class="menu-category-container">
             <div *ngFor="let item of category.items" class="menu-category-item">
                 <div class="menu-category-item-header">
-                    <div *ngIf="item.recipe != null">
+                    <div *ngIf="item.recipe != null" class="menu-category-item-link-button">
                         {{ item.recipe.name }}
                         <div (click)="goToRecipe(item.recipe.name)">
                             <img src="assets/link.png" alt="">
+                        </div>
+                        <div (click)="openEditItem(item, category.category)">
+                            <img src="assets/edit.png" alt="">
+                        </div>
+                        <div (click)="deleteMenuItem(item.id)">
+                            <img src="assets/delete-button.png" alt="">
                         </div>
                     </div>
                     <div *ngIf="item.recipe === null" class="menu-category-item-link-button">
@@ -57,14 +63,18 @@
                     <input class="input-style" style="font-size: 20px" placeholder="Description" [(ngModel)]="newItemDescription">
                 </div>
                 <div class="add-item-container-right">
-                    <div class="button-style" style="width: 175px; font-size: 25px; height: 50px;">
-                        Link to recipe
-                    </div>
+                    <p-dropdown [options]="recipes" [(ngModel)]="newItemRecipe" optionLabel="name" [filter]="true"
+                                filterBy="name" [showClear]="true" placeholder="Link recipe">
+                    </p-dropdown>
                 </div>
                 <div class="add-item-container-right">
-                    <div class="button-style" style="width: 150px; font-size: 25px; height: 50px;"
-                    (click)="createNewItem(category.category)">
+                    <div *ngIf="saveEdit === false" class="button-style" style="width: 150px; font-size: 25px; height: 50px;"
+                    (click)="createNewItem(category.category, null)">
                         Create
+                    </div>
+                    <div *ngIf="saveEdit === true" class="button-style" style="width: 150px; font-size: 25px; height: 50px;"
+                         (click)="createNewItem(category.category, newItemId)">
+                        Save
                     </div>
                 </div>
             </div>

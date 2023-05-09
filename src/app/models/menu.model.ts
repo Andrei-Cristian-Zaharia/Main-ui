@@ -31,11 +31,17 @@ export class MenuItem {
     new: boolean = false;
     recipe: RecipeModel;
 
-    constructor(price: number, name: string, description: string, recipe: RecipeModel) {
+    constructor(id: number, price: number, name: string, description: string, recipe: RecipeModel) {
         this.price = price;
         this.name = name;
         this.new = true;
         this.description = description;
+
+        if (id != null) {
+            this.id = id;
+        } else {
+            id = null;
+        }
 
         if (recipe === null || recipe === undefined) {
             this.recipe = null;

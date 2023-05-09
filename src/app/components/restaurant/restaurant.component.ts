@@ -54,7 +54,6 @@ export class RestaurantComponent {
     getMenu() {
         this.menuService.getCategorisedMenu(this.restaurant.menu.id).subscribe(data => {
             this.menu = data;
-            console.log("Menu", this.menu);
         })
     }
 

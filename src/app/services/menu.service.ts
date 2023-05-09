@@ -30,6 +30,10 @@ export class MenuService {
         return this.http.post(this.apiConfig.MENU + '/updateItems', body, this.getOptions())
     }
 
+    deleteMenuItem(id: number) {
+        return this.http.delete(this.apiConfig.MENU_ITEM + "/delete?id=" + id, this.getOptions());
+    }
+
     getOptions() {
         return {
             headers: new HttpHeaders({

@@ -1,21 +1,3 @@
-<!--<div class="container" *ngIf="!isMobile">-->
-<!--    <div>-->
-<!--        <button pButton type="button" label="Recipes" class="menu-button" (click)="goToRecipes()"></button>-->
-<!--        <div class="menu-button" *ngIf="userLogged == true && user.hasRestaurant == true">-->
-<!--            <button pButton type="button" label="Restaurant"></button>-->
-<!--        </div>-->
-<!--        <div class="menu-button" *ngIf="userLogged == true">-->
-<!--            <button pButton type="button" label="Create recipe" (click)="showCreateRecipeDialog()"></button>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <div class="right-container">-->
-<!--        <div *ngIf="userLogged == true">-->
-<!--            <button pButton type="button" class="p-button-raised" label="{{ user.username.at(0) | uppercase }}"-->
-<!--                    (click)="op.toggle($event)"></button>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--</div>-->
-
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <section class="top-nav">
     <div class="qr-container" *ngIf="!isMobile">
@@ -31,6 +13,7 @@
         <li class="menu-element" *ngIf="isMobile" (click)="goToFavouriteRecipes()">Saved</li>
         <li class="menu-element" *ngIf="userLogged == true" (click)="showCreateRecipeDialog()">Create recipe</li>
         <li class="menu-element" *ngIf="userLogged == true" (click)="goToProfile()">Profile</li>
+        <li class="menu-element" *ngIf="userLogged == true && user.accountType == 'ADMIN'" (click)="goToAdmin()">Admin</li>
         <li class="menu-element" *ngIf="userLogged == true" (click)="logout()">Logout</li>
         <li class="menu-element" *ngIf="userLogged == false" (click)="login()">Login</li>
     </ul>

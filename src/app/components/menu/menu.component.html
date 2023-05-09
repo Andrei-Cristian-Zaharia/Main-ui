@@ -47,6 +47,12 @@
                     </div>
                     <div *ngIf="item.recipe === null" class="menu-category-item-link-button">
                         {{ item.name }}
+                        <div (click)="openEditItem(item, category.category)">
+                            <img src="assets/edit.png" alt="">
+                        </div>
+                        <div (click)="deleteMenuItem(item.id)">
+                            <img src="assets/delete-button.png" alt="">
+                        </div>
                     </div>
                     <div>
                         {{ item.price | currency }}

@@ -53,6 +53,7 @@ export class MenuComponent implements OnInit {
             this.createMenu = true;
         } else {
             this.menu.categories.forEach(cat => cat.createItem = false);
+            this.getRecipes();
         }
     }
 
@@ -116,32 +117,36 @@ export class MenuComponent implements OnInit {
         if (itemId != null) {
             this.menu.categories.find(cat => cat.category == categoryName)
                 .items.find(itm => {
-                itm.name = this.newItemName;
-                itm.price = this.newItemPrice;
-                itm.description = this.newItemDescription;
-                itm.recipe = this.newItemRecipe;
+                if (itm.id == itemId) {
+                    itm.name = this.newItemName;
+                    itm.price = this.newItemPrice;
+                    itm.description = this.newItemDescription;
+                    itm.recipe = this.newItemRecipe;
 
-                let body = {
-                    menuId: this.menu.menuId,
-                    price: itm.price,
-                    name: itm.recipe != null ? itm.recipe.name : itm.name,
-                    description: itm.description,
-                    category: categoryName,
-                    recipeId: itm.recipe != undefined ? itm.recipe.id : null
+                    let body = {
+                        id: itm.id,
+                        menuId: this.menu.menuId,
+                        price: itm.price,
+                        name: itm.recipe != null ? itm.recipe.name : itm.name,
+                        description: itm.description,
+                        category: categoryName,
+                        recipeId: itm.recipe != undefined ? itm.recipe.id : null
+                    }
+
+                    this.menuService.createMenuItem(body).subscribe(data => {
+                        this.currentMenuItems.push(data.id);
+                        console.log(data)
+                    });
+
+                    this.init();
                 }
-
-                this.menuService.createMenuItem(body).subscribe(data => {
-                    this.currentMenuItems.push(data.id);
-                    console.log(data)
-                });
-
-                this.init();
             });
         } else {
             this.menu.categories.find(cat => cat.category == categoryName)
                 .items.push(new MenuItem(itemId, this.newItemPrice, this.newItemName, this.newItemDescription, this.newItemRecipe));
         }
 
+        console.log(this.menu.categories)
         this.closeCreateItemCategory(categoryName);
     }
 
@@ -156,7 +161,6 @@ export class MenuComponent implements OnInit {
     openCreateItemCategory(categoryName: string) {
         this.menu.categories.forEach(cat => cat.createItem = false);
         this.menu.categories.find(cat => cat.category == categoryName).createItem = true;
-        this.getRecipes();
         this.saveEdit = false;
     }
 

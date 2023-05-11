@@ -90,6 +90,10 @@ export class NavbarComponent implements OnInit {
         this.router.navigate(['/recipes']);
     }
 
+    goToRestaurants() {
+        this.router.navigate(['/restaurants']);
+    }
+
     goToFavouriteRecipes() {
         this.router.navigate(['/recipes'], { queryParams: {favorites:'show'}});
     }

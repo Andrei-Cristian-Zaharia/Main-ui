@@ -51,13 +51,14 @@
                 justify-content: space-between;
 
                 .menu-category-item-link-button {
+                    font-size: 22px;
                     display: flex;
 
                     img {
                         margin-left: 10px;
                         margin-bottom: 4px;
-                        width: 20px;
-                        height: 20px;
+                        width: 30px;
+                        height: 30px;
                         cursor: pointer;
                     }
                 }
@@ -68,6 +69,7 @@
 
                 .menu-category-item-header-price {
                     margin-right: 50px;
+                    font-size: 20px;
                 }
             }
         }
@@ -75,7 +77,7 @@
         .menu-category-item-description {
             margin-top: 5px;
             font-style: italic;
-            font-size: 15px;
+            font-size: 20px;
         }
 
         .menu-category-container-add-item-container {

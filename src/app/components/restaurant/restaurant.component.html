@@ -20,17 +20,17 @@
                         <p class="restaurant-page-main-component-title">Description</p>
                         {{ restaurant.description }}
                     </div>
-                    <div class="restaurant-page-main-component">
+                    <div *ngIf="restaurant.pageText != ''" class="restaurant-page-main-component">
                         <p class="restaurant-page-main-component-title">Announcements</p>
                         {{ restaurant.pageText }}
                     </div>
-                    <div class="restaurant-page-main-component">
+                    <div *ngIf="restaurant.employAnnounce != ''" class="restaurant-page-main-component">
                         <p class="restaurant-page-main-component-title">We are hiring !</p>
                         {{ restaurant.employAnnounce }}
                     </div>
                 </div>
             <div *ngIf="displayMenu">
-                <menu *ngIf="menu != null" [menu]="menu" [isOwner]="isOwner" [restaurantId]="restaurant.id"></menu>
+                <menu *ngIf="restaurant.menu.id != null" [menuId]="restaurant.menu.id" [isOwner]="isOwner" [restaurantId]="restaurant.id"></menu>
             </div>
         </div>
         <div class="restaurant-page-summary main-component">
@@ -49,9 +49,6 @@
                 <div>
                     {{ restaurant.addressLocation }}
                 </div>
-            </div>
-            <div class="button-style center-component-margin" style="width: 200px">
-                Display virtual menu
             </div>
             <div class="restaurant-page-summary-contact restaurant-page-summary-component">
                 <div class="restaurant-page-summary-component-title">

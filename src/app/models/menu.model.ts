@@ -1,4 +1,4 @@
-import {RecipeModel} from "./recipe.model";
+import {BasicRecipeModel, RecipeModel} from "./recipe.model";
 import {MenuService} from "../services/menu.service";
 
 export class MenuModel {
@@ -29,9 +29,9 @@ export class MenuItem {
     name: string;
     description: string;
     new: boolean = false;
-    recipe: RecipeModel;
+    recipe: BasicRecipeModel;
 
-    constructor(id: number, price: number, name: string, description: string, recipe: RecipeModel) {
+    constructor(id: number, price: number, name: string, description: string, recipe: BasicRecipeModel) {
         this.price = price;
         this.name = name;
         this.new = true;

@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MenuCategorisedModel, MenuCategory, MenuItem} from "../../models/menu.model";
 import {MenuService} from "../../services/menu.service";
-import {RecipeModel} from "../../models/recipe.model";
+import {BasicRecipeModel, RecipeModel} from "../../models/recipe.model";
 import {Router} from "@angular/router";
 import {RecipeService} from "../../services/recipe.service";
 import {CookieService} from "ngx-cookie-service";
@@ -14,7 +14,7 @@ import {CookieService} from "ngx-cookie-service";
 export class MenuComponent implements OnInit {
 
     @Input()
-    menu: MenuCategorisedModel;
+    menuId: number;
 
     @Input()
     isOwner: boolean;
@@ -22,6 +22,7 @@ export class MenuComponent implements OnInit {
     @Input()
     restaurantId: number;
 
+    menu: MenuCategorisedModel;
     createMenu: boolean = false;
 
     menuName: string;
@@ -36,7 +37,7 @@ export class MenuComponent implements OnInit {
     newItemPrice: number;
     newItemName: string = "";
     newItemDescription: string = "";
-    newItemRecipe: RecipeModel;
+    newItemRecipe: BasicRecipeModel;
     recipes: RecipeModel[];
 
     newItemId: number;
@@ -49,12 +50,16 @@ export class MenuComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        if (this.menu === undefined) {
+        if (this.menuId === undefined) {
             this.createMenu = true;
         } else {
-            this.menu.categories.forEach(cat => cat.createItem = false);
+            this.getMenu();
             this.getRecipes();
         }
+
+        console.log(this.menuId)
+
+
     }
 
     createNewMenu() {
@@ -96,7 +101,7 @@ export class MenuComponent implements OnInit {
             "itemsList": this.currentMenuItems
         }
 
-        await this.sleep(2000);
+        await this.sleep(1000);
 
         this.menuService.updateMenuItems(body).subscribe(data => console.log("Menu updated !"));
     }
@@ -169,6 +174,15 @@ export class MenuComponent implements OnInit {
         this.init();
     }
 
+    getMenu() {
+        this.menuService.getCategorisedMenu(this.menuId).subscribe(data => {
+            this.menu = data;
+            this.menu.categories.forEach(cat => cat.createItem = false);
+
+            console.log("Menu", this.menu)
+        })
+    }
+
     goToRecipe(recipe: string) {
         this.router.navigateByUrl('recipe?name=' + recipe);
     }
@@ -178,11 +192,20 @@ export class MenuComponent implements OnInit {
         this.menu.categories.find(cat => cat.category == categoryName).createItem = true;
         this.menu.categories.find(cat => cat.category == categoryName).items.find(it => {
             if (it.id == item.id) {
-                this.newItemId = it.id;
-                this.newItemPrice = it.price;
-                this.newItemDescription = it.description;
-                this.newItemName = it.name;
-                this.newItemRecipe = it.recipe;
+                it.name = item.name;
+                it.price = item.price;
+                it.description = item.description
+                it.recipe = item.recipe;
+                this.newItemId = item.id;
+                this.newItemPrice = item.price;
+                this.newItemDescription = item.description;
+                this.newItemName = item.name;
+                if (item.recipe != null) {
+                    this.newItemRecipe = this.recipes.find(r => r.id === item.recipe.id);
+                }
+                console.log(item.recipe)
+                console.log(this.newItemRecipe)
+                console.log(this.recipes)
 
                 return true;
             } else {
@@ -195,5 +218,7 @@ export class MenuComponent implements OnInit {
 
     deleteMenuItem(id: number) {
         this.menuService.deleteMenuItem(id).subscribe();
+        this.menu = null;
+        this.getMenu();
     }
 }

@@ -2,7 +2,7 @@ import {PersonModel} from "./person.model";
 import {IngredientModel} from "./ingredient.model";
 import {BaseEntityModel} from "./baseEntity.model";
 
-export class RecipeModel extends BaseEntityModel {
+export class BasicRecipeModel extends  BaseEntityModel {
     name: string;
     description: string;
     howToPrepare: string;
@@ -13,8 +13,16 @@ export class RecipeModel extends BaseEntityModel {
     vegan: boolean;
     imageAddress: string;
     person: PersonModel;
+
+    constructor(category: string) {
+        super("RECIPE");
+    }
+}
+
+export class RecipeModel extends BasicRecipeModel {
+
     saved: boolean;
-    ingredientList: IngredientModel[];
+    ingredientList: IngredientModel[] = new Array<IngredientModel>();
 
     constructor() {
         super("RECIPE");

@@ -53,6 +53,7 @@ import { ProfileRestaurantComponent } from './components/utils/profile-restauran
 import { AuthorComponent } from './components/utils/author/author.component';
 import { CreateMenuComponent } from './components/utils/create-menu/create-menu.component';
 import { MenuComponent } from './components/menu/menu.component';
+import { RestaurantsComponent } from './components/restaurants/restaurants.component';
 
 @NgModule({
     declarations: [
@@ -82,7 +83,8 @@ import { MenuComponent } from './components/menu/menu.component';
         ProfileRestaurantComponent,
         AuthorComponent,
         CreateMenuComponent,
-        MenuComponent
+        MenuComponent,
+        RestaurantsComponent
     ],
     imports: [
         BrowserModule,

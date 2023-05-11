@@ -35,8 +35,12 @@ export class ProfileRestaurantComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        if (this.user.hasRestaurant) {
+        if (this.user != null && this.user.hasRestaurant) {
             this.getRestaurant();
+        } else {
+            if (this.restaurant != null) {
+                this.isLoaded = true;
+            }
         }
     }
 

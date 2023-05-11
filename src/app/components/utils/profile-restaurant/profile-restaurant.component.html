@@ -1,5 +1,5 @@
 <div *ngIf="isLoaded">
-    <div class="profile-restaurant-container" *ngIf="user.hasRestaurant; else noRestaurant">
+    <div class="profile-restaurant-container" *ngIf="(user != null && user.hasRestaurant) || restaurant != null; else noRestaurant">
         <div class="profile-section-title">
         </div>
         <div class="profile-restaurant-container-base">

@@ -20,7 +20,7 @@
     </div>
 </div>
 
-<div *ngIf="createMenu === false && isOwner === true">
+<div *ngIf="createMenu === false && isOwner === true && menu != null">
     <div *ngFor="let category of menu.categories" class="menu-category-component">
         <div class="menu-category-header">
             {{ category.category | titlecase }}
@@ -54,7 +54,7 @@
                             <img src="assets/delete-button.png" alt="">
                         </div>
                     </div>
-                    <div>
+                    <div class="menu-category-item-header-price">
                         {{ item.price | currency }}
                     </div>
                 </div>
@@ -107,13 +107,19 @@
         <div class="menu-category-container">
             <div *ngFor="let item of category.items" class="menu-category-item">
                 <div class="menu-category-item-header">
-                    <div *ngIf="item.recipe != null">
+                    <div *ngIf="item.recipe != null" class="menu-category-item-link-button">
                         {{ item.recipe.name }}
+                        <div *ngIf="item.recipe.vegan" pTooltip="Vegan food" tooltipPosition="top">
+                            <img src="assets/vegan.png" alt="">
+                        </div>
+                        <div (click)="goToRecipe(item.recipe.name)" pTooltip="Visit recipe page" tooltipPosition="top">
+                            <img src="assets/link.png" alt="">
+                        </div>
                     </div>
-                    <div *ngIf="item.recipe === null">
+                    <div *ngIf="item.recipe === null" class="menu-category-item-link-button">
                         {{ item.name }}
                     </div>
-                    <div>
+                    <div class="menu-category-item-header-price">
                         {{ item.price | currency }}
                     </div>
                 </div>

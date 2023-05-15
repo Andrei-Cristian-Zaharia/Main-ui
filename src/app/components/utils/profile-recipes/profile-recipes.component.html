@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div class="recipe-view-container" *ngIf="type === 'VIEW'">
-                <save-button [recipe]="recipe" (outRecipe)="updateUserSaveList($event)"/>
+                <save-button [entity]="recipe" (outRecipe)="updateUserSaveList($event)"/>
                 <time-display [value]="recipe.time"/>
                 <rate style="margin-top: 4px" [type]="rateType.difficulty" [value]="recipe.difficulty"/>
             </div>

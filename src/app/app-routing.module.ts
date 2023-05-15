@@ -68,6 +68,7 @@ const routes: Routes = [
         path: '', component: OverviewComponent, children: [
             {path: 'recipes', component: RecipeComponent},
             {path: 'restaurants', component: RestaurantsComponent},
+            {path: 'restaurants/:favorites', component: RestaurantsComponent},
             {path: 'recipes/:favorites', component: RecipeComponent},
             {path: 'recipe', component: RecipePageComponent},
             {path: 'recipe/:name', component: RecipePageComponent},

@@ -141,9 +141,7 @@ export class RecipeComponent implements OnInit {
     refreshRecipes(): void {
         this.activatedRoute.queryParamMap.subscribe(params => {
 
-            if (this.user != null &&
-                this.activatedRoute.snapshot.queryParams['favorites'] &&
-                params.get('favorites') === 'show') {
+            if (this.user != null && this.activatedRoute.snapshot.queryParams['favorites'] && params.get('favorites') === 'show') {
                 this.showFavorites = false;
                 this.recipeService.getFavoriteListFiltered(
                     this.user.emailAddress,

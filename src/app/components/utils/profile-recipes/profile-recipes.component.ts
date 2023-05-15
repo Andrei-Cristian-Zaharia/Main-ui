@@ -14,7 +14,7 @@ import {PersonService} from "../../../services/person.service";
 import {RecipeModel} from "../../../models/recipe.model";
 import {RecipeService} from "../../../services/recipe.service";
 import {RateTypeEnum} from "../../../enums/rateType.enum";
-import {SaveRecipeFormModel} from "../../../models/saveRecipeForm.model";
+import {SaveEntityFormModel} from "../../../models/saveEntityFormModel";
 import {Router} from "@angular/router";
 
 @Component({
@@ -143,7 +143,7 @@ export class ProfileRecipesComponent implements OnInit {
         })
     }
 
-    updateUserSaveList(saveForm: SaveRecipeFormModel) {
+    updateUserSaveList(saveForm: SaveEntityFormModel) {
 
         if (saveForm.type == "ADD") {
             this.recipeService.addFavorite(saveForm.recipeId, this.user.id).subscribe(data =>

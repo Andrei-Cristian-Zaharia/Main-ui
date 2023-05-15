@@ -23,7 +23,6 @@ export class BasicRecipeModel extends  BaseEntityModel {
 
 export class RecipeModel extends BasicRecipeModel {
 
-    saved: boolean;
     ingredientList: IngredientModel[] = new Array<IngredientModel>();
 
     constructor() {

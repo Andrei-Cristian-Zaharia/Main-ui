@@ -56,12 +56,20 @@
     padding: 15px 10px 5px 10px;
 
     .filter-component {
-        padding: 10px;
+        padding: 0px;
     }
 
     input {
         text-align: center;
         font-size: 18px;
+    }
+
+    ::ng-deep .showFavoritesButton {
+        margin-top: -3px;
+    }
+
+    ::ng-deep .hideFavoritesButton {
+        margin-top: -3px;
     }
 
     .container-filter-component {

@@ -51,7 +51,7 @@ html, body {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    background: #00BAF0 linear-gradient(to left, #f0a04b, #ffa86e);
+    background: #00BAF0 linear-gradient(to left, #402e32, rgb(223, 224, 223));
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     color: #FFF;
     height: 50px;
@@ -181,7 +181,7 @@ hr {
 }
 
 .menu-element:hover {
-    border: 1px solid #ffbc68;
+    border: 1px solid #dfe0df;
     border-radius: 5px;
 }
 

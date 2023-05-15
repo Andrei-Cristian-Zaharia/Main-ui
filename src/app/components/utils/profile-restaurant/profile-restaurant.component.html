@@ -9,7 +9,7 @@
             <div class="right-panel-image">
                 <h2>{{ restaurant.name }}</h2>
                 <div class="profile-restaurant-rating">
-                    <rate [value]="4" [type]="rateType.rating"></rate>
+                    <rate [value]="restaurant.rating" [type]="rateType.rating" [imageSize]="30"></rate>
                 </div>
                 <div class="profile-restaurant-address">
                     <p class="profile-restaurant-title">Location of our restaurant:</p>
@@ -31,5 +31,4 @@
             <h4 class="subtitle-not-found">There is no restaurant to display.</h4>
         </div>
     </ng-template>
-
 </div>

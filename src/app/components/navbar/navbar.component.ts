@@ -23,7 +23,7 @@ export class NavbarComponent implements OnInit {
     public config: Options = {
         width: 130,
         height: 130,
-        image: "assets/recipe-logo.png",
+        image: "assets/ZAHA_LOGOGO.png",
         margin: 2,
         dotsOptions: {
             color: "f3b519",
@@ -103,7 +103,7 @@ export class NavbarComponent implements OnInit {
     }
 
     goToAdmin() {
-        this.router.navigate(['/my-profile']);
+        this.router.navigate(['/admin']);
     }
 
     goToRestaurant() {

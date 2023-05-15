@@ -32,6 +32,15 @@
     justify-content: space-evenly;
     justify-items: center;
 
+    ::ng-deep .p-dropdown:not(.p-disabled).p-focus {
+        border-color: #402E32;
+        box-shadow: none;
+    }
+
+    ::ng-deep .p-inputtext:enabled:hover {
+        border-color: #402E32;
+    }
+
     .veganContainer {
         display: flex;
         margin-top: 5px;
@@ -44,6 +53,30 @@
 
         .veganSwitch {
             margin-top: 4px;
+
+            ::ng-deep .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
+                background: #402E32;
+            }
+
+            ::ng-deep .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider:hover {
+                background: #402E32;
+            }
+
+            ::ng-deep .p-inputswitch .p-component.p-inputswitch-checked .p-focus {
+                border-color: #402E32;
+                outline: none;
+            }
+        }
+
+        ::ng-deep .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
+            background: #402E32;
+        }
+
+        ::ng-deep .p-inputswitch .p-component.p-inputswitch-checked .p-focus {
+            border-color: #402E32;
+            background: red;
+            outline: none;
+            box-shadow: #ba3636;
         }
     }
 
@@ -53,8 +86,11 @@
 .card-container {
     margin-top: 15px;
     margin-left: 20px;
-
     position: relative;
+
+    ::ng-deep .p-dropdown:hover {
+        border-color: #402E32;
+    }
 }
 
 .add-button {
@@ -89,6 +125,23 @@
 
     ::ng-deep .p-dropdown {
         width: 275px;
+
+        .p-inputtext:enabled:hover {
+            border-color: #402E32;
+        }
+
+        .p-inputtext:enabled:focus {
+            border-color: #402E32;
+        }
+    }
+
+    ::ng-deep .p-dropdown:focus {
+        border-color: #402E32;
+    }
+
+    ::ng-deep .p-dropdown:not(.p-disabled).p-focus {
+        border-color: #402E32;
+        box-shadow: none;
     }
 }
 
@@ -150,3 +203,20 @@
         top: 0;
     }
 }
+
+::ng-deep .p-button:enabled:hover {
+    background: #402E32;
+    border-color: #402E32;
+}
+
+::ng-deep .p-button {
+    background: #402E32;
+    border-color: #402E32;
+}
+
+::ng-deep .p-inputtext:hover{
+    border-color: #402E32;
+}
+
+
+

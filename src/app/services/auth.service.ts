@@ -69,6 +69,22 @@ export class AuthService {
         return this.result;
     }
 
+    async checkAdmin(): Promise<boolean> {
+        if (this.cookieService.check('token')) {
+            await this.http.get<boolean>(
+                this.apiConfig.AUTH_API + "/adminCheck?emailAddress=" + this.cookieService.get("emailAddress"),
+                this.getOptionsAuth(this.cookieService.get('token'))
+            ).toPromise()
+                .then(res => {
+                    this.result = res;
+                });
+        } else {
+            return false;
+        }
+
+        return this.result;
+    }
+
     getOptions() {
         return {
             headers: new HttpHeaders({

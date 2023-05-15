@@ -20,6 +20,7 @@ import {RestaurantComponent} from "./components/restaurant/restaurant.component"
 import {RegisterComponent} from "./components/register/register.component";
 import {MyProfileComponent} from "./components/my-profile/my-profile.component";
 import {RestaurantsComponent} from "./components/restaurants/restaurants.component";
+import {AdminPageComponent} from "./components/admin-page/admin-page.component";
 
 @Injectable()
 export class LoginGuard implements CanActivate {
@@ -41,19 +42,40 @@ export class LoginGuard implements CanActivate {
     }
 }
 
+@Injectable()
+export class AdminGuard implements CanActivate {
+
+    constructor(private authService: AuthService,
+                private router: Router) {
+    }
+
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot):
+        Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+
+        return this.authService.checkAdmin().then(session => {
+            if (!session) {
+                this.router.navigate(['login']);
+            }
+
+            return session;
+        });
+    }
+}
+
 const routes: Routes = [
-    { path: '',  redirectTo: '/recipes', pathMatch: 'full' },
+    {path: '', redirectTo: '/recipes', pathMatch: 'full'},
     {
         path: '', component: OverviewComponent, children: [
-            {path: 'recipes', component: RecipeComponent },
-            {path: 'restaurants', component: RestaurantsComponent },
-            {path: 'recipes/:favorites', component: RecipeComponent },
-            {path: 'recipe', component: RecipePageComponent },
-            {path: 'recipe/:name', component: RecipePageComponent },
-            {path: 'profile', component: ProfileComponent },
-            {path: 'profile/:username', component: ProfileComponent },
-            {path: 'restaurant', component: RestaurantComponent },
-            {path: 'restaurant/:name', component: RestaurantComponent },
+            {path: 'recipes', component: RecipeComponent},
+            {path: 'restaurants', component: RestaurantsComponent},
+            {path: 'recipes/:favorites', component: RecipeComponent},
+            {path: 'recipe', component: RecipePageComponent},
+            {path: 'recipe/:name', component: RecipePageComponent},
+            {path: 'profile', component: ProfileComponent},
+            {path: 'profile/:username', component: ProfileComponent},
+            {path: 'restaurant', component: RestaurantComponent},
+            {path: 'restaurant/:name', component: RestaurantComponent},
+            {path: 'admin', component: AdminPageComponent, canActivate: [AdminGuard]},
             {path: 'my-profile', component: MyProfileComponent, canActivate: [LoginGuard]}
         ]
     },

@@ -1,15 +1,20 @@
 <div class="restaurants-container">
     <div class="restaurants-filters main-component">
-        <div *ngIf="user != null && showFavorites === true" class="showFavoritesButton" tooltipPosition="top"
+        <div *ngIf="user != null && showFavorites === true" class="showFavoritesButton filter-component"
+             tooltipPosition="top"
              pTooltip="Show favorite restaurants"></div>
-        <div *ngIf="user != null && showFavorites === false" class="hideFavoritesButton" tooltipPosition="top"
+        <div *ngIf="user != null && showFavorites === false" class="hideFavoritesButton filter-component"
+             tooltipPosition="top"
              pTooltip="Show all restaurants"></div>
-        <span class="p-input-icon-left">
+        <span class="p-input-icon-left filter-component">
             <i class="pi pi-search"></i>
             <input type="text" pInputText [(ngModel)]="filterRestaurantName" placeholder="Search restaurant name"
                    (ngModelChange)="getRestaurants()">
         </span>
-        <rate [value]="filterRating" [type]="rateType.rating" [readonly]="false" [imageSize]="40"
+        <p-inputSwitch class="publicSwitch filter-component" [(ngModel)]="showPublic"
+                       pTooltip="Show ACTIVE/INACTIVE" tooltipPosition="top"></p-inputSwitch>
+        <rate class="filter-component" [value]="filterRating" [type]="rateType.rating" [readonly]="false"
+              [imageSize]="40"
               (selectedValue)="updateRatingFilter($event)" (contextmenu)="resetRatingFilter($event)"></rate>
     </div>
     <div *ngFor="let restaurant of restaurants" class="main-component">

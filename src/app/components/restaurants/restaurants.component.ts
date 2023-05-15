@@ -15,14 +15,14 @@ export class RestaurantsComponent {
 
     restaurants: RestaurantModel[];
 
-    filterRestaurantName: string;
-
-    filterRating: number = 0;
-
     user: PersonBasicInfoModel;
 
-    showFavorites: boolean;
+    showFavorites: boolean = false;
+    showPublic: boolean;
     rateType = RateTypeEnum;
+
+    filterRestaurantName: string = "";
+    filterRating: number = 0;
 
     constructor(private restaurantService: RestaurantService,
                 private personService: PersonService,
@@ -32,7 +32,12 @@ export class RestaurantsComponent {
     }
 
     getRestaurants() {
-        this.restaurantService.getRestaurants().subscribe(data => {
+        let body = {
+            filterName: this.filterRestaurantName,
+            rating: this.filterRating
+        }
+
+        this.restaurantService.getRestaurantsFiltered(body).subscribe(data => {
             this.restaurants = data;
         })
     }

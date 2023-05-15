@@ -1,6 +1,4 @@
 .profile-restaurant-container {
-    height: 500px;
-
     .profile-restaurant-container-base {
         padding: 20px;
         width: 100%;
@@ -10,8 +8,8 @@
 
         .left-panel-image {
             img {
-                height: 450px;
-                width: 900px;
+                height: 300px;
+                width: 600px;
                 object-fit: cover;
                 border-bottom-left-radius: 20px;
                 border-top-left-radius: 20px;
@@ -19,39 +17,68 @@
         }
 
         .right-panel-image {
-            padding: 10px 15px 10px;
+            padding: 10px 50px 10px;
             text-align: center;
             position: relative;
             width: 100%;
-            height: 450px;
 
             .profile-restaurant-address {
-                padding: 20px 0 20px;
+                padding: 10px 0 20px;
                 width: 60%;
                 margin: auto;
             }
 
             .profile-restaurant-details {
-                height: auto;
                 width: 100%;
+                height: 80px;
                 max-font-size: 15px;
                 font-size: 0.8vw;
+                text-align: justify;
+                display: -webkit-box;
+                overflow: hidden;
+                -webkit-line-clamp: 4;
+                -webkit-box-orient: vertical;
+            }
+
+            .profile-restaurant-title {
+                text-align: center;
+                margin-bottom: 5px;
+                font-size: 18px;
             }
 
             .profile-restaurant-rating {
-                padding-top: 10px;
+                padding-top: 5px;
                 padding-bottom: 5px;
             }
 
             .right-panel-button-container {
-                position: absolute;
-                bottom: 0;
+                position: relative;
+                bottom: -30px;
                 left: 50%;
                 transform: translate(-50%, 0);
+
+                ::ng-deep .p-dropdown:hover {
+                    border-color: #402E32;
+                }
             }
         }
     }
 }
+
+::ng-deep .p-button:enabled:hover {
+    background: #402E32;
+    border-color: #402E32;
+}
+
+::ng-deep .p-button {
+    background: #402E32;
+    border-color: #402E32;
+}
+
+::ng-deep .p-inputtext:hover{
+    border-color: #402E32;
+}
+
 
 @media only screen and (max-width: 1400px) {
     .profile-restaurant-container {
@@ -78,13 +105,21 @@
 
             .right-panel-image {
                 height: auto;
+                padding: 10px 2px;
+
                 .profile-restaurant-details {
+                    height: auto;
                     font-size: 15px;
+                    -webkit-line-clamp: 16;
+                }
+
+                .profile-restaurant-address {
+                    width: 90%;
                 }
 
                 .right-panel-button-container {
-                    position: relative;
-                    padding-top: 20px;
+                    bottom: -20px;
+                    padding-top: 10px;
                 }
             }
         }

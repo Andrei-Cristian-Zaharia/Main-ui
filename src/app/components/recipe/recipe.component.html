@@ -1,7 +1,10 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 <div class="banner">
-    <img style="width: 100%;" alt="" src="assets/food-banner.jpg">
+    <div style="height: 373px">
+
+    </div>
+<!--    <img style="width: 100%;" alt="" src="assets/fresh-vegetables-table_1_edited.jpg">-->
     <button pButton type="button" label="Select ingredients" (click)="toggleShowIngredients()"
             class="ingredients-button"></button>
 </div>
@@ -66,42 +69,35 @@
 </div>
 <!-- END MOBILE SEARCH -->
 
-<div class="selected-ingredients" *ngIf="selectedIngredients.length > 0">
-    <h4>Selected ingredients:&nbsp;</h4>
-    <div class="text-container" *ngFor="let ingredient of selectedIngredients">
-        <h4>{{ ingredient.name }},&nbsp;</h4>
-    </div>
-</div>
-
 <div class="filterContainer" *ngIf="!isMobile">
     <div *ngIf="user != null && showFavorites === true" class="showFavoritesButton" tooltipPosition="top"
          pTooltip="Show favorite recipes" (click)="goToFavouriteRecipes()"></div>
     <div *ngIf="user != null && showFavorites === false" class="hideFavoritesButton" tooltipPosition="top"
          pTooltip="Show all recipes" (click)="goToRecipes()"></div>
-    <div>
+    <div class="filter-component">
         <span class="p-input-icon-left">
             <i class="pi pi-search"></i>
             <input type="text" pInputText [(ngModel)]="filterRecipeName" placeholder="Search recipe name"
                    (ngModelChange)="refreshRecipes()">
         </span>
     </div>
-    <div>
+    <div class="filter-component">
         <span class="p-input-icon-left">
             <i class="pi pi-search"></i>
             <input type="text" pInputText [(ngModel)]="filterAuthorName" placeholder="Search author name"
                    (ngModelChange)="refreshRecipes()">
         </span>
     </div>
-    <div class="container-filter-component">
+    <div class="filter-component"class="container-filter-component">
         <p class="indicator-text">Prepare time: {{ sliderText }}</p>
         <p-slider [(ngModel)]="rangeValues" [min]="1" [max]="600" [range]="true"
                   (onChange)="changeSliderValue()"></p-slider>
     </div>
-    <rate [value]="filterRating" [type]="rateType.rating" [readonly]="false" [imageSize]="40"
+    <rate class="filter-component" [value]="filterRating" [type]="rateType.rating" [readonly]="false" [imageSize]="40"
           (selectedValue)="updateRatingFilter($event)" (contextmenu)="resetRatingFilter($event)"></rate>
-    <rate [value]="filterDifficulty" [type]="rateType.difficulty" [readonly]="false" [imageSize]="40"
+    <rate class="filter-component"[value]="filterDifficulty" [type]="rateType.difficulty" [readonly]="false" [imageSize]="40"
           (selectedValue)="updateDifficultyFilter($event)" (contextmenu)="resetDifficultyFilter($event)"></rate>
-    <rate [value]="filterSpiciness" [type]="rateType.spiciness" [readonly]="false" [imageSize]="40"
+    <rate class="filter-component"[value]="filterSpiciness" [type]="rateType.spiciness" [readonly]="false" [imageSize]="40"
           (selectedValue)="updateSpicinessFilter($event)" (contextmenu)="resetSpicinessFilter($event)"></rate>
 </div>
 <div class="background-component">

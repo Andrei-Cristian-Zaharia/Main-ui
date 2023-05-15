@@ -56,6 +56,14 @@ export class RecipeService {
         return this.http.get<string[]>(this.apiConfig.RECIPE_API + "/favoriteNames?email=" + email);
     }
 
+    getAllPossibleRecipes() {
+        return this.http.get<RecipeModel[]>(this.apiConfig.RECIPE_API + "/all/possible", this.getOptions());
+    }
+
+    saveRecipe(body) {
+        return this.http.post<RecipeModel>(this.apiConfig.RECIPE_API + "/save/status", body, this.getOptions());
+    }
+
     getOptions() {
         return {
             headers: new HttpHeaders({

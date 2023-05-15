@@ -26,6 +26,14 @@ export class RestaurantService {
         return this.http.get<RestaurantModel[]>(this.apiConfig.RESTAURANT_API + "/all");
     }
 
+    getRestaurantsFiltered(body) {
+        return this.http.post<RestaurantModel[]>(this.apiConfig.RESTAURANT_API + "/all/filtered", body);
+    }
+
+    saveRestaurant(body) {
+        return this.http.post<RestaurantModel>(this.apiConfig.RESTAURANT_API + "/save/status", body, this.getOptions());
+    }
+
     getOptions() {
         return {
             headers: new HttpHeaders({

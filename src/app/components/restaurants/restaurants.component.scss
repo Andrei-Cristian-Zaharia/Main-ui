@@ -4,5 +4,34 @@
 
 .restaurants-filters {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-evenly;
+
+    .filter-component {
+        margin: 20px 0;
+    }
+
+    .publicSwitch {
+        margin-top: 25px;
+
+        ::ng-deep .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
+            background: #402E32;
+        }
+
+        ::ng-deep .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider:hover {
+            background: #402E32;
+        }
+
+        ::ng-deep .p-inputswitch .p-component.p-inputswitch-checked .p-focus {
+            border-color: #402E32;
+            outline: none;
+        }
+    }
+}
+
+@media only screen and (max-width: 1400px) {
+
+    .restaurants-container {
+        padding: 10px 10px;
+    }
 }

@@ -30,7 +30,11 @@
                     </div>
                 </div>
             <div *ngIf="displayMenu">
-                <menu *ngIf="restaurant.menu.id != null" [menuId]="restaurant.menu.id" [isOwner]="isOwner" [restaurantId]="restaurant.id"></menu>
+                <menu *ngIf="restaurant.menu.id != null"
+                      [menuId]="restaurant.menu.id"
+                      [isOwner]="isOwner"
+                      [restaurantId]="restaurant.id">
+                </menu>
             </div>
         </div>
         <div class="restaurant-page-summary main-component">
@@ -55,7 +59,7 @@
                     Contact info:
                 </div>
                 <div>
-                    Telephone number: {{ restaurant.telephone }}
+                    Telephone number: 0{{ restaurant.telephone }}
                 </div>
                 <div>
                     Email: {{ restaurant.emailAddress }}

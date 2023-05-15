@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
-import {AppRoutingModule, LoginGuard} from './app-routing.module';
+import {AdminGuard, AppRoutingModule, LoginGuard} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {NavbarComponent} from './components/navbar/navbar.component';
 import {RecipeComponent} from './components/recipe/recipe.component';
@@ -54,6 +54,9 @@ import { AuthorComponent } from './components/utils/author/author.component';
 import { CreateMenuComponent } from './components/utils/create-menu/create-menu.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { RestaurantsComponent } from './components/restaurants/restaurants.component';
+import { AdminPageComponent } from './components/admin-page/admin-page.component';
+import {TableModule} from "primeng/table";
+import {TagModule} from "primeng/tag";
 
 @NgModule({
     declarations: [
@@ -84,7 +87,8 @@ import { RestaurantsComponent } from './components/restaurants/restaurants.compo
         AuthorComponent,
         CreateMenuComponent,
         MenuComponent,
-        RestaurantsComponent
+        RestaurantsComponent,
+        AdminPageComponent
     ],
     imports: [
         BrowserModule,
@@ -111,10 +115,13 @@ import { RestaurantsComponent } from './components/restaurants/restaurants.compo
         NgxQrcodeStylingModule,
         PasswordModule,
         ToastModule,
-        InputSwitchModule
+        InputSwitchModule,
+        TableModule,
+        TagModule
     ],
     providers: [
         LoginGuard,
+        AdminGuard,
         ApiConfig
     ],
     bootstrap: [AppComponent]

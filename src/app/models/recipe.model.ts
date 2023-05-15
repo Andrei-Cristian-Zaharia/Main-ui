@@ -13,6 +13,8 @@ export class BasicRecipeModel extends  BaseEntityModel {
     vegan: boolean;
     imageAddress: string;
     person: PersonModel;
+    status: string;
+    publicRecipe: boolean;
 
     constructor(category: string) {
         super("RECIPE");

@@ -1,5 +1,6 @@
 <div *ngIf="isLoaded">
-    <div class="profile-restaurant-container" *ngIf="(user != null && user.hasRestaurant) || restaurant != null; else noRestaurant">
+    <div class="profile-restaurant-container"
+         *ngIf="(user != null && user.hasRestaurant) || restaurant != null; else noRestaurant">
         <div class="profile-section-title">
         </div>
         <div class="profile-restaurant-container-base">
@@ -22,6 +23,9 @@
                 <div class="right-panel-button-container">
                     <p-button label="Visit restaurant page" (onClick)="goToRestaurant(restaurant.name)"></p-button>
                 </div>
+            </div>
+            <div *ngIf="restaurant.id != null && restaurant.saved != null">
+                <save-button [id]="restaurant.id" [saved]="restaurant.saved" (outResult)="updateUserSaveList($event)"/>
             </div>
         </div>
     </div>

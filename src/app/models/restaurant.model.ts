@@ -23,6 +23,6 @@ export class RestaurantModel extends BaseEntityModel{
     rating: number;
 
     constructor() {
-        super("RESTAURANT");
+        super("RESTAURANT", false);
     }
 }

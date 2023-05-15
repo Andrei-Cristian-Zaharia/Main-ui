@@ -3,6 +3,7 @@
     background-image: url('../../../../assets/unfavorite.png');
     transition: background-image .2s ease-out .2s;
     background-size: contain;
+    cursor: pointer;
     height: 45px;
     width: 45px;
 }
@@ -18,6 +19,7 @@
     background-image: url('../../../../assets/favorite.png');
     transition: background-image .2s ease-out .2s;
     background-size: contain;
+    cursor: pointer;
     height: 45px;
     width: 45px;
 }

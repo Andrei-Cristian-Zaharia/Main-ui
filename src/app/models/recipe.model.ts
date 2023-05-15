@@ -17,7 +17,7 @@ export class BasicRecipeModel extends  BaseEntityModel {
     publicRecipe: boolean;
 
     constructor(category: string) {
-        super("RECIPE");
+        super("RECIPE", false);
     }
 }
 
@@ -27,6 +27,5 @@ export class RecipeModel extends BasicRecipeModel {
 
     constructor() {
         super("RECIPE");
-        this.saved = false;
     }
 }

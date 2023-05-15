@@ -10,6 +10,20 @@
                          [style]="{ height: headerSize + 'rem' }">
                         <p class="recipe-card-hover-name">{{ recipe.name }}</p>
                     </div>
+                    <div class="recipe-status">
+                        <div *ngIf="recipe.status === 'APPROVED'"
+                             pTooltip="Verified" tooltipPosition="top">
+                            <img src="assets/verified.png" alt="">
+                        </div>
+                        <div *ngIf="recipe.status === 'WAITING'"
+                             pTooltip="Waiting for approve" tooltipPosition="top">
+                            <img src="assets/waiting.png" alt="">
+                        </div>
+                        <div *ngIf="recipe.status === 'DENIED'"
+                             pTooltip="Verification failed" tooltipPosition="top">
+                            <img src="assets/decline.png" alt="">
+                        </div>
+                    </div>
                 </div>
             </ng-template>
             <div class="recipe-buttons-container" *ngIf="type === 'EDIT'">
@@ -22,7 +36,7 @@
                 </div>
             </div>
             <div class="recipe-view-container" *ngIf="type === 'VIEW'">
-                <save-button [entity]="recipe" (outRecipe)="updateUserSaveList($event)"/>
+                <save-button [id]="recipe.id" [saved]="recipe.saved" (outResult)="updateUserSaveList($event)"/>
                 <time-display [value]="recipe.time"/>
                 <rate style="margin-top: 4px" [type]="rateType.difficulty" [value]="recipe.difficulty"/>
             </div>

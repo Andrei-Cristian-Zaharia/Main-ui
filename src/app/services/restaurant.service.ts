@@ -34,6 +34,28 @@ export class RestaurantService {
         return this.http.post<RestaurantModel>(this.apiConfig.RESTAURANT_API + "/save/status", body, this.getOptions());
     }
 
+    addFavorite(restaurantId: number, userId: number) {
+        let body = {
+            "restaurantId": restaurantId,
+            "userId": userId
+        }
+        return this.http.post<string>(this.apiConfig.RESTAURANT_API + "/addFavorite", body, this.getOptions());
+    }
+
+    removeFavorite(restaurantId: number, userId: number) {
+        return this.http.delete(this.apiConfig.SAVED_RESTAURANTS_API + "/delete?restaurantId=" + restaurantId + "&userId=" + userId,
+            this.getOptions()
+        );
+    }
+
+    getFavoriteListFiltered(email: string, body) {
+        return this.http.post<RestaurantModel[]>(this.apiConfig.RESTAURANT_API + "/favoriteListFiltered?email=" + email, body);
+    }
+
+    getFavoriteListNames(email: string) {
+        return this.http.get<string[]>(this.apiConfig.RESTAURANT_API + "/favoriteNames?email=" + email);
+    }
+
     getOptions() {
         return {
             headers: new HttpHeaders({

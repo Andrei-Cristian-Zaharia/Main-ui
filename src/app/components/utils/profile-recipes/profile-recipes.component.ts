@@ -3,8 +3,7 @@ import {
     EventEmitter,
     Input,
     OnInit,
-    Output,
-    ViewEncapsulation
+    Output
 } from '@angular/core';
 import {PersonBasicInfoModel} from "../../../models/personBasicInfo.model";
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
@@ -146,12 +145,12 @@ export class ProfileRecipesComponent implements OnInit {
     updateUserSaveList(saveForm: SaveEntityFormModel) {
 
         if (saveForm.type == "ADD") {
-            this.recipeService.addFavorite(saveForm.recipeId, this.user.id).subscribe(data =>
+            this.recipeService.addFavorite(saveForm.entityId, this.user.id).subscribe(data =>
                 this.refreshFavoriteNames(true)
             );
         }
         else if (saveForm.type == "REMOVE") {
-            this.recipeService.removeFavorite(saveForm.recipeId, this.user.id).subscribe(data =>
+            this.recipeService.removeFavorite(saveForm.entityId, this.user.id).subscribe(data =>
                 this.refreshFavoriteNames(true)
             );
         }
@@ -164,6 +163,10 @@ export class ProfileRecipesComponent implements OnInit {
     showCreateRecipeDialog(recipe: RecipeModel) {
         this.selectedRecipe = recipe;
         this.createRecipeDialog = true;
+    }
+
+    deleteRecipe(recipe) {
+
     }
 
     hideCreateRecipeDialog() {

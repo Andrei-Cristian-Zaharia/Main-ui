@@ -1,0 +1,295 @@
+<p-toast position="top-right" [baseZIndex]="5000">
+    <ng-template let-message pTemplate="message">
+        <div class="flex flex-column" style="flex: 1">
+            <div class="text-center">
+                <h4>{{message.summary}}</h4>
+                <p>{{message.detail}}</p>
+            </div>
+        </div>
+    </ng-template>
+</p-toast>
+
+<div class="admin-container">
+    <div class="admin-table-container main-component">
+        <p-table #usersTable [value]="users" [tableStyle]="{'min-width': '60rem'}" [paginator]="true" [rows]="5"
+                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                 [rowsPerPageOptions]="[5, 10, 25, 50]">
+            <ng-template pTemplate="caption">
+                <div class="table-header">
+                    Users
+                    <p-button icon="pi pi-refresh" (click)="getAllUsers()"></p-button>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="id">
+                        Id
+                        <p-sortIcon field="id"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="username">
+                        Username
+                        <p-sortIcon field="username"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="emailAddress">
+                        Email address
+                        <p-sortIcon field="emailAddress"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="hasRestaurant">
+                        Restaurant owner
+                        <p-sortIcon field="hasRestaurant"></p-sortIcon>
+                    </th>
+                    <th>Account type</th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th>
+                        <p-columnFilter type="text" field="username"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="emailAddress"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="boolean" field="hasRestaurant"></p-columnFilter>
+                    </th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-user>
+                <tr>
+                    <td>
+                        {{ user.id }}
+                    </td>
+                    <td><input type="text" pInputText [(ngModel)]="user.username"></td>
+                    <td><input type="text" pInputText [(ngModel)]="user.emailAddress"></td>
+                    <td>{{ user.hasRestaurant }}</td>
+                    <td>
+                        <p-dropdown [options]="accountTypes" [editable]="true" placeholder="Measurement"
+                                    [showClear]="true" [(ngModel)]="user.accountType" [autoDisplayFirst]="false"
+                                    class="space"></p-dropdown>
+                    </td>
+                    <td>
+                        <div class="save-button">
+                            <img src="assets/checked.png" alt="" pTooltip="Save" tooltipPosition="top"
+                                 (click)="saveUser(user)">
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+    <div class="admin-table-container main-component">
+        <p-table #recipesTable [value]="recipes" [tableStyle]="{'min-width': '60rem'}" [paginator]="true" [rows]="5"
+                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                 [rowsPerPageOptions]="[5, 10, 25, 50]">
+            <ng-template pTemplate="caption">
+                <div class="table-header">
+                    Recipes
+                    <p-button icon="pi pi-refresh" (click)="getAllRecipes()"></p-button>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="id">
+                        Id
+                        <p-sortIcon field="id"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="name">
+                        Name
+                        <p-sortIcon field="name"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="publicRecipe">
+                        Public
+                        <p-sortIcon field="publicRecipe"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="person.username">
+                        Owner
+                        <p-sortIcon field="person.username"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="status">Status <p-sortIcon field="status"></p-sortIcon></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th>
+                        <p-columnFilter type="text" field="name"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="boolean" field="publicRecipe"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="person.username"></p-columnFilter>
+                    </th>
+                    <th>
+                        Status
+                        <p-columnFilter field="status" matchMode="equals" display="menu">
+                            <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                <p-dropdown [ngModel]="value" [options]="recipesStatuses" (onChange)="filter($event.value)"
+                                            placeholder="Any">
+                                    <ng-template let-option pTemplate="item">
+                                        <p-tag [value]="option.value" [severity]="getRecipeStatus(option.label)"></p-tag>
+                                    </ng-template>
+                                </p-dropdown>
+                            </ng-template>
+                        </p-columnFilter>
+                    </th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-recipe>
+                <tr>
+                    <td>{{ recipe.id }}</td>
+                    <td>{{ recipe.name }}</td>
+                    <td>{{ recipe.publicRecipe }}</td>
+                    <td>{{ recipe.person.username }}</td>
+                    <td class="status-tag">
+                        <p-tag
+                            [ngClass]="{
+                            'status-tag-accepted': recipe.status == 'APPROVED',
+                            'status-tag-waiting': recipe.status == 'WAITING',
+                            'status-tag-denied': recipe.status == 'DENIED'
+                         }"
+                            [value]="recipe.status" [severity]="getRecipeStatus(recipe.status)"
+                            (click)="changeRecipeStatus(recipe)"></p-tag>
+                    </td>
+                    <td>
+                        <div class="button-style" (click)="selectRecipe(recipe)">
+                            View
+                        </div>
+                    </td>
+                    <td>
+                        <div class="save-button">
+                            <img src="assets/checked.png" alt="" pTooltip="Save" tooltipPosition="top"
+                                 (click)="saveRecipe(recipe)">
+                        </div>
+                    </td>
+                    <td>
+                        <div class="save-button">
+                            <img src="assets/delete.png" alt="" pTooltip="Delete" tooltipPosition="top"
+                                 (click)="deleteRecipe(recipe)">
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+    <div class="admin-table-container main-component">
+        <p-table #restaurantTable [value]="restaurants" [tableStyle]="{'min-width': '60rem'}" [paginator]="true" [rows]="5"
+                 currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                 [rowsPerPageOptions]="[5, 10, 25, 50]">
+            <ng-template pTemplate="caption">
+                <div class="table-header">
+                    Restaurants
+                    <p-button icon="pi pi-refresh" (click)="getAllRestaurants()"></p-button>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="id">
+                        Id
+                        <p-sortIcon field="id"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="name">
+                        Name
+                        <p-sortIcon field="name"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="telephone">
+                        Telephone
+                        <p-sortIcon field="telephone"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="emailAddress">
+                        Email address
+                        <p-sortIcon field="emailAddress"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="owner.username">
+                        Owner
+                        <p-sortIcon field="owner.username"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="status">Status <p-sortIcon field="status"></p-sortIcon></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th>
+                        <p-columnFilter type="text" field="name"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="telephone"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="emailAddress"></p-columnFilter>
+                    </th>
+                    <th>
+                        <p-columnFilter type="text" field="owner.username"></p-columnFilter>
+                    </th>
+                    <th>
+                        Status
+                        <p-columnFilter field="status" matchMode="equals" display="menu">
+                            <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                <p-dropdown [ngModel]="value" [options]="recipesStatuses" (onChange)="filter($event.value)"
+                                            placeholder="Any">
+                                    <ng-template let-option pTemplate="item">
+                                        <p-tag [value]="option.value" [severity]="getRecipeStatus(option.label)"></p-tag>
+                                    </ng-template>
+                                </p-dropdown>
+                            </ng-template>
+                        </p-columnFilter>
+                    </th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-restaurant>
+                <tr>
+                    <td>{{ restaurant.id }}</td>
+                    <td><input type="text" pInputText [(ngModel)]="restaurant.name"></td>
+                    <td><input type="text" maxlength="9" pInputText [(ngModel)]="restaurant.telephone"></td>
+                    <td><input type="text" pInputText [(ngModel)]="restaurant.emailAddress"></td>
+                    <td>{{ restaurant.owner.username }}</td>
+                    <td class="status-tag">
+                        <p-tag
+                            [ngClass]="{
+                            'status-tag-accepted': restaurant.status == 'ACTIVE',
+                            'status-tag-waiting': restaurant.status == 'WAITING',
+                            'status-tag-denied': restaurant.status == 'INACTIVE'
+                         }"
+                            [value]="restaurant.status" [severity]="getRestaurantStatus(restaurant.status)"
+                            (click)="changeRestaurantStatus(restaurant)"></p-tag>
+                    </td>
+                    <td>
+                        <div class="button-style" (click)="selectRestaurant(restaurant)">
+                            View
+                        </div>
+                    </td>
+                    <td>
+                        <div class="save-button">
+                            <img src="assets/checked.png" alt="" pTooltip="Save" tooltipPosition="top"
+                                 (click)="saveRestaurant(restaurant)">
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
+
+<p-dialog [(visible)]="viewRecipeDialog"
+          [style]="{width: '65vw', height: '50vw'}" [showHeader]="false"
+          [baseZIndex]="10000" [draggable]="false" [resizable]="false" [dismissableMask]="true" [modal]="true"
+          [closable]="true">
+    <recipe-view [recipe]="selectedRecipe"></recipe-view>
+</p-dialog>
+
+<p-dialog [(visible)]="viewRestaurantDialog"
+          [style]="{width: '65vw', height: '50vw'}" [showHeader]="false"
+          [baseZIndex]="10000" [draggable]="false" [resizable]="false" [dismissableMask]="true" [modal]="true"
+          [closable]="true">
+    <restaurant [restaurant]="selectedRestaurant"></restaurant>
+</p-dialog>
+

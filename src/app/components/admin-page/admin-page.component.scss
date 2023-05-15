@@ -1,0 +1,50 @@
+.admin-container {
+    padding: 30px 150px;
+
+    .admin-table-container {
+        padding: 10px;
+        margin: 20px 0;
+    }
+}
+
+.user-container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.table-header {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.save-button {
+    img {
+        height: 50px;
+        width: 50px;
+        cursor: pointer;
+    }
+}
+
+.status-tag {
+    cursor: pointer;
+}
+
+.status-tag-accepted {
+    ::ng-deep .p-tag {
+        background: #402E32;
+    }
+}
+
+.status-tag-waiting {
+    ::ng-deep .p-tag {
+        background: #783300;
+    }
+}
+
+.status-tag-denied {
+    ::ng-deep .p-tag {
+        background: #DFE0DF;
+        color: black;
+    }
+}

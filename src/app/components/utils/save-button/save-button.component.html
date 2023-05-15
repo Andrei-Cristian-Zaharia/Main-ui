@@ -1,6 +1,6 @@
-<div *ngIf="entity.saved === false" class="addToFavorite" tooltipPosition="top"
-     (click)="emitAddEntity(entity.id)" pTooltip="Save to favorites">
+<div *ngIf="saved === false" class="addToFavorite" tooltipPosition="top"
+     (click)="emitAddEntity()" pTooltip="Save to favorites">
 </div>
-<div *ngIf="entity.saved === true" class="removeFromFavorite" tooltipPosition="top"
-     (click)="emitRemoveEntity(entity.id)" pTooltip="Remove from favorites">
+<div *ngIf="saved === true" class="removeFromFavorite" tooltipPosition="top"
+     (click)="emitRemoveEntity()" pTooltip="Remove from favorites">
 </div>

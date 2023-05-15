@@ -1,6 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {SaveEntityFormModel} from "../../../models/saveEntityFormModel";
-import {BaseEntityModel} from "../../../models/baseEntity.model";
 
 @Component({
   selector: 'save-button',
@@ -10,25 +9,33 @@ import {BaseEntityModel} from "../../../models/baseEntity.model";
 export class SaveButtonComponent {
 
     @Input()
-    entity: BaseEntityModel;
+    id: number;
+
+    @Input()
+    saved: boolean;
 
     @Output()
-    outRecipe= new EventEmitter<SaveEntityFormModel>();
+    outResult = new EventEmitter<SaveEntityFormModel>();
 
-    emitAddEntity(id: number) {
-        let form = new SaveEntityFormModel();
-        form.entityId = id;
-        form.type = "ADD";
-
-        this.outRecipe.emit(form);
+    constructor() {
+        this.saved = false;
+        this.id = 2;
     }
 
-    emitRemoveEntity(id: number) {
+    emitAddEntity() {
+        let form = new SaveEntityFormModel();
+        form.entityId = this.id;
+        form.type = "ADD";
+
+        this.outResult.emit(form);
+    }
+
+    emitRemoveEntity() {
 
         let form = new SaveEntityFormModel();
-        form.entityId = id;
+        form.entityId = this.id;
         form.type = "REMOVE";
 
-        this.outRecipe.emit(form);
+        this.outResult.emit(form);
     }
 }

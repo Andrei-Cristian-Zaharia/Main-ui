@@ -64,6 +64,10 @@ export class RecipeService {
         return this.http.post<RecipeModel>(this.apiConfig.RECIPE_API + "/save/status", body, this.getOptions());
     }
 
+    deleteRecipe(id: number) {
+        return this.http.delete<void>(this.apiConfig.RECIPE_API + "/delete?id=" + id, this.getOptions());
+    }
+
     getOptions() {
         return {
             headers: new HttpHeaders({

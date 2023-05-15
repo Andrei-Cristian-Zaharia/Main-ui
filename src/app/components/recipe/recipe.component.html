@@ -112,13 +112,6 @@
     <!-- END SHOW RECIPES-->
 </div>
 
-<p-dialog header="Selected ingredients:" [(visible)]="selectedIngredientsDialog" [style]="{width: '50vw'}"
-          [baseZIndex]="10000" [draggable]="false" [resizable]="false" [dismissableMask]="true" [modal]="true">
-    <ng-template pTemplate="footer">
-
-    </ng-template>
-</p-dialog>
-
 <p-dialog header="{{selectedCategory | titlecase }}" [(visible)]="selectedIngredientCategoryDialog"
           [style]="{width: '50vw'}"
           [baseZIndex]="10000" [draggable]="false" [resizable]="false" [dismissableMask]="true" [modal]="true">

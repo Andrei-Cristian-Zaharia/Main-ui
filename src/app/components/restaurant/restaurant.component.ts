@@ -1,21 +1,20 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {RestaurantService} from "../../services/restaurant.service";
 import {RestaurantModel} from "../../models/restaurant.model";
 import {ActivatedRoute} from "@angular/router";
 import {RateTypeEnum} from "../../enums/rateType.enum";
 import {EntityTypeEnum} from "../../enums/entityType.enum";
 import {ReviewTypeEnum} from "../../enums/reviewType.enum";
-import {MenuService} from "../../services/menu.service";
-import {MenuCategorisedModel} from "../../models/menu.model";
 import {CookieService} from "ngx-cookie-service";
 
 @Component({
-  selector: 'app-restaurant',
+  selector: 'restaurant',
   templateUrl: './restaurant.component.html',
   styleUrls: ['./restaurant.component.scss']
 })
 export class RestaurantComponent {
 
+    @Input()
     restaurant: RestaurantModel;
 
     rateType = RateTypeEnum;
@@ -34,6 +33,13 @@ export class RestaurantComponent {
     }
 
     getRestaurantInfo() {
+        if (this.restaurant != null) {
+            this.restaurantService.getRestaurantByName(this.restaurant.name).subscribe(data => {
+                this.restaurant = data;
+                this.checkOwner();
+            })
+        }
+
         this.activatedRoute.queryParamMap.subscribe(params => {
             this.restaurantService.getRestaurantByName(params.get('name')).subscribe(data => {
                 this.restaurant = data;

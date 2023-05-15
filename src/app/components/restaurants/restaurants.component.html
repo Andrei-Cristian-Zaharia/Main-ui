@@ -1,7 +1,7 @@
 <div class="restaurants-container">
     <div class="restaurants-filters main-component">
         <div *ngIf="user != null && showFavorites === true" class="showFavoritesButton"
-             tooltipPosition="top"
+             tooltipPosition="top" (click)="goToAllRestaurants()"
              pTooltip="Show favorite restaurants"></div>
         <div *ngIf="user != null && showFavorites === false" class="hideFavoritesButton"
              tooltipPosition="top" (click)="goToFavouriteRestaurants()"
@@ -23,8 +23,13 @@
               [imageSize]="40"
               (selectedValue)="updateRatingFilter($event)" (contextmenu)="resetRatingFilter($event)"></rate>
     </div>
-    <div *ngFor="let restaurant of restaurants" class="main-component">
-        <profile-restaurant [restaurant]="restaurant"></profile-restaurant>
+    <div *ngIf="isLoaded">
+        <div *ngFor="let restaurant of restaurants" class="main-component">
+            <profile-restaurant [restaurant]="restaurant"
+                                [user]="user"
+                                (favoriteListUpdated)="refreshFavoriteNames()">
+            </profile-restaurant>
+        </div>
     </div>
 </div>
 

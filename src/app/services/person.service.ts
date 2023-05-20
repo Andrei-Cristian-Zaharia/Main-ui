@@ -4,31 +4,20 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {AuthService} from "./auth.service";
 import {PersonDetailsModel} from "../models/personDetails.model";
 import {PersonBasicInfoModel} from "../models/personBasicInfo.model";
+import {catchError, throwError} from "rxjs";
 
 @Injectable({
     providedIn: 'root'
 })
 export class PersonService {
 
+    status: string = null;
+
     constructor(
         @Inject(ApiConfig) private apiConfig: ApiConfig,
         private authService: AuthService,
         private http: HttpClient
-    ) {
-    }
-
-    createNewUser(username: string, emailAddress: string, password: string) {
-        let body = {
-            username: username,
-            emailAddress: emailAddress,
-            password: password
-        }
-
-        this.http.post(this.apiConfig.PERSON_API + "/create", body, this.getOptions())
-            .subscribe(data => {
-                this.authService.authLogin(emailAddress, password);
-            });
-    }
+    ) {}
 
     getPersonDetails(email: string) {
         return this.http.get<PersonBasicInfoModel>(

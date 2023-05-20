@@ -25,21 +25,20 @@
             padding: 0 15px;
         }
     }
+
+    .p-inputtext:enabled:focus {
+        border-color: #402E32;
+    }
+
+    .p-inputtext:enabled:hover {
+        border-color: #402E32;
+    }
 }
 
 .generalDetails {
     display: flex;
     justify-content: space-evenly;
     justify-items: center;
-
-    ::ng-deep .p-dropdown:not(.p-disabled).p-focus {
-        border-color: #402E32;
-        box-shadow: none;
-    }
-
-    ::ng-deep .p-inputtext:enabled:hover {
-        border-color: #402E32;
-    }
 
     .veganContainer {
         display: flex;
@@ -53,30 +52,6 @@
 
         .veganSwitch {
             margin-top: 4px;
-
-            ::ng-deep .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
-                background: #402E32;
-            }
-
-            ::ng-deep .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider:hover {
-                background: #402E32;
-            }
-
-            ::ng-deep .p-inputswitch .p-component.p-inputswitch-checked .p-focus {
-                border-color: #402E32;
-                outline: none;
-            }
-        }
-
-        ::ng-deep .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
-            background: #402E32;
-        }
-
-        ::ng-deep .p-inputswitch .p-component.p-inputswitch-checked .p-focus {
-            border-color: #402E32;
-            background: red;
-            outline: none;
-            box-shadow: #ba3636;
         }
     }
 
@@ -125,35 +100,11 @@
 
     ::ng-deep .p-dropdown {
         width: 275px;
-
-        .p-inputtext:enabled:hover {
-            border-color: #402E32;
-        }
-
-        .p-inputtext:enabled:focus {
-            border-color: #402E32;
-        }
-    }
-
-    ::ng-deep .p-dropdown:focus {
-        border-color: #402E32;
-    }
-
-    ::ng-deep .p-dropdown:not(.p-disabled).p-focus {
-        border-color: #402E32;
-        box-shadow: none;
     }
 }
 
 .p-card .p-card-content::-webkit-scrollbar {
     display: none; /* for Chrome, Safari, and Opera */
-}
-
-.insert-distance {
-    white-space: pre-wrap;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    width: 100%;
 }
 
 .difficulty-container {
@@ -171,25 +122,6 @@
     .difficulty-image {
         width: 40px;
         height: 40px;
-    }
-}
-
-.recipe-name-container{
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-
-    textarea {
-        font-weight: bold;
-        width: 500px;
-        resize: none;
-        text-align: center;
-        font-size: 27px;
-        border: none;
-    }
-
-    textarea:focus {
-        outline: none;
     }
 }
 

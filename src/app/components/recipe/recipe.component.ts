@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {RecipeService} from "../../services/recipe.service";
 import {RecipeModel} from "../../models/recipe.model";
 import {IngredientService} from "../../services/ingredient.service";
@@ -10,6 +10,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {PersonService} from "../../services/person.service";
 import {PersonBasicInfoModel} from "../../models/personBasicInfo.model";
 import {CookieService} from "ngx-cookie-service";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
     selector: 'app-recipe',
@@ -57,6 +58,7 @@ export class RecipeComponent implements OnInit {
                 private responsive: BreakpointObserver,
                 private router: Router,
                 private personService: PersonService,
+                private authService: AuthService,
                 private activatedRoute: ActivatedRoute,
                 private cookieService: CookieService) {
         this.ingredientService = ingredientService;
@@ -81,10 +83,9 @@ export class RecipeComponent implements OnInit {
     }
 
     getCurrentUser() {
-        if (this.cookieService.get('emailAddress') != null) {
-            this.personService.getPersonDetails(this.cookieService.get('emailAddress')).subscribe(data => {
-                this.user = data
-
+        if (this.cookieService.check('token')) {
+            this.authService.getUser(null).subscribe(data => {
+                this.user = data;
                 this.refreshFavoriteNames();
             });
         } else {
@@ -161,10 +162,9 @@ export class RecipeComponent implements OnInit {
         this.recipeService.getRecipesFilteredByIngredients(this.formFilters()).subscribe(result => {
             this.recipes = result;
 
-            if (this.user != null){
+            if (this.user != null) {
                 this.verifyFavorites();
-            }
-            else {
+            } else {
                 this.isLoaded = true;
             }
         })
@@ -173,7 +173,7 @@ export class RecipeComponent implements OnInit {
     formFilters() {
         let ingredients = this.selectedIngredients.map(i => i.name);
 
-        let filterForm = {
+        return {
             "recipeName": this.filterRecipeName,
             "authorName": this.filterAuthorName,
             "prepareTimeMin": this.rangeValues[0],
@@ -181,14 +181,13 @@ export class RecipeComponent implements OnInit {
             "rating": this.filterRating,
             "difficulty": this.filterDifficulty,
             "spiciness": this.filterSpiciness,
+            "status": "APPROVED",
             "ingredientsNames": ingredients
         }
-
-        return filterForm
     }
 
     verifyFavorites() {
-        if (this.favoriteNames != undefined){
+        if (this.favoriteNames != undefined) {
             this.recipes.forEach(recipe => {
                 recipe.saved = this.favoriteNames.includes(recipe.name);
                 this.isLoaded = true;
@@ -242,7 +241,8 @@ export class RecipeComponent implements OnInit {
         this.selectedIngredientCategoryDialog = true;
         this.selectedCategory = selectedCategory;
 
-        this.chooseIngredients = this.ingredients.categoryIngredients.find(c => c.categoryName == selectedCategory).ingredients;
+        this.chooseIngredients = this.ingredients.categoryIngredients
+            .find(c => c.categoryName == selectedCategory).ingredients;
     }
 
     toggleShowIngredients(): void {
@@ -282,7 +282,7 @@ export class RecipeComponent implements OnInit {
     }
 
     goToFavouriteRecipes() {
-        this.router.navigate(['/recipes'], { queryParams: {favorites:'show'}});
+        this.router.navigate(['/recipes'], {queryParams: {favorites: 'show'}});
     }
 }
 

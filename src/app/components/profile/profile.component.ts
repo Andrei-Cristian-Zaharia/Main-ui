@@ -45,7 +45,6 @@ export class ProfileComponent implements OnInit{
 
             this.personService.getPersonDetailsByUsername(params.get('name')).subscribe(data => {
                 this.user = data;
-                console.log(this.user)
 
                 this.getRestaurant();
                 this.getRecipes();
@@ -65,7 +64,12 @@ export class ProfileComponent implements OnInit{
     }
 
     getRecipes() {
-        this.recipeService.getRecipesForUser(this.user.username).subscribe(data => {
+        let body = {
+            "authorName": this.user.username,
+            "status" : 'APPROVED'
+        }
+
+        this.recipeService.getRecipesFilteredByIngredients(body).subscribe(data => {
             this.recipes = data;
         })
     }

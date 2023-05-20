@@ -40,12 +40,12 @@ export class CreateRecipeComponent implements OnInit {
     addedIngredients: AddIngredientModel[] = new Array<AddIngredientModel>;
 
     recipeName: string;
-    imageLink: string;
+    imageLink: string = "";
     prepareTime: string;
     difficulty: number = 0;
     spiciness: number = 0;
-    description: string;
-    howToPrepare: string;
+    description: string = "";
+    howToPrepare: string = "";
     isVegan: boolean;
 
     keysPressed = {};
@@ -138,49 +138,42 @@ export class CreateRecipeComponent implements OnInit {
 
         if (event.key === "i" && this.keysPressed['Control']) {
             textArea.value = textArea.value.substring(0, startPos) + this.imageComponent;
-            console.log(textArea.value);
         }
 
         if (event.key === "b" && this.keysPressed['Control']) {
             textArea.value = textArea.value.substring(0, startPos) + "<b>"
                 + textArea.value.substring(startPos, endPos) + "</b>"
                 + textArea.value.substring(endPos, textArea.textLength);
-            console.log(textArea.value);
         }
 
         if (event.key === "1" && this.keysPressed['Control']) {
             textArea.value = textArea.value.substring(0, startPos) + "<h1>"
                 + textArea.value.substring(startPos, endPos) + "</h1>"
                 + textArea.value.substring(endPos, textArea.textLength);
-            console.log(textArea.value);
         }
 
         if (event.key === "2" && this.keysPressed['Control']) {
             textArea.value = textArea.value.substring(0, startPos) + "<h2>"
                 + textArea.value.substring(startPos, endPos) + "</h2>"
                 + textArea.value.substring(endPos, textArea.textLength);
-            console.log(textArea.value);
         }
 
         if (event.key === "3" && this.keysPressed['Control']) {
             textArea.value = textArea.value.substring(0, startPos) + "<h3>"
                 + textArea.value.substring(startPos, endPos) + "</h3>"
                 + textArea.value.substring(endPos, textArea.textLength);
-            console.log(textArea.value);
         }
 
         if (event.key === "4" && this.keysPressed['Control']) {
             textArea.value = textArea.value.substring(0, startPos) + "<h4>"
                 + textArea.value.substring(startPos, endPos) + "</h4>"
                 + textArea.value.substring(endPos, textArea.textLength);
-            console.log(textArea.value);
         }
 
         if (event.key === "5" && this.keysPressed['Control']) {
             textArea.value = textArea.value.substring(0, startPos) + "<h5>"
                 + textArea.value.substring(startPos, endPos) + "</h5>"
                 + textArea.value.substring(endPos, textArea.textLength);
-            console.log(textArea.value);
         }
     }
 
@@ -209,7 +202,6 @@ export class CreateRecipeComponent implements OnInit {
         }
 
         this.recipeService.createNewRecipe(recipe).subscribe(result => {
-                console.log(result);
                 this.closeModal();
                 this.resetInputs();
             },

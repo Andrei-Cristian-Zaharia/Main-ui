@@ -5,30 +5,55 @@
 
     <div class="restaurant-page">
         <div class="restaurant-page-main main-component">
-                <div class="restaurant-page-main-header">
-                    <div class="restaurant-page-main-header-button restaurant-page-main-header-overview"
-                         (click)="showOverview()">
-                        Overview
-                    </div>
-                    <div class="restaurant-page-main-header-button restaurant-page-main-header-menu"
-                         (click)="showMenu()">
-                        Menu
-                    </div>
+            <div class="restaurant-page-main-header">
+                <div class="restaurant-page-main-header-button restaurant-page-main-header-overview"
+                     (click)="showOverview()">
+                    Overview
                 </div>
-                <div *ngIf="displayOverview">
+                <div class="restaurant-page-main-header-button restaurant-page-main-header-menu"
+                     (click)="showMenu()">
+                    Menu
+                </div>
+            </div>
+            <div *ngIf="displayOverview">
+                <div *ngIf="(restaurant.owner.username != user.username) || preview === true; else editAllowed">
                     <div class="restaurant-page-main-component">
                         <p class="restaurant-page-main-component-title">Description</p>
-                        {{ restaurant.description }}
+                        <p [innerHTML]="restaurant.description" class="paragraph-text-format"></p>
                     </div>
                     <div *ngIf="restaurant.pageText != ''" class="restaurant-page-main-component">
                         <p class="restaurant-page-main-component-title">Announcements</p>
-                        {{ restaurant.pageText }}
+                        <div [innerHTML]="restaurant.pageText" class="paragraph-text-format"></div>
                     </div>
                     <div *ngIf="restaurant.employAnnounce != ''" class="restaurant-page-main-component">
                         <p class="restaurant-page-main-component-title">We are hiring !</p>
-                        {{ restaurant.employAnnounce }}
+                        <div [innerHTML]="restaurant.employAnnounce" class="paragraph-text-format"></div>
                     </div>
                 </div>
+            </div>
+            <ng-template class="restaurant-page-edit" #editAllowed>
+                <div class="restaurant-page-main-component">
+                    <p class="restaurant-page-main-component-title">Description</p>
+                    <textarea id="DescriptionR" rows="1" class="insert-distance" pInputTextarea [autoResize]="true"
+                              [(ngModel)]="restaurant.description" (keydown)="formatText($event)"
+                              (keyup)="clearPressedKeys()">
+                        </textarea>
+                </div>
+                <div class="restaurant-page-main-component">
+                    <p class="restaurant-page-main-component-title">Announcements</p>
+                    <textarea id="AnnouncementsR" rows="1" class="insert-distance" pInputTextarea [autoResize]="true"
+                              [(ngModel)]="restaurant.pageText" (keydown)="formatText($event)"
+                              (keyup)="clearPressedKeys()">
+                        </textarea>
+                </div>
+                <div class="restaurant-page-main-component">
+                    <p class="restaurant-page-main-component-title">We are hiring !</p>
+                    <textarea id="HiringR" rows="1" class="insert-distance" pInputTextarea [autoResize]="true"
+                              [(ngModel)]="restaurant.employAnnounce" (keydown)="formatText($event)"
+                              (keyup)="clearPressedKeys()">
+                        </textarea>
+                </div>
+            </ng-template>
             <div *ngIf="displayMenu">
                 <menu *ngIf="restaurant.menu.id != null"
                       [menuId]="restaurant.menu.id"
@@ -36,8 +61,11 @@
                       [restaurantId]="restaurant.id">
                 </menu>
             </div>
+            <div *ngIf="restaurant.owner.username === user.username" style="width: 100px"
+                 class="button-style brown-button center-component-margin" (click)="saveRestaurant()">Save
+            </div>
         </div>
-        <div class="restaurant-page-summary main-component">
+        <div *ngIf="openFromView === false" class="restaurant-page-summary main-component">
             <div class="restaurant-page-summary-name restaurant-page-summary-component">
                 {{ restaurant.name }}
                 <div class="restaurant-page-summary-partner">
@@ -53,6 +81,17 @@
                 <div>
                     {{ restaurant.addressLocation }}
                 </div>
+            </div>
+            <div *ngIf="restaurant.owner.username === user.username"
+                class="button-style brown-button" style="width: 150px; margin: 10px auto"
+                 (click)="openMediaInfo=true">
+                Edit media info
+            </div>
+            <div *ngIf="restaurant.owner.username === user.username"
+                 class="button-style brown-button" style="width: 150px; margin: 10px auto"
+                 (click)="preview === false ? preview = true : preview = false">
+                <div *ngIf="preview">Edit page</div>
+                <div *ngIf="!preview">Preview</div>
             </div>
             <div class="restaurant-page-summary-contact restaurant-page-summary-component">
                 <div class="restaurant-page-summary-component-title">
@@ -82,8 +121,66 @@
         <review-content [entity]="restaurant"
                         [category]="entityType.RESTAURANT"
                         [reviewType]="reviewType.INSERT"
-                        [user]="restaurant.owner"
+                        [owner]="restaurant.owner"
                         (rating)="updateRestaurantRating($event)">
         </review-content>
     </div>
+</div>
+
+<div class="primeng-change">
+    <p-dialog [(visible)]="openMediaInfo"
+              [style]="{width: '60vw'}" [showHeader]="true"
+              [baseZIndex]="10000" [draggable]="false" [resizable]="false" [dismissableMask]="true" [modal]="true"
+              [closable]="true">
+        <div class="create-general-info">
+            <div class="links-container create-flex-1">
+                <div>
+                    <img src="assets/instagram-logo.png" alt="">
+                    <textarea style="resize: none; width: 400px" rows="1" pInputTextarea
+                              [autoResize]="false"
+                              [(ngModel)]="restaurant.instagramLink">
+                </textarea>
+                </div>
+                <div>
+                    <img src="assets/facebook-logo.png" alt="">
+                    <textarea style="resize: none; width: 400px" rows="1" pInputTextarea
+                              [autoResize]="false"
+                              [(ngModel)]="restaurant.facebookLink">
+                </textarea>
+                </div>
+                <div>
+                    <img src="assets/website.png" alt="">
+                    <textarea style="resize: none; width: 400px" rows="1" pInputTextarea
+                              [autoResize]="false"
+                              [(ngModel)]="restaurant.websiteAddress">
+                </textarea>
+                </div>
+            </div>
+
+            <div class="create-component create-flex-1">
+                <h2 class="create-component-title">Address</h2>
+                <textarea class="insert-distance" rows="3" style="resize: none"
+                          pInputTextarea [autoResize]="false" [(ngModel)]="restaurant.addressLocation">
+                </textarea>
+            </div>
+        </div>
+
+        <div class="create-component">
+            <h2 class="create-component-title">Front Image</h2>
+            <textarea class="insert-distance" rows="1" style="resize: none"
+                      pInputTextarea [autoResize]="false" [(ngModel)]="restaurant.frontImage">
+        </textarea>
+        </div>
+
+        <div class="create-component">
+            <h2 class="create-component-title">Banner Image</h2>
+            <textarea class="insert-distance" rows="1" style="resize: none"
+                      pInputTextarea [autoResize]="false" [(ngModel)]="restaurant.bannerImage">
+        </textarea>
+        </div>
+
+        <div style="width: 100px"
+             class="button-style brown-button center-component-margin" (click)="saveRestaurant()">Save
+        </div>
+    </p-dialog>
 </div>

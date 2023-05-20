@@ -68,7 +68,7 @@
                     <input class="input-style" style="font-size: 20px" placeholder="Price" [(ngModel)]="newItemPrice">
                     <input class="input-style" style="font-size: 20px" placeholder="Description" [(ngModel)]="newItemDescription">
                 </div>
-                <div class="add-item-container-right">
+                <div class="add-item-container-right primeng-change">
                     <p-dropdown [options]="recipes" [(ngModel)]="newItemRecipe" optionLabel="name" [filter]="true"
                                 filterBy="name" [showClear]="true" placeholder="Link recipe">
                     </p-dropdown>
@@ -99,7 +99,7 @@
     </div>
 </div>
 
-<div *ngIf="createMenu === false && isOwner === false">
+<div *ngIf="createMenu === false && isOwner === false && menu != null">
     <div *ngFor="let category of menu.categories" class="menu-category-component">
         <div class="menu-category-header">
             {{ category.category | titlecase }}

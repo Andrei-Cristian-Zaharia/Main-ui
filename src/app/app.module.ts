@@ -28,35 +28,41 @@ import {SliderModule} from 'primeng/slider';
 import {RecipeViewComponent} from './components/recipe/recipeComponents/recipe-view/recipe-view.component';
 import {TimeTransform} from "./pipes/time.pipe";
 import {TooltipModule} from 'primeng/tooltip';
-import { ProfileComponent } from './components/profile/profile.component';
-import { RecipePageComponent } from './components/recipe/recipeComponents/recipe-page/recipe-page.component';
+import {ProfileComponent} from './components/profile/profile.component';
+import {RecipePageComponent} from './components/recipe/recipeComponents/recipe-page/recipe-page.component';
 import {DataViewModule} from "primeng/dataview";
-import { RateComponent } from './components/utils/rate/rate.component';
+import {RateComponent} from './components/utils/rate/rate.component';
 import {SplitterModule} from "primeng/splitter";
-import { RestaurantComponent } from './components/restaurant/restaurant.component';
-import { RecipeDescriptionComponent } from './components/recipe/recipeComponents/recipeContainers/recipe-description/recipe-description.component';
-import { RecipeSummaryComponent } from './components/recipe/recipeComponents/recipeContainers/recipe-summary/recipe-summary.component';
-import { RecipeContentComponent } from './components/recipe/recipeComponents/recipeContainers/recipe-content/recipe-content.component';
-import { ReviewContentComponent } from './components/utils/review-content/review-content.component';
+import {RestaurantComponent} from './components/restaurant/restaurant.component';
+import {
+    RecipeDescriptionComponent
+} from './components/recipe/recipeComponents/recipeContainers/recipe-description/recipe-description.component';
+import {
+    RecipeSummaryComponent
+} from './components/recipe/recipeComponents/recipeContainers/recipe-summary/recipe-summary.component';
+import {
+    RecipeContentComponent
+} from './components/recipe/recipeComponents/recipeContainers/recipe-content/recipe-content.component';
+import {ReviewContentComponent} from './components/utils/review-content/review-content.component';
 import {NgxQRCodeModule} from "@techiediaries/ngx-qrcode";
 import {NgxQrcodeStylingModule} from "ngx-qrcode-styling";
 import {PasswordModule} from "primeng/password";
-import { MyProfileComponent } from './components/my-profile/my-profile.component';
-import { RecipesListComponent } from './components/utils/recipes-list/recipes-list.component';
-import { RegisterComponent } from './components/register/register.component';
-import { ToastModule } from 'primeng/toast';
+import {MyProfileComponent} from './components/my-profile/my-profile.component';
+import {RegisterComponent} from './components/register/register.component';
+import {ToastModule} from 'primeng/toast';
 import {InputSwitchModule} from "primeng/inputswitch";
-import { ProfileRecipesComponent } from './components/utils/profile-recipes/profile-recipes.component';
-import { TimeDisplayComponent } from './components/utils/time-display/time-display.component';
-import { SaveButtonComponent } from './components/utils/save-button/save-button.component';
-import { ProfileRestaurantComponent } from './components/utils/profile-restaurant/profile-restaurant.component';
-import { AuthorComponent } from './components/utils/author/author.component';
-import { CreateMenuComponent } from './components/utils/create-menu/create-menu.component';
-import { MenuComponent } from './components/menu/menu.component';
-import { RestaurantsComponent } from './components/restaurants/restaurants.component';
-import { AdminPageComponent } from './components/admin-page/admin-page.component';
+import {RecipesContainerComponent} from './components/utils/recipes-container/recipes-container.component';
+import {TimeDisplayComponent} from './components/utils/time-display/time-display.component';
+import {SaveButtonComponent} from './components/utils/save-button/save-button.component';
+import {ProfileRestaurantComponent} from './components/utils/profile-restaurant/profile-restaurant.component';
+import {AuthorComponent} from './components/utils/author/author.component';
+import {CreateMenuComponent} from './components/utils/create-menu/create-menu.component';
+import {MenuComponent} from './components/menu/menu.component';
+import {RestaurantsComponent} from './components/restaurants/restaurants.component';
+import {AdminPageComponent} from './components/admin-page/admin-page.component';
 import {TableModule} from "primeng/table";
 import {TagModule} from "primeng/tag";
+import { CreateRestaurantComponent } from './components/restaurant/create-restaurant/create-restaurant.component';
 
 @NgModule({
     declarations: [
@@ -78,9 +84,8 @@ import {TagModule} from "primeng/tag";
         RecipeContentComponent,
         ReviewContentComponent,
         MyProfileComponent,
-        RecipesListComponent,
         RegisterComponent,
-        ProfileRecipesComponent,
+        RecipesContainerComponent,
         TimeDisplayComponent,
         SaveButtonComponent,
         ProfileRestaurantComponent,
@@ -88,7 +93,8 @@ import {TagModule} from "primeng/tag";
         CreateMenuComponent,
         MenuComponent,
         RestaurantsComponent,
-        AdminPageComponent
+        AdminPageComponent,
+        CreateRestaurantComponent
     ],
     imports: [
         BrowserModule,

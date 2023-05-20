@@ -15,20 +15,17 @@ import {RecipeService} from "../../../services/recipe.service";
 import {RateTypeEnum} from "../../../enums/rateType.enum";
 import {SaveEntityFormModel} from "../../../models/saveEntityFormModel";
 import {Router} from "@angular/router";
+import {AuthService} from "../../../services/auth.service";
 
 @Component({
-    selector: 'profile-recipes',
-    templateUrl: './profile-recipes.component.html',
-    styleUrls: ['./profile-recipes.component.scss']
+    selector: 'recipes-container',
+    templateUrl: './recipes-container.component.html',
+    styleUrls: ['./recipes-container.component.scss']
 })
-export class ProfileRecipesComponent implements OnInit {
+export class RecipesContainerComponent implements OnInit {
 
     @Input()
     user: PersonBasicInfoModel;
-
-    isMobile: boolean;
-
-    rateType = RateTypeEnum;
 
     @Input()
     recipes: RecipeModel[];
@@ -57,6 +54,10 @@ export class ProfileRecipesComponent implements OnInit {
     @Input()
     mobileHeaderSize = 8.75;
 
+    isMobile: boolean;
+
+    rateType = RateTypeEnum;
+
     initialWidth: number;
     initialHeight: number;
     initialHeaderSize: number;
@@ -66,11 +67,14 @@ export class ProfileRecipesComponent implements OnInit {
 
     createRecipeDialog: boolean = false;
 
+    showApprovedOnly: boolean = false;
+
     constructor(private responsive: BreakpointObserver,
                 private reviewService: ReviewService,
                 private cookieService: CookieService,
                 private recipeService: RecipeService,
                 private personService: PersonService,
+                private authService: AuthService,
                 private router: Router) {
     }
 
@@ -99,10 +103,6 @@ export class ProfileRecipesComponent implements OnInit {
         if (this.recipes == null) {
             this.getCurrentUser();
         }
-
-        // if (this.type == "VIEW") {
-        //     this.getCurrentUser();
-        // }
     }
 
     showViewRecipeDialog(recipe) {
@@ -127,13 +127,15 @@ export class ProfileRecipesComponent implements OnInit {
     }
 
     getCurrentUser() {
-        this.personService.getPersonDetails(this.cookieService.get("emailAddress")).subscribe(data => {
-            this.user = data;
+        if (this.cookieService.check('token')) {
+            this.authService.getUser(null).subscribe(data => {
+                this.user = data;
 
-            if (this.type == "EDIT") {
-                this.getRecipes();
-            }
-        })
+                if (this.type == "EDIT") {
+                    this.getRecipes();
+                }
+            })
+        }
     }
 
     getRecipes() {
@@ -143,6 +145,8 @@ export class ProfileRecipesComponent implements OnInit {
     }
 
     updateUserSaveList(saveForm: SaveEntityFormModel) {
+        console.log(saveForm)
+        console.log(this.user)
 
         if (saveForm.type == "ADD") {
             this.recipeService.addFavorite(saveForm.entityId, this.user.id).subscribe(data =>

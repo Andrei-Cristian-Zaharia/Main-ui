@@ -39,7 +39,7 @@
 .login-content {
     //background-image: url('../src/assets/layered-waves-haikei (1).png');
     //background-repeat: repeat-x;
-    //background-image: url('../src/assets/Background_M.jpg');
+    background-image: url('../src/assets/Background_M.jpg');
     height: 100vh;
     width: 100%;
     display: flex;
@@ -49,7 +49,7 @@
 
 .login-form {
     border-radius: 5px;
-    background-color: #f0a04b;
+    background-color: #402E32;
     width: 300px;
     height: 50vh;
     position: relative;
@@ -57,11 +57,10 @@
     .login-text {
         padding: 15px;
         text-align: center;
-        box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px, rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px, rgba(0, 0, 0, 0.07) 0px 16px 16px;
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
-        background: #f0a04b;
-        color: #FFF6E7;
+        background: #402E32;
+        color: #DFE0DF;
     }
 
     .login-buttons-container {
@@ -76,7 +75,7 @@
     }
 
     .reset-button {
-        color: #FFF6E7;
+        color: #DFE0DF;
         width: 100%;
         position: absolute;
         text-align: center;
@@ -86,6 +85,40 @@
             color: #9cb0a4;
             cursor: pointer;
         }
+    }
+}
+
+// PROFILES
+.profile-container-title {
+    padding-bottom: 15px;
+    display: inline-flex;
+    font-size: 30px;
+    text-align: center;
+}
+
+// RESTAURANTS - CREATE
+
+.create-general-info {
+    display: flex;
+    justify-content: space-evenly;
+
+    .links-container{
+        display: block;
+        flex: 1;
+
+        img {
+            margin-right: 10px;
+            height: 45px;
+            width: 45px;
+        }
+    }
+
+    .create-flex-1 {
+        flex: 1;
+    }
+
+    .create-flex-2 {
+        flex: 2;
     }
 }
 
@@ -105,6 +138,57 @@
             max-width: 100%;
             max-height: 100%;
         }
+    }
+}
+
+
+.create-name-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+
+    textarea {
+        font-weight: bold;
+        width: 500px;
+        resize: none;
+        text-align: center;
+        font-size: 27px;
+        border: none;
+    }
+
+    textarea:focus {
+        outline: none;
+    }
+}
+
+.insert-distance {
+    white-space: pre-wrap;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.create-component {
+    padding: 10px;
+
+    .create-component-title {
+        margin-bottom: 10px;
+    }
+}
+
+.paragraph-text-format {
+    margin: 0 auto;
+
+    img {
+        height: auto;
+        width: auto;
+        max-height: 30vw;
+        max-width: 40vw;
+        object-fit: fill;
+        object-position: center;
+        border-radius: 5px;
+        display: block;
+        margin: 20px auto;
     }
 }
 
@@ -128,6 +212,11 @@
     color: black;
     width: auto;
     text-align: center;
+}
+
+.brown-button {
+    color: white !important;
+    background: #402E32 !important;
 }
 
 .circle-button {
@@ -192,6 +281,104 @@
     margin: 0 auto;
 }
 
+.primeng-change {
+    .p-dropdown:not(.p-disabled).p-focus {
+        border-color: #402E32 !important;
+        box-shadow: none !important;
+    }
+
+    .p-dropdown:not(.p-disabled):hover {
+        border-color: #402E32 !important;
+    }
+
+    .p-inputtext:enabled:hover {
+        border-color: #402E32 !important;
+    }
+
+    .p-inputtext:enabled:focus {
+        border-color: #402E32 !important;
+    }
+
+    .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider {
+        background: #402E32 !important;
+    }
+
+    .p-inputswitch.p-inputswitch-checked .p-inputswitch-slider:hover {
+        background: #402E32 !important;
+    }
+
+
+    .p-inputswitch.p-focus .p-inputswitch-slider {
+        box-shadow: none !important;
+    }
+
+    .p-inputswitch .p-component.p-inputswitch-checked .p-focus {
+        border-color: #402E32 !important;
+        outline: none !important;
+    }
+
+    .p-dropdown:focus {
+        border-color: #402E32 !important;
+    }
+
+    ::ng-deep .p-dropdown:not(.p-disabled):hover {
+        border-color: #402E32 !important;
+    }
+
+    .p-dropdown:not(.p-disabled).p-focus {
+        border-color: #402E32 !important;
+        box-shadow: none !important;
+    }
+
+    .p-dropdown:not(.p-disabled):hover {
+        border-color: #402E32 !important;
+        box-shadow: none !important;
+    }
+
+    .p-inputtext:enabled:hover {
+        border-color: #402E32 !important;
+    }
+
+    .p-inputtext:enabled:focus {
+        border-color: #402E32 !important;
+    }
+
+    .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+        background: #F0FDFA !important;
+        border-color: #F0FDFA !important;
+        color: #402E32 !important;
+    }
+
+    .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box:hover {
+        border-color: #402E32 !important;
+    }
+
+    .p-checkbox .p-checkbox-box.p-highlight {
+        border-color: #402E32 !important;
+        background: #402E32 !important;
+    }
+
+    .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-highlight:hover {
+        border-color: #402E32 !important;
+        background: #402E32 !important;
+        color: #ffffff;
+    }
+
+    .p-checkbox:not(.p-checkbox-disabled) .p-checkbox-box.p-focus {
+        border-color: #402E32 !important;
+        box-shadow: none !important;
+        color: #ffffff;
+    }
+
+    ::ng-deep .p-button.p-button-text {
+        color: #402E32 !important;
+    }
+
+    .p-button.p-button-text {
+        color: #402E32 !important;
+    }
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -215,4 +402,22 @@ body::-webkit-scrollbar {
 
 .page-container {
     padding: 20px 220px 40px;
+}
+
+@media only screen and (max-width: 1416px) {
+    .paragraph-text-format {
+        img {
+            max-height: 70%;
+            max-width: 70%;
+        }
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .paragraph-text-format {
+        img {
+            max-height: 90%;
+            max-width: 90%;
+        }
+    }
 }

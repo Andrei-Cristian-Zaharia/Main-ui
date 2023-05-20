@@ -19,6 +19,7 @@ import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {RateTypeEnum} from "../../../enums/rateType.enum";
 import {ReviewTypeEnum} from "../../../enums/reviewType.enum";
 import {PersonModel} from "../../../models/person.model";
+import {AuthService} from "../../../services/auth.service";
 
 @Component({
     selector: 'review-content',
@@ -38,10 +39,12 @@ export class ReviewContentComponent implements OnInit, OnChanges {
     reviewType: ReviewTypeEnum;
 
     @Input()
-    user: PersonModel;
+    owner: PersonModel;
 
     @Output()
     rating = new EventEmitter<number>();
+
+    currentUser: PersonModel = null;
 
     reviews: ReviewModel[] = new Array<ReviewModel>;
 
@@ -69,6 +72,7 @@ export class ReviewContentComponent implements OnInit, OnChanges {
                 private reviewService: ReviewService,
                 private cookieService: CookieService,
                 private personService: PersonService,
+                private authService: AuthService,
                 private router: Router) {
     }
 
@@ -86,22 +90,30 @@ export class ReviewContentComponent implements OnInit, OnChanges {
 
     ngOnChanges(changes: SimpleChanges): void {
         if (this.reviewType === ReviewTypeEnum.VIEW) {
-            this.getReviews();
+            this.getReviewsForUser();
         }
 
         if (this.entity != null) {
-            this.refreshReviews();
-            this.checkPostReview();
-            this.resetReview();
             this.checkLogin();
+            this.refreshReviews();
+            this.resetReview();
         }
     }
 
     checkLogin() {
-        if (this.cookieService.get('token') != "") {
-            this.userLogged = true;
+        if (this.cookieService.check('token')) {
+            this.getCurrentUser();
         }
     }
+
+    getCurrentUser() {
+        this.authService.getUser(null).subscribe(data => {
+            this.currentUser = data
+            this.userLogged = true;
+            this.checkPostReview();
+        });
+    }
+
 
     createReview() {
         let review = {
@@ -109,11 +121,9 @@ export class ReviewContentComponent implements OnInit, OnChanges {
             "text": this.content,
             "rating": this.givenStars,
             'category': this.category,
-            "ownerEmail": this.cookieService.get('emailAddress'),
+            "ownerEmail": this.currentUser.emailAddress,
             "recipeId": this.entity.id
         }
-
-        console.log("review", review)
 
         this.reviewService.createNewReview(review).subscribe(result => {
             this.refreshReviews();
@@ -141,7 +151,7 @@ export class ReviewContentComponent implements OnInit, OnChanges {
     }
 
     checkPostReview() {
-        this.reviewService.checkReviewFromUserOnEntity(this.cookieService.get('emailAddress'), this.entity.id, this.category)
+        this.reviewService.checkReviewFromUserOnEntity(this.currentUser.emailAddress, this.entity.id, this.category)
             .subscribe(data => {
                 this.userAlreadyPosted = data;
             });
@@ -204,6 +214,10 @@ export class ReviewContentComponent implements OnInit, OnChanges {
         this.router.navigateByUrl('recipe?name=' + name);
     }
 
+    goToRestaurantPage(name: string) {
+        this.router.navigateByUrl('restaurant?name=' + name);
+    }
+
     showDeleteDialog(review: ReviewModel) {
         this.confirmDeleteDialog = true;
         this.currentDeleteReview = review;
@@ -221,6 +235,7 @@ export class ReviewContentComponent implements OnInit, OnChanges {
         }
 
         this.newReviewPanelOpen = false;
+        this.userAlreadyPosted = false;
         this.hideDeleteDialog();
     }
 
@@ -240,10 +255,9 @@ export class ReviewContentComponent implements OnInit, OnChanges {
         this.insertNewReviewWindow = true;
     }
 
-    getReviews() {
-        this.reviewService.getReviewsForUser(this.user.emailAddress).subscribe(result => {
+    getReviewsForUser() {
+        this.reviewService.getReviewsForUser(this.owner.emailAddress).subscribe(result => {
             this.reviews = result;
         })
     }
-
 }

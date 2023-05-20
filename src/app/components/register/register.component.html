@@ -1,16 +1,3 @@
-<!--<div style="margin-bottom: 25px; margin-top: 25px;">-->
-<!--    <input [(ngModel)]="emailAddress" placeholder="EmailAddress">-->
-<!--    <input [(ngModel)]="password" placeholder="Password">-->
-<!--    <p-button (onClick)="login()" label="Login"></p-button>-->
-<!--</div>-->
-<!--<div style="margin-bottom: 25px; margin-top: 25px;">-->
-<!--    <input [(ngModel)]="username" placeholder="Username">-->
-<!--    <input [(ngModel)]="emailAddress" placeholder="EmailAddress">-->
-<!--    <input [(ngModel)]="password" placeholder="Password">-->
-<!--    <input [(ngModel)]="confirmPassword" placeholder="Password">-->
-<!--    <p-button (onClick)="createAccount()" label="Create"></p-button>-->
-<!--</div>-->
-
 <p-toast position="top-left" [baseZIndex]="5000">
     <ng-template let-message pTemplate="message">
         <div class="flex flex-column" style="flex: 1">
@@ -27,7 +14,7 @@
         <div class="login-text">
             <h1>Register</h1>
         </div>
-        <div class="login-buttons-container">
+        <div class="login-buttons-container primeng-change">
             <div class="login-button">
                 <input pInputText placeholder="Username" [(ngModel)]="username"/>
             </div>
@@ -35,7 +22,7 @@
                 <input pInputText placeholder="Email address" [(ngModel)]="emailAddress"/>
             </div>
             <div class="login-button">
-                <p-password placeholder="Password" [feedback]="true" [(ngModel)]="password"></p-password>
+                <p-password placeholder="Password" [feedback]="false" [(ngModel)]="password"></p-password>
             </div>
             <div id="confirmButton" class="login-button">
                 <p-password placeholder="Confirm password" [feedback]="false" [(ngModel)]="confirmPassword"></p-password>

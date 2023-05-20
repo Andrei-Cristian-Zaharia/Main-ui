@@ -57,6 +57,10 @@
 
     .filter-component {
         padding: 0px;
+
+        ::ng-deep .p-inputtext:enabled:focus {
+            border-color: #402E32;
+        }
     }
 
     input {

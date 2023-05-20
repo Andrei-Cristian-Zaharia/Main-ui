@@ -7,8 +7,20 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
 
+    ::ng-deep .p-inputswitch.p-focus .p-inputswitch-slider{
+        box-shadow: none;
+    }
+
     .filter-component {
         margin: 20px 0;
+
+        ::ng-deep .p-inputtext:enabled:focus {
+            border-color: #402E32;
+        }
+
+        ::ng-deep .p-inputtext:enabled:hover {
+            border-color: #402E32;
+        }
     }
 
     .publicSwitch {

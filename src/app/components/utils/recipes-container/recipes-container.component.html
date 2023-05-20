@@ -1,0 +1,68 @@
+<div *ngIf="recipes != null">
+    <div *ngIf="recipes.length > 0" class="recipes-container">
+        <div class="recipe-card" *ngFor="let recipe of recipes">
+            <p-card [ngStyle]="{ display: 'block', width: width + 'rem', height: height + 'rem' }">
+                <ng-template pTemplate="header">
+                    <div class="recipe-card-image-container">
+                        <img alt="Card" src="{{ recipe.imageAddress }}" class="image-card-header"
+                             (click)="showViewRecipeDialog(recipe)"
+                             [style]="{ height: headerSize + 'rem' }">
+                        <div class="recipe-card-hover-name-box" (click)="showViewRecipeDialog(recipe)"
+                             [style]="{ height: headerSize + 'rem' }">
+                            <p class="recipe-card-hover-name">{{ recipe.name }}</p>
+                        </div>
+                        <div class="recipe-status">
+                            <div *ngIf="recipe.status === 'APPROVED'"
+                                 pTooltip="Verified" tooltipPosition="top">
+                                <img src="assets/verified.png" alt="">
+                            </div>
+                            <div *ngIf="recipe.status === 'WAITING'"
+                                 pTooltip="Waiting for approve" tooltipPosition="top">
+                                <img src="assets/waiting.png" alt="">
+                            </div>
+                            <div *ngIf="recipe.status === 'DENIED'"
+                                 pTooltip="Verification failed" tooltipPosition="top">
+                                <img src="assets/decline.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+                <div class="recipe-buttons-container" *ngIf="type === 'EDIT'">
+                    <div class="recipe-edit-button" (click)="showCreateRecipeDialog(recipe)">Edit</div>
+                    <div class="recipe-delete-button" (click)="showCreateRecipeDialog(recipe)">
+                        <img src="assets/delete.png" alt="">
+                    </div>
+                    <div class="recipe-mobile-name">
+                        <h4>{{ recipe.name }}</h4>
+                    </div>
+                </div>
+                <div class="recipe-view-container" *ngIf="type === 'VIEW'">
+                    <save-button [id]="recipe.id" [saved]="recipe.saved" (outResult)="updateUserSaveList($event)"/>
+                    <time-display [value]="recipe.time"/>
+                    <rate style="margin-top: 4px" [type]="rateType.difficulty" [value]="recipe.difficulty"/>
+                </div>
+            </p-card>
+        </div>
+    </div>
+</div>
+
+<p-dialog [(visible)]="viewRecipeDialog"
+          [style]="{width: '65vw', height: '50vw'}" [showHeader]="false"
+          [baseZIndex]="10000" [draggable]="false" [resizable]="false" [dismissableMask]="true" [modal]="true"
+          [closable]="true">
+    <recipe-view [recipe]="selectedRecipe"></recipe-view>
+</p-dialog>
+
+<div>
+    <p-dialog [(visible)]="createRecipeDialog"
+              [style]="{width: '60vw'}" [showHeader]="false"
+              [baseZIndex]="10000" [draggable]="false" [resizable]="false" [dismissableMask]="true" [modal]="true"
+              [closable]="true">
+        <app-create-recipe *ngIf="createRecipeDialog"
+                           [username]="user.username"
+                           [recipe]="selectedRecipe"
+                           [type]="'EDIT'"
+                           (closeDialog)="hideCreateRecipeDialog()">
+        </app-create-recipe>
+    </p-dialog>
+</div>

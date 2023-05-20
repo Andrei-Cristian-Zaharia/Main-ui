@@ -26,6 +26,16 @@
         height: auto;
         align-self: flex-start;
 
+        ::ng-deep .p-inputtext {
+            border: rgba(64, 46, 50, 0);
+            background: #fdfbf8;
+        }
+
+        ::ng-deep .p-inputtext:focus {
+            border: 1px solid #ced4da;
+            background: #eae6e5;
+        }
+
         .restaurant-page-main-header {
             display: flex;
             justify-content: center;
@@ -125,6 +135,26 @@
         }
     }
 }
+
+@media only screen and (max-width: 1415px) {
+    .restaurant-container {
+        padding: 10px 10px 10px 10px;
+
+        .restaurant-banner {
+            height: 300px;
+        }
+    }
+
+    .restaurant-page {
+        display: block;
+
+        .restaurant-page-summary {
+            width: 500px;
+            margin: auto;
+        }
+    }
+}
+
 
 @media only screen and (max-width: 768px) {
     .restaurant-container {

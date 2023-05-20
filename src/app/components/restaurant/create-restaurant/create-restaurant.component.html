@@ -1,0 +1,66 @@
+<div class="primeng-change">
+    <div class="create-name-container">
+        <textarea name="text" rows="2" cols="20" wrap="hard" placeholder="Enter name"
+                  maxlength="60" [(ngModel)]="restaurantName"></textarea>
+    </div>
+
+    <div class="create-general-info">
+        <div class="create-flex-1" style="margin: auto 0">
+            <div style="padding: 10px">
+                <input type="number" placeholder="Telephone ..." pInputText [(ngModel)]="phoneNumber"/>
+            </div>
+            <div style="padding: 10px">
+                <input type="text" placeholder="Email ..." pInputText [(ngModel)]="emailAddress"/>
+            </div>
+        </div>
+
+        <div class="links-container create-flex-1">
+            <div>
+                <img src="assets/instagram-logo.png" alt="">
+                <textarea style="resize: none" rows="1" pInputTextarea
+                          [autoResize]="false"
+                          [(ngModel)]="instagramLink">
+                </textarea>
+            </div>
+            <div>
+                <img src="assets/facebook-logo.png" alt="">
+                <textarea style="resize: none" rows="1" pInputTextarea
+                          [autoResize]="false"
+                          [(ngModel)]="facebookLink">
+                </textarea>
+            </div>
+            <div>
+                <img src="assets/website.png" alt="">
+                <textarea style="resize: none" rows="1" pInputTextarea
+                          [autoResize]="false"
+                          [(ngModel)]="webLink">
+                </textarea>
+            </div>
+        </div>
+
+        <div class="create-componen create-flex-2">
+            <h2 class="create-component-title">Address</h2>
+            <textarea class="insert-distance" rows="3" style="resize: none"
+                      pInputTextarea [autoResize]="false" [(ngModel)]="address">
+        </textarea>
+        </div>
+    </div>
+
+    <div class="create-component">
+        <h2 class="create-component-title">Front Image</h2>
+        <textarea class="insert-distance" rows="1" style="resize: none"
+                  pInputTextarea [autoResize]="false" [(ngModel)]="frontImage">
+        </textarea>
+    </div>
+
+    <div class="create-component">
+        <h2 class="create-component-title">Banner Image</h2>
+        <textarea class="insert-distance" rows="1" style="resize: none"
+                  pInputTextarea [autoResize]="false" [(ngModel)]="bannerImage">
+        </textarea>
+    </div>
+
+    <div class="button-style brown-button center-component-margin" style="width: 100px" (click)="createRestaurant()">
+        Create
+    </div>
+</div>

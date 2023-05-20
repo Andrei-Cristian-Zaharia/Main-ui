@@ -56,10 +56,6 @@ export class MenuComponent implements OnInit {
             this.getMenu();
             this.getRecipes();
         }
-
-        console.log(this.menuId)
-
-
     }
 
     createNewMenu() {
@@ -140,7 +136,6 @@ export class MenuComponent implements OnInit {
 
                     this.menuService.createMenuItem(body).subscribe(data => {
                         this.currentMenuItems.push(data.id);
-                        console.log(data)
                     });
 
                     this.init();
@@ -151,7 +146,6 @@ export class MenuComponent implements OnInit {
                 .items.push(new MenuItem(itemId, this.newItemPrice, this.newItemName, this.newItemDescription, this.newItemRecipe));
         }
 
-        console.log(this.menu.categories)
         this.closeCreateItemCategory(categoryName);
     }
 

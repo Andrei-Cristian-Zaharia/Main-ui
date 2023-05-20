@@ -57,33 +57,27 @@ export class NavbarComponent implements OnInit {
     updateQR(): void {
         this.qrcode.update(this.qrcode.config, {
             data: this.currentURL
-        }).subscribe((res) => {
-        });
+        }).subscribe((res) => {});
     }
 
     user: PersonBasicInfoModel;
-    userLogged: boolean;
+    userLogged: boolean = false;
 
     createRecipeDialog: boolean = false;
 
     isMobile: boolean;
 
     ngOnInit(): void {
-        if (this.cookieService.check('emailAddress')) {
-            this.personService.getPersonDetails(this.cookieService.get('emailAddress')).subscribe(data => {
+        if (this.cookieService.check('token')) {
+            this.authService.getUser(null).subscribe(data => {
                 this.user = data;
                 this.userLogged = true;
-            }, () => {
-                this.userLogged = false;
-            });
-        } else {
-            this.userLogged = false;
+            }, () => this.userLogged = false);
         }
 
-        this.responsive.observe(Breakpoints.HandsetPortrait)
-            .subscribe(result => {
-                this.isMobile = result.matches;
-            });
+        this.responsive.observe(Breakpoints.HandsetPortrait).subscribe(result => {
+            this.isMobile = result.matches;
+        });
     }
 
     goToRecipes() {
@@ -95,7 +89,7 @@ export class NavbarComponent implements OnInit {
     }
 
     goToFavouriteRecipes() {
-        this.router.navigate(['/recipes'], { queryParams: {favorites:'show'}});
+        this.router.navigate(['/recipes'], {queryParams: {favorites: 'show'}});
     }
 
     goToProfile() {
@@ -107,7 +101,7 @@ export class NavbarComponent implements OnInit {
     }
 
     goToRestaurant() {
-        this.restaurantService.getRestaurantForUser(this.cookieService.get('username')).subscribe(data => {
+        this.restaurantService.getRestaurantForUser(this.user.username).subscribe(data => {
             this.router.navigateByUrl('restaurant?name=' + data.name);
         })
     }

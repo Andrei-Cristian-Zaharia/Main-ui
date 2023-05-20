@@ -1,4 +1,4 @@
-<div class="my-profile-container">
+<div *ngIf="user != null" class="my-profile-container">
     <div class="profile-details-container main-component">
         <div class="profile-details-header">
             <img src="assets/person-icon.png" alt="">
@@ -35,19 +35,19 @@
             </div>
         </div>
     </div>
-    <div class="main-component">
+    <div *ngIf="user.hasRestaurant" class="main-component">
         <profile-restaurant [user]="user"/>
     </div>
-    <div class="profile-recipes-container main-component">
-        <h2 class="profile-recipes-container-title">Recipes</h2>
-        <profile-recipes [recipes]="recipes"
+    <div class="main-component">
+        <h2 class="profile-container-title">Recipes</h2>
+        <recipes-container [recipes]="recipes"
                          [width]="20"
                          [height]="12.5"
                          [headerSize]="8"
                          [mobileWidth]="20">
-        </profile-recipes>
+        </recipes-container>
     </div>
-    <div class="profile-reviews-container main-component">
-        <review-content [reviewType]="reviewType.VIEW" [user]="user"/>
+    <div class="main-component">
+        <review-content [reviewType]="reviewType.VIEW" [owner]="user"/>
     </div>
 </div>

@@ -73,6 +73,14 @@
                 margin-top: 5px;
                 margin-left: 10px;
             }
+
+            .p-inputtext:enabled:hover {
+                border-color: #402E32;
+            }
+
+            .p-inputtext:enabled:focus {
+                border-color: #402E32;
+            }
         }
 
         .review-owner {
@@ -86,15 +94,11 @@
         }
     }
 
-    .review-user {
+    .review-entity {
         margin-left: 15px;
         height: 15px;
         display: flex;
         float: left;
-
-        .review-edit-delete {
-            cursor: pointer;
-        }
 
         img {
             height: 30px;
@@ -102,6 +106,7 @@
             margin-bottom: 150px;
             margin-left: 5px;
             margin-right: 5px;
+            cursor: pointer;
         }
     }
 }

@@ -9,6 +9,7 @@ import {PersonBasicInfoModel} from "../models/personBasicInfo.model";
     providedIn: 'root'
 })
 export class AuthService {
+    currentUser: PersonBasicInfoModel = null;
     result: boolean;
 
     constructor(
@@ -16,11 +17,9 @@ export class AuthService {
         private http: HttpClient,
         private router: Router,
         private cookieService: CookieService
-    ) {
-    }
+    ) {}
 
     async authLogin(emailAddress, password) {
-
         let body = {
             emailAddress: emailAddress,
             password: password
@@ -30,11 +29,10 @@ export class AuthService {
             .toPromise().then(token => {
                 this.getPersonDetails(emailAddress, token).subscribe(data => {
                     this.cookieService.set('token', token);
-                    this.cookieService.set('username', data.username)
-                    this.cookieService.set('emailAddress', data.emailAddress);
+                    this.getUser(token);
                     this.router.navigate(['']);
                 })
-            });
+            }, () => {throw new Error("Invalid account !")});
     }
 
     getOptionsAuth(token: string) {
@@ -72,7 +70,7 @@ export class AuthService {
     async checkAdmin(): Promise<boolean> {
         if (this.cookieService.check('token')) {
             await this.http.get<boolean>(
-                this.apiConfig.AUTH_API + "/adminCheck?emailAddress=" + this.cookieService.get("emailAddress"),
+                this.apiConfig.AUTH_API + "/adminCheck?token=" + this.cookieService.get('token'),
                 this.getOptionsAuth(this.cookieService.get('token'))
             ).toPromise()
                 .then(res => {
@@ -83,6 +81,18 @@ export class AuthService {
         }
 
         return this.result;
+    }
+
+    getUser(token: string) {
+
+        if (token === null) {
+            token = this.cookieService.get("token");
+        }
+
+        return this.http.get<PersonBasicInfoModel>(
+            this.apiConfig.AUTH_API + "/getUser?token=" + token,
+            this.getOptionsAuth(token)
+        );
     }
 
     getOptions() {
@@ -96,7 +106,6 @@ export class AuthService {
 
     authLogout() {
         this.cookieService.delete('token');
-        this.cookieService.delete('emailAddress');
         this.router.navigate(['login']);
     }
 
@@ -106,9 +115,5 @@ export class AuthService {
 
     getToken(): string {
         return this.cookieService.get('token');
-    }
-
-    getCurrentUserEmail(): string {
-        return this.cookieService.get('emailAddress');
     }
 }

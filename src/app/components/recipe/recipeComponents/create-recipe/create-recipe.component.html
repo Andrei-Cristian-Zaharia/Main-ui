@@ -1,11 +1,11 @@
-<div class="recipe-name-container">
+<div class="create-name-container">
         <textarea name="text" rows="2" cols="20" wrap="hard" placeholder="Enter name"
                   maxlength="60" [(ngModel)]="recipeName"></textarea>
 </div>
 <div class="container">
     <h2>Details</h2>
-    <div class="generalDetails">
-        <div class="veganContainer">
+    <div class="generalDetails primeng-change">
+        <div class="veganContainer primeng-change">
             <h2 class="veganText">Vegan: </h2>
             <p-inputSwitch class="veganSwitch" [(ngModel)]="isVegan"></p-inputSwitch>
         </div>
@@ -25,7 +25,7 @@
             <button class="add-button" pButton type="button" label="Add ingredient" (click)="addIngredient()"></button>
             <ul *ngFor="let ing of addedIngredients; let i = index">
                 <div class="items">
-                    <div class="items-container">
+                    <div class="items-container primeng-change">
                         <p-dropdown [options]="measurements" [editable]="true" placeholder="Measurement"
                                     [showClear]="true" [(ngModel)]="ing.measurementUnit" [autoDisplayFirst]="false"
                                     class="space"></p-dropdown>
@@ -55,7 +55,7 @@
               (keyup)="clearPressedKeys()"></textarea>
 
     <h2>Link to image</h2>
-    <textarea class=" insert-distance" rows="1" pInputTextarea [autoResize]="true"
+    <textarea class="insert-distance" rows="1" pInputTextarea [autoResize]="true"
               [(ngModel)]="imageLink"></textarea>
 </div>
 <div *ngIf="type != 'EDIT'">

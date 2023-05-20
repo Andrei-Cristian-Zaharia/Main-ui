@@ -7,6 +7,7 @@ import {CookieService} from "ngx-cookie-service";
 import {RateTypeEnum} from "../../enums/rateType.enum";
 import {ActivatedRoute, Router} from "@angular/router";
 import {SaveEntityFormModel} from "../../models/saveEntityFormModel";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
     selector: 'app-restaurants',
@@ -33,6 +34,7 @@ export class RestaurantsComponent {
     constructor(private restaurantService: RestaurantService,
                 private personService: PersonService,
                 private router: Router,
+                private authService: AuthService,
                 private activatedRoute: ActivatedRoute,
                 private cookieService: CookieService) {
 
@@ -77,8 +79,8 @@ export class RestaurantsComponent {
     }
 
     getCurrentUser() {
-        if (this.cookieService.get('emailAddress') != null) {
-            this.personService.getPersonDetails(this.cookieService.get('emailAddress')).subscribe(data => {
+        if (this.cookieService.check('token') === true) {
+            this.authService.getUser(null).subscribe(data => {
                 this.user = data
                 this.refreshFavoriteNames();
             });

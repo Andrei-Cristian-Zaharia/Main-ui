@@ -6,6 +6,7 @@ import {CookieService} from "ngx-cookie-service";
 import {ReviewService} from "../../services/review.service";
 import {RecipeService} from "../../services/recipe.service";
 import {ReviewTypeEnum} from "../../enums/reviewType.enum";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
     selector: 'app-my-profile',
@@ -24,10 +25,13 @@ export class MyProfileComponent implements OnInit {
 
     reviewType = ReviewTypeEnum;
 
+    createRestaurantDialog: boolean = false;
+
     constructor(private responsive: BreakpointObserver,
                 private personService: PersonService,
                 private reviewService: ReviewService,
                 private recipeService: RecipeService,
+                private authService: AuthService,
                 private cookieService: CookieService) {
     }
 
@@ -43,40 +47,42 @@ export class MyProfileComponent implements OnInit {
             });
 
         this.getCurrentUser();
-        this.countUserReviewsNumber();
-        this.countUserRecipes();
-        this.getAveragesRateForUser();
     }
 
     getCurrentUser() {
-        this.personService.getPersonDetails(this.cookieService.get('emailAddress')).subscribe(data => {
+        this.authService.getUser(null).subscribe(data => {
             this.user = data
+
+            this.countUserReviewsNumber();
+            this.countUserRecipes();
+            this.getAveragesRateForUser();
         });
     }
 
     countUserReviewsNumber() {
-        this.reviewService.countUserReviews(this.cookieService.get('emailAddress')).subscribe(data => {
+        this.reviewService.countUserReviews(this.user.emailAddress).subscribe(data => {
             this.reviewsNumber = data;
         })
     }
 
     countUserRecipes() {
-        this.recipeService.countUserRecipes(this.cookieService.get('emailAddress')).subscribe(data => {
+        this.recipeService.countUserRecipes(this.user.emailAddress).subscribe(data => {
             this.recipesNumber = data;
         })
     }
 
     getAveragesRateForUser() {
-        this.reviewService.averageRateUser(this.cookieService.get('emailAddress')).subscribe(data => {
+        this.reviewService.averageRateUser(this.user.emailAddress).subscribe(data => {
             this.averageRate = data;
         })
     }
 
-    createRestaurant() {
-
+    openCreateRestaurantView() {
+        this.createRestaurantDialog = true;
     }
 
-    goToRestaurant() {
-
+    restaurantCreated() {
+        this.createRestaurantDialog = false
+        this.getCurrentUser();
     }
 }

@@ -10,7 +10,7 @@
 </p-toast>
 
 <div class="admin-container">
-    <div class="admin-table-container main-component">
+    <div class="admin-table-container main-component primeng-change">
         <p-table #usersTable [value]="users" [tableStyle]="{'min-width': '60rem'}" [paginator]="true" [rows]="5"
                  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                  [rowsPerPageOptions]="[5, 10, 25, 50]">
@@ -79,7 +79,7 @@
             </ng-template>
         </p-table>
     </div>
-    <div class="admin-table-container main-component">
+    <div class="admin-table-container main-component primeng-change">
         <p-table #recipesTable [value]="recipes" [tableStyle]="{'min-width': '60rem'}" [paginator]="true" [rows]="5"
                  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                  [rowsPerPageOptions]="[5, 10, 25, 50]">
@@ -178,7 +178,7 @@
             </ng-template>
         </p-table>
     </div>
-    <div class="admin-table-container main-component">
+    <div class="admin-table-container main-component primeng-change">
         <p-table #restaurantTable [value]="restaurants" [tableStyle]="{'min-width': '60rem'}" [paginator]="true" [rows]="5"
                  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
                  [rowsPerPageOptions]="[5, 10, 25, 50]">
@@ -232,7 +232,9 @@
                         Status
                         <p-columnFilter field="status" matchMode="equals" display="menu">
                             <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                                <p-dropdown [ngModel]="value" [options]="recipesStatuses" (onChange)="filter($event.value)"
+                                <p-dropdown [ngModel]="value"
+                                            [options]="recipesStatuses"
+                                            (onChange)="filter($event.value)"
                                             placeholder="Any">
                                     <ng-template let-option pTemplate="item">
                                         <p-tag [value]="option.value" [severity]="getRecipeStatus(option.label)"></p-tag>
@@ -290,6 +292,6 @@
           [style]="{width: '65vw', height: '50vw'}" [showHeader]="false"
           [baseZIndex]="10000" [draggable]="false" [resizable]="false" [dismissableMask]="true" [modal]="true"
           [closable]="true">
-    <restaurant [restaurant]="selectedRestaurant"></restaurant>
+    <restaurant [restaurant]="selectedRestaurant" [openFromView]="true"></restaurant>
 </p-dialog>
 

@@ -34,6 +34,14 @@ export class RestaurantService {
         return this.http.post<RestaurantModel>(this.apiConfig.RESTAURANT_API + "/save/status", body, this.getOptions());
     }
 
+    saveRestaurantPage(body) {
+        return this.http.post<RestaurantModel>(this.apiConfig.RESTAURANT_API + "/save", body, this.getOptions());
+    }
+
+    createRestaurant(body) {
+        return this.http.post<RestaurantModel>(this.apiConfig.RESTAURANT_API + "/create", body, this.getOptions());
+    }
+
     addFavorite(restaurantId: number, userId: number) {
         let body = {
             "restaurantId": restaurantId,

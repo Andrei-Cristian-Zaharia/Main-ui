@@ -24,22 +24,6 @@
 .recipe-description {
     margin-top: 25px;
     margin-bottom: 25px;
-
-    .description-text {
-        margin: 0 auto;
-
-        img {
-            height: auto;
-            width: auto;
-            max-height: 25vw;
-            max-width: 35vw;
-            object-fit: fill;
-            object-position: center;
-            border-radius: 5px;
-            display: block;
-            margin: 0 auto;
-        }
-    }
 }
 
 .recipe-ingredients {

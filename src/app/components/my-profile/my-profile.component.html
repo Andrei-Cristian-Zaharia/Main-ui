@@ -36,15 +36,33 @@
                 </div>
             </div>
         </div>
-        <div class="main-component">
+        <div *ngIf="user.hasRestaurant" class="main-component">
             <profile-restaurant [user]="user"></profile-restaurant>
         </div>
-        <div class="profile-recipes-container main-component">
-            <h2 class="profile-recipes-container-title">Recipes</h2>
-            <profile-recipes [width]="20" [height]="10" [headerSize]="8" [type]="'EDIT'"/>
+        <div *ngIf="!user.hasRestaurant" class="main-component">
+            <div>
+                <h2 class="profile-container-title">Restaurant</h2>
+                <div class="button-style center-component-margin" style="width: 300px; font-size: 25px"
+                    (click)="openCreateRestaurantView()">
+                    Bring your restaurant in our world!
+                </div>
+            </div>
         </div>
-        <div class="reviews-container main-component">
-            <review-content [reviewType]="reviewType.VIEW" [user]="user"></review-content>
+        <div class="main-component">
+            <h2 class="profile-container-title">Recipes</h2>
+            <recipes-container [width]="20" [height]="10" [headerSize]="8" [type]="'EDIT'"/>
+        </div>
+        <div class="main-component">
+            <review-content [reviewType]="reviewType.VIEW" [owner]="user"></review-content>
         </div>
     </div>
+</div>
+
+<div class="createRecipeDialog">
+    <p-dialog [(visible)]="createRestaurantDialog"
+              [style]="{width: '60vw'}" [showHeader]="false"
+              [baseZIndex]="10000" [draggable]="false" [resizable]="false" [dismissableMask]="true" [modal]="true"
+              [closable]="true">
+        <create-restaurant [owner]="user" (closeDialog)="restaurantCreated()"></create-restaurant>
+    </p-dialog>
 </div>

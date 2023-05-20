@@ -102,13 +102,13 @@
 </div>
 <div class="background-component">
     <!-- SHOW RECIPES -->
-    <profile-recipes *ngIf="isLoaded === true" (favoriteListUpdated)="refreshFavoriteNames()"
+    <recipes-container *ngIf="isLoaded === true" (favoriteListUpdated)="refreshFavoriteNames()"
                      [recipes]="recipes"
                      [width]="27"
                      [height]="15"
                      [headerSize]="11.5"
                      [user]="user">
-    </profile-recipes>
+    </recipes-container>
     <!-- END SHOW RECIPES-->
 </div>
 

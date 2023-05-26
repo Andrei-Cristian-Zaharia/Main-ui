@@ -39,14 +39,14 @@ export class CreateRecipeComponent implements OnInit {
 
     addedIngredients: AddIngredientModel[] = new Array<AddIngredientModel>;
 
-    recipeName: string;
+    recipeName: string = "";
     imageLink: string = "";
     prepareTime: string;
     difficulty: number = 0;
     spiciness: number = 0;
     description: string = "";
     howToPrepare: string = "";
-    isVegan: boolean;
+    isVegan: boolean = false;
 
     keysPressed = {};
 
@@ -196,6 +196,8 @@ export class CreateRecipeComponent implements OnInit {
             ingredientNames: ingredientNames,
             ingredientMeasurements: ingredientMeasurement
         }
+
+        console.log(recipe)
 
         if (this.recipe != null) {
             recipe.id = this.recipe.id;

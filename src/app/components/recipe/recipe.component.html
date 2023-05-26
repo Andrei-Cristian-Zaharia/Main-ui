@@ -41,16 +41,16 @@
             </ng-template>
             <div class="select-ingredient-container">
                 <div *ngFor="let ing of ingredient.ingredients; let i = index" class="select-ingredient">
-                    <div *ngIf="i < 14; else show_list_button">
+                    <div *ngIf="i < 12; else show_list_button">
                         <div [ngClass]="{'selected': ing.selected == true, 'unselected': ing.selected == false}"
                              class="select-ingredient-container-element" (click)="toggleIngredientSelection(ing)">
                             {{ ing.name }}
                         </div>
                     </div>
                     <ng-template #show_list_button>
-                        <div *ngIf="i === 14" class="select-ingredient-container-element"
+                        <div *ngIf="i === 12" class="select-ingredient-container-element"
                              (click)="showSelectedIngredientCategoryDialog(ingredient.categoryName)">
-                            Show other {{ ingredient.ingredients.length - 14 }}
+                            Show other {{ ingredient.ingredients.length - 12 }}
                         </div>
                     </ng-template>
                 </div>

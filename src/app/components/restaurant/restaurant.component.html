@@ -39,14 +39,14 @@
                               (keyup)="clearPressedKeys()">
                         </textarea>
                 </div>
-                <div class="restaurant-page-main-component">
+                <div *ngIf="restaurant.pageText != null" class="restaurant-page-main-component">
                     <p class="restaurant-page-main-component-title">Announcements</p>
                     <textarea id="AnnouncementsR" rows="1" class="insert-distance" pInputTextarea [autoResize]="true"
                               [(ngModel)]="restaurant.pageText" (keydown)="formatText($event)"
                               (keyup)="clearPressedKeys()">
                         </textarea>
                 </div>
-                <div class="restaurant-page-main-component">
+                <div *ngIf="restaurant.employAnnounce != null" class="restaurant-page-main-component">
                     <p class="restaurant-page-main-component-title">We are hiring !</p>
                     <textarea id="HiringR" rows="1" class="insert-distance" pInputTextarea [autoResize]="true"
                               [(ngModel)]="restaurant.employAnnounce" (keydown)="formatText($event)"
@@ -61,7 +61,7 @@
                       [restaurantId]="restaurant.id">
                 </menu>
             </div>
-            <div *ngIf="restaurant.owner.username === user.username" style="width: 100px"
+            <div *ngIf="restaurant.owner.username === user.username && !displayMenu" style="width: 100px"
                  class="button-style brown-button center-component-margin" (click)="saveRestaurant()">Save
             </div>
         </div>

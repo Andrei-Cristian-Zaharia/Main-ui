@@ -64,6 +64,13 @@ export class RestaurantService {
         return this.http.get<string[]>(this.apiConfig.RESTAURANT_API + "/favoriteNames?email=" + email);
     }
 
+    deleteRestaurant(restaurantId) {
+        return this.http.delete(
+            this.apiConfig.RESTAURANT_API + "/admin/delete?id=" + restaurantId,
+            this.getOptions()
+        );
+    }
+
     getOptions() {
         return {
             headers: new HttpHeaders({

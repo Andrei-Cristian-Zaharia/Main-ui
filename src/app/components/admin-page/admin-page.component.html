@@ -275,6 +275,12 @@
                                  (click)="saveRestaurant(restaurant)">
                         </div>
                     </td>
+                    <td>
+                        <div class="save-button">
+                            <img src="assets/delete.png" alt="" pTooltip="Delete" tooltipPosition="top"
+                                 (click)="deleteRestaurant(restaurant.id)">
+                        </div>
+                    </td>
                 </tr>
             </ng-template>
         </p-table>
@@ -292,6 +298,6 @@
           [style]="{width: '65vw', height: '50vw'}" [showHeader]="false"
           [baseZIndex]="10000" [draggable]="false" [resizable]="false" [dismissableMask]="true" [modal]="true"
           [closable]="true">
-    <restaurant [restaurant]="selectedRestaurant" [openFromView]="true"></restaurant>
+    <restaurant *ngIf="selectedRestaurant != null" [restaurant]="selectedRestaurant" [openFromView]="true"></restaurant>
 </p-dialog>
 

@@ -202,7 +202,9 @@ export class AdminPageComponent {
         );
     }
 
-    deleteRestaurant(restaurant) {
-
+    deleteRestaurant(restaurantId) {
+        this.restaurantService.deleteRestaurant(restaurantId).subscribe(
+            () => this.deleteTOS()
+        );
     }
 }

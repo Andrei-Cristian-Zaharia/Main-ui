@@ -16,7 +16,8 @@
                 </div>
             </div>
             <div *ngIf="displayOverview">
-                <div *ngIf="(restaurant.owner.username != user.username) || preview === true; else editAllowed">
+                <div *ngIf="user == null || (restaurant.owner.username != user.username) || preview === true;
+                            else editAllowed">
                     <div class="restaurant-page-main-component">
                         <p class="restaurant-page-main-component-title">Description</p>
                         <p [innerHTML]="restaurant.description" class="paragraph-text-format"></p>
@@ -39,14 +40,14 @@
                               (keyup)="clearPressedKeys()">
                         </textarea>
                 </div>
-                <div *ngIf="restaurant.pageText != null" class="restaurant-page-main-component">
+                <div class="restaurant-page-main-component">
                     <p class="restaurant-page-main-component-title">Announcements</p>
                     <textarea id="AnnouncementsR" rows="1" class="insert-distance" pInputTextarea [autoResize]="true"
                               [(ngModel)]="restaurant.pageText" (keydown)="formatText($event)"
                               (keyup)="clearPressedKeys()">
                         </textarea>
                 </div>
-                <div *ngIf="restaurant.employAnnounce != null" class="restaurant-page-main-component">
+                <div class="restaurant-page-main-component">
                     <p class="restaurant-page-main-component-title">We are hiring !</p>
                     <textarea id="HiringR" rows="1" class="insert-distance" pInputTextarea [autoResize]="true"
                               [(ngModel)]="restaurant.employAnnounce" (keydown)="formatText($event)"
@@ -54,14 +55,15 @@
                         </textarea>
                 </div>
             </ng-template>
-            <div *ngIf="displayMenu">
+            <div *ngIf="displayMenu && (user != null)">
                 <menu *ngIf="restaurant.menu.id != null"
                       [menuId]="restaurant.menu.id"
                       [isOwner]="isOwner"
                       [restaurantId]="restaurant.id">
                 </menu>
             </div>
-            <div *ngIf="restaurant.owner.username === user.username && !displayMenu" style="width: 100px"
+            <div *ngIf="user != null && restaurant.owner.username === user.username && !displayMenu"
+                 style="width: 100px"
                  class="button-style brown-button center-component-margin" (click)="saveRestaurant()">Save
             </div>
         </div>
@@ -82,12 +84,12 @@
                     {{ restaurant.addressLocation }}
                 </div>
             </div>
-            <div *ngIf="restaurant.owner.username === user.username"
-                class="button-style brown-button" style="width: 150px; margin: 10px auto"
+            <div *ngIf="user != null && restaurant.owner.username === user.username"
+                 class="button-style brown-button" style="width: 150px; margin: 10px auto"
                  (click)="openMediaInfo=true">
                 Edit media info
             </div>
-            <div *ngIf="restaurant.owner.username === user.username"
+            <div *ngIf="user != null && restaurant.owner.username === user.username"
                  class="button-style brown-button" style="width: 150px; margin: 10px auto"
                  (click)="preview === false ? preview = true : preview = false">
                 <div *ngIf="preview">Edit page</div>
@@ -104,13 +106,16 @@
                     Email: {{ restaurant.emailAddress }}
                 </div>
                 <div class="media-container">
-                    <div class="media-logo-button" (click)="openLink(restaurant.facebookLink)">
+                    <div *ngIf="restaurant.facebookLink != null"
+                         class="media-logo-button" (click)="openLink(restaurant.facebookLink)">
                         <img src="assets/facebook-logo.png" alt="">
                     </div>
-                    <div class="media-logo-button" (click)="openLink(restaurant.instagramLink)">
+                    <div *ngIf="restaurant.instagramLink != null"
+                         class="media-logo-button" (click)="openLink(restaurant.instagramLink)">
                         <img src="assets/instagram-logo.png" alt="">
                     </div>
-                    <div class="media-logo-button" (click)="openLink(restaurant.websiteAddress)">
+                    <div *ngIf="restaurant.websiteAddress != null"
+                         class="media-logo-button" (click)="openLink(restaurant.websiteAddress)">
                         <img src="assets/website.png" alt="">
                     </div>
                 </div>
@@ -127,7 +132,7 @@
     </div>
 </div>
 
-<div class="primeng-change">
+<div *ngIf="restaurant != null"  class="primeng-change">
     <p-dialog [(visible)]="openMediaInfo"
               [style]="{width: '60vw'}" [showHeader]="true"
               [baseZIndex]="10000" [draggable]="false" [resizable]="false" [dismissableMask]="true" [modal]="true"
@@ -184,3 +189,5 @@
         </div>
     </p-dialog>
 </div>
+
+

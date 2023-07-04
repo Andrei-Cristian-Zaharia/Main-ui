@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {RestaurantService} from "../../services/restaurant.service";
 import {RestaurantModel} from "../../models/restaurant.model";
 import {ActivatedRoute} from "@angular/router";
@@ -14,7 +14,7 @@ import {PersonBasicInfoModel} from "../../models/personBasicInfo.model";
   templateUrl: './restaurant.component.html',
   styleUrls: ['./restaurant.component.scss']
 })
-export class RestaurantComponent {
+export class RestaurantComponent implements OnInit {
 
     @Input()
     restaurant: RestaurantModel;
@@ -43,15 +43,15 @@ export class RestaurantComponent {
     constructor(private restaurantService: RestaurantService,
                 private cookieService: CookieService,
                 private authService: AuthService,
-                private activatedRoute: ActivatedRoute) {
+                private activatedRoute: ActivatedRoute) {}
+
+    ngOnInit(): void {
         this.getRestaurantInfo();
-        this.getCurrentUser();
     }
 
     getCurrentUser() {
         this.authService.getUser(null).subscribe(data => {
             this.user = data;
-
             if (this.user.username === this.restaurant.owner.username) {
                 this.isOwner = true;
             }
@@ -69,6 +69,7 @@ export class RestaurantComponent {
         this.activatedRoute.queryParamMap.subscribe(params => {
             this.restaurantService.getRestaurantByName(params.get('name')).subscribe(data => {
                 this.restaurant = data;
+                this.getCurrentUser();
             })
         });
     }

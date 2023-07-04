@@ -192,10 +192,6 @@ export class AdminPageComponent {
         this.viewRestaurantDialog = true;
     }
 
-    deleteUser(user) {
-
-    }
-
     deleteRecipe(recipe) {
         this.recipeService.deleteRecipe(recipe.id).subscribe(
             data => this.deleteTOS(), () => this.errorTOS("deleted")

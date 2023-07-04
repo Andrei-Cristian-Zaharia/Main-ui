@@ -23,7 +23,7 @@ export class MenuService {
     }
 
     createMenuItem(body) {
-        return this.http.post<MenuItem>(this.apiConfig.MENU_ITEM + '/create', body, this.getOptions())
+        return this.http.post<MenuItem>(this.apiConfig.MENU + '/addItem', body, this.getOptions())
     }
 
     updateMenuItems(body) {

@@ -62,7 +62,7 @@
                     {{ item.description }}
                 </div>
             </div>
-            <div *ngIf="category.createItem === true" class="menu-category-container-add-item-container">
+            <div id="{{category.category}}ItemId" *ngIf="category.createItem === true" class="menu-category-container-add-item-container">
                 <div class="add-item-container-left">
                     <input class="input-style" style="font-size: 20px" placeholder="Name" [(ngModel)]="newItemName">
                     <input class="input-style" style="font-size: 20px" placeholder="Price" [(ngModel)]="newItemPrice">
@@ -94,9 +94,9 @@
             </div>
         </div>
     </div>
-    <div class="button-style center-component-margin" style="width: 150px; font-size: 20px" (click)="updateMenuItems()">
-        Save
-    </div>
+<!--    <div class="button-style center-component-margin" style="width: 150px; font-size: 20px" (click)="updateMenuItems()">-->
+<!--        Save-->
+<!--    </div>-->
 </div>
 
 <div *ngIf="createMenu === false && isOwner === false && menu != null">
@@ -130,3 +130,14 @@
         </div>
     </div>
 </div>
+
+<p-toast position="top-right" [baseZIndex]="5000">
+    <ng-template let-message pTemplate="message">
+        <div class="flex flex-column" style="flex: 1">
+            <div class="text-center">
+                <h4>{{message.summary}}</h4>
+                <p>{{message.detail}}</p>
+            </div>
+        </div>
+    </ng-template>
+</p-toast>

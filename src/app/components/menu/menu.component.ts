@@ -205,7 +205,7 @@ export class MenuComponent implements OnInit {
 
     private scrollToItemPanel(categoryName: string) {
         setTimeout(() => {
-            document.getElementById(categoryName + "ItemId").scrollIntoView({behavior: 'smooth'});
+            document.getElementById(categoryName + "ItemId").scrollIntoView({block: 'end', behavior: "smooth"});
         }, 150);
     }
 
